@@ -9,8 +9,13 @@ import {
   UserOutlined,
   VideoCameraOutlined,
   DashboardOutlined,
+  FullscreenExitOutlined,
+  FullscreenOutlined,
+  ExpandOutlined,
+  CompressOutlined,
+  SettingOutlined,
 } from '@ant-design/icons';
-import { Layout, Menu, Button, theme } from 'antd';
+import { Layout, Menu, Button, theme, Avatar, Popover } from 'antd';
 // import { context } from './AppProvider';
 
 import Home from '../pages/home';
@@ -119,6 +124,14 @@ const MyLayout = ({ children }) => {
   const {
     token: { colorBgContainer },
   } = theme.useToken();
+
+  const text = <span>Title</span>;
+  const content = (
+    <div>
+      <p>Content</p>
+      <p>Content</p>
+    </div>
+  );
   return (
     <Layout className="container">
       <Sider trigger={null} collapsible collapsed={collapsed} theme="light">
@@ -145,6 +158,7 @@ const MyLayout = ({ children }) => {
       </Sider>
       <Layout>
         <Header
+          className="flx-justify-between"
           style={{
             padding: 0,
             background: colorBgContainer,
@@ -161,6 +175,21 @@ const MyLayout = ({ children }) => {
               background: colorBgContainer,
             }}
           />
+          <div className="header-right flx-center">
+            <CompressOutlined />
+            <ExpandOutlined />
+            <SettingOutlined />
+            <Popover
+              placement="bottomRight"
+              title={text}
+              content={content}
+              trigger="click"
+            >
+              <div className="flx-center header-right-user">
+                <Avatar src="https://xsgames.co/randomusers/avatar.php?g=pixel&key=2" />
+              </div>
+            </Popover>
+          </div>
         </Header>
         <Content
           style={{
