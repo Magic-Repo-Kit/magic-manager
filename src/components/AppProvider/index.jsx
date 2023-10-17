@@ -9,7 +9,7 @@ import {
 import Home from '@/views/home';
 import TreeFiter from '@/views/superTable/treeFiter';
 import SelectFiter from '@/views/superTable/selectFiter';
-import Users from '@/views/user';
+import Users from '@/views/users';
 
 export const context = createContext({});
 

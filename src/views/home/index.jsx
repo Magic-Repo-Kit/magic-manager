@@ -1,7 +1,13 @@
-import React from 'react';
+import './index.less';
+import globeFlat from '@/assets/images/globe-flat.svg';
 
 function Home() {
-  return <div>home</div>;
+  return (
+    <div className="home-container">
+      <header>Home</header>
+      <img src={globeFlat} alt="globeFlat" className="globeFlat" />
+    </div>
+  );
 }
 
 export default Home;

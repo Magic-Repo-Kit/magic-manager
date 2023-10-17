@@ -1,88 +1,47 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useState } from 'react';
 import './index.less';
+import { useNavigate } from 'react-router-dom';
+
 import viteLogo from '../../../public/vite.svg';
 import reactLogo from '@/assets/react.svg';
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
-  UploadOutlined,
   UserOutlined,
-  VideoCameraOutlined,
-  DashboardOutlined,
-  FullscreenExitOutlined,
-  FullscreenOutlined,
   ExpandOutlined,
   CompressOutlined,
   SettingOutlined,
+  HomeOutlined,
+  DeploymentUnitOutlined,
+  ShareAltOutlined,
+  RocketFilled,
 } from '@ant-design/icons';
 import { Layout, Menu, Button, theme, Avatar, Popover } from 'antd';
-// import { context } from './AppProvider';
 
 import Home from '@/views/home';
 import TreeFiter from '@/views/superTable/treeFiter';
 import SelectFiter from '@/views/superTable/selectFiter';
-import Users from '@/views/user';
+import ChartBoard from '@/views/databoard/chartBoard';
+import ImgBoard from '@/views/databoard/imgBoard';
+import Users from '@/views/users';
+import About from '@/views/about';
 
 const { Header, Sider, Content } = Layout;
 
-/**
- * 查找当前选中的menu菜单的值
- * @param key
- * @returns
- */
-const findOpenKeys = (key, menus) => {
-  const result = [];
-  const findInfo = (arr) => {
-    arr.forEach((item) => {
-      if (key.includes(item.key)) {
-        result.push(item.key);
-        if (item.children) {
-          findInfo(item.children); // 使用递归的方式查找当前页面刷新之后的默认选中项
-        }
-      }
-    });
-  };
-  findInfo(menus);
-  return result;
-};
-
-/**
- * 获取当前选中的数据的所有父节点
- * @param key
- * @returns
- */
-const findDeepPath = (key, menus) => {
-  const result = []; // 处理完所有的menu数据成为一个一维数组
-  const findInfo = (arr) => {
-    arr.forEach((item) => {
-      const { children, ...info } = item;
-      result.push(info);
-      if (children) {
-        findInfo(children); // 递归处理子节点
-      }
-    });
-  };
-  findInfo(menus);
-  // 根据当前传递的key值过滤数据，获取到当前用来显示的menu item数据
-  const tmpData = result.filter((item) => key.includes(item.key));
-  if (tmpData.length > 0) {
-    return [{ label: '首页', key: '/admin/dashboard' }, ...tmpData];
-  }
-  return [];
-};
-
 const MyLayout = ({ children }) => {
+  const navigate = useNavigate();
+  const [collapsed, setCollapsed] = useState(false);
+  const classNamesLogo = `logo ${collapsed ? 'logo-rotate' : ''}`;
   const menus = [
     {
       key: '/admin/home',
-      icon: <DashboardOutlined />,
+      icon: <HomeOutlined style={{ fontSize: '20px' }} />,
       element: <Home />,
       label: '首页',
     },
     {
       key: '/admin/superTable',
-      icon: <VideoCameraOutlined />,
+      icon: <RocketFilled style={{ fontSize: '20px' }} />,
       label: '超级表格',
       roles: ['admin', 'editor'],
       children: [
@@ -101,27 +60,41 @@ const MyLayout = ({ children }) => {
       ],
     },
     {
+      key: '/admin/databoard',
+      icon: <DeploymentUnitOutlined style={{ fontSize: '20px' }} />,
+      label: '数据板',
+      roles: ['admin', 'editor'],
+      children: [
+        {
+          label: 'databoard',
+          key: '/admin/databoard/chartBoard',
+          element: <ChartBoard />,
+          roles: ['admin'],
+        },
+        {
+          label: 'imgBoard',
+          key: '/admin/databoard/imgBoard',
+          element: <ImgBoard />,
+          roles: ['admin', 'editor'],
+        },
+      ],
+    },
+    {
       key: '/admin/users',
-      icon: <UserOutlined />,
-      label: '账号信息',
+      icon: <UserOutlined style={{ fontSize: '20px' }} />,
+      label: '用户管理',
       element: <Users />,
       roles: ['admin', 'kf'],
     },
+    {
+      key: '/admin/about',
+      icon: <ShareAltOutlined style={{ fontSize: '20px' }} />,
+      label: '关于',
+      element: <About />,
+      roles: ['admin', 'kf'],
+    },
   ];
-  // const { menus } = useContext(context);
-  console.log('🚀 ~ file: MyLayout.jsx:63 ~ MyLayout ~ menus:', menus);
-  const [collapsed, setCollapsed] = useState(false);
-  const [breadcrumbs, setBreadcrumbs] = useState([]);
-  const navigate = useNavigate();
-  const { pathname } = useLocation(); // 获取location中的数据
-  const tmpOpenKeys = findOpenKeys(pathname, menus);
 
-  // 监听pathname的改变，重新这是面包屑数据
-  useEffect(() => {
-    setBreadcrumbs(findDeepPath(pathname, menus));
-  }, [pathname]);
-
-  const classNamesLogo = `logo ${collapsed ? 'logo-rotate' : ''}`;
   const {
     token: { colorBgContainer },
   } = theme.useToken();
@@ -148,13 +121,13 @@ const MyLayout = ({ children }) => {
         </div>
         <Menu
           onClick={({ key }) => {
-            // alert(key);
             navigate(key);
           }}
           mode="inline"
-          defaultSelectedKeys={tmpOpenKeys}
-          defaultOpenKeys={tmpOpenKeys}
+          defaultSelectedKeys={['1']}
+          defaultOpenKeys={['1']}
           items={menus}
+          style={{ fontSize: '15px', fontWeight: 600 }}
         />
       </Sider>
       <Layout>
@@ -165,17 +138,21 @@ const MyLayout = ({ children }) => {
             background: colorBgContainer,
           }}
         >
-          <Button
-            type="text"
-            icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-            onClick={() => setCollapsed(!collapsed)}
-            style={{
-              fontSize: '16px',
-              width: 64,
-              height: 64,
-              background: colorBgContainer,
-            }}
-          />
+          <div className="flx-justify-between">
+            <Button
+              type="text"
+              icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+              onClick={() => setCollapsed(!collapsed)}
+              style={{
+                fontSize: '16px',
+                width: 64,
+                height: 64,
+                background: colorBgContainer,
+              }}
+            />
+            <span className="header-left-title">百宝袋管理系统</span>
+          </div>
+
           <div className="header-right flx-center">
             <CompressOutlined />
             <ExpandOutlined />
@@ -202,7 +179,6 @@ const MyLayout = ({ children }) => {
             flex: 1,
           }}
         >
-          百宝袋管理系统
           {children}
         </Content>
       </Layout>

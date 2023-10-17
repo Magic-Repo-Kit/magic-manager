@@ -1,20 +1,25 @@
-import { useContext } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { context } from './components/AppProvider';
-import MyLayout from './components/MyLayout';
+import MyLayout from '@/components/MyLayout';
+
+import Home from '@/views/home';
+import TreeFiter from '@/views/superTable/treeFiter';
+import SelectFiter from '@/views/superTable/selectFiter';
+import ChartBoard from '@/views/databoard/chartBoard';
+import ImgBoard from '@/views/databoard/imgBoard';
+import Users from '@/views/users';
+import About from '@/views/about';
 
 function App() {
-  const { routes } = useContext(context);
   return (
     <MyLayout>
       <Routes>
-        {routes.map((item) => (
-          <Route
-            key={item.key}
-            path={item.key.replace('/admin/', '')}
-            element={item.element}
-          />
-        ))}
+        <Route path="home" element={<Home />} />
+        <Route path="superTable/treeFiter" element={<TreeFiter />} />
+        <Route path="superTable/selectFiter" element={<SelectFiter />} />
+        <Route path="databoard/chartBoard" element={<ChartBoard />} />
+        <Route path="databoard/imgBoard" element={<ImgBoard />} />
+        <Route path="users" element={<Users />} />
+        <Route path="about" element={<About />} />
       </Routes>
     </MyLayout>
   );
