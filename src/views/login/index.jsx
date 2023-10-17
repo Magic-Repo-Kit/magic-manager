@@ -1,7 +1,7 @@
 import { Row, Col, Card, Form, Input, Button, message } from 'antd';
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { context } from '../components/AppProvider';
+import { context } from '@/components/AppProvider';
 
 function Login() {
   const navigate = useNavigate();

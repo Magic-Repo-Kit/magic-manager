@@ -6,10 +6,10 @@ import {
   DashboardOutlined,
 } from '@ant-design/icons';
 
-import Home from '../pages/home';
-import TreeFiter from '../pages/superTable/treeFiter';
-import SelectFiter from '../pages/superTable/selectFiter';
-import Users from '../pages/user';
+import Home from '@/views/home';
+import TreeFiter from '@/views/superTable/treeFiter';
+import SelectFiter from '@/views/superTable/selectFiter';
+import Users from '@/views/user';
 
 export const context = createContext({});
 

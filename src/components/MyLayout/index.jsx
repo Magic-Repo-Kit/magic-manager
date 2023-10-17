@@ -1,7 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import viteLogo from '../../public/vite.svg';
-import reactLogo from '../assets/react.svg';
+import './index.less';
+import viteLogo from '../../../public/vite.svg';
+import reactLogo from '@/assets/react.svg';
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
@@ -18,10 +19,10 @@ import {
 import { Layout, Menu, Button, theme, Avatar, Popover } from 'antd';
 // import { context } from './AppProvider';
 
-import Home from '../pages/home';
-import TreeFiter from '../pages/superTable/treeFiter';
-import SelectFiter from '../pages/superTable/selectFiter';
-import Users from '../pages/user';
+import Home from '@/views/home';
+import TreeFiter from '@/views/superTable/treeFiter';
+import SelectFiter from '@/views/superTable/selectFiter';
+import Users from '@/views/user';
 
 const { Header, Sider, Content } = Layout;
 
@@ -185,7 +186,7 @@ const MyLayout = ({ children }) => {
               content={content}
               trigger="click"
             >
-              <div className="flx-center header-right-user">
+              <div className="flx-center header-right-user cursor-point">
                 <Avatar src="https://xsgames.co/randomusers/avatar.php?g=pixel&key=2" />
               </div>
             </Popover>
