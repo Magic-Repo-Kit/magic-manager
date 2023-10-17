@@ -1,22 +1,21 @@
 import './index.less';
 
 import { useRef } from 'react';
-import { Button, Checkbox, Form, Input } from 'antd';
+import { useNavigate } from 'react-router-dom';
+import { Button, Checkbox, Form, Input, message } from 'antd';
 import {
   GithubOutlined,
   GoogleOutlined,
   WechatOutlined,
 } from '@ant-design/icons';
 
-const onFinish = (values) => {
-  console.log('Success:', values);
-};
 const onFinishFailed = (errorInfo) => {
   console.log('Failed:', errorInfo);
 };
 
 function LoginForm() {
   const containerRef = useRef(null);
+  const navigate = useNavigate();
   return (
     <div className="form-box">
       <div className="form-box-title">Magicrepokit 百宝箱</div>
@@ -67,7 +66,16 @@ function LoginForm() {
             <input type="password" placeholder="密码" />
             <a href="#">忘记密码？</a>
             {/* <a href="#">Forgot your password?</a> */}
-            <button>登 录</button>
+            <button
+              onClick={() => {
+                message.success('登录成功，正在跳转...');
+                setTimeout(() => {
+                  navigate('/admin/home');
+                }, 1000);
+              }}
+            >
+              登 录
+            </button>
             {/* <button>Sign In</button> */}
           </form>
         </div>
