@@ -13,8 +13,9 @@ import {
   DeploymentUnitOutlined,
   ShareAltOutlined,
   RocketFilled,
+  MinusOutlined,
 } from '@ant-design/icons';
-import { Layout, Menu, theme, Avatar, Popover } from 'antd';
+import { Layout, Menu, theme, Input, Popover, Badge } from 'antd';
 
 import Home from '@/views/home';
 import TreeFiter from '@/views/superTable/treeFiter';
@@ -25,10 +26,23 @@ import Users from '@/views/users';
 import About from '@/views/about';
 
 const { Header, Sider, Content } = Layout;
+const { Search } = Input;
+const onSearch = (value, _e, info) => console.log(info?.source, value);
 
 const MyLayout = ({ children }) => {
   const navigate = useNavigate();
   const [collapsed, setCollapsed] = useState(false);
+  // 夜间模式
+  const [nigntmode, setNigntmode] = useState(false);
+  const classNigntmode = `color-text-body iconfont ${
+    nigntmode ? 'mr-evening-moon1' : 'mr-day-moon'
+  }`;
+  // 全屏;
+  const [fullmode, setFullmode] = useState(false);
+  const classFullmode = `color-text-body iconfont ${
+    fullmode ? 'mr-un-full' : 'mr-full'
+  }`;
+
   const classNamesLogo = `logo ${collapsed ? 'logo-rotate' : ''}`;
   const menus = [
     {
@@ -97,18 +111,22 @@ const MyLayout = ({ children }) => {
     token: { colorBgContainer },
   } = theme.useToken();
 
-  const text = <span>Title</span>;
-  const content = (
-    <div>
-      <p>Content</p>
-      <p
+  const popoverTitle = <div className="popover-title">👋Hey,friend</div>;
+  const popoverContent = (
+    <div className="popover-content">
+      <div>个人信息</div>
+      <div>修改密码</div>
+      <div
         onClick={() => {
           navigate('/');
         }}
       >
-        退出
-      </p>
+        退出登录
+      </div>
     </div>
+  );
+  const searchIcon = (
+    <i style={{ fontSize: '16px' }} className="iconfont mr-search-1"></i>
   );
   return (
     <Layout className="container">
@@ -133,7 +151,7 @@ const MyLayout = ({ children }) => {
             }}
           /> */}
           <i
-            className="iconfont mr-circular2"
+            className="iconfont mr-circular"
             style={{
               fontSize: '30px',
               fontWeight: 600,
@@ -160,17 +178,54 @@ const MyLayout = ({ children }) => {
         </div>
 
         <div className="header-right flx-center">
-          <CompressOutlined />
-          <ExpandOutlined />
-          <SettingOutlined />
+          <Search
+            placeholder="搜索"
+            onSearch={onSearch}
+            enterButton={searchIcon}
+            style={{ width: '250px' }}
+          />
+          <i
+            style={{
+              fontSize: '22px',
+              fontWeight: nigntmode ? '' : 600,
+              color: nigntmode ? '#ffce45' : '',
+            }}
+            className={classNigntmode}
+            onClick={() => setNigntmode(!nigntmode)}
+          ></i>
+          {/* 全屏/非全屏 */}
+          <i
+            style={{ fontSize: '22px' }}
+            className={classFullmode}
+            onClick={() => setFullmode(!fullmode)}
+          ></i>
+          <Badge count={5} size="small">
+            <i
+              style={{ fontSize: '22px' }}
+              className="color-text-body iconfont mr-notify"
+            ></i>
+          </Badge>
+          <MinusOutlined
+            style={{
+              transform: 'rotate(90deg)',
+              fontSize: '22px',
+              margin: '0px',
+            }}
+          />
           <Popover
             placement="bottomRight"
-            title={text}
-            content={content}
             trigger="click"
+            title={popoverTitle}
+            content={popoverContent}
           >
-            <div className="flx-center header-right-user cursor-point">
-              <Avatar src="https://xsgames.co/randomusers/avatar.php?g=pixel&key=2" />
+            <div className="flx-center cursor-point">
+              <div className="header-right-user flx-center">
+                <i
+                  style={{ fontSize: '25px' }}
+                  className="color-text-body iconfont mr-user"
+                ></i>
+              </div>
+              <div style={{ fontWeight: 600 }}>你好，谭智亮</div>
             </div>
           </Popover>
         </div>
