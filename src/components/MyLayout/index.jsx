@@ -5,8 +5,6 @@ import { useNavigate } from 'react-router-dom';
 import viteLogo from '../../../public/vite.svg';
 import reactLogo from '@/assets/react.svg';
 import {
-  MenuFoldOutlined,
-  MenuUnfoldOutlined,
   UserOutlined,
   ExpandOutlined,
   CompressOutlined,
@@ -16,7 +14,7 @@ import {
   ShareAltOutlined,
   RocketFilled,
 } from '@ant-design/icons';
-import { Layout, Menu, Button, theme, Avatar, Popover } from 'antd';
+import { Layout, Menu, theme, Avatar, Popover } from 'antd';
 
 import Home from '@/views/home';
 import TreeFiter from '@/views/superTable/treeFiter';
@@ -103,84 +101,123 @@ const MyLayout = ({ children }) => {
   const content = (
     <div>
       <p>Content</p>
-      <p>Content</p>
+      <p
+        onClick={() => {
+          navigate('/');
+        }}
+      >
+        退出
+      </p>
     </div>
   );
   return (
     <Layout className="container">
-      <Sider trigger={null} collapsible collapsed={collapsed} theme="light">
-        <div className="container-title flx-center">
-          <img
-            src={collapsed ? reactLogo : viteLogo}
-            className={classNamesLogo}
-            alt="Vite logo"
-          />
-          <span style={{ display: collapsed ? 'none' : 'block' }}>
-            MagicRepokit
+      <Header
+        className="flx-justify-between cursor-point"
+        style={{
+          padding: 0,
+          background: colorBgContainer,
+        }}
+      >
+        <div className="flx-justify-between" style={{ paddingLeft: '20px' }}>
+          {/* 展开/隐藏 */}
+          {/* <Button
+            type="text"
+            icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+            onClick={() => setCollapsed(!collapsed)}
+            style={{
+              fontSize: '16px',
+              width: 64,
+              height: 64,
+              background: colorBgContainer,
+            }}
+          /> */}
+          <i
+            className="iconfont mr-circular2"
+            style={{
+              fontSize: '30px',
+              fontWeight: 600,
+              color: '#0162ff',
+            }}
+          ></i>
+          <i
+            className="iconfont mr-triangle"
+            style={{ fontSize: '30px', color: '#0162ff' }}
+          ></i>
+          <i
+            className="iconfont mr-square"
+            style={{ fontSize: '30px', color: '#0162ff' }}
+          ></i>
+          <span
+            className="header-left-title font-family-dingding"
+            style={{
+              marginLeft: '15px',
+              fontSize: '22px',
+            }}
+          >
+            Magicrepokit 百宝袋
           </span>
         </div>
-        <Menu
-          onClick={({ key }) => {
-            navigate(key);
-          }}
-          mode="inline"
-          defaultSelectedKeys={['1']}
-          defaultOpenKeys={['1']}
-          items={menus}
-          style={{ fontSize: '15px', fontWeight: 600 }}
-        />
-      </Sider>
-      <Layout>
-        <Header
-          className="flx-justify-between"
-          style={{
-            padding: 0,
-            background: colorBgContainer,
-          }}
-        >
-          <div className="flx-justify-between">
-            <Button
-              type="text"
-              icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-              onClick={() => setCollapsed(!collapsed)}
-              style={{
-                fontSize: '16px',
-                width: 64,
-                height: 64,
-                background: colorBgContainer,
-              }}
-            />
-            <span className="header-left-title">百宝袋管理系统</span>
-          </div>
 
-          <div className="header-right flx-center">
-            <CompressOutlined />
-            <ExpandOutlined />
-            <SettingOutlined />
-            <Popover
-              placement="bottomRight"
-              title={text}
-              content={content}
-              trigger="click"
+        <div className="header-right flx-center">
+          <CompressOutlined />
+          <ExpandOutlined />
+          <SettingOutlined />
+          <Popover
+            placement="bottomRight"
+            title={text}
+            content={content}
+            trigger="click"
+          >
+            <div className="flx-center header-right-user cursor-point">
+              <Avatar src="https://xsgames.co/randomusers/avatar.php?g=pixel&key=2" />
+            </div>
+          </Popover>
+        </div>
+      </Header>
+
+      <Layout>
+        <Sider trigger={null} collapsible collapsed={collapsed} theme="light">
+          <div className="container-title flx-center">
+            <img
+              src={collapsed ? reactLogo : viteLogo}
+              className={classNamesLogo}
+              alt="Vite logo"
+            />
+            <span
+              style={{
+                display: collapsed ? 'none' : 'block',
+                fontSize: '20px',
+              }}
             >
-              <div className="flx-center header-right-user cursor-point">
-                <Avatar src="https://xsgames.co/randomusers/avatar.php?g=pixel&key=2" />
-              </div>
-            </Popover>
+              MagicRepokit
+            </span>
           </div>
-        </Header>
-        <Content
-          style={{
-            margin: '24px 16px',
-            padding: 24,
-            minHeight: 280,
-            background: colorBgContainer,
-            overflow: 'auto',
-            flex: 1,
-          }}
-        >
-          {children}
-        </Content>
+          <Menu
+            onClick={({ key }) => {
+              navigate(key);
+            }}
+            mode="inline"
+            defaultSelectedKeys={['1']}
+            defaultOpenKeys={['1']}
+            items={menus}
+            style={{ fontSize: '15px', fontWeight: 600 }}
+          />
+        </Sider>
+        <Layout>
+          <Content
+            style={{
+              margin: '24px 16px',
+              padding: 24,
+              minHeight: 280,
+              background: colorBgContainer,
+              overflow: 'auto',
+              flex: 1,
+            }}
+          >
+            {children}
+          </Content>
+        </Layout>
       </Layout>
     </Layout>
   );

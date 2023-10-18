@@ -1,0 +1,37 @@
+{
+  "id": "4291850",
+  "name": "MagicRepokit",
+  "font_family": "iconfont",
+  "css_prefix_text": "mr-",
+  "description": "百宝袋",
+  "glyphs": [
+    {
+      "icon_id": "22761407",
+      "name": "圆形",
+      "font_class": "circular2",
+      "unicode": "e6bf",
+      "unicode_decimal": 59071
+    },
+    {
+      "icon_id": "23713941",
+      "name": "椭圆形",
+      "font_class": "circular",
+      "unicode": "e627",
+      "unicode_decimal": 58919
+    },
+    {
+      "icon_id": "7715179",
+      "name": "square",
+      "font_class": "square",
+      "unicode": "e67b",
+      "unicode_decimal": 59003
+    },
+    {
+      "icon_id": "30797056",
+      "name": "三角形",
+      "font_class": "triangle",
+      "unicode": "e659",
+      "unicode_decimal": 58969
+    }
+  ]
+}

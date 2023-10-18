@@ -18,7 +18,15 @@ function LoginForm() {
   const navigate = useNavigate();
   return (
     <div className="form-box">
-      <div className="form-box-title">Magicrepokit 百宝箱</div>
+      <div
+        className="form-box-title"
+        style={{
+          fontSize: '25px',
+          fontFamily: '钉钉进步体 Regular',
+        }}
+      >
+        Magicrepokit 百宝袋
+      </div>
 
       <div className="form-container-box" ref={containerRef}>
         {/* 注册 */}
@@ -38,7 +46,7 @@ function LoginForm() {
               </a>
             </div>
             <input type="text" placeholder="账户名" />
-            <input type="email" placeholder="账号" />
+            <input type="text" placeholder="账号" />
             <input type="password" placeholder="密码" />
             <button>注 册</button>
             {/* <button>Sign Up</button> */}
@@ -62,7 +70,7 @@ function LoginForm() {
             </div>
             <span style={{ color: '#3f3f3f' }}>使用第三方平台快速登录</span>
             {/* <span style={{ color: '#3f3f3f' }}>or use your account</span> */}
-            <input type="email" placeholder="账号" />
+            <input type="text" placeholder="账号" />
             <input type="password" placeholder="密码" />
             <a href="#">忘记密码？</a>
             {/* <a href="#">Forgot your password?</a> */}
@@ -95,7 +103,7 @@ function LoginForm() {
                   containerRef.current.classList.remove('right-panel-active');
                 }}
               >
-                登录
+                登 录
               </button>
             </div>
             <div className="overlay-panel overlay-right">
@@ -108,7 +116,7 @@ function LoginForm() {
                   containerRef.current.classList.add('right-panel-active');
                 }}
               >
-                注册
+                注 册
               </button>
             </div>
           </div>

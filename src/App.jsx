@@ -8,11 +8,13 @@ import ChartBoard from '@/views/databoard/chartBoard';
 import ImgBoard from '@/views/databoard/imgBoard';
 import Users from '@/views/users';
 import About from '@/views/about';
+import Login from './views/login';
 
 function App() {
   return (
     <MyLayout>
       <Routes>
+        <Route path="login" element={<Login />} />
         <Route path="home" element={<Home />} />
         <Route path="superTable/treeFiter" element={<TreeFiter />} />
         <Route path="superTable/selectFiter" element={<SelectFiter />} />
