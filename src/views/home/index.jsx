@@ -1,4 +1,4 @@
-import './index.less';
+import './index.scss';
 import globeFlat from '@/assets/images/globe-flat.svg';
 
 function Home() {

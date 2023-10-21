@@ -1,0 +1,36 @@
+.container {
+  min-width: 950px;
+  height: 100%;
+}
+.container-title {
+  height: 64px;
+  font-weight: 700;
+  font-size: 22px;
+}
+
+.header-left-title {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.header-right {
+  // font-size: 20px;
+  margin-right: 30px;
+  > * {
+    margin: 0px 8px;
+  }
+  > :last-child {
+    margin: 0px;
+  }
+  .header-right-user {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+  }
+}
+.popover-title {
+  border-bottom: 1px solid #e5e5e5;
+}
+.popover-content {
+  // width: 180px;
+}

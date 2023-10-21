@@ -1,29 +1,18 @@
-import { Routes, Route } from 'react-router-dom';
-import MyLayout from '@/components/MyLayout';
+import React from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
 
-import Home from '@/views/home';
-import TreeFiter from '@/views/superTable/treeFiter';
-import SelectFiter from '@/views/superTable/selectFiter';
-import ChartBoard from '@/views/databoard/chartBoard';
-import ImgBoard from '@/views/databoard/imgBoard';
-import Users from '@/views/users';
-import About from '@/views/about';
-import Login from './views/login';
+import AdminLayout from '@/layouts/admin';
+import AuthLayout from '@/layouts/auth';
+import FailLayout from '@/layouts/fail';
 
 function App() {
   return (
-    <MyLayout>
-      <Routes>
-        <Route path="login" element={<Login />} />
-        <Route path="home" element={<Home />} />
-        <Route path="superTable/treeFiter" element={<TreeFiter />} />
-        <Route path="superTable/selectFiter" element={<SelectFiter />} />
-        <Route path="databoard/chartBoard" element={<ChartBoard />} />
-        <Route path="databoard/imgBoard" element={<ImgBoard />} />
-        <Route path="users" element={<Users />} />
-        <Route path="about" element={<About />} />
-      </Routes>
-    </MyLayout>
+    <Routes>
+      <Route path="auth/*" element={<AuthLayout />} />
+      <Route path="admin/*" element={<AdminLayout />} />
+      <Route path="fail/*" element={<FailLayout />} />
+      <Route path="/" element={<Navigate to="/auth" replace />} />
+    </Routes>
   );
 }
 
