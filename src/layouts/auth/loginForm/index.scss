@@ -20,15 +20,16 @@ a {
 }
 button {
   border-radius: 20px;
-  border: 1px solid #ff4b2b;
-  background-color: #ff4b2b;
+  border: 1px solid #0038fa;
+  background-color: #0038fa;
   color: #ffffff;
   font-size: 12px;
   font-weight: bold;
-  padding: 12px 45px;
+  padding: 12px 60px;
   letter-spacing: 1px;
   text-transform: uppercase;
   transition: transform 80ms ease-in;
+  margin-bottom: 80px;
 }
 button:active {
   transform: scale(0.95);
@@ -42,23 +43,26 @@ button.ghost {
   background-color: transparent;
   border-color: #ffffff;
 }
+
 form {
   background-color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding: 0 50px;
   height: 100%;
   text-align: center;
+  padding: 0 10vw;
+  min-width: 300px;
 }
 
 input {
   background-color: #eee;
   border: none;
   padding: 12px 15px;
-  margin: 8px 0;
+  margin: 10px;
   width: 100%;
+  max-width: 600px;
 }
 .form-box {
   .form-box-title {
@@ -70,27 +74,86 @@ input {
   }
   .form-container-box {
     background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    // border-radius: 10px;
+    // box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
     position: relative;
     overflow: hidden;
-    width: 768px;
-    max-width: 100%;
-    min-height: 480px;
+    // width: 768px;
+    // max-width: 100%;
+    // min-height: 480px;
+    width: 100vw;
+    height: 100vh;
 
     .form-container {
       position: absolute;
       top: 0;
       height: 100%;
+      width: 768px;
       transition: all 0.6s ease-in-out;
     }
+    // 登陆
     .sign-in-container {
-      left: 0;
+      right: 0;
+      // left: 0;
       width: 50%;
       z-index: 2;
+      // .loading-formIn {
+      //   h1 {
+      //     text-align: center;
+      //     font-size: 18px;
+      //     letter-spacing: -0.13em;
+
+      //     span {
+      //       color: #0390f6;
+      //       text-shadow: 4px 4px 0px #82f2f2, 8px 8px 0px #6d63fd;
+      //       animation: knock 3s infinite;
+      //       position: relative;
+      //       display: inline-block;
+      //       &:nth-of-type(2) {
+      //         animation-delay: 0.25s;
+      //       }
+      //       &:nth-of-type(3) {
+      //         animation-delay: 0.45s;
+      //       }
+      //       &:nth-of-type(4) {
+      //         animation-delay: 0.65s;
+      //       }
+      //       &:nth-of-type(5) {
+      //         animation-delay: 850ms;
+      //       }
+      //       &:nth-of-type(6) {
+      //         animation-delay: 1050ms;
+      //       }
+      //       &:nth-of-type(7) {
+      //         animation-delay: 1250ms;
+      //       }
+      //     }
+      //   }
+
+      //   @keyframes knock {
+      //     0% {
+      //       transform: rotate(0) translatey(0);
+      //     }
+      //     25% {
+      //       transform: rotate(90deg) translatey(-0.15em);
+      //     }
+      //     50% {
+      //       transform: rotate(360eg) translatey(-0.15em);
+      //     }
+      //     55% {
+      //       transform: rotate(0) translatey(0);
+      //     }
+
+      //     100% {
+      //       transform: rotate(0) translatey(0);
+      //     }
+      //   }
+      // }
     }
+    // 注册
     .sign-up-container {
-      left: 0;
+      left: 50%;
+      // left: -50%;
       width: 50%;
       opacity: 0;
       z-index: 1;
@@ -98,8 +161,9 @@ input {
     .overlay-container {
       position: absolute;
       top: 0;
-      left: 50%;
-      width: 50%;
+      left: 0;
+      // left: 50%;
+      width: 40%;
       height: 100%;
       overflow: hidden;
       transition: transform 0.6s ease-in-out;
@@ -107,13 +171,12 @@ input {
     }
   }
 }
-
 .form-container-box.right-panel-active .sign-in-container {
-  transform: translateX(100%);
+  transform: translateX(-100%);
 }
 
 .form-container-box.right-panel-active .sign-up-container {
-  transform: translateX(100%);
+  transform: translateX(-100%);
   opacity: 1;
   z-index: 5;
   animation: show 0.6s;
@@ -131,13 +194,15 @@ input {
   }
 }
 .form-container-box.right-panel-active .overlay-container {
-  transform: translateX(-100%);
+  transform: translateX(150%);
+  // transform: translateX(-100%);
 }
 
 .overlay {
-  background: #ff416c;
-  background: -webkit-linear-gradient(to right, #ff4b2b, #ff416c);
-  background: linear-gradient(to right, #ff4b2b, #ff416c);
+  background: #0038fa;
+  background: -webkit-linear-gradient(to right, #03ffd0, #0038fa);
+  background: linear-gradient(to right, #03ffd0, #0038fa);
+  // background-image: radial-gradient(#03ffd0 17%, #6f00ff 22%, #0038fa 88%);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 0 0;
@@ -171,6 +236,20 @@ input {
 
 .overlay-left {
   transform: translateX(-20%);
+  background: url('../../../assets/images/auth-bc-set.png');
+  background-repeat: no-repeat;
+  &::before {
+    content: '';
+    width: 420px;
+    height: 420px;
+    position: relative;
+    top: -40px;
+    left: 30px;
+    // transform: rotate(12deg);
+    background-image: url('../../../assets/images/auth-magic-1.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
 }
 
 .form-container-box.right-panel-active .overlay-left {
@@ -180,6 +259,18 @@ input {
 .overlay-right {
   right: 0;
   transform: translateX(0);
+  background: url('../../../assets/images/auth-bc-login.png');
+  background-repeat: no-repeat;
+  &::before {
+    content: '';
+    width: 420px;
+    height: 285px;
+    position: relative;
+    bottom: -15px;
+    left: 30px;
+    background-image: url('../../../assets/images/auth-report.png');
+    background-repeat: no-repeat;
+  }
 }
 
 .form-container-box.right-panel-active .overlay-right {

@@ -18,7 +18,7 @@ function LoginForm() {
   const navigate = useNavigate();
   return (
     <div className="form-box">
-      <div
+      {/* <div
         className="form-box-title"
         style={{
           fontSize: '25px',
@@ -26,36 +26,25 @@ function LoginForm() {
         }}
       >
         Magicrepokit 百宝袋
-      </div>
+      </div> */}
 
       <div className="form-container-box" ref={containerRef}>
-        {/* 注册 */}
-        <div className="form-container sign-up-container">
-          <form action="#">
-            <h1>创建账户</h1>
-            {/* <h1>Create Account</h1> */}
-            <div className="social-container">
-              <a href="#" className="social">
-                <GoogleOutlined style={{ fontSize: '24px' }} />
-              </a>
-              <a href="#" className="social">
-                <GithubOutlined style={{ fontSize: '24px' }} />
-              </a>
-              <a href="#" className="social">
-                <WechatOutlined style={{ fontSize: '24px' }} />
-              </a>
-            </div>
-            <input type="text" placeholder="账户名" />
-            <input type="text" placeholder="账号" />
-            <input type="password" placeholder="密码" />
-            <button>注 册</button>
-            {/* <button>Sign Up</button> */}
-          </form>
-        </div>
         {/* 登录 */}
         <div className="form-container sign-in-container">
-          <form action="#">
+          {/* <div className="loading-formIn">
+            <h1>
+              <span>L</span>
+              <span>O</span>
+              <span>A</span>
+              <span>D</span>
+              <span>I</span>
+              <span>N</span>
+              <span>G</span>
+            </h1>
+          </div> */}
+          <form action="#" className="formIn">
             <h1>登录</h1>
+
             {/* <h1>Sign in</h1> */}
             <div className="social-container">
               <a href="#" className="social">
@@ -85,15 +74,35 @@ function LoginForm() {
             {/* <button>Sign In</button> */}
           </form>
         </div>
+        {/* 注册 */}
+        <div className="form-container sign-up-container">
+          <form action="#" className="formUp">
+            <h1>创建账户</h1>
+            {/* <h1>Create Account</h1> */}
+            <div className="social-container">
+              <a href="#" className="social">
+                <GoogleOutlined style={{ fontSize: '24px' }} />
+              </a>
+              <a href="#" className="social">
+                <GithubOutlined style={{ fontSize: '24px' }} />
+              </a>
+              <a href="#" className="social">
+                <WechatOutlined style={{ fontSize: '24px' }} />
+              </a>
+            </div>
+            <input type="text" placeholder="账户名" />
+            <input type="text" placeholder="账号" />
+            <input type="password" placeholder="密码" />
+            <button style={{ marginTop: '15px' }}>注 册</button>
+            {/* <button>Sign Up</button> */}
+          </form>
+        </div>
+
         <div className="overlay-container">
           <div className="overlay">
             <div className="overlay-panel overlay-left">
               <h1>欢迎回来！</h1>
-              {/* <h1>Welcome Back!</h1> */}
               <p>为了与我们保持联系，请使用您的个人信息登录。</p>
-              {/* <p>
-                To keep connected with us please login with your personal info
-              </p> */}
               <button
                 className="ghost"
                 id="signIn"

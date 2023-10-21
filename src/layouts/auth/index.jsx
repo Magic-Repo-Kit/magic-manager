@@ -1,14 +1,17 @@
 import LoginForm from './loginForm';
 import './index.scss';
-// import loginBcImg from '@/assets/images/login-bc.png';
+import { QuestionCircleOutlined } from '@ant-design/icons';
+import { FloatButton } from 'antd';
 
 function Login() {
   return (
-    <div className="logindcontainer flxdcenter">
-      <div className="login-bc">{/* <img src={loginBcImg} alt="ß" /> */}</div>
-      <div className="login-form">
-        <LoginForm />
-      </div>
+    <div className="login-container flx-center">
+      <LoginForm />
+      <FloatButton
+        icon={<QuestionCircleOutlined />}
+        type="primary"
+        style={{ top: 24, zIndex: 10 }}
+      />
     </div>
   );
 }
