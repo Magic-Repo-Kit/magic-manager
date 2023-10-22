@@ -1,99 +1,130 @@
 import React from 'react';
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
-import Navbar from '@/components/mr-navbar';
-import Sidebar from '@/components/mr-sidebar';
-import Footer from '@/components/mr-footer';
+
+import { Layout } from 'antd';
+const { Header, Footer, Sider, Content } = Layout;
+
+import MrHeader from '@/components/mr-header';
+import MrSidebar from '@/components/mr-sidebar';
+import MrFooter from '@/components/mr-footer';
+
 import { totalRoutes } from '@/router';
 
-export default function Admin(props) {
-  const { ...rest } = props;
-  const location = useLocation();
-  const [open, setOpen] = React.useState(true);
-  const [currentRoute, setCurrentRoute] = React.useState('Main Dashboard');
+// 样式
+const headerStyle = {
+  zIndex: 1,
+  position: 'sticky',
+  top: 0,
+  height: '60px',
+  background: 'rgba(255, 255, 255, 0.7)',
+  backgroundClip: 'padding-box',
+  boxShadow:
+    '0 1px 2px 0 rgba(0,0,0,.03), 0 1px 6px -1px rgba(0,0,0,.02), 0 2px 4px 0 rgba(0,0,0,.02)',
+  backdropFilter: 'blur(24px)',
+};
+const siderStyle = {
+  overflow: 'auto',
+  position: 'fixed',
+  left: 0,
+  height: 'calc(100% - 90px)',
+  width: '300',
+  padding: '12px 10px',
+  marginTop: '30px',
+  backgroundColor: '#fff',
+  borderInlineEnd: '1px solid rgba(5, 5, 5, 0.06)',
+};
+const contentStyle = {
+  overflow: 'auto',
+  padding: '0 50px',
+  backgroundColor: '#fff',
+};
+const footerStyle = {
+  textAlign: 'center',
+  height: '65px',
+  backgroundColor: '#fff',
+};
 
-  React.useEffect(() => {
-    window.addEventListener('resize', () =>
-      window.innerWidth < 1200 ? setOpen(false) : setOpen(true)
-    );
-  }, []);
-  React.useEffect(() => {
-    getActiveRoute(totalRoutes);
-  }, [location.pathname]);
+// HeaderIcon
+const HeaderIcon = [
+  { name: '夜间', icon: 'evening-moon1' },
+  { name: '全屏', icon: 'un-full' },
+  { name: '通知', icon: 'notify' },
+];
 
-  const getActiveRoute = (totalRoutes) => {
-    let activeRoute = 'Main Dashboard';
-    for (let i = 0; i < totalRoutes.length; i++) {
-      if (
-        window.location.href.indexOf(
-          totalRoutes[i].layout + '/' + totalRoutes[i].path
-        ) !== -1
-      ) {
-        setCurrentRoute(totalRoutes[i].name);
-      }
-    }
-    return activeRoute;
-  };
-  const getActiveNavbar = (totalRoutes) => {
-    let activeNavbar = false;
-    for (let i = 0; i < totalRoutes.length; i++) {
-      if (
-        window.location.href.indexOf(
-          totalRoutes[i].layout + totalRoutes[i].path
-        ) !== -1
-      ) {
-        return totalRoutes[i].secondary;
-      }
-    }
-    return activeNavbar;
-  };
-  const getRoutes = (totalRoutes) => {
-    return totalRoutes.map((prop, key) => {
-      if (prop.layout === '/admin') {
-        return (
-          <Route path={`/${prop.path}`} element={prop.component} key={key} />
-        );
-      } else {
-        return null;
-      }
-    });
-  };
-
-  document.documentElement.dir = 'ltr';
+function Admin(props) {
   return (
-    <div className="flex h-full w-full">
-      <Sidebar open={open} onClose={() => setOpen(false)} />
-      {/* Navbar & Main Content */}
-      <div className="h-full w-full bg-lightPrimary dark:!bg-navy-900">
-        {/* Main Content */}
-        <main
-          className={`mx-[12px] h-full flex-none transition-all md:pr-2 xl:ml-[313px]`}
+    <Layout>
+      <Header style={headerStyle}>
+        <MrHeader slotTitle="Magicrepokit" slotIcon={HeaderIcon} />
+      </Header>
+      <Layout hasSider style={{ backgroundColor: '#fff' }}>
+        <Sider style={siderStyle} width="280">
+          <MrSidebar />
+        </Sider>
+        <Layout
+          style={{
+            minHeight: 'calc(100vh - 60px)',
+            marginLeft: 300,
+          }}
         >
-          {/* Routes */}
-          <div className="h-full">
-            <Navbar
-              onOpenSidenav={() => setOpen(true)}
-              logoText={'Horizon UI Tailwind React'}
-              brandText={currentRoute}
-              secondary={getActiveNavbar(totalRoutes)}
-              {...rest}
-            />
-            <div className="pt-5s mx-auto mb-auto h-full min-h-[84vh] p-2 md:pr-2">
-              <Routes>
-                {getRoutes(totalRoutes)}
-
-                <Route
-                  path="/"
-                  element={<Navigate to="/admin/default" replace />}
-                />
-              </Routes>
+          <Content style={contentStyle}>
+            <div
+              style={{
+                height: '1500px',
+                padding: 24,
+                textAlign: 'center',
+                display: 'flex',
+                justifyContent: 'space-between',
+              }}
+            >
+              <div
+                style={{
+                  background: '#4751fb',
+                  padding: '50px',
+                  height: '300px',
+                }}
+              >
+                long content
+              </div>
+              <div
+                style={{
+                  background: '#6dd5f8',
+                  padding: '50px',
+                  height: '300px',
+                }}
+              >
+                long content
+              </div>
+              <div
+                style={{
+                  background: '#6274f8',
+                  padding: '50px',
+                  height: '300px',
+                }}
+              >
+                long content
+              </div>
+              <div
+                style={{
+                  background: '#263af6',
+                  padding: '50px',
+                  height: '300px',
+                }}
+              >
+                long content
+              </div>
+              <div style={{ background: '#13bb58', height: '300px' }}>
+                long content
+              </div>
             </div>
-
-            <div className="p-3">
-              <Footer />
-            </div>
-          </div>
-        </main>
-      </div>
-    </div>
+          </Content>
+          <Footer style={footerStyle}>
+            <MrFooter />
+          </Footer>
+        </Layout>
+      </Layout>
+    </Layout>
   );
 }
+
+export default Admin;
