@@ -1,51 +1,49 @@
-import './index.scss';
-
-import { useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+
 import { Button, Checkbox, Form, Input, message } from 'antd';
 import {
   GithubOutlined,
   GoogleOutlined,
   WechatOutlined,
 } from '@ant-design/icons';
+import './index.scss';
+import ajax from '@/utils/ajax';
 
 const onFinishFailed = (errorInfo) => {
   console.log('Failed:', errorInfo);
 };
 
 function LoginForm() {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const containerRef = useRef(null);
   const navigate = useNavigate();
+
+  const handleLogin = async () => {
+    // 添加登录处理函数
+    try {
+      const response = await ajax.post('/auth/login', { username, password }); // 调用登录接口
+      // 根据你的 API 返回结构处理响应
+      if (response.success) {
+        message.success('登录成功，正在跳转...');
+        navigate('/admin');
+      } else {
+        message.error(response.message || '登录失败');
+      }
+    } catch (error) {
+      message.error('登录失败');
+    }
+  };
+
   return (
     <div className="form-box">
-      {/* <div
-        className="form-box-title"
-        style={{
-          fontSize: '25px',
-          fontFamily: '钉钉进步体 Regular',
-        }}
-      >
-        Magicrepokit 百宝袋
-      </div> */}
-
       <div className="form-container-box" ref={containerRef}>
         {/* 登录 */}
         <div className="form-container sign-in-container">
-          {/* <div className="loading-formIn">
-            <h1>
-              <span>L</span>
-              <span>O</span>
-              <span>A</span>
-              <span>D</span>
-              <span>I</span>
-              <span>N</span>
-              <span>G</span>
-            </h1>
-          </div> */}
           <form action="#" className="formIn">
             <h1>登录</h1>
-
-            {/* <h1>Sign in</h1> */}
+            {/* 第三方登陆 */}
             <div className="social-container">
               <a href="#" className="social">
                 <GoogleOutlined style={{ fontSize: '24px' }} />
@@ -58,19 +56,21 @@ function LoginForm() {
               </a>
             </div>
             <span style={{ color: '#3f3f3f' }}>使用第三方平台快速登录</span>
-            {/* <span style={{ color: '#3f3f3f' }}>or use your account</span> */}
-            <input type="text" placeholder="账号" />
-            <input type="password" placeholder="密码" />
+            <input
+              type="text"
+              placeholder="账号"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+            <input
+              type="password"
+              placeholder="密码"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
             <a href="#">忘记密码？</a>
             {/* <a href="#">Forgot your password?</a> */}
-            <button
-              onClick={() => {
-                message.success('登录成功，正在跳转...');
-                navigate('/admin');
-              }}
-            >
-              登 录
-            </button>
+            <button onClick={handleLogin}>登 录</button>
             {/* <button>Sign In</button> */}
           </form>
         </div>
