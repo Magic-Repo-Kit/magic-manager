@@ -2,12 +2,12 @@ import axios from 'axios';
 
 // 创建 axios 实例
 const instance = axios.create({
-  baseURL: process.env.NODE_ENV === 'development' ? '/system' : 'http://124.222.46.195:1000/system',
+  baseURL: process.env.NODE_ENV === 'development' ? '/api' : 'http://124.222.46.195:1000',
   timeout: 1000,
   headers: {
     'Content-Type': 'application/json',
     'Accept-Language': 'zh-CN',
-    'User-Type': 'guest'
+    'User-Type': 'pc'
   },
 });
 
@@ -29,11 +29,12 @@ instance.interceptors.response.use((response) => {
   return response;
 }, async error => {
   const originalRequest = error.config;
+  // 如果token过期，此时401
   if (error.response.status === 401 && !originalRequest._retry) {
     originalRequest._retry = true;
     try {
       const refreshToken = localStorage.getItem('refresh_token');
-      const response = await axiosInstance.post('/auth/refresh-token', { refreshToken });
+      const response = await axiosInstance.post('/system/auth/refresh-token', { refreshToken });
       const newAccessToken = response.data.accessToken;
       // 将新的访问令牌存储在本地存储中
       localStorage.setItem('access_token', newAccessToken);
@@ -45,7 +46,7 @@ instance.interceptors.response.use((response) => {
       // 刷新失败，清除令牌并重定向到登录页面
       localStorage.removeItem('access_token');
       localStorage.removeItem('refresh_token');
-      window.location.replace('/login');
+      window.location.replace('/auth');
     }
   }
   return Promise.reject(error);
