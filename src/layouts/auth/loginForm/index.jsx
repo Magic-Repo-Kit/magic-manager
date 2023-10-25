@@ -8,7 +8,9 @@ import {
   WechatOutlined,
 } from '@ant-design/icons';
 import './index.scss';
-import ajax from '@/utils/ajax';
+import ajax from '@/utils/request';
+import { loginAPI } from '@/services/auth';
+import { setAccessToken, setRefreshToken } from '@/utils/tools';
 
 const onFinishFailed = (errorInfo) => {
   console.log('Failed:', errorInfo);
@@ -24,23 +26,19 @@ function LoginForm() {
     e.preventDefault();
     // 添加登录处理函数
     try {
-      const response = await ajax.post('/system/auth/login', {
-        username,
-        password,
-      }); // 调用登录接口
-      // 根据你的 API 返回结构处理响应
-      console.log(
-        '🚀 ~ file: index.jsx:32 ~ handleLogin ~ response:',
-        response
-      );
-      if (response.status === 200) {
-        message.success('登录成功，正在跳转...');
+      const res = await loginAPI({ username, password });
+
+      if (res.code === 200) {
+        const { access_token, refresh_token } = res.data;
+        setAccessToken(access_token);
+        setRefreshToken(refresh_token);
         navigate('/admin');
+        message.success('登录成功');
       } else {
-        message.error(response.message || '登录失败');
+        message.error(res.msg || '登录失败');
       }
     } catch (error) {
-      message.error('登录失败');
+      message.error(error.msg || '登录失败');
     }
   };
 
