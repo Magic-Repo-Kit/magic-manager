@@ -8,6 +8,8 @@ import MrHeader from '@/components/mr-header';
 import MrSidebar from '@/components/mr-sidebar';
 import MrFooter from '@/components/mr-footer';
 
+import Home from '@/views/home';
+
 import { totalRoutes } from '@/router';
 
 // 样式
@@ -37,6 +39,7 @@ const contentStyle = {
   overflow: 'auto',
   padding: '0 50px',
   backgroundColor: '#fff',
+  marginTop: '30px',
 };
 const footerStyle = {
   textAlign: 'center',
@@ -46,9 +49,9 @@ const footerStyle = {
 
 // HeaderIcon
 const HeaderIcon = [
-  { name: '夜间', icon: 'evening-moon1' },
-  { name: '全屏', icon: 'un-full' },
-  { name: '通知', icon: 'notify' },
+  { name: '夜间', id: '1', icon: 'evening-moon1' },
+  { name: '全屏', id: '2', icon: 'un-full' },
+  { name: '通知', id: '3', icon: 'notify' },
 ];
 
 function Admin(props) {
@@ -65,58 +68,11 @@ function Admin(props) {
           style={{
             minHeight: 'calc(100vh - 60px)',
             marginLeft: 300,
+            backgroundColor: '#fff',
           }}
         >
           <Content style={contentStyle}>
-            <div
-              style={{
-                height: '1500px',
-                padding: 24,
-                textAlign: 'center',
-                display: 'flex',
-                justifyContent: 'space-between',
-              }}
-            >
-              <div
-                style={{
-                  background: '#4751fb',
-                  padding: '50px',
-                  height: '300px',
-                }}
-              >
-                long content
-              </div>
-              <div
-                style={{
-                  background: '#6dd5f8',
-                  padding: '50px',
-                  height: '300px',
-                }}
-              >
-                long content
-              </div>
-              <div
-                style={{
-                  background: '#6274f8',
-                  padding: '50px',
-                  height: '300px',
-                }}
-              >
-                long content
-              </div>
-              <div
-                style={{
-                  background: '#263af6',
-                  padding: '50px',
-                  height: '300px',
-                }}
-              >
-                long content
-              </div>
-              <div style={{ background: '#13bb58', height: '300px' }}>
-                long content
-              </div>
-            </div>
+            <Home />
           </Content>
           <Footer style={footerStyle}>
             <MrFooter />

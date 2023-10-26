@@ -5,7 +5,11 @@ import AdminLayout from '@/layouts/admin';
 import AuthLayout from '@/layouts/auth';
 import FailLayout from '@/layouts/fail';
 
-import { getAccessToken } from '@/utils/tools';
+import {
+  getAccessToken,
+  removeAccessToken,
+  removeRefreshToken,
+} from '@/utils/tools';
 
 function App() {
   const navigate = useNavigate();
@@ -14,8 +18,15 @@ function App() {
     const accessToken = getAccessToken();
     // 检查token是否存在
     if (accessToken) {
-      // 已登录，跳转到 admin 路由
-      navigate('/admin', { replace: true });
+      // 已登录
+      if (location.pathname !== '/auth') {
+        // 当前路径不是登录页面，跳转到 admin 路由
+        navigate('/admin', { replace: true });
+      } else {
+        navigate('/auth', { replace: true });
+        removeAccessToken();
+        removeRefreshToken();
+      }
     } else {
       // 未登录，跳转到登录页面
       navigate('/auth', { replace: true });
