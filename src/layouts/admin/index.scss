@@ -5,7 +5,7 @@
     position: sticky;
     top: 0;
     height: 60px;
-    background: rgba(255, 255, 255, 0.7);
+    // background: rgba(255, 255, 255, 0.7);
     background-clip: 'padding-box';
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.03),
       0 1px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px 0 rgba(0, 0, 0, 0.02);
@@ -19,12 +19,10 @@
     height: calc(100% - 90px);
     padding: 12px 10px;
     margin-top: 30px;
-    background-color: #fff;
     border-inline-end: 1px solid rgba(5, 5, 5, 0.06);
   }
   // 内容区
   .contentStyle {
-    background-color: #fff;
     overflow: auto;
     padding: 0 50px;
     margin-top: 30px;
@@ -33,6 +31,5 @@
   .footerStyle {
     text-align: center;
     height: 65px;
-    background-color: #fff;
   }
 }

@@ -5,6 +5,8 @@ import AdminLayout from '@/layouts/admin';
 import AuthLayout from '@/layouts/auth';
 import FailLayout from '@/layouts/fail';
 
+import { ConfigProvider, theme } from 'antd';
+
 import {
   getAccessToken,
   removeAccessToken,
@@ -34,12 +36,14 @@ function App() {
   // }, [navigate]);
 
   return (
-    <Routes>
-      <Route path="auth/*" element={<AuthLayout />} />
-      <Route path="admin/*" element={<AdminLayout />} />
-      <Route path="fail/*" element={<FailLayout />} />
-      {/* <Route path="/" element={<Navigate to="/auth" replace />} /> */}
-    </Routes>
+    <ConfigProvider theme={{ algorithm: theme.darkAlgorithm }}>
+      <Routes>
+        <Route path="auth/*" element={<AuthLayout />} />
+        <Route path="admin/*" element={<AdminLayout />} />
+        <Route path="fail/*" element={<FailLayout />} />
+        {/* <Route path="/" element={<Navigate to="/auth" replace />} /> */}
+      </Routes>
+    </ConfigProvider>
   );
 }
 
