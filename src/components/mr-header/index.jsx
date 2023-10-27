@@ -1,6 +1,6 @@
 import './index.scss';
 import { Flex, Typography, Popover, Avatar } from 'antd';
-import { UserOutlined } from '@ant-design/icons';
+import { UserOutlined, LoginOutlined } from '@ant-design/icons';
 
 const { Title } = Typography;
 
@@ -13,7 +13,7 @@ const MrHeader = ({ slotTitle, slotIcon }) => {
 
       {/* 右侧 */}
       <Flex justify="space-between" align="center">
-        <div justify="space-between" align="center" style={{ height: '60px' }}>
+        <div style={{ height: '60px' }}>
           {slotIcon.map((item) => (
             <i
               key={item.id}
@@ -38,7 +38,9 @@ const MrHeader = ({ slotTitle, slotIcon }) => {
             </div>
           }
           content={
-            <div style={{ padding: '1rem', color: '#1b254b' }}>
+            <div
+              style={{ padding: '1rem', color: '#1b254b', cursor: 'pointer' }}
+            >
               <div style={{ height: '30px' }}>个人中心</div>
               <div style={{ height: '30px' }}>设置</div>
               <div
@@ -47,6 +49,7 @@ const MrHeader = ({ slotTitle, slotIcon }) => {
                   window.location.replace('/auth');
                 }}
               >
+                <LoginOutlined />
                 退出
               </div>
             </div>
