@@ -19,4 +19,6 @@ npm install -D tailwindcss postcss autoprefixer
 npx tailwindcss init -p //生成配置文件
 
 npm install react-icons
+
+npm install --save redux
 ```

@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Routes, Route, useNavigate, Navigate } from 'react-router-dom';
 
 import AdminLayout from '@/layouts/admin';
 import AuthLayout from '@/layouts/auth';
 import FailLayout from '@/layouts/fail';
 
-import { ConfigProvider, theme } from 'antd';
+import { ConfigProvider, theme, FloatButton } from 'antd';
 
 import {
   getAccessToken,
@@ -34,15 +34,33 @@ function App() {
   //     navigate('/auth', { replace: true });
   //   }
   // }, [navigate]);
-
+  const [value, setValue] = useState('default');
+  const onChange = () => {
+    setValue(value === 'default' ? 'dark' : 'default');
+  };
   return (
-    <ConfigProvider theme={{ algorithm: theme.darkAlgorithm }}>
+    <ConfigProvider
+      theme={{
+        algorithm:
+          value === 'default' ? theme.defaultAlgorithm : theme.darkAlgorithm,
+      }}
+    >
       <Routes>
         <Route path="auth/*" element={<AuthLayout />} />
         <Route path="admin/*" element={<AdminLayout />} />
         <Route path="fail/*" element={<FailLayout />} />
         {/* <Route path="/" element={<Navigate to="/auth" replace />} /> */}
       </Routes>
+      <FloatButton
+        icon={
+          <i
+            style={{ fontSize: '22px', marginRight: '15px' }}
+            className="iconfont mr-evening-moon1"
+          ></i>
+        }
+        style={{ right: 24 }}
+        onClick={onChange}
+      />
     </ConfigProvider>
   );
 }

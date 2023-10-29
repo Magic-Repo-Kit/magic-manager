@@ -4,17 +4,17 @@ import { UserOutlined, LoginOutlined } from '@ant-design/icons';
 
 const { Title } = Typography;
 
-const MrHeader = ({ slotTitle, slotIcon }) => {
+const MrHeader = (props) => {
   return (
     <Flex justify="space-between" align="center">
       <Title level={4} style={{ margin: 0 }} className="font-family-dingding">
-        {slotTitle}
+        {props.slotTitle}
       </Title>
 
       {/* 右侧 */}
       <Flex justify="space-between" align="center">
         <div style={{ height: '60px' }}>
-          {slotIcon.map((item) => (
+          {props.slotIcon.map((item) => (
             <i
               key={item.id}
               style={{ fontSize: '22px', marginRight: '15px' }}

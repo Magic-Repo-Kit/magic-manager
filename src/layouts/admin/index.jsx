@@ -11,7 +11,7 @@ import MrFooter from '@/components/mr-footer';
 const { useToken } = theme;
 // HeaderIcon
 const HeaderIcon = [
-  { name: '夜间', id: '1', icon: 'evening-moon1' },
+  // { name: '夜间', id: '1', icon: 'evening-moon1' },
   { name: '全屏', id: '2', icon: 'un-full' },
   { name: '通知', id: '3', icon: 'notify' },
 ];
