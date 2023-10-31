@@ -14,26 +14,22 @@ import {
 } from '@/utils/tools';
 
 function App() {
-  // const navigate = useNavigate();
-  // // 判断登陆状态
-  // useEffect(() => {
-  //   const accessToken = getAccessToken();
-  //   // 检查token是否存在
-  //   if (accessToken) {
-  //     // 已登录
-  //     if (location.pathname !== '/auth') {
-  //       // 当前路径不是登录页面，跳转到 admin 路由
-  //       navigate('/admin', { replace: true });
-  //     } else {
-  //       navigate('/auth', { replace: true });
-  //       removeAccessToken();
-  //       removeRefreshToken();
-  //     }
-  //   } else {
-  //     // 未登录，跳转到登录页面
-  //     navigate('/auth', { replace: true });
-  //   }
-  // }, [navigate]);
+  const navigate = useNavigate();
+  // 判断登陆状态
+  useEffect(() => {
+    const accessToken = getAccessToken();
+    // 检查token是否存在
+    if (accessToken) {
+      // 已登录每次跳转登录清token
+      if (location.pathname === '/auth') {
+        removeAccessToken();
+        removeRefreshToken();
+      }
+    } else {
+      // 未登录，跳转到登录页面
+      navigate('/auth', { replace: true });
+    }
+  }, [navigate]);
   const [value, setValue] = useState('default');
   const onChange = () => {
     setValue(value === 'default' ? 'dark' : 'default');
@@ -49,7 +45,7 @@ function App() {
         <Route path="auth/*" element={<AuthLayout />} />
         <Route path="admin/*" element={<AdminLayout />} />
         <Route path="fail/*" element={<FailLayout />} />
-        {/* <Route path="/" element={<Navigate to="/auth" replace />} /> */}
+        <Route path="/" element={<Navigate to="/admin" replace />} />
       </Routes>
       <FloatButton
         icon={
