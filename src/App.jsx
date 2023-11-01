@@ -45,7 +45,7 @@ function App() {
         <Route path="auth/*" element={<AuthLayout />} />
         <Route path="admin/*" element={<AdminLayout />} />
         <Route path="fail/*" element={<FailLayout />} />
-        <Route path="/" element={<Navigate to="/admin" replace />} />
+        <Route path="*" element={<Navigate to="/admin" replace />} />
       </Routes>
       <FloatButton
         icon={
