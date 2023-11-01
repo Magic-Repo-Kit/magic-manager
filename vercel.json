@@ -1,0 +1,12 @@
+{
+  "rewrites": [
+    {
+      "source": "/base-api/:path*",
+      "destination": "http://124.222.46.195:1000/:path*"
+    },
+    {
+      "source": "/:path*",
+      "destination": "/index.html"
+    }
+  ]
+}
