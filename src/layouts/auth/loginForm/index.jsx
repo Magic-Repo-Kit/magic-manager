@@ -20,28 +20,39 @@ function LoginForm() {
 
   // 监听地址栏
   useEffect(() => {
-    const urlParams = new URLSearchParams(location.search);
-    const code = urlParams.get('code');
-    const state = urlParams.get('state');
-    const params = {
-      type: '10', // 10-github 20-google 30-gitee
-      code,
-      state,
-    };
-    console.log('🚀 ~ file: index.jsx:26 ~ useEffect ~ code:', code);
-    console.log('🚀 ~ file: index.jsx:27 ~ useEffect ~ state:', state);
-    if (code && state) {
-      const res = platformLoginAPI(params);
-      if (res.code === 200) {
-        const { access_token, refresh_token } = res.data;
-        setAccessToken(access_token);
-        setRefreshToken(refresh_token);
-        navigate('/admin');
-        message.success('登录成功');
-      } else {
-        message.error(res.msg || '登录失败');
+    const fetchData = async () => {
+      const urlParams = new URLSearchParams(location.search);
+      const code = urlParams.get('code');
+      const state = urlParams.get('state');
+      const params = {
+        type: sessionStorage.getItem('platformType'),
+        code,
+        state,
+      };
+      console.log('🚀 ~ file: index.jsx:26 ~ useEffect ~ code:', code);
+      console.log('🚀 ~ file: index.jsx:27 ~ useEffect ~ state:', state);
+
+      if (code && state) {
+        try {
+          const res = await platformLoginAPI(params);
+          if (res.code === 200) {
+            const { access_token, refresh_token } = res.data;
+            setAccessToken(access_token);
+            setRefreshToken(refresh_token);
+            navigate('/admin');
+            message.success('登录成功');
+          } else {
+            alert(3);
+            console.log('🚀 ~ file: index.jsx:44 ~ useEffect ~ res.msg:', res);
+            message.error(res.msg || '登录失败');
+          }
+        } catch (error) {
+          message.error(error.msg || '登录失败');
+        }
       }
-    }
+    };
+
+    fetchData();
   }, [location.search, navigate]);
 
   // 账号密码登录
@@ -65,7 +76,7 @@ function LoginForm() {
   };
   // 第三方平台登录
   const platformLogin = async (type) => {
-    console.log('🚀 ~ file: index.jsx:20 ~ LoginForm ~ location:', location);
+    sessionStorage.setItem('platformType', type);
     const params = {
       type, // 10-github 20-google 30-gitee
       redirectUri: window.location.href,
@@ -79,7 +90,7 @@ function LoginForm() {
         content: '正在跳转，请稍后..',
         duration: 0,
       });
-      window.location.href = res.data;
+      // window.location.href = res.data;
       setTimeout(message.destroy, 2500);
     } else {
       message.error(res.msg || '获取授权失败');
@@ -146,7 +157,6 @@ function LoginForm() {
         <div className="form-container sign-up-container">
           <form action="#" className="formUp">
             <h1>创建账户</h1>
-            {/* <h1>Create Account</h1> */}
             <div className="social-container">
               <a className="social">
                 <GoogleOutlined style={{ fontSize: '24px' }} />
@@ -162,7 +172,6 @@ function LoginForm() {
             <input type="text" placeholder="账号" />
             <input type="password" placeholder="密码" />
             <button style={{ marginTop: '15px' }}>注 册</button>
-            {/* <button>Sign Up</button> */}
           </form>
         </div>
 
