@@ -90,7 +90,7 @@ function LoginForm() {
         content: '正在跳转，请稍后..',
         duration: 0,
       });
-      // window.location.href = res.data;
+      window.location.href = res.data;
       setTimeout(message.destroy, 2500);
     } else {
       message.error(res.msg || '获取授权失败');
