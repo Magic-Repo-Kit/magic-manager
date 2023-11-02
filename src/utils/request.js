@@ -6,7 +6,7 @@ import { getAccessToken, setAccessToken, removeAccessToken, getRefreshToken, set
 // 创建 axios 实例
 const instance = axios.create({
   baseURL: process.env.NODE_ENV === 'development' ? '/api' : 'https://124.222.46.195',
-  timeout: 1000,
+  timeout: 10000,
   headers: {
     'Content-Type': 'application/json',
     'Accept-Language': 'zh-CN',
@@ -53,7 +53,8 @@ instance.interceptors.response.use((response) => {
       // 刷新失败，清除令牌并重定向到登录页面【清除token，清除本地缓存帐号信息user-detail】
       removeAccessToken('access_token');
       removeRefreshToken('refresh_token');
-      window.location.replace('/auth');
+      window.location.href('/auth');
+      // window.location.replace('/auth');
     }
   }
   return Promise.reject(error);

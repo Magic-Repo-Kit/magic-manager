@@ -130,3 +130,14 @@
 .color-text-active {
   color: #0162ff;
 }
+
+// 首字母变色
+.first-letter-color-blue::first-letter {
+  color: #0040f8;
+}
+// 文字背景渐变
+.gradient-text {
+  background: linear-gradient(to right, #0040f8, #03ffd0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

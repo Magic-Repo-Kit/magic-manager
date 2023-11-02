@@ -27,7 +27,8 @@ function App() {
       }
     } else {
       // 未登录，跳转到登录页面
-      navigate('/auth', { replace: true });
+      navigate('/auth');
+      // navigate('/auth', { replace: true });
     }
   }, [navigate]);
   const [value, setValue] = useState('default');
@@ -45,7 +46,8 @@ function App() {
         <Route path="auth/*" element={<AuthLayout />} />
         <Route path="admin/*" element={<AdminLayout />} />
         <Route path="fail/*" element={<FailLayout />} />
-        <Route path="*" element={<Navigate to="/admin" replace />} />
+        <Route path="*" element={<Navigate to="/admin" />} />
+        {/* <Route path="*" element={<Navigate to="/admin" replace />} /> */}
       </Routes>
       <FloatButton
         icon={

@@ -21,7 +21,7 @@ a {
 button {
   border-radius: 20px;
   border: 1px solid #0038fa;
-  background-color: #0038fa;
+  background: rgba($color: #0038fa, $alpha: 0.9);
   color: #ffffff;
   font-size: 12px;
   font-weight: bold;
@@ -74,13 +74,8 @@ input {
   }
   .form-container-box {
     background-color: #fff;
-    // border-radius: 10px;
-    // box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
     position: relative;
     overflow: hidden;
-    // width: 768px;
-    // max-width: 100%;
-    // min-height: 480px;
     width: 100vw;
     height: 100vh;
 
@@ -97,58 +92,6 @@ input {
       // left: 0;
       width: 50%;
       z-index: 2;
-      // .loading-formIn {
-      //   h1 {
-      //     text-align: center;
-      //     font-size: 18px;
-      //     letter-spacing: -0.13em;
-
-      //     span {
-      //       color: #0390f6;
-      //       text-shadow: 4px 4px 0px #82f2f2, 8px 8px 0px #6d63fd;
-      //       animation: knock 3s infinite;
-      //       position: relative;
-      //       display: inline-block;
-      //       &:nth-of-type(2) {
-      //         animation-delay: 0.25s;
-      //       }
-      //       &:nth-of-type(3) {
-      //         animation-delay: 0.45s;
-      //       }
-      //       &:nth-of-type(4) {
-      //         animation-delay: 0.65s;
-      //       }
-      //       &:nth-of-type(5) {
-      //         animation-delay: 850ms;
-      //       }
-      //       &:nth-of-type(6) {
-      //         animation-delay: 1050ms;
-      //       }
-      //       &:nth-of-type(7) {
-      //         animation-delay: 1250ms;
-      //       }
-      //     }
-      //   }
-
-      //   @keyframes knock {
-      //     0% {
-      //       transform: rotate(0) translatey(0);
-      //     }
-      //     25% {
-      //       transform: rotate(90deg) translatey(-0.15em);
-      //     }
-      //     50% {
-      //       transform: rotate(360eg) translatey(-0.15em);
-      //     }
-      //     55% {
-      //       transform: rotate(0) translatey(0);
-      //     }
-
-      //     100% {
-      //       transform: rotate(0) translatey(0);
-      //     }
-      //   }
-      // }
     }
     // 注册
     .sign-up-container {
@@ -195,14 +138,12 @@ input {
 }
 .form-container-box.right-panel-active .overlay-container {
   transform: translateX(150%);
-  // transform: translateX(-100%);
 }
 
 .overlay {
   background: #0038fa;
-  background: -webkit-linear-gradient(to right, #03ffd0, #0038fa);
-  background: linear-gradient(to right, #03ffd0, #0038fa);
-  // background-image: radial-gradient(#03ffd0 17%, #6f00ff 22%, #0038fa 88%);
+  background: -webkit-linear-gradient(to right, #03ffd0, #0040f8);
+  background: linear-gradient(to right, #03ffd0, #0040f8);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 0 0;
@@ -245,7 +186,6 @@ input {
     position: relative;
     top: -40px;
     left: 30px;
-    // transform: rotate(12deg);
     background-image: url('../../../assets/images/auth-magic-1.png');
     background-size: cover;
     background-repeat: no-repeat;

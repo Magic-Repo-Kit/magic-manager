@@ -7,7 +7,11 @@ const { Title } = Typography;
 const MrHeader = (props) => {
   return (
     <Flex justify="space-between" align="center">
-      <Title level={4} style={{ margin: 0 }} className="font-family-dingding">
+      <Title
+        level={4}
+        style={{ margin: 0 }}
+        className="font-family-dingding gradient-text"
+      >
         {props.slotTitle}
       </Title>
 

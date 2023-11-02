@@ -1,5 +1,5 @@
 const Footer = () => {
-  return <div> Magicrepokit ©2023 Created by Odin-7</div>;
+  return <div> Magicrepokit ©2023 Created by User</div>;
 };
 
 export default Footer;
