@@ -1,19 +1,23 @@
 import './index.scss';
 import { Flex, Typography, Popover, Avatar } from 'antd';
 import { UserOutlined, LoginOutlined } from '@ant-design/icons';
+import mrkLogoLight from '@/assets/images/mrk6.png';
+import mrkLogoDark from '@/assets/images/mrk5.png';
+import mrkLogo from '@/assets/images/mrk7.png';
 
 const { Title } = Typography;
 
 const MrHeader = (props) => {
   return (
     <Flex justify="space-between" align="center">
-      <Title
+      {/* <Title
         level={4}
         style={{ margin: 0 }}
         className="font-family-dingding gradient-text"
       >
         {props.slotTitle}
-      </Title>
+      </Title> */}
+      <img src={mrkLogo} alt="" height="25" />
 
       {/* 右侧 */}
       <Flex justify="space-between" align="center">

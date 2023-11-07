@@ -191,7 +191,8 @@ function LoginForm() {
               </button>
             </div>
             <div className="overlay-panel overlay-right">
-              <h1>Hello Magicrepokit</h1>
+              {/* <h1>Hello Magicrepokit</h1> */}
+              <h1>Hello</h1>
               <p>输入您的个人详细信息，与我们一起开始旅程。</p>
               <button
                 className="ghost"
