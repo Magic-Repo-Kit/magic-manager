@@ -9,7 +9,7 @@ import mrkLogoDark from '@/assets/images/mrk-dark.png';
 const { Title } = Typography;
 
 const MrHeader = (props) => {
-  const { slotTitle, slotIcon, onIconClick } = props;
+  const { slotTitle, slotIcon, onIconClick, mode } = props;
   const handleIconClick = (id) => {
     const icon = slotIcon.find((icon) => icon.id === id);
     if (icon && onIconClick) {
@@ -25,7 +25,11 @@ const MrHeader = (props) => {
       >
         {props.slotTitle}
       </Title> */}
-      <img src={mrkLogoLight} alt="" height="25" />
+      <img
+        src={mode === 'default' ? mrkLogoLight : mrkLogoDark}
+        alt=""
+        height="25"
+      />
 
       {/* 右侧 */}
       <Flex justify="space-between" align="center">

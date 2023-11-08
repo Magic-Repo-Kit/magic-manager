@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Router from '@/router';
 import './index.scss';
 import MrHeader from '@/components/mr-header';
@@ -7,8 +7,10 @@ import MrFooter from '@/components/mr-footer';
 import { handleFullScreenClick } from '@/utils/tools';
 import { Layout, theme, ConfigProvider } from 'antd';
 const { Header, Footer, Sider, Content } = Layout;
+const { useToken } = theme;
 
 function Admin() {
+  const { token } = useToken();
   const [mode, setMode] = useState('default');
 
   // headerIcons
@@ -43,6 +45,19 @@ function Admin() {
     }
   };
 
+  // 当 mode 发生变化时，更新 Header 和 Content 的背景颜色
+  useEffect(() => {
+    if (mode === 'dark') {
+      console.log(token.colorPrimaryBg);
+      document.querySelector('.headerStyle').style.background = '#333'; // 替换为你想要的夜间模式下的背景颜色
+      document.querySelector('.siderStyle').style.background = '#222'; // 替换为你想要的夜间模式下的背景颜色
+    } else {
+      console.log(theme.algorithm);
+      document.querySelector('.headerStyle').style.background = '#f0f2f5'; // 替换为你想要的默认模式下的背景颜色
+      document.querySelector('.siderStyle').style.background = '#fff'; // 替换为你想要的默认模式下的背景颜色
+    }
+  }, [mode]);
+
   return (
     <ConfigProvider
       theme={{
@@ -55,6 +70,7 @@ function Admin() {
           <MrHeader
             slotTitle="Magicrepokit"
             slotIcon={headerIcons}
+            mode={mode}
             onIconClick={(icon) => {
               handleIconClick(icon.id);
             }}
