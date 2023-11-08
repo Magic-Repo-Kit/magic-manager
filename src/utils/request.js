@@ -2,7 +2,7 @@ import axios from 'axios';
 import NProgress from "nprogress";  //进度条
 import "nprogress/nprogress.css";
 
-import { getAccessToken, setAccessToken, removeAccessToken, getRefreshToken, setRefreshToken, removeRefreshToken } from "./tools";
+import { getAccessToken, setAccessToken, removeAccessToken, getRefreshToken, removeRefreshToken } from "./tools";
 // 创建 axios 实例
 const instance = axios.create({
   baseURL: process.env.NODE_ENV === 'development' ? '/api' : 'https://124.222.46.195',
@@ -26,7 +26,7 @@ instance.interceptors.request.use((config) => {
   NProgress.start();  //启动loading
   return config;
 }, (error) => {
-  console.log(666);
+  console.log(error);
   return Promise.reject(error);
 });
 
@@ -60,7 +60,7 @@ instance.interceptors.response.use((response) => {
   return Promise.reject(error);
 });
 
-// 将各种请求方法封装在 ajax 对象中
+// 将各种请求方法封装在 ajax 对象中，并且解构
 const ajax = {
   get: (url, params) => instance.get(url, { params }).then(res => res.data),
   post: (url, data) => instance.post(url, data).then(res => res.data),

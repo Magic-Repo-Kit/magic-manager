@@ -1,13 +1,21 @@
+import React from 'react';
 import './index.scss';
 import { Flex, Typography, Popover, Avatar } from 'antd';
 import { UserOutlined, LoginOutlined } from '@ant-design/icons';
-import mrkLogoLight from '@/assets/images/mrk6.png';
-import mrkLogoDark from '@/assets/images/mrk5.png';
-import mrkLogo from '@/assets/images/mrk7.png';
+
+import mrkLogoLight from '@/assets/images/mrk-light.png';
+import mrkLogoDark from '@/assets/images/mrk-dark.png';
 
 const { Title } = Typography;
 
 const MrHeader = (props) => {
+  const { slotTitle, slotIcon, onIconClick } = props;
+  const handleIconClick = (id) => {
+    const icon = slotIcon.find((icon) => icon.id === id);
+    if (icon && onIconClick) {
+      onIconClick(icon);
+    }
+  };
   return (
     <Flex justify="space-between" align="center">
       {/* <Title
@@ -17,16 +25,17 @@ const MrHeader = (props) => {
       >
         {props.slotTitle}
       </Title> */}
-      <img src={mrkLogo} alt="" height="25" />
+      <img src={mrkLogoLight} alt="" height="25" />
 
       {/* 右侧 */}
       <Flex justify="space-between" align="center">
         <div style={{ height: '60px' }}>
-          {props.slotIcon.map((item) => (
+          {slotIcon.map((item) => (
             <i
               key={item.id}
               style={{ fontSize: '22px', marginRight: '15px' }}
               className={`iconfont mr-${item.icon}`}
+              onClick={() => handleIconClick(item.id)}
             ></i>
           ))}
         </div>

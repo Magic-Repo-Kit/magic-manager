@@ -6,6 +6,76 @@
   "description": "百宝袋",
   "glyphs": [
     {
+      "icon_id": "248887",
+      "name": "登录",
+      "font_class": "denglu",
+      "unicode": "e609",
+      "unicode_decimal": 58889
+    },
+    {
+      "icon_id": "658008",
+      "name": "多语言",
+      "font_class": "duoyuyan",
+      "unicode": "e654",
+      "unicode_decimal": 58964
+    },
+    {
+      "icon_id": "4552970",
+      "name": "邮箱",
+      "font_class": "youxiang",
+      "unicode": "e908",
+      "unicode_decimal": 59656
+    },
+    {
+      "icon_id": "5353133",
+      "name": "github",
+      "font_class": "github",
+      "unicode": "e82b",
+      "unicode_decimal": 59435
+    },
+    {
+      "icon_id": "7874507",
+      "name": "联系我们",
+      "font_class": "lianxiwomen",
+      "unicode": "e604",
+      "unicode_decimal": 58884
+    },
+    {
+      "icon_id": "8327186",
+      "name": "qq",
+      "font_class": "qq",
+      "unicode": "e612",
+      "unicode_decimal": 58898
+    },
+    {
+      "icon_id": "11372717",
+      "name": "微信",
+      "font_class": "weixin",
+      "unicode": "e8bb",
+      "unicode_decimal": 59579
+    },
+    {
+      "icon_id": "20885024",
+      "name": "切换语言",
+      "font_class": "qiehuanyuyan",
+      "unicode": "e769",
+      "unicode_decimal": 59241
+    },
+    {
+      "icon_id": "27876632",
+      "name": "语言 中文",
+      "font_class": "a-yuyanzhongwen",
+      "unicode": "e640",
+      "unicode_decimal": 58944
+    },
+    {
+      "icon_id": "27876671",
+      "name": "语言 英文",
+      "font_class": "a-yuyanyingwen",
+      "unicode": "e642",
+      "unicode_decimal": 58946
+    },
+    {
       "icon_id": "26267572",
       "name": "gitee",
       "font_class": "gitee",

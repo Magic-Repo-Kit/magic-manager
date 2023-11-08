@@ -1,7 +1,12 @@
 .login-container {
   width: 100vw;
   height: 100vh;
-  background-image: url(../../assets/images/login-bc.png);
-  background-size: cover;
-  background-repeat: no-repeat;
+  background: #f6f5f7;
+  // background-image: url(../../assets/images/login-bc.png);
+  // background-size: cover;
+  // background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Montserrat', sans-serif;
 }
