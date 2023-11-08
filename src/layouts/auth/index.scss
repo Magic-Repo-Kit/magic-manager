@@ -1,12 +1,32 @@
+.login-icon {
+  color: #ffffff;
+  display: inline-block;
+  width: 20px;
+  font-size: 20px;
+  margin: 8px;
+  cursor: pointer;
+  transition: transform 80ms ease-in;
+  &:active {
+    font-size: 19px;
+  }
+}
+
 .login-container {
   width: 100vw;
   height: 100vh;
-  background: #f6f5f7;
-  // background-image: url(../../assets/images/login-bc.png);
-  // background-size: cover;
-  // background-repeat: no-repeat;
+  // background: #f6f5f7;
+  background: #212534;
   display: flex;
   justify-content: center;
   align-items: center;
   font-family: 'Montserrat', sans-serif;
+
+  .login-form-bc {
+    padding: 10%;
+    // background: rgba(255, 255, 255, 0.375);
+    box-shadow: 0 0.75rem 2rem 0 rgba(0, 0, 0, 0.1);
+    border-radius: 2rem;
+    // border: 1px solid rgba(255, 255, 255, 0.125);
+    backdrop-filter: blur(100px);
+  }
 }

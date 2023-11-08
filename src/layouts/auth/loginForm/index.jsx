@@ -158,7 +158,7 @@ function LoginForm() {
           <form action="#" className="formUp">
             <h1>创建账户</h1>
             <div className="social-container">
-              <a className="social">
+              {/* <a className="social">
                 <GoogleOutlined style={{ fontSize: '24px' }} />
               </a>
               <a className="social">
@@ -166,7 +166,7 @@ function LoginForm() {
               </a>
               <a className="social">
                 <WechatOutlined style={{ fontSize: '24px' }} />
-              </a>
+              </a> */}
             </div>
             <input type="text" placeholder="账户名" />
             <input type="text" placeholder="账号" />
