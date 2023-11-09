@@ -49,12 +49,12 @@ function Admin() {
   useEffect(() => {
     if (mode === 'dark') {
       console.log(token.colorPrimaryBg);
-      document.querySelector('.headerStyle').style.background = '#333'; // 替换为你想要的夜间模式下的背景颜色
-      document.querySelector('.siderStyle').style.background = '#222'; // 替换为你想要的夜间模式下的背景颜色
+      document.querySelector('.headerStyle').style.background = '#001529';
+      document.querySelector('.siderStyle').style.background = '#141414';
     } else {
-      console.log(theme.algorithm);
-      document.querySelector('.headerStyle').style.background = '#f0f2f5'; // 替换为你想要的默认模式下的背景颜色
-      document.querySelector('.siderStyle').style.background = '#fff'; // 替换为你想要的默认模式下的背景颜色
+      console.log(token.colorPrimaryBg);
+      document.querySelector('.headerStyle').style.background = '#ffffff';
+      document.querySelector('.siderStyle').style.background = '#f5f5f5';
     }
   }, [mode]);
 
@@ -78,7 +78,7 @@ function Admin() {
         </Header>
         <Layout hasSider>
           <Sider className="siderStyle" width="280">
-            <MrSidebar />
+            <MrSidebar mode={mode} />
           </Sider>
           <Layout
             style={{

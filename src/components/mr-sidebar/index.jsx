@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './index.scss';
 import { Menu } from 'antd';
 import {
@@ -34,15 +34,24 @@ const items = [
   getItem('关于', 'about', <NumberOutlined />),
 ];
 
-function MrSidebar() {
+function MrSidebar(props) {
+  const { mode } = props;
   const navigate = useNavigate();
   const handleClick = (e) => {
     const { key } = e;
     navigate(`/admin/${key}`);
   };
-
+  const [theme, setTheme] = useState('mode');
+  useEffect(() => {
+    if (mode === 'default') {
+      setTheme('light');
+    } else {
+      setTheme('dark');
+    }
+  }, [mode]);
   return (
     <Menu
+      theme={theme}
       onClick={handleClick}
       style={{
         width: 260,
