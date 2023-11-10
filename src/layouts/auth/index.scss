@@ -14,21 +14,27 @@
 .login-container {
   width: 100vw;
   height: 100vh;
-  // background: #f6f5f7;
   background: #212534;
   display: flex;
   justify-content: center;
   align-items: center;
   font-family: 'Montserrat', sans-serif;
-
+  box-shadow: inset 0 0 10px #03e9f4, 0 0 25px #03e9f4, 0 0 50px #03e9f4,
+    0 0 100px #03e9f4;
+  // .login-form-box {
+  //   // border-radius: 5px;
+  //   // padding: 50px;
+  //   // background: #03e9f4;
+  //   // box-shadow: 0 0 5px #03e9f4, 0 0 25px #03e9f4, 0 0 50px #03e9f4,
+  //   //   0 0 100px #03e9f4;
+  //   // box-shadow: 0 0 5px #03e9f4, 0 0 5px #03e9f4, 0 0 30px #03e9f4,
+  //   //   0 0 100px #03e9f4;
+  // }
   .login-form-bc {
     padding: 10%;
-    // background: rgba(255, 255, 255, 0.375);
     box-shadow: 0 0.75rem 2rem 0 rgba(0, 0, 0, 0.1);
     border-radius: 2px;
-    // border: 1px solid rgba(255, 255, 255, 0.125);
     backdrop-filter: blur(100px);
-
     overflow: hidden;
     .line {
       position: absolute;

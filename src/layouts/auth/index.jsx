@@ -3,10 +3,9 @@ import MrFooter from '@/components/mr-footer';
 import './index.scss';
 import mrkLogo from '@/assets/images/mrk-dark.png';
 import loginBc1 from '@/assets/images/login-vr.svg';
-import loginBc2 from '@/assets/images/login-chip.svg';
 
 import { Layout, Tooltip } from 'antd';
-const { Header, Footer, Sider, Content } = Layout;
+const { Header, Footer } = Layout;
 
 function Login() {
   const lines = ['top', 'right', 'bottom', 'left'];
@@ -16,7 +15,7 @@ function Login() {
         {lines.map((index) => (
           <div key={index} className="line"></div>
         ))}
-        <div>
+        <div className="login-form-left">
           <img
             src={loginBc1}
             style={{
@@ -24,7 +23,6 @@ function Login() {
               marginRight: '150px',
             }}
           />
-          {/* <img src={loginBc2} alt="" /> */}
         </div>
         <LoginForm />
       </div>
