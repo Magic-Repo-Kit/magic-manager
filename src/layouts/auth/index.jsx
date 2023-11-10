@@ -5,13 +5,17 @@ import mrkLogo from '@/assets/images/mrk-dark.png';
 import loginBc1 from '@/assets/images/login-vr.svg';
 import loginBc2 from '@/assets/images/login-chip.svg';
 
-import { Layout, theme } from 'antd';
+import { Layout, Tooltip } from 'antd';
 const { Header, Footer, Sider, Content } = Layout;
 
 function Login() {
+  const lines = ['top', 'right', 'bottom', 'left'];
   return (
     <div className="login-container flx-center">
       <div className="login-form-bc flx-center">
+        {lines.map((index) => (
+          <div key={index} className="line"></div>
+        ))}
         <div>
           <img
             src={loginBc1}
@@ -38,18 +42,21 @@ function Login() {
       >
         <img src={mrkLogo} alt="" height="20" />
         <div>
-          <a>
-            <i className="iconfont mr-menu-4 login-icon"></i>
-          </a>
-          <a>
-            <i className="iconfont mr-duoyuyan login-icon"></i>
-          </a>
-          <a>
-            <i className="iconfont mr-github login-icon"></i>
-          </a>
+          <Tooltip title="全屏" color="transparent">
+            <a>
+              <i className="iconfont mr-menu-4 login-icon"></i>
+            </a>
+          </Tooltip>
+          <Tooltip title="中/英" color="transparent">
+            <a>
+              <i className="iconfont mr-duoyuyan login-icon"></i>
+            </a>
+          </Tooltip>
           <a>
             <i className="iconfont mr-lianxiwomen login-icon"></i>
           </a>
+
+          <a>{/* <i className="iconfont mr-github login-icon"></i> */}</a>
         </div>
       </Header>
 
@@ -62,9 +69,9 @@ function Login() {
         }}
       >
         <div className="text-center flx-justify-around">
-          <a className="color-text-fff">帮助</a>
-          <a className="color-text-fff">隐私</a>
-          <a className="color-text-fff">条款</a>
+          <a className="color-text-fff user-select">帮助</a>
+          <a className="color-text-fff user-select">隐私</a>
+          <a className="color-text-fff user-select">条款</a>
         </div>
         <MrFooter />
       </Footer>

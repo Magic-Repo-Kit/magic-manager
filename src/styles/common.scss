@@ -149,7 +149,12 @@
   -webkit-text-fill-color: transparent;
 }
 
-// 居中
+// 文字居中
 .text-center {
   text-align: center;
+}
+
+// 禁止选中
+.user-select {
+  user-select: none;
 }

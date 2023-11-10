@@ -97,6 +97,14 @@ function LoginForm() {
     }
   };
 
+  const [loginText, setLoginText] = useState('使用第三方平台快速登录');
+  const handleMouseEnter = (text) => {
+    setLoginText(text);
+  };
+
+  const handleMouseLeave = () => {
+    setLoginText('使用第三方平台快速登录');
+  };
   return (
     <div className="form-box">
       <div className="form-container-box" ref={containerRef}>
@@ -105,8 +113,14 @@ function LoginForm() {
           <form action="#" className="formIn">
             <h1>登录</h1>
             {/* 第三方登陆 */}
-            <div className="social-container flx-center">
-              <a className="social">
+            <div
+              className="social-container flx-center"
+              onMouseLeave={handleMouseLeave}
+            >
+              <a
+                className="social"
+                onMouseEnter={() => handleMouseEnter('使用Github登录')}
+              >
                 <GithubOutlined
                   style={{ fontSize: '24px' }}
                   onClick={(e) => {
@@ -115,7 +129,11 @@ function LoginForm() {
                   }}
                 />
               </a>
-              <a className="social">
+
+              <a
+                className="social"
+                onMouseEnter={() => handleMouseEnter('使用Gitee登录')}
+              >
                 <i
                   className="iconfont mr-gitee"
                   style={{ fontSize: '24px' }}
@@ -125,7 +143,11 @@ function LoginForm() {
                   }}
                 ></i>
               </a>
-              <a className="social">
+
+              <a
+                className="social"
+                onMouseEnter={() => handleMouseEnter('使用Google登录')}
+              >
                 <GoogleOutlined
                   style={{ fontSize: '24px' }}
                   onClick={(e) => {
@@ -135,7 +157,8 @@ function LoginForm() {
                 />
               </a>
             </div>
-            <span style={{ color: '#3f3f3f' }}>使用第三方平台快速登录</span>
+            <span className="login-quickly-text">{loginText}</span>
+
             <input
               type="text"
               placeholder="账号"
@@ -178,8 +201,8 @@ function LoginForm() {
         <div className="overlay-container">
           <div className="overlay">
             <div className="overlay-panel overlay-left">
-              <h1>欢迎回来！</h1>
-              <p>为了与我们保持联系，请使用您的个人信息登录。</p>
+              <h1>Welcome Back</h1>
+              <p>已有账号？GOGO！</p>
               <button
                 className="ghost"
                 id="signIn"
@@ -191,9 +214,8 @@ function LoginForm() {
               </button>
             </div>
             <div className="overlay-panel overlay-right">
-              {/* <h1>Hello Magicrepokit</h1> */}
-              <h1>Hello</h1>
-              <p>输入您的个人详细信息，与我们一起开始旅程。</p>
+              <h1>Hello Magicrepokit</h1>
+              <p>输入您的账户信息，与我们一起开始旅程。</p>
               <button
                 className="ghost"
                 id="signUp"
