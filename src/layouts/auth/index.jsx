@@ -1,14 +1,24 @@
+import React, { useState, useEffect } from 'react';
 import LoginForm from './loginForm';
 import MrFooter from '@/components/mr-footer';
 import './index.scss';
 import mrkLogo from '@/assets/images/mrk-dark.png';
 import loginBc1 from '@/assets/images/login-vr.svg';
+import { handleFullScreenClick } from '@/utils/tools';
 
 import { Layout, Tooltip } from 'antd';
 const { Header, Footer } = Layout;
 
 function Login() {
   const lines = ['top', 'right', 'bottom', 'left'];
+  const [mode, setMode] = useState('dark');
+  useEffect(() => {
+    if (mode === 'dark') {
+      document.querySelector('.login-container').style.background = '#212534';
+    } else {
+      document.querySelector('.login-container').style.background = '#ffffff';
+    }
+  }, [mode]);
   return (
     <div className="login-container flx-center">
       <div className="login-form-bc flx-center">
@@ -41,10 +51,13 @@ function Login() {
         <img src={mrkLogo} alt="" height="20" />
         <div>
           <Tooltip title="全屏" color="transparent">
-            <a>
+            <a onClick={handleFullScreenClick}>
               <i className="iconfont mr-menu-4 login-icon"></i>
             </a>
           </Tooltip>
+          <a onClick={() => setMode(mode === 'dark' ? 'default' : 'dark')}>
+            <i className="iconfont mr-evening-moon2 login-icon"></i>
+          </a>
           <Tooltip title="中/英" color="transparent">
             <a>
               <i className="iconfont mr-duoyuyan login-icon"></i>
@@ -53,8 +66,6 @@ function Login() {
           <a>
             <i className="iconfont mr-lianxiwomen login-icon"></i>
           </a>
-
-          <a>{/* <i className="iconfont mr-github login-icon"></i> */}</a>
         </div>
       </Header>
 
