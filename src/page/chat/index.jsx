@@ -22,6 +22,7 @@ function Chat() {
   const siderStyle = {
     color: '#fff',
     backgroundColor: '#292b2f',
+    height: 'calc(100vh - 60px)',
   };
   const groups = [
     {
@@ -99,7 +100,7 @@ function Chat() {
     <animated.div style={fallIn}>
       <Layout>
         <Sider style={siderStyle}>
-          <div className="slider-header">
+          <div className="slider-header user-select">
             <RollbackOutlined
               style={{ fontSize: '23px' }}
               onClick={() => navigate('/home')}
@@ -128,8 +129,17 @@ function Chat() {
           </footer>
         </Content>
         <Sider style={siderStyle}>
-          <div className="slider-header">
+          <div className="slider-header user-select">
             <div>当前在线</div>
+            <i
+              className="iconfont mr-wangluozaixianbaozheng"
+              style={{
+                fontSize: '20px',
+                fontWeight: 'bold',
+                color: '#00d726',
+                transform: ' translateY(-3px)',
+              }}
+            ></i>
           </div>
           <div className="slide-members">
             {members.map((member) => {
