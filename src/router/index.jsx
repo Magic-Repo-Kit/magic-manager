@@ -3,6 +3,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 
 // 路由菜单
 import Home from '@/page/home';
+import Chat from '@/page/chat';
 import TreeFiter from '@/page/superTable/children/treeFiter';
 import SelectFiter from '@/page/superTable/children/selectFiter';
 import ChartBoard from '@/page/databoard/chartBoard';
@@ -15,6 +16,7 @@ function Router() {
     <Routes>
       <Route path="" element={<Navigate to="home" />} />
       <Route path="home" element={<Home />} />
+      <Route path="chat" element={<Chat />} />
       <Route path="tree-fiter" element={<TreeFiter />} />
       <Route path="select-fiter" element={<SelectFiter />} />
       <Route path="chart-board" element={<ChartBoard />} />

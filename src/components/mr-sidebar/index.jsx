@@ -7,6 +7,7 @@ import {
   DashboardOutlined,
   SolutionOutlined,
   NumberOutlined,
+  MessageFilled,
 } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 
@@ -20,18 +21,38 @@ function getItem(label, key, icon, children, type) {
   };
 }
 const items = [
-  getItem('首页', 'home', <AlignLeftOutlined />),
-  getItem('超级表格', 'superTable', <TableOutlined />, [
-    getItem('TreeFiter', 'tree-fiter'),
-    getItem('SelectFiter', 'select-fiter'),
-  ]),
-  getItem('dashboard', 'dashboard', <DashboardOutlined />, [
-    getItem('ChartBoard', 'chart-board'),
-    getItem('ImgBoard', 'img-board'),
-  ]),
-
-  getItem('用户管理', 'users', <SolutionOutlined />),
-  getItem('关于', 'about', <NumberOutlined />),
+  getItem(
+    <span style={{ fontSize: '14px' }}>首页</span>,
+    'home',
+    <AlignLeftOutlined className="slider-menu-icon" />
+  ),
+  getItem(
+    <span style={{ fontSize: '14px' }}>chatMagic</span>,
+    'chat',
+    <i className="iconfont mr-shejishi slider-menu-icon"></i>
+  ),
+  getItem(
+    <span style={{ fontSize: '14px' }}>超级表格</span>,
+    'superTable',
+    <TableOutlined className="slider-menu-icon" />,
+    [getItem('TreeFiter', 'tree-fiter'), getItem('SelectFiter', 'select-fiter')]
+  ),
+  getItem(
+    'dashboard',
+    'dashboard',
+    <DashboardOutlined className="slider-menu-icon" />,
+    [getItem('ChartBoard', 'chart-board'), getItem('ImgBoard', 'img-board')]
+  ),
+  getItem(
+    <span style={{ fontSize: '14px' }}>用户管理</span>,
+    'users',
+    <SolutionOutlined className="slider-menu-icon" />
+  ),
+  getItem(
+    <span style={{ fontSize: '14px' }}>关于</span>,
+    'about',
+    <NumberOutlined className="slider-menu-icon" />
+  ),
 ];
 
 function MrSidebar(props) {
@@ -42,19 +63,24 @@ function MrSidebar(props) {
     navigate(`/admin/${key}`);
   };
   const [theme, setTheme] = useState('mode');
+  const [bgColor, setBgColor] = useState('');
   useEffect(() => {
     if (mode === 'default') {
       setTheme('light');
+      setBgColor('#f3f3f3');
     } else {
       setTheme('dark');
+      setBgColor('#141414');
     }
   }, [mode]);
+
   return (
     <Menu
       theme={theme}
       onClick={handleClick}
       style={{
         width: 260,
+        backgroundColor: bgColor,
       }}
       defaultSelectedKeys={['home']}
       defaultOpenKeys={['superTable']}

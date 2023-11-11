@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import Router from '@/router';
+import { useLocation } from 'react-router-dom';
 import './index.scss';
 import MrHeader from '@/components/mr-header';
 import MrSidebar from '@/components/mr-sidebar';
-import MrFooter from '@/components/mr-footer';
+// import MrFooter from '@/components/mr-footer';
 import { handleFullScreenClick } from '@/utils/tools';
 import { Layout, theme, ConfigProvider } from 'antd';
 const { Header, Footer, Sider, Content } = Layout;
@@ -48,16 +49,28 @@ function Admin() {
   // 当 mode 发生变化时，更新 Header 和 Content 的背景颜色
   useEffect(() => {
     if (mode === 'dark') {
-      console.log(token.colorPrimaryBg);
       document.querySelector('.headerStyle').style.background = '#001529';
       document.querySelector('.siderStyle').style.background = '#141414';
     } else {
-      console.log(token.colorPrimaryBg);
+      // console.log(token.colorPrimaryBg);
       document.querySelector('.headerStyle').style.background = '#ffffff';
       document.querySelector('.siderStyle').style.background = '#f5f5f5';
     }
   }, [mode]);
 
+  // chat页面隐藏slider
+  const location = useLocation();
+  const [width, setWidth] = useState('280');
+  const [marginLeft, SetMarginLeft] = useState('300px');
+  useEffect(() => {
+    if (location.pathname.includes('/chat')) {
+      setWidth('0');
+      SetMarginLeft('0');
+    } else {
+      setWidth('280');
+      SetMarginLeft('300px');
+    }
+  }, [location]);
   return (
     <ConfigProvider
       theme={{
@@ -77,22 +90,26 @@ function Admin() {
           />
         </Header>
         <Layout hasSider>
-          <Sider className="siderStyle" width="280">
+          <Sider
+            className="siderStyle"
+            width={width}
+            // style={{ opacity: opacity }}
+          >
             <MrSidebar mode={mode} />
           </Sider>
           <Layout
             style={{
               minHeight: 'calc(100vh - 60px)',
-              marginLeft: 300,
+              marginLeft: marginLeft,
             }}
           >
             <Content className="contentStyle">
               {/* 路由出口 */}
               <Router />
             </Content>
-            <Footer className="footerStyle">
+            {/* <Footer className="footerStyle">
               <MrFooter />
-            </Footer>
+            </Footer> */}
           </Layout>
         </Layout>
       </Layout>

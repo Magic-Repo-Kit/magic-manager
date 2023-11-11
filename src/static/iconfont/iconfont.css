@@ -1,11 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 4291850 */
-  src: url('iconfont.eot?t=1699416841700'); /* IE9 */
-  src: url('iconfont.eot?t=1699416841700#iefix') format('embedded-opentype'), /* IE6-IE8 */
-       url('iconfont.woff2?t=1699416841700') format('woff2'),
-       url('iconfont.woff?t=1699416841700') format('woff'),
-       url('iconfont.ttf?t=1699416841700') format('truetype'),
-       url('iconfont.svg?t=1699416841700#iconfont') format('svg');
+  src: url('iconfont.woff2?t=1699717909562') format('woff2'),
+       url('iconfont.woff?t=1699717909562') format('woff'),
+       url('iconfont.ttf?t=1699717909562') format('truetype');
 }
 
 .iconfont {
@@ -16,16 +13,72 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.mr-denglu:before {
-  content: "\e609";
+.mr-fasong1:before {
+  content: "\e613";
+}
+
+.mr-qiehuanyuyan:before {
+  content: "\e769";
+}
+
+.mr-more-1:before {
+  content: "\e645";
+}
+
+.mr-fasongchuansong-circle-xian:before {
+  content: "\e8a7";
+}
+
+.mr-square:before {
+  content: "\e67b";
+}
+
+.mr-weixin:before {
+  content: "\e8bb";
+}
+
+.mr-qq:before {
+  content: "\e612";
+}
+
+.mr-right-1:before {
+  content: "\e61d";
+}
+
+.mr-likes-1:before {
+  content: "\e61a";
+}
+
+.mr-fork-1:before {
+  content: "\e628";
+}
+
+.mr-photo-1:before {
+  content: "\e6b4";
+}
+
+.mr-window-up:before {
+  content: "\e9c2";
+}
+
+.mr-shejishi:before {
+  content: "\e600";
+}
+
+.mr-zhankai1:before {
+  content: "\e614";
+}
+
+.mr-xiaolian:before {
+  content: "\e605";
+}
+
+.mr-fasong:before {
+  content: "\e65a";
 }
 
 .mr-duoyuyan:before {
   content: "\e654";
-}
-
-.mr-youxiang:before {
-  content: "\e908";
 }
 
 .mr-github:before {
@@ -34,26 +87,6 @@
 
 .mr-lianxiwomen:before {
   content: "\e604";
-}
-
-.mr-qq:before {
-  content: "\e612";
-}
-
-.mr-weixin:before {
-  content: "\e8bb";
-}
-
-.mr-qiehuanyuyan:before {
-  content: "\e769";
-}
-
-.mr-a-yuyanzhongwen:before {
-  content: "\e640";
-}
-
-.mr-a-yuyanyingwen:before {
-  content: "\e642";
 }
 
 .mr-gitee:before {
@@ -68,32 +101,8 @@
   content: "\e611";
 }
 
-.mr-home-7:before {
-  content: "\e6b8";
-}
-
-.mr-home-6:before {
-  content: "\e6bb";
-}
-
 .mr-menu-4:before {
   content: "\e755";
-}
-
-.mr-fork-1:before {
-  content: "\e628";
-}
-
-.mr-photo-1:before {
-  content: "\e6b4";
-}
-
-.mr-likes-1:before {
-  content: "\e61a";
-}
-
-.mr-right-1:before {
-  content: "\e61d";
 }
 
 .mr-local-1:before {
@@ -116,64 +125,24 @@
   content: "\e625";
 }
 
-.mr-home2:before {
-  content: "\e61b";
-}
-
 .mr-change-1:before {
   content: "\e606";
-}
-
-.mr-sound-2:before {
-  content: "\e63e";
 }
 
 .mr-setting-3:before {
   content: "\e6b3";
 }
 
-.mr-home-2:before {
-  content: "\e64e";
-}
-
-.mr-home-1:before {
-  content: "\e76b";
-}
-
 .mr-home-3:before {
   content: "\e63b";
-}
-
-.mr-home-4:before {
-  content: "\e63c";
 }
 
 .mr-user:before {
   content: "\e676";
 }
 
-.mr-settig-2:before {
-  content: "\eb40";
-}
-
 .mr-home3:before {
   content: "\e6f5";
-}
-
-.mr-leave-2:before {
-  content: "\e66e";
-}
-
-.mr-setting-1:before {
-  content: "\e75e";
-}
-
-.mr-menu-2:before {
-  content: "\e840";
-}
-
-.mr-home4:before {
-  content: "\e7d0";
 }
 
 .mr-leave-1:before {
@@ -184,36 +153,8 @@
   content: "\e608";
 }
 
-.mr-sound-1:before {
-  content: "\e60c";
-}
-
-.mr-home5:before {
-  content: "\e6bc";
-}
-
-.mr-translate-2:before {
-  content: "\e65f";
-}
-
-.mr-more-1:before {
-  content: "\e645";
-}
-
-.mr-translate-1:before {
-  content: "\e6fb";
-}
-
-.mr-menu-1:before {
-  content: "\e83b";
-}
-
 .mr-notify:before {
   content: "\e622";
-}
-
-.mr-circular:before {
-  content: "\e6bf";
 }
 
 .mr-evening-moon1:before {
@@ -222,14 +163,6 @@
 
 .mr-evening-moon2:before {
   content: "\e714";
-}
-
-.mr-day-moon:before {
-  content: "\e715";
-}
-
-.mr-square:before {
-  content: "\e67b";
 }
 
 .mr-triangle:before {

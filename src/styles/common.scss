@@ -156,5 +156,8 @@
 
 // 禁止选中
 .user-select {
-  user-select: none;
+  -webkit-user-select: none; /* Chrome, Safari, Opera */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE , Edge */
+  user-select: none; /* Standard syntax */
 }

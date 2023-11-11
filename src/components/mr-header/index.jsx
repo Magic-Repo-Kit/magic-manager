@@ -2,6 +2,7 @@ import React from 'react';
 import './index.scss';
 import { Flex, Typography, Popover, Avatar } from 'antd';
 import { UserOutlined, LoginOutlined } from '@ant-design/icons';
+import { useNavigate } from 'react-router-dom';
 
 import mrkLogoLight from '@/assets/images/mrk-light.png';
 import mrkLogoDark from '@/assets/images/mrk-dark.png';
@@ -9,6 +10,7 @@ import mrkLogoDark from '@/assets/images/mrk-dark.png';
 const { Title } = Typography;
 
 const MrHeader = (props) => {
+  const navigate = useNavigate();
   const { slotTitle, slotIcon, onIconClick, mode } = props;
   const handleIconClick = (id) => {
     const icon = slotIcon.find((icon) => icon.id === id);
@@ -27,8 +29,10 @@ const MrHeader = (props) => {
       </Title> */}
       <img
         src={mode === 'default' ? mrkLogoLight : mrkLogoDark}
-        alt=""
+        alt="MRK"
         height="25"
+        onClick={() => navigate('/home')}
+        className="cursor-point"
       />
 
       {/* 右侧 */}
