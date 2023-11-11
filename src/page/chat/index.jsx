@@ -77,8 +77,23 @@ function Chat() {
       icon: 'head-6',
     },
   ];
-  const [activeGroup, setActiveGroup] = useState(groups[0]);
+  const [activeGroup, setActiveGroup] = useState(
+    sessionStorage.getItem('activeGroup') || groups[0]
+  );
   const fallIn = useSpring(fallLRIn);
+
+  // 在组件挂载时，从 sessionStorage 中恢复 activeGroup 的值
+  useEffect(() => {
+    const savedActiveGroup = sessionStorage.getItem('activeGroup');
+    if (savedActiveGroup) {
+      const parsedActiveGroup = JSON.parse(savedActiveGroup);
+      setActiveGroup(parsedActiveGroup);
+    }
+  }, []);
+  // 在 activeGroup 改变时，保存 activeGroup 到 sessionStorage
+  useEffect(() => {
+    sessionStorage.setItem('activeGroup', JSON.stringify(activeGroup));
+  }, [activeGroup]);
 
   return (
     <animated.div style={fallIn}>
