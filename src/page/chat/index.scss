@@ -1,3 +1,9 @@
+.slider-box {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+}
 .slider-header {
   display: flex;
   justify-content: space-between;
@@ -11,7 +17,7 @@
   }
 }
 .slide-groups {
-  height: calc(100% - 90px);
+  flex: 1 1 auto;
   overflow: auto;
   padding: 16px;
   > div {
@@ -30,15 +36,24 @@
   }
 }
 .slide-members {
-  height: calc(100% - 90px);
+  flex: 1 1 auto;
   overflow: auto;
-  padding: 16px;
+  padding: 16px 10px;
+  > span {
+    display: inline-block;
+    margin: 5px 10px;
+  }
   > div {
-    padding: 12px 5px;
+    cursor: pointer;
+    padding: 8px 10px;
     width: 100%;
     display: flex;
     align-items: center;
-
+    border-radius: 8px;
+    transition: all 0.3s;
+    &:hover {
+      background: #2f3135;
+    }
     .slide-member-icon {
       margin-right: 10px;
       width: 33px;
@@ -48,13 +63,24 @@
       position: relative;
       &::before {
         content: '';
-        width: 8px;
-        height: 8px;
+        width: 10px;
+        height: 10px;
         border-radius: 50%;
         background: #00d726;
         position: absolute;
-        bottom: 1px;
-        right: 1px;
+        bottom: 0px;
+        right: 0px;
+        z-index: 1;
+      }
+      &::after {
+        content: '';
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background: #242629;
+        position: absolute;
+        bottom: -3px;
+        right: -3px;
       }
       > i {
         font-size: 25px;
@@ -62,27 +88,32 @@
     }
   }
 }
+// 内容
+.container-ctx {
+  display: flex;
+  flex: 1 1 auto;
+}
+// 输入框
 .container-footer {
-  position: fixed;
-  bottom: 0;
-  width: calc(100% - 420px);
+  width: calc(100% - 20px);
+  padding: 20px 200px;
   min-width: 500px;
   margin: 10px;
-  padding: 20px 250px;
   background: #2f3236;
   border-top: 2px solid #383b3f;
 
   &-box {
+    position: relative;
     height: 100%;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     &-btn {
-      // width: 60px;
-      // padding: 10px 0;
       display: flex;
       justify-content: center;
       align-items: center;
       margin-left: 10px;
+
       > i {
         width: 35px;
         text-align: center;
@@ -92,6 +123,9 @@
         border-radius: 50%;
         margin-right: 10px;
         transition: transform 0.3s ease;
+        &:hover {
+          transform: scale(1.1);
+        }
         &:active {
           transform: scale(0.9);
         }
@@ -117,10 +151,9 @@
 }
 
 .chat-history-box {
+  flex: 1 1 auto;
   overflow: auto;
   padding: 5px 22px;
-  padding-bottom: 135px;
-  height: calc(100% - 165px);
   .chat-history {
     border-bottom: 1px solid #383b3f;
     padding: 18px 22px;
@@ -156,6 +189,41 @@
 .slide-members::-webkit-scrollbar,
 .slide-groups::-webkit-scrollbar {
   display: none !important;
+}
+
+// 搜索群消息
+.input-container {
+  position: relative;
+  &.focused {
+    .input-ctx {
+      width: 250px; /* 点击时的宽度 */
+      border: none;
+    }
+    .icon-ctx {
+      // opacity: 0;
+    }
+  }
+  .input-ctx {
+    width: 180px;
+    height: 30px;
+    border-radius: 4px;
+    background-color: #1c1d1f;
+    color: #dbdee1;
+    padding: 0 32px 0 8px;
+    transition: width 0.3s ease; /* 添加过渡效果 */
+  }
+  .icon-ctx {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    opacity: 1;
+    transition: opacity 0.3s ease, transform 0.3s ease; /* 添加过渡效果 */
+    // &.mr-search-1 {
+    //   transform: rotate(45deg); /* 清除标签的旋转效果 */
+    // }
+  }
 }
 
 /* 在屏幕宽度小于等于 768px 时应用的样式 */

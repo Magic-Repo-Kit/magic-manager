@@ -3,7 +3,12 @@ import './index.scss';
 import { useSpring, animated } from 'react-spring';
 import { fallLRIn } from '@/utils/animations';
 import { Layout } from 'antd';
-import { RollbackOutlined, AlignRightOutlined } from '@ant-design/icons';
+import {
+  RollbackOutlined,
+  AlignRightOutlined,
+  RedoOutlined,
+  QuestionCircleOutlined,
+} from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import userHead from '@/assets/headIcon/head-3.svg';
 
@@ -18,6 +23,8 @@ function Chat() {
     color: '#fff',
     backgroundColor: '#2f3236',
     height: 'calc(100vh - 60px)',
+    display: 'flex',
+    flexDirection: 'column',
   };
   const siderStyle = {
     color: '#fff',
@@ -96,62 +103,137 @@ function Chat() {
     sessionStorage.setItem('activeGroup', JSON.stringify(activeGroup));
   }, [activeGroup]);
 
+  // 搜索 input框
+  const [focused, setFocused] = useState(false);
+  const [searchValue, setSearchValue] = useState('');
+  const handleFocus = () => {
+    setFocused(true);
+  };
+  const handleBlur = () => {
+    setFocused(false);
+  };
+  const handleChange = (e) => {
+    setSearchValue(e.target.value);
+  };
+
+  const handleClear = () => {
+    setSearchValue('');
+  };
   return (
     <animated.div style={fallIn}>
       <Layout>
         <Sider style={siderStyle}>
-          <div className="slider-header user-select">
-            <RollbackOutlined
-              style={{ fontSize: '23px' }}
-              onClick={() => navigate('/home')}
-            />
-            <AlignRightOutlined style={{ fontSize: '23px' }} />
-          </div>
-          <div className="slide-groups">
-            {groups.map((group) => {
-              return (
-                <div
-                  key={group.id}
-                  className={group.id === activeGroup.id ? 'active' : ''}
-                  onClick={() => setActiveGroup(group)}
-                >
-                  # {group.name}
-                </div>
-              );
-            })}
+          <div className="slider-box">
+            <div className="slider-header user-select">
+              <RollbackOutlined
+                style={{ fontSize: '23px' }}
+                onClick={() => navigate('/home')}
+              />
+              <AlignRightOutlined style={{ fontSize: '23px' }} />
+            </div>
+            <div className="slide-groups">
+              {groups.map((group) => {
+                return (
+                  <div
+                    key={group.id}
+                    className={group.id === activeGroup.id ? 'active' : ''}
+                    onClick={() => setActiveGroup(group)}
+                  >
+                    # {group.name}
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </Sider>
         <Content style={contentStyle}>
-          <h2>{activeGroup.name}</h2>
-          <ChatCtx />
+          <div
+            className="flx-justify-between"
+            style={{ padding: '0 20px 0 30px' }}
+          >
+            <h2>{activeGroup.name}</h2>
+            <div className={`input-container ${focused ? 'focused' : ''}`}>
+              <input
+                type="text"
+                onFocus={handleFocus}
+                onBlur={handleBlur}
+                className="input-ctx"
+                placeholder="搜索"
+                value={searchValue}
+                onChange={handleChange}
+                style={{ border: 'none !important' }}
+              />
+              {searchValue ? (
+                <i
+                  className="iconfont mr-fork-1 icon-ctx"
+                  onClick={handleClear}
+                ></i>
+              ) : (
+                <i className="iconfont mr-search-1 icon-ctx"></i>
+              )}
+            </div>
+          </div>
+
+          <ChatCtx className="container-ctx" />
           <footer className="container-footer">
             <FooterCtx />
           </footer>
         </Content>
         <Sider style={siderStyle}>
-          <div className="slider-header user-select">
-            <div>当前在线</div>
-            <i
-              className="iconfont mr-wangluozaixianbaozheng"
-              style={{
-                fontSize: '20px',
-                fontWeight: 'bold',
-                color: '#00d726',
-                transform: ' translateY(-3px)',
-              }}
-            ></i>
-          </div>
-          <div className="slide-members">
-            {members.map((member) => {
-              return (
-                <div key={member.id}>
-                  <div className="slide-member-icon flx-center">
-                    <img src={userHead} height="28" />
+          <div className="slider-box">
+            <div className="slider-header user-select">
+              <div>在线状态</div>
+              {/* <i
+                className="iconfont mr-wangluozaixianbaozheng"
+                style={{
+                  fontSize: '20px',
+                  fontWeight: 'bold',
+                  color: '#00d726',
+                  transform: ' translateY(-3px)',
+                }}
+              ></i> */}
+              <div>
+                <QuestionCircleOutlined
+                  style={{
+                    fontSize: '18px',
+                    fontWeight: 'bold',
+                    filter: 'grayscale(100%)',
+                  }}
+                />
+                <RedoOutlined
+                  style={{
+                    fontSize: '18px',
+                    fontWeight: 'bold',
+                    marginLeft: '8px',
+                  }}
+                />
+              </div>
+            </div>
+
+            <div className="slide-members">
+              <span>管理员 - 6</span>
+              {members.map((member) => {
+                return (
+                  <div key={member.id}>
+                    <div className="slide-member-icon flx-center">
+                      <img src={userHead} height="28" />
+                    </div>
+                    <div>{member.name}</div>
                   </div>
-                  <div>{member.name}</div>
-                </div>
-              );
-            })}
+                );
+              })}
+              <span>群成员 - 30</span>
+              {members.map((member) => {
+                return (
+                  <div key={member.id}>
+                    <div className="slide-member-icon flx-center">
+                      <img src={userHead} height="28" />
+                    </div>
+                    <div>{member.name}</div>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </Sider>
       </Layout>
