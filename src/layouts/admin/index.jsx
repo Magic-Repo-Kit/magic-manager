@@ -4,17 +4,16 @@ import { useLocation } from 'react-router-dom';
 import './index.scss';
 import MrHeader from '@/components/mr-header';
 import MrSidebar from '@/components/mr-sidebar';
-// import MrFooter from '@/components/mr-footer';
+
 import { handleFullScreenClick } from '@/utils/tools';
 import { Layout, theme, ConfigProvider } from 'antd';
-const { Header, Footer, Sider, Content } = Layout;
-const { useToken } = theme;
+
+const { Header, Sider, Content } = Layout;
 
 function Admin() {
-  const { token } = useToken();
   const [mode, setMode] = useState('default');
 
-  // headerIcons
+  // headerIcons 按钮相关
   const handleNotificationClick = () => {
     console.log('Notification icon clicked');
   };
@@ -38,7 +37,6 @@ function Admin() {
       callback: handleNotificationClick,
     },
   ];
-
   const handleIconClick = (iconId) => {
     const clickedIcon = headerIcons.find((icon) => icon.id === iconId);
     if (clickedIcon) {
@@ -46,29 +44,33 @@ function Admin() {
     }
   };
 
-  // 当 mode 发生变化时，更新 Header 和 Content 的背景颜色
+  // 主题监听
   useEffect(() => {
     if (mode === 'dark') {
-      document.querySelector('.headerStyle').style.background = '#001529';
-      document.querySelector('.siderStyle').style.background = '#141414';
+      document.querySelector('.layout').style.background = '#242424';
+      document.querySelector('.layout-content').style.background = '#242424';
+      document.querySelector('.siderStyle').style.background = '#242424';
+      document.querySelector('.contentStyle').style.background = '#242424';
     } else {
-      // console.log(token.colorPrimaryBg);
-      document.querySelector('.headerStyle').style.background = '#ffffff';
+      document.querySelector('.layout').style.background = '#f5f5f5';
+      document.querySelector('.layout-content').style.background = '#f5f5f5';
       document.querySelector('.siderStyle').style.background = '#f5f5f5';
+      document.querySelector('.contentStyle').style.background = '#f5f5f5';
     }
   }, [mode]);
 
   // chat页面隐藏slider
   const location = useLocation();
-  const [width, setWidth] = useState('280');
-  const [marginLeft, SetMarginLeft] = useState('300px');
+  const [opacity, setOpacity] = useState(1);
+  const [marginLeft, SetMarginLeft] = useState('280px');
+
   useEffect(() => {
     if (location.pathname.includes('/chat')) {
-      setWidth('0');
+      setOpacity(0);
       SetMarginLeft('0');
     } else {
-      setWidth('280');
-      SetMarginLeft('300px');
+      setOpacity(1);
+      SetMarginLeft('280px');
     }
   }, [location]);
   return (
@@ -89,28 +91,14 @@ function Admin() {
             }}
           />
         </Header>
-        <Layout hasSider>
-          <Sider
-            className="siderStyle"
-            width={width}
-            // style={{ opacity: opacity }}
-          >
+        <Layout className="layout-content">
+          <Sider className="siderStyle" width="280" style={{ opacity }}>
             <MrSidebar mode={mode} />
           </Sider>
-          <Layout
-            style={{
-              minHeight: 'calc(100vh - 60px)',
-              marginLeft: marginLeft,
-            }}
-          >
-            <Content className="contentStyle">
-              {/* 路由出口 */}
-              <Router />
-            </Content>
-            {/* <Footer className="footerStyle">
-              <MrFooter />
-            </Footer> */}
-          </Layout>
+          <Content className="contentStyle" style={{ marginLeft }}>
+            {/* 路由出口 */}
+            <Router />
+          </Content>
         </Layout>
       </Layout>
     </ConfigProvider>

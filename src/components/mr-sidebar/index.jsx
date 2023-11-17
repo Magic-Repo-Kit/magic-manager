@@ -67,10 +67,10 @@ function MrSidebar(props) {
   useEffect(() => {
     if (mode === 'default') {
       setTheme('light');
-      setBgColor('#f3f3f3');
+      setBgColor('#f5f5f5');
     } else {
       setTheme('dark');
-      setBgColor('#141414');
+      setBgColor('#242424');
     }
   }, [mode]);
 
@@ -79,8 +79,8 @@ function MrSidebar(props) {
       theme={theme}
       onClick={handleClick}
       style={{
-        width: 260,
         backgroundColor: bgColor,
+        height: '2200px',
       }}
       defaultSelectedKeys={['home']}
       defaultOpenKeys={['superTable']}

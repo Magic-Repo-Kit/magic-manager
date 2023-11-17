@@ -19,7 +19,7 @@ const MrHeader = (props) => {
     }
   };
   return (
-    <Flex justify="space-between" align="center">
+    <Flex justify="space-between" align="center" className="header-container">
       {/* <Title
         level={4}
         style={{ margin: 0 }}

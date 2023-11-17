@@ -1,0 +1,37 @@
+$primary-color-theme1: #1890ff;
+$background-color-theme1: #f0f0f0;
+$text-color-theme1: #333;
+
+$primary-color-theme2: #f5222d;
+$background-color-theme2: #fff;
+$text-color-theme2: #000;
+
+$primary-color-theme3: #52c41a;
+$background-color-theme3: #000;
+$text-color-theme3: #fff;
+
+// 默认主题
+$primary-color: $primary-color-theme1;
+$background-color: $background-color-theme1;
+$text-color: $text-color-theme1;
+
+.theme1 {
+  // 主题1样式
+  $primary-color: $primary-color-theme1;
+  $background-color: $background-color-theme1;
+  $text-color: $text-color-theme1;
+}
+
+.theme2 {
+  // 主题2样式
+  $primary-color: $primary-color-theme2;
+  $background-color: $background-color-theme2;
+  $text-color: $text-color-theme2;
+}
+
+.theme3 {
+  // 主题3样式
+  $primary-color: $primary-color-theme3;
+  $background-color: $background-color-theme3;
+  $text-color: $text-color-theme3;
+}
