@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Router from '@/router';
+import { Outlet } from 'react-router-dom'; //渲染子路由
 import { useLocation } from 'react-router-dom';
 import './index.scss';
 import MrHeader from '@/components/mr-header';
@@ -96,8 +96,8 @@ function Admin() {
             <MrSidebar mode={mode} />
           </Sider>
           <Content className="contentStyle" style={{ marginLeft }}>
-            {/* 路由出口 */}
-            <Router />
+            {/* 渲染子路由 */}
+            <Outlet />
           </Content>
         </Layout>
       </Layout>

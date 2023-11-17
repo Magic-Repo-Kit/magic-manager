@@ -60,7 +60,7 @@ function MrSidebar(props) {
   const navigate = useNavigate();
   const handleClick = (e) => {
     const { key } = e;
-    navigate(`/admin/${key}`);
+    navigate(`${key}`);
   };
   const [theme, setTheme] = useState('mode');
   const [bgColor, setBgColor] = useState('');

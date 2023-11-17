@@ -24,3 +24,5 @@ npm install --save redux
 
 npm install react-spring
 ```
+# 
+路由懒加载

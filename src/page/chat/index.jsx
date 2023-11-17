@@ -127,7 +127,7 @@ function Chat() {
             <div className="slider-header user-select">
               <RollbackOutlined
                 style={{ fontSize: '23px' }}
-                onClick={() => navigate('/home')}
+                onClick={() => navigate(-1)}
               />
               <AlignRightOutlined style={{ fontSize: '23px' }} />
             </div>

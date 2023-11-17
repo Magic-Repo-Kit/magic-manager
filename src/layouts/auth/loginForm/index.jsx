@@ -42,7 +42,6 @@ function LoginForm() {
             navigate('/admin');
             message.success('登录成功');
           } else {
-            alert(3);
             console.log('🚀 ~ file: index.jsx:44 ~ useEffect ~ res.msg:', res);
             message.error(res.msg || '登录失败');
           }

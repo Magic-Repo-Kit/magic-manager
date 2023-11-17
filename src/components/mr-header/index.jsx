@@ -31,7 +31,7 @@ const MrHeader = (props) => {
         src={mode === 'default' ? mrkLogoLight : mrkLogoDark}
         alt="MRK"
         height="25"
-        onClick={() => navigate('/home')}
+        onClick={() => navigate('/admin')}
         className="cursor-point"
       />
 
