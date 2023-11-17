@@ -1,67 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import './index.scss';
 import { Menu } from 'antd';
-import {
-  AlignLeftOutlined,
-  TableOutlined,
-  DashboardOutlined,
-  SolutionOutlined,
-  NumberOutlined,
-  MessageFilled,
-} from '@ant-design/icons';
-import { useNavigate } from 'react-router-dom';
+import menus from './menus';
 
-function getItem(label, key, icon, children, type) {
-  return {
-    key,
-    icon,
-    children,
-    label,
-    type,
-  };
-}
-const items = [
-  getItem(
-    <span style={{ fontSize: '14px' }}>首页</span>,
-    'home',
-    <AlignLeftOutlined className="slider-menu-icon" />
-  ),
-  getItem(
-    <span style={{ fontSize: '14px' }}>chatMagic</span>,
-    'chat',
-    <i className="iconfont mr-shejishi slider-menu-icon"></i>
-  ),
-  getItem(
-    <span style={{ fontSize: '14px' }}>超级表格</span>,
-    'superTable',
-    <TableOutlined className="slider-menu-icon" />,
-    [getItem('TreeFiter', 'tree-fiter'), getItem('SelectFiter', 'select-fiter')]
-  ),
-  getItem(
-    'dashboard',
-    'dashboard',
-    <DashboardOutlined className="slider-menu-icon" />,
-    [getItem('ChartBoard', 'chart-board'), getItem('ImgBoard', 'img-board')]
-  ),
-  getItem(
-    <span style={{ fontSize: '14px' }}>用户管理</span>,
-    'users',
-    <SolutionOutlined className="slider-menu-icon" />
-  ),
-  getItem(
-    <span style={{ fontSize: '14px' }}>关于</span>,
-    'about',
-    <NumberOutlined className="slider-menu-icon" />
-  ),
-];
+import { useNavigate } from 'react-router-dom';
+import useMenuRoute from '@/hooks/useMenuRoute';
 
 function MrSidebar(props) {
   const { mode } = props;
   const navigate = useNavigate();
+
+  // 该菜单管理一级路由，因此传入的参数为 1
+  const [selectedKey, setSelectedKey] = useMenuRoute(1);
   const handleClick = (e) => {
     const { key } = e;
     navigate(`${key}`);
   };
+
+  // 主题相关
   const [theme, setTheme] = useState('mode');
   const [bgColor, setBgColor] = useState('');
   useEffect(() => {
@@ -84,8 +40,10 @@ function MrSidebar(props) {
       }}
       defaultSelectedKeys={['home']}
       defaultOpenKeys={['superTable']}
+      // onSelect={({ key }) => setSelectedKey(key)}
+      // selectedKeys={[selectedKey]}
       mode="inline"
-      items={items}
+      items={menus}
     />
   );
 }
