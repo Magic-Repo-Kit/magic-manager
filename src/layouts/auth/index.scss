@@ -14,31 +14,36 @@
 .login-container {
   width: 100vw;
   height: 100vh;
-  // background: #212534;
   display: flex;
   justify-content: center;
   align-items: center;
   font-family: 'Montserrat', sans-serif;
   box-shadow: inset 0 0 10px #03e9f4, 0 0 25px #03e9f4, 0 0 50px #03e9f4,
     0 0 100px #03e9f4;
-  // .login-form-box {
-  //   // border-radius: 5px;
-  //   // padding: 50px;
-  //   // background: #03e9f4;
-  //   // box-shadow: 0 0 5px #03e9f4, 0 0 25px #03e9f4, 0 0 50px #03e9f4,
-  //   //   0 0 100px #03e9f4;
-  //   // box-shadow: 0 0 5px #03e9f4, 0 0 5px #03e9f4, 0 0 30px #03e9f4,
-  //   //   0 0 100px #03e9f4;
-  // }
+  // PC登陆页面
   .login-form-bc {
-    padding: 10%;
     box-shadow: 0 0.75rem 2rem 0 rgba(0, 0, 0, 0.1);
     border-radius: 2px;
     backdrop-filter: blur(100px);
     overflow: hidden;
+    padding: 120px;
+    @media screen and (max-width: 2000px) {
+      padding: 100px;
+    }
+    @media screen and (max-width: 1700px) {
+      padding: 50px;
+    }
+    @media screen and (max-width: 1000px) {
+      display: none;
+      padding: 0px;
+    }
+    // 线条
     .line {
       position: absolute;
       display: block;
+      @media screen and (max-width: 1000px) {
+        display: none;
+      }
       &:nth-child(1) {
         top: 0;
         left: -100%;
@@ -113,6 +118,56 @@
           bottom: 100%;
         }
       }
+    }
+    .login-form-left {
+      > img {
+        width: 500px;
+        margin-right: 150px;
+      }
+      @media screen and (max-width: 2300px) {
+        width: 450px;
+        margin-right: 150px;
+      }
+      @media screen and (max-width: 2000px) {
+        width: 400px;
+        margin-right: 150px;
+      }
+      @media screen and (max-width: 1700px) {
+        width: 300px;
+        margin-right: 250px;
+      }
+      @media screen and (max-width: 1500px) {
+        display: none;
+      }
+    }
+  }
+  // 手机端登陆页面
+  .login-form-phone {
+    @media screen and (min-width: 1000px) {
+      display: none;
+    }
+  }
+  // 头部
+  .login-header {
+    width: 50%;
+    position: fixed;
+    top: 0;
+    background: transparent;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    // 适应屏幕
+    @media screen and (max-width: 1800px) {
+      width: 60%;
+    }
+    @media screen and (max-width: 1500px) {
+      width: 70%;
+    }
+    @media screen and (max-width: 1200px) {
+      width: 80%;
+    }
+    @media screen and (max-width: 768px) {
+      width: 100%;
     }
   }
 }

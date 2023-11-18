@@ -68,6 +68,14 @@ input {
 
 // 登录组件
 .form-box {
+  position: relative;
+  // 手机端
+  .form-statu-change {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    z-index: 5;
+  }
   .form-container-box {
     background-color: #fff;
     border-radius: 10px;
@@ -76,8 +84,14 @@ input {
     position: relative;
     overflow: hidden;
     width: 768px;
-    max-width: 100%;
-    min-height: 480px;
+    height: 480px;
+    // 手机端
+    @media screen and (max-width: 1000px) {
+      width: 500px;
+    }
+    @media screen and (max-width: 768px) {
+      width: 350px;
+    }
     .form-container {
       position: absolute;
       top: 0;
@@ -97,6 +111,26 @@ input {
       opacity: 0;
       z-index: 1;
     }
+    // 手机端登陆
+    .sign-in-phone {
+      right: 0;
+      width: 100%;
+      z-index: 2;
+    }
+    // 手机端注册
+    .sign-up-phone {
+      right: 0;
+      width: 100%;
+      z-index: 1;
+    }
+    // 手机端切换动画
+    .phone-show {
+      opacity: 1;
+    }
+    .phone-hide {
+      opacity: 0;
+    }
+
     .overlay-container {
       position: absolute;
       top: 0;
@@ -214,7 +248,8 @@ input {
   transform: translateX(20%);
 }
 
-.sign-in-container {
+.sign-in-container,
+.sign-in-phone {
   .social-container {
     margin: 20px 0 15px 0;
     .social {
