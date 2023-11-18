@@ -1,3 +1,22 @@
 .header-container {
   cursor: url('../../assets/icons/cursor-1.png'), auto;
+  .header-icon {
+    transition: transform 80ms ease-in;
+    &:active {
+      transform: scale(0.95);
+    }
+    &:last-child {
+      position: relative;
+      &::after {
+        content: '';
+        width: 55%;
+        height: 2px;
+        background-color: #f5383d;
+        position: absolute;
+        border-radius: 10px;
+        left: 10%;
+        bottom: -5px;
+      }
+    }
+  }
 }

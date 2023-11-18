@@ -145,6 +145,7 @@
 // 文字背景渐变
 .gradient-text {
   background: linear-gradient(to right, #0040f8, #03ffd0);
+  // background-image: url('../assets/images/text-bc.png');
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }

@@ -67,20 +67,11 @@
         height: 10px;
         border-radius: 50%;
         background: #00d726;
-        position: absolute;
-        bottom: 0px;
-        right: 0px;
-        z-index: 1;
-      }
-      &::after {
-        content: '';
-        width: 16px;
-        height: 16px;
-        border-radius: 50%;
-        background: #242629;
+        border: 3px solid #242629;
         position: absolute;
         bottom: -3px;
         right: -3px;
+        z-index: 1;
       }
       > i {
         font-size: 25px;

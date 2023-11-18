@@ -41,14 +41,18 @@ const MrHeader = (props) => {
           {slotIcon.map((item) => (
             <i
               key={item.id}
-              style={{ fontSize: '22px', marginRight: '15px' }}
-              className={`iconfont mr-${item.icon}`}
+              style={{
+                fontSize: '22px',
+                marginRight: '15px',
+                cursor: 'pointer',
+              }}
+              className={`iconfont mr-${item.icon} header-icon`}
               onClick={() => handleIconClick(item.id)}
             ></i>
           ))}
         </div>
 
-        <Popover
+        {/* <Popover
           placement="bottomRight"
           title={
             <div
@@ -82,7 +86,7 @@ const MrHeader = (props) => {
           trigger="click"
         >
           <Avatar icon={<UserOutlined style={{ fontSize: '16px' }} />} />
-        </Popover>
+        </Popover> */}
       </Flex>
     </Flex>
   );

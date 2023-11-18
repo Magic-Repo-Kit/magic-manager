@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom';
 import './index.scss';
 import MrHeader from '@/components/mr-header';
 import MrSidebar from '@/components/mr-sidebar';
+import MrCard from '@/components/mr-card';
 
 import { handleFullScreenClick } from '@/utils/tools';
 import { Layout, theme, ConfigProvider } from 'antd';
@@ -35,6 +36,12 @@ function Admin() {
       id: '3',
       icon: 'notify',
       callback: handleNotificationClick,
+    },
+    {
+      name: '退出',
+      id: '4',
+      icon: 'leave-1',
+      callback: () => window.location.replace('/auth'),
     },
   ];
   const handleIconClick = (iconId) => {
@@ -95,6 +102,8 @@ function Admin() {
         <Layout className="layout-content">
           <Sider className="siderStyle" width="280" style={{ opacity }}>
             <MrSidebar mode={mode} />
+            <div style={{ height: '320px' }}></div>
+            <MrCard mode={mode} />
           </Sider>
           <Content className="contentStyle" style={{ marginLeft }}>
             {/* 渲染子路由 */}

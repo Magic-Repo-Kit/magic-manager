@@ -3,17 +3,40 @@ import './index.scss';
 
 function Home() {
   return (
-    <div>
-      <div>121</div>
-      {/* <div style={{ width: '300px', height: '500px', background: 'pink' }}>
-        1
-      </div>
-      <div style={{ width: '300px', height: '500px', background: 'skyblue' }}>
-        1
-      </div>
-      <div style={{ width: '300px', height: '500px', background: 'green' }}>
-        1
-      </div> */}
+    <div className="home-container">
+      <header>
+        <div
+          className="text-center"
+          style={{
+            fontSize: '28px',
+            fontWeight: '700',
+            height: '60px',
+            lineHeight: '60px',
+            marginBottom: '10px',
+          }}
+        >
+          <span className="gradient-text">Welcome to the MarginRepoKit</span>
+        </div>
+      </header>
+      <main>
+        <div></div>
+        <div>
+          <div>今日访客</div>
+        </div>
+      </main>
+      <section>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </section>
+      <footer>
+        <div></div>
+        <div></div>
+        <div></div>
+      </footer>
     </div>
   );
 }

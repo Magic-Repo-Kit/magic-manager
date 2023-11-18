@@ -1,6 +1,7 @@
 .layout {
   // 头部
   .headerStyle {
+    padding-right: 10px;
     z-index: 1;
     position: sticky;
     top: 0;
@@ -22,6 +23,9 @@
       height: calc(100% - 60px);
       padding-top: 30px;
       border-inline-end: 1px solid rgba(5, 5, 5, 0.06);
+      display: flex;
+      flex-direction: column;
+      overflow: auto;
     }
     // 内容区
     .contentStyle {
