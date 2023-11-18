@@ -28,27 +28,33 @@ const menus = [
     <i className="iconfont mr-shejishi slider-menu-icon"></i>
   ),
   getItem(
-    <span style={{ fontSize: '14px' }}>超级表格</span>,
-    'superTable',
-    <TableOutlined className="slider-menu-icon" />,
-    [getItem('TreeFiter', 'tree-fiter'), getItem('SelectFiter', 'select-fiter')]
-  ),
-  getItem(
-    'dashboard',
-    'dashboard',
-    <DashboardOutlined className="slider-menu-icon" />,
-    [getItem('ChartBoard', 'chart-board'), getItem('ImgBoard', 'img-board')]
-  ),
-  getItem(
     <span style={{ fontSize: '14px' }}>用户管理</span>,
     'users',
-    <SolutionOutlined className="slider-menu-icon" />
+    <SolutionOutlined className="slider-menu-icon" />,
+    [
+      getItem('账号管理', 'users-admin'),
+      getItem('角色管理', 'roles-admin'),
+      getItem('登陆日志', 'login-log'),
+    ]
   ),
-  getItem(
-    <span style={{ fontSize: '14px' }}>关于</span>,
-    'about',
-    <NumberOutlined className="slider-menu-icon" />
-  ),
+  // getItem(
+  //   <span style={{ fontSize: '14px' }}>超级表格</span>,
+  //   'superTable',
+  //   <TableOutlined className="slider-menu-icon" />,
+  //   [getItem('TreeFiter', 'tree-fiter'), getItem('SelectFiter', 'select-fiter')]
+  // ),
+  // getItem(
+  //   'dashboard',
+  //   'dashboard',
+  //   <DashboardOutlined className="slider-menu-icon" />,
+  //   [getItem('ChartBoard', 'chart-board'), getItem('ImgBoard', 'img-board')]
+  // ),
+
+  // getItem(
+  //   <span style={{ fontSize: '14px' }}>关于</span>,
+  //   'about',
+  //   <NumberOutlined className="slider-menu-icon" />
+  // ),
 ];
 
 export default menus;

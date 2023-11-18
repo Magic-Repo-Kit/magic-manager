@@ -1,4 +1,4 @@
-import React, { useEffect, lazy, Suspense } from 'react';
+import React from 'react';
 import Router from '@/router';
 
 function App() {

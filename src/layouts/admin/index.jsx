@@ -52,6 +52,7 @@ function Admin() {
       document.querySelector('.siderStyle').style.background = '#242424';
       document.querySelector('.contentStyle').style.background = '#242424';
     } else {
+      //f5f5f5
       document.querySelector('.layout').style.background = '#f5f5f5';
       document.querySelector('.layout-content').style.background = '#f5f5f5';
       document.querySelector('.siderStyle').style.background = '#f5f5f5';

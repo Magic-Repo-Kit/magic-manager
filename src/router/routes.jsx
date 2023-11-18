@@ -3,7 +3,22 @@ import { Navigate } from 'react-router-dom';
 import { Spin } from 'antd'; //加载中
 // 避免闪屏
 const lazyLoad = (component) => {
-  return <Suspense fallback={<Spin />}>{component}</Suspense>;
+  return (
+    <Suspense
+      fallback={
+        <Spin
+          style={{
+            position: 'fixed',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+          }}
+        />
+      }
+    >
+      {component}
+    </Suspense>
+  );
 };
 
 // AdminLayout不需要懒加载
@@ -13,13 +28,19 @@ const AuthLayout = lazy(() => import('@/layouts/auth'));
 const FailLayout = lazy(() => import('@/layouts/fail'));
 const Home = lazy(() => import('@/page/home'));
 const Chat = lazy(() => import('@/page/chat'));
+
 const TreeFiter = lazy(() => import('@/page/superTable/children/treeFiter'));
 const SelectFiter = lazy(() =>
   import('@/page/superTable/children/selectFiter')
 );
 const ChartBoard = lazy(() => import('@/page/databoard/chartBoard'));
 const ImgBoard = lazy(() => import('@/page/databoard/imgBoard'));
-const Users = lazy(() => import('@/page/users'));
+
+// 用户管理
+const UsersAdmin = lazy(() => import('@/page/users/children/users-admin'));
+const RolesAdmin = lazy(() => import('@/page/users/children/roles-admin'));
+const LoginLog = lazy(() => import('@/page/users/children/login-log'));
+
 const About = lazy(() => import('@/page/about'));
 
 const routes = [
@@ -57,10 +78,20 @@ const routes = [
         path: 'img-board',
         element: lazyLoad(<ImgBoard />),
       },
+      // 用户管理
       {
-        path: 'users',
-        element: lazyLoad(<Users />),
+        path: 'users-admin',
+        element: lazyLoad(<UsersAdmin />),
       },
+      {
+        path: 'roles-admin',
+        element: lazyLoad(<RolesAdmin />),
+      },
+      {
+        path: 'login-log',
+        element: lazyLoad(<LoginLog />),
+      },
+
       {
         path: 'about',
         element: lazyLoad(<About />),

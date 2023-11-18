@@ -36,10 +36,9 @@ function MrSidebar(props) {
       onClick={handleClick}
       style={{
         backgroundColor: bgColor,
-        height: '2200px',
       }}
       defaultSelectedKeys={['home']}
-      defaultOpenKeys={['superTable']}
+      defaultOpenKeys={['users']}
       // onSelect={({ key }) => setSelectedKey(key)}
       // selectedKeys={[selectedKey]}
       mode="inline"

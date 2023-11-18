@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button } from 'antd';
+import { Button, Result } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import './index.scss';
 
@@ -24,12 +24,19 @@ function Fail() {
   };
   return (
     <div className="fail-container">
-      <div className="fail-button">
-        <Button type="link" onClick={handleClick}>
-          点击去往首页
-        </Button>
-        倒计时{countDown}s...
-      </div>
+      <Result
+        className="fail-result"
+        status="404"
+        title="404"
+        subTitle={
+          <span>抱歉，您访问的页面不存在，{countDown}s后将前往首页。</span>
+        }
+        extra={
+          <Button type="primary" onClick={handleClick}>
+            返回首页
+          </Button>
+        }
+      />
     </div>
   );
 }
