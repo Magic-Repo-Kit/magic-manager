@@ -36,6 +36,7 @@ function MrSidebar(props) {
       onClick={handleClick}
       style={{
         backgroundColor: bgColor,
+        direction: 'ltr',
       }}
       defaultSelectedKeys={['home']}
       defaultOpenKeys={['users']}

@@ -3,3 +3,20 @@
 @import '@/styles/common.scss';
 @import '@/static/iconfont/iconfont.css';
 @import '@/static/fonts/font.css';
+
+// 设置滚动条样式
+::-webkit-scrollbar {
+  width: 5px;
+  height: 10px;
+  // background-color: #ffffff;
+}
+//定义滑块
+::-webkit-scrollbar-thumb {
+  border-radius: 6px;
+  background: #888;
+}
+//定义轨道
+::-webkit-scrollbar-track {
+  // background: #f1f1f1;
+  background: transparent;
+}

@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 import mrkLogoLight from '@/assets/images/mrk-light.png';
 import mrkLogoDark from '@/assets/images/mrk-dark.png';
+import mrkLogo from '@/assets/images/logo-mrk.png';
 
 const { Title } = Typography;
 
@@ -27,13 +28,18 @@ const MrHeader = (props) => {
       >
         {props.slotTitle}
       </Title> */}
-      <img
-        src={mode === 'default' ? mrkLogoLight : mrkLogoDark}
-        alt="MRK"
-        height="25"
+      <div
         onClick={() => navigate('/admin')}
-        className="cursor-point"
-      />
+        className="cursor-point flx-center "
+        style={{ height: '60px' }}
+      >
+        <img src={mrkLogo} height="30" style={{ marginRight: '5px' }} />
+        <img
+          src={mode === 'default' ? mrkLogoLight : mrkLogoDark}
+          alt="MRK"
+          height="25"
+        />
+      </div>
 
       {/* 右侧 */}
       <Flex justify="space-between" align="center">

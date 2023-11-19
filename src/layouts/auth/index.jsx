@@ -3,7 +3,10 @@ import LoginForm from './loginForm';
 import LoginFormPhone from './loginForm/form-phone';
 import MrFooter from '@/components/mr-footer';
 import './index.scss';
-import mrkLogo from '@/assets/images/mrk-dark.png';
+
+import mrkLogoLight from '@/assets/images/mrk-light.png';
+import mrkLogoDark from '@/assets/images/mrk-dark.png';
+import mrkLogo from '@/assets/images/logo-mrk.png';
 import loginBc1 from '@/assets/images/login-vr.svg';
 import { handleFullScreenClick } from '@/utils/tools';
 
@@ -40,7 +43,19 @@ function Login() {
       </div>
       {/* 头部 */}
       <Header className="login-header">
-        <img src={mrkLogo} alt="" height="20" />
+        {/* <img src={mrkLogo} alt="" height="20" /> */}
+        <div
+          onClick={() => navigate('/admin')}
+          className="cursor-point flx-center "
+          style={{ height: '60px' }}
+        >
+          <img src={mrkLogo} height="25" style={{ marginRight: '5px' }} />
+          <img
+            src={mode === 'default' ? mrkLogoLight : mrkLogoDark}
+            alt="MRK"
+            height="20"
+          />
+        </div>
         <div>
           <Tooltip title="全屏" color="transparent">
             <a onClick={handleFullScreenClick}>
