@@ -8,11 +8,14 @@
     height: 60px;
     width: 100%;
     background: transparent;
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.03),
-      0 1px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px 0 rgba(0, 0, 0, 0.02);
-    border-bottom: 1px solid rgba(5, 5, 5, 0.06);
     backdrop-filter: saturate(50%) blur(6px);
     // cursor: url('../../assets/icons/cursor-1.png'), auto;
+    transition: all 1s ease-out;
+  }
+  .headerStyle.header-shadow {
+    // border-bottom: 1px solid rgba(5, 5, 5, 0.06);
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.03),
+      0 1px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px 0 rgba(0, 0, 0, 0.02);
   }
   .layout-content {
     // 侧边菜单
@@ -22,7 +25,7 @@
       left: 0;
       height: calc(100% - 60px);
       padding-top: 30px;
-      border-inline-end: 1px solid rgba(5, 5, 5, 0.06);
+      border-inline-start: 1px solid rgba(5, 5, 5, 0.06);
       display: flex;
       flex-direction: column;
       overflow: auto;

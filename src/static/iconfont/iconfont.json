@@ -6,6 +6,34 @@
   "description": "百宝袋",
   "glyphs": [
     {
+      "icon_id": "5011966",
+      "name": "退出",
+      "font_class": "tuichu",
+      "unicode": "e632",
+      "unicode_decimal": 58930
+    },
+    {
+      "icon_id": "5845990",
+      "name": "退出",
+      "font_class": "tuichu1",
+      "unicode": "e60c",
+      "unicode_decimal": 58892
+    },
+    {
+      "icon_id": "6762154",
+      "name": "退出",
+      "font_class": "tuichu2",
+      "unicode": "e62a",
+      "unicode_decimal": 58922
+    },
+    {
+      "icon_id": "11599238",
+      "name": "退出",
+      "font_class": "tuichu3",
+      "unicode": "e602",
+      "unicode_decimal": 58882
+    },
+    {
       "icon_id": "248884",
       "name": "注册",
       "font_class": "zhuce",

@@ -1,7 +1,7 @@
 import React from 'react';
 import './index.scss';
-import { Flex, Typography, Popover, Avatar } from 'antd';
-import { UserOutlined, LoginOutlined } from '@ant-design/icons';
+import { Flex, Typography, Popconfirm } from 'antd';
+// import { UserOutlined, LoginOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 
 import mrkLogoLight from '@/assets/images/mrk-light.png';
@@ -19,15 +19,9 @@ const MrHeader = (props) => {
       onIconClick(icon);
     }
   };
+
   return (
     <Flex justify="space-between" align="center" className="header-container">
-      {/* <Title
-        level={4}
-        style={{ margin: 0 }}
-        className="font-family-dingding gradient-text"
-      >
-        {props.slotTitle}
-      </Title> */}
       <div
         onClick={() => navigate('/admin')}
         className="cursor-point flx-center "
@@ -57,42 +51,30 @@ const MrHeader = (props) => {
             ></i>
           ))}
         </div>
-
-        {/* <Popover
-          placement="bottomRight"
-          title={
-            <div
-              style={{
-                padding: '1rem',
-                borderBottom: '1px solid #e9ecef',
-                fontWeight: '700',
-                color: '#1b254b',
-              }}
-            >
-              👋 你好！
-            </div>
+        <Popconfirm
+          title="提示"
+          description="确认退出当前账号？"
+          okText="确认"
+          okType="primary"
+          cancelText="取消"
+          onConfirm={() => window.location.replace('/auth')}
+          icon={
+            <i
+              className="iconfont mr-tuichu"
+              style={{ color: '#d81e06', marginRight: '8px', fontSize: '14px' }}
+            ></i>
           }
-          content={
-            <div
-              style={{ padding: '1rem', color: '#1b254b', cursor: 'pointer' }}
-            >
-              <div style={{ height: '30px' }}>个人中心</div>
-              <div style={{ height: '30px' }}>设置</div>
-              <div
-                style={{ height: '30px', color: '#f93336' }}
-                onClick={() => {
-                  window.location.replace('/auth');
-                }}
-              >
-                <LoginOutlined />
-                退出
-              </div>
-            </div>
-          }
-          trigger="click"
         >
-          <Avatar icon={<UserOutlined style={{ fontSize: '16px' }} />} />
-        </Popover> */}
+          <i
+            style={{
+              fontSize: '22px',
+              marginRight: '15px',
+              cursor: 'pointer',
+              height: '60px',
+            }}
+            className="iconfont mr-leave-1 header-login-icon"
+          ></i>
+        </Popconfirm>
       </Flex>
     </Flex>
   );

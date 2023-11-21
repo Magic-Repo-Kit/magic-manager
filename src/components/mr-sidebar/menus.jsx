@@ -37,75 +37,21 @@ const menus = [
       getItem('登陆日志', 'login-log'),
     ]
   ),
-  getItem(
-    <span style={{ fontSize: '14px' }}>超级表格</span>,
-    'superTable',
-    <TableOutlined className="slider-menu-icon" />,
-    [getItem('TreeFiter', 'tree-fiter'), getItem('SelectFiter', 'select-fiter')]
-  ),
-  getItem(
-    'dashboard',
-    'dashboard',
-    <DashboardOutlined className="slider-menu-icon" />,
-    [getItem('ChartBoard', 'chart-board'), getItem('ImgBoard', 'img-board')]
-  ),
+  // getItem(
+  //   <span style={{ fontSize: '14px' }}>超级表格</span>,
+  //   'superTable',
+  //   <TableOutlined className="slider-menu-icon" />,
+  //   [getItem('TreeFiter', 'tree-fiter'), getItem('SelectFiter', 'select-fiter')]
+  // ),
+  // getItem(
+  //   'dashboard',
+  //   'dashboard',
+  //   <DashboardOutlined className="slider-menu-icon" />,
+  //   [getItem('ChartBoard', 'chart-board'), getItem('ImgBoard', 'img-board')]
+  // ),
 
   getItem(
-    <span style={{ fontSize: '14px' }}>关于</span>,
-    'about',
-    <NumberOutlined className="slider-menu-icon" />
-  ),
-  getItem(
-    <span style={{ fontSize: '14px' }}>超级表格</span>,
-    'superTable',
-    <TableOutlined className="slider-menu-icon" />,
-    [getItem('TreeFiter', 'tree-fiter'), getItem('SelectFiter', 'select-fiter')]
-  ),
-  getItem(
-    'dashboard',
-    'dashboard',
-    <DashboardOutlined className="slider-menu-icon" />,
-    [getItem('ChartBoard', 'chart-board'), getItem('ImgBoard', 'img-board')]
-  ),
-
-  getItem(
-    <span style={{ fontSize: '14px' }}>关于</span>,
-    'about',
-    <NumberOutlined className="slider-menu-icon" />
-  ),
-  getItem(
-    <span style={{ fontSize: '14px' }}>超级表格</span>,
-    'superTable',
-    <TableOutlined className="slider-menu-icon" />,
-    [getItem('TreeFiter', 'tree-fiter'), getItem('SelectFiter', 'select-fiter')]
-  ),
-  getItem(
-    'dashboard',
-    'dashboard',
-    <DashboardOutlined className="slider-menu-icon" />,
-    [getItem('ChartBoard', 'chart-board'), getItem('ImgBoard', 'img-board')]
-  ),
-
-  getItem(
-    <span style={{ fontSize: '14px' }}>关于</span>,
-    'about',
-    <NumberOutlined className="slider-menu-icon" />
-  ),
-  getItem(
-    <span style={{ fontSize: '14px' }}>超级表格</span>,
-    'superTable',
-    <TableOutlined className="slider-menu-icon" />,
-    [getItem('TreeFiter', 'tree-fiter'), getItem('SelectFiter', 'select-fiter')]
-  ),
-  getItem(
-    'dashboard',
-    'dashboard',
-    <DashboardOutlined className="slider-menu-icon" />,
-    [getItem('ChartBoard', 'chart-board'), getItem('ImgBoard', 'img-board')]
-  ),
-
-  getItem(
-    <span style={{ fontSize: '14px' }}>关于</span>,
+    <span style={{ fontSize: '14px' }}>关于我们</span>,
     'about',
     <NumberOutlined className="slider-menu-icon" />
   ),

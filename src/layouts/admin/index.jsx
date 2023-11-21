@@ -13,6 +13,7 @@ const { Header, Sider, Content } = Layout;
 
 function Admin() {
   const [mode, setMode] = useState('default');
+  const [showShadow, setShowShadow] = useState(false);
 
   // headerIcons 按钮相关
   const handleNotificationClick = () => {
@@ -37,12 +38,12 @@ function Admin() {
       icon: 'notify',
       callback: handleNotificationClick,
     },
-    {
-      name: '退出',
-      id: '4',
-      icon: 'leave-1',
-      callback: () => window.location.replace('/auth'),
-    },
+    // {
+    //   name: '退出',
+    //   id: '4',
+    //   icon: 'leave-1',
+    //   callback: () => window.location.replace('/auth'),
+    // },
   ];
   const handleIconClick = (iconId) => {
     const clickedIcon = headerIcons.find((icon) => icon.id === iconId);
@@ -81,6 +82,24 @@ function Admin() {
       SetMarginLeft('280px');
     }
   }, [location]);
+
+  // 监听屏幕滚动
+  useEffect(() => {
+    let prevScrollPos = window.pageYOffset;
+    const handleScroll = () => {
+      const currentScrollPos = window.pageYOffset;
+      if (prevScrollPos > currentScrollPos) {
+        setShowShadow(true);
+      } else {
+        setShowShadow(false);
+      }
+      prevScrollPos = currentScrollPos;
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
   return (
     <ConfigProvider
       theme={{
@@ -89,7 +108,9 @@ function Admin() {
       }}
     >
       <Layout className="layout">
-        <Header className="headerStyle">
+        <Header
+          className={showShadow ? 'headerStyle' : 'headerStyle header-shadow'}
+        >
           <MrHeader
             slotTitle="Magicrepokit"
             slotIcon={headerIcons}

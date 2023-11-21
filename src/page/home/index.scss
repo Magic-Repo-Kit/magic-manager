@@ -7,21 +7,25 @@
     display: flex;
     justify-content: space-between;
     > div {
-      height: 400px;
-      width: 49%;
-      padding: 20px;
+      // height: 400px;
+      // width: 49%;
+      width: 100%;
+      padding: 30px;
       border-radius: 30px;
       background: #ffffff;
       &:first-child {
-        padding-top: 56px;
-        padding-bottom: 56px;
-        padding-inline: 64px;
-        color: #ffffff;
-        background: linear-gradient(
-          135deg,
-          rgb(134, 140, 255) 0%,
-          rgb(67, 24, 255) 100%
-        );
+        // padding-top: 56px;
+        // padding-bottom: 56px;
+        // padding-inline: 64px;
+        // color: #ffffff;
+        // background: linear-gradient(
+        //   135deg,
+        //   rgb(134, 140, 255) 0%,
+        //   rgb(67, 24, 255) 100%
+        // );
+        .home-title {
+          margin-bottom: 25px;
+        }
       }
     }
   }
