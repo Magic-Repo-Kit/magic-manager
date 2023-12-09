@@ -8,7 +8,7 @@ import {
   WechatOutlined,
 } from '@ant-design/icons';
 import './index.scss';
-import { loginAPI, getPlatformAuth, platformLoginAPI } from '@/services/auth';
+import { loginAPI, getPlatformAuth, platformLoginAPI } from '@/request/auth';
 import { setAccessToken, setRefreshToken } from '@/utils/tools';
 
 function LoginForm() {

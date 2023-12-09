@@ -6,13 +6,13 @@ import routes from './routes';
 
 function Router() {
   const { pathname } = useLocation();
-  const accessToken = getAccessToken();
+  const access_token = getAccessToken();
 
   const handleRedirect = (item) => {
     if (pathname === '/') {
       return <Navigate to="/admin" />;
     }
-    if (pathname !== '/auth' && !accessToken) {
+    if (pathname !== '/auth' && !access_token) {
       //已授权页面，无token
       return <Navigate to="/auth" replace={true} />;
     } else {

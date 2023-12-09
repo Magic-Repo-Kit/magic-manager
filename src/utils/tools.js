@@ -1,21 +1,21 @@
 /**
  * 设置accessToken
- * @param accessTokenn
+ * @param access_token
  * @return
  */
-export const setAccessToken = (accessToken) => {
-  localStorage.setItem('accessToken', accessToken);
+export const setAccessToken = (access_token) => {
+  localStorage.setItem('access_token', access_token);
 }
 /**
  * 获取accessToken
  * @return
  */
-export const getAccessToken = () => localStorage.getItem('accessToken')
+export const getAccessToken = () => localStorage.getItem('access_token')
 /**
  * 删除accessToken
  * @return
  */
-export const removeAccessToken = () => localStorage.removeItem('accessToken');
+export const removeAccessToken = () => localStorage.removeItem('access_token');
 
 /**
  * 设置refresh_token

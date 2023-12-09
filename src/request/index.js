@@ -2,7 +2,7 @@ import axios from 'axios';
 import NProgress from "nprogress";  //进度条
 import "nprogress/nprogress.css";
 
-import { getAccessToken, setAccessToken, removeAccessToken, getRefreshToken, removeRefreshToken } from "./tools";
+import { getAccessToken, setAccessToken, removeAccessToken, getRefreshToken, removeRefreshToken } from "@/utils/tools";
 // 创建 axios 实例
 const instance = axios.create({
   baseURL: process.env.NODE_ENV === 'development' ? '/api' : 'https://124.222.46.195',
@@ -16,11 +16,11 @@ const instance = axios.create({
 
 // 请求拦截器
 instance.interceptors.request.use((config) => {
-  const accessToken = getAccessToken();
+  const access_token = getAccessToken();
   // 鉴权，判断本地有没有accessToken
-  if (accessToken) {
+  if (access_token) {
     config.headers = Object.assign({
-      Authorization: `Bearer ${accessToken}`
+      Authorization: `Bearer ${access_token}`
     }, config.headers);
   }
   NProgress.start();  //启动loading
@@ -42,11 +42,11 @@ instance.interceptors.response.use((response) => {
     try {
       const refreshToken = getRefreshToken();
       const response = await instance.post('/system/auth/refresh-token', { refreshToken });
-      const newAccessToken = response.data.accessToken;
+      const newAccessToken = response.data.access_token;
       // 将新的访问令牌存储在本地存储中
       setAccessToken(newAccessToken);
       // 更新请求头中的访问令牌
-      originalRequest.headers.authorization = `Bearer ${newAccessToken}`;
+      originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
       // 重新发送原始请求
       return instance(originalRequest);
     } catch (error) {

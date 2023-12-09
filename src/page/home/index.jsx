@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './index.scss';
 import { Area } from '@ant-design/plots';
+import Typewriter from '@/components/Typewriter';
 
 function Home() {
   const [data, setData] = useState([]);
@@ -49,7 +50,9 @@ function Home() {
       </header> */}
       <main>
         <div>
-          <div className="home-title">访客统计</div>
+          <div className="home-title">
+            <Typewriter text="访客统计" />
+          </div>
           <Area {...config} />
         </div>
         {/* <div>

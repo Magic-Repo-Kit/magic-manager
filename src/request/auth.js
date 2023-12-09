@@ -1,4 +1,4 @@
-import ajax from '@/utils/request';
+import ajax from '@/request';
 
 
 // 账号密码登录
