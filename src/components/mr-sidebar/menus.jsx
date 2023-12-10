@@ -24,8 +24,13 @@ const menus = [
   ),
   getItem(
     <span style={{ fontSize: '14px' }}>chatMagic</span>,
-    'chat',
+    'chat-magic',
     <i className="iconfont mr-shejishi slider-menu-icon"></i>
+  ),
+  getItem(
+    <span style={{ fontSize: '14px' }}>chatGPT</span>,
+    'chat-gpt',
+    <i className="iconfont mr-chatgpt slider-menu-icon"></i>
   ),
   getItem(
     <span style={{ fontSize: '14px' }}>用户管理</span>,

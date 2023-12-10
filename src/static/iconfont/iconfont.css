@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 4291850 */
-  src: url('iconfont.woff2?t=1700545029063') format('woff2'),
-       url('iconfont.woff?t=1700545029063') format('woff'),
-       url('iconfont.ttf?t=1700545029063') format('truetype');
+  src: url('iconfont.woff2?t=1702200802365') format('woff2'),
+       url('iconfont.woff?t=1702200802365') format('woff'),
+       url('iconfont.ttf?t=1702200802365') format('truetype');
 }
 
 .iconfont {
@@ -11,6 +11,14 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.mr-service_ChatGPT:before {
+  content: "\ea63";
+}
+
+.mr-chatgpt:before {
+  content: "\e609";
 }
 
 .mr-tuichu:before {

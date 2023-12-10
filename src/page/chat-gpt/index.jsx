@@ -22,14 +22,14 @@ function Chat() {
   const contentStyle = {
     color: '#fff',
     backgroundColor: '#2f3236',
-    height: 'calc(100vh - 60px)',
+    height: '100vh',
     display: 'flex',
     flexDirection: 'column',
   };
   const siderStyle = {
     color: '#fff',
     backgroundColor: '#292b2f',
-    height: 'calc(100vh - 60px)',
+    height: '100vh',
   };
   const groups = [
     {
@@ -127,7 +127,7 @@ function Chat() {
             <div className="slider-header user-select">
               <RollbackOutlined
                 style={{ fontSize: '23px' }}
-                onClick={() => navigate(-1)}
+                onClick={() => navigate('/')}
               />
               <AlignRightOutlined style={{ fontSize: '23px' }} />
             </div>

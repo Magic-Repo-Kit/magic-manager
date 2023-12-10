@@ -27,7 +27,8 @@ import AdminLayout from '@/layouts/admin';
 const AuthLayout = lazy(() => import('@/layouts/auth'));
 const FailLayout = lazy(() => import('@/layouts/fail'));
 const Home = lazy(() => import('@/page/home'));
-const Chat = lazy(() => import('@/page/chat'));
+const ChatMagic = lazy(() => import('@/page/chat-magic'));
+const ChatGPT = lazy(() => import('@/page/chat-gpt'));
 
 const TreeFiter = lazy(() => import('@/page/superTable/children/treeFiter'));
 const SelectFiter = lazy(() =>
@@ -58,8 +59,13 @@ const routes = [
         element: lazyLoad(<Home />),
       },
       {
-        path: 'chat',
-        element: lazyLoad(<Chat />),
+        path: 'chat-magic',
+        element: lazyLoad(<ChatMagic />),
+        children: [],
+      },
+      {
+        path: 'chat-gpt',
+        element: lazyLoad(<ChatGPT />),
         children: [],
       },
       {

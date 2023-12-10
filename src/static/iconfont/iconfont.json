@@ -6,6 +6,20 @@
   "description": "百宝袋",
   "glyphs": [
     {
+      "icon_id": "34379894",
+      "name": "service_ChatGPT",
+      "font_class": "service_ChatGPT",
+      "unicode": "ea63",
+      "unicode_decimal": 60003
+    },
+    {
+      "icon_id": "35606088",
+      "name": "chatgpt",
+      "font_class": "chatgpt",
+      "unicode": "e609",
+      "unicode_decimal": 58889
+    },
+    {
       "icon_id": "5011966",
       "name": "退出",
       "font_class": "tuichu",

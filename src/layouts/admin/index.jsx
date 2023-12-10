@@ -68,15 +68,19 @@ function Admin() {
     }
   }, [mode]);
 
-  // chat页面隐藏slider
+  // chat页面隐藏slider header
   const location = useLocation();
   const [opacity, setOpacity] = useState(1);
   const [marginLeft, SetMarginLeft] = useState('280px');
-
+  const [isDisplay, SetIsDisplay] = useState('block');
   useEffect(() => {
-    if (location.pathname.includes('/chat')) {
+    if (
+      location.pathname.includes('/chat-magic') ||
+      location.pathname.includes('/chat-gpt')
+    ) {
       setOpacity(0);
       SetMarginLeft('0');
+      SetIsDisplay('none');
     } else {
       setOpacity(1);
       SetMarginLeft('280px');
@@ -110,6 +114,7 @@ function Admin() {
       <Layout className="layout">
         <Header
           className={showShadow ? 'headerStyle' : 'headerStyle header-shadow'}
+          style={{ display: isDisplay }}
         >
           <MrHeader
             slotTitle="Magicrepokit"
