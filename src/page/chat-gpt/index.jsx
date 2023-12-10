@@ -10,7 +10,6 @@ import {
   QuestionCircleOutlined,
 } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
-import userHead from '@/assets/headIcon/head-3.svg';
 
 import ChatCtx from './chat-ctx';
 import FooterCtx from './footer-ctx';
@@ -19,6 +18,7 @@ const { Header, Footer, Sider, Content } = Layout;
 
 function Chat() {
   const navigate = useNavigate();
+
   const contentStyle = {
     color: '#fff',
     backgroundColor: '#2f3236',
@@ -30,6 +30,7 @@ function Chat() {
     color: '#fff',
     backgroundColor: '#292b2f',
     height: '100vh',
+    width: '200px',
   };
   const groups = [
     {
@@ -53,38 +54,6 @@ function Chat() {
       name: 'Chatgpt 4',
     },
   ];
-  const members = [
-    {
-      id: 1,
-      name: 'Mark',
-      icon: 'head-1.svg',
-    },
-    {
-      id: 2,
-      name: 'Iris',
-      icon: 'head-3',
-    },
-    {
-      id: 3,
-      name: '树懒',
-      icon: 'head-2',
-    },
-    {
-      id: 4,
-      name: '小美',
-      icon: 'head-18',
-    },
-    {
-      id: 5,
-      name: '这个男人',
-      icon: 'head-10',
-    },
-    {
-      id: 6,
-      name: '阿黄',
-      icon: 'head-6',
-    },
-  ];
   const [activeGroup, setActiveGroup] = useState(
     sessionStorage.getItem('activeGroup') || groups[0]
   );
@@ -103,33 +72,25 @@ function Chat() {
     sessionStorage.setItem('activeGroup', JSON.stringify(activeGroup));
   }, [activeGroup]);
 
-  // 搜索 input框
-  const [focused, setFocused] = useState(false);
-  const [searchValue, setSearchValue] = useState('');
-  const handleFocus = () => {
-    setFocused(true);
-  };
-  const handleBlur = () => {
-    setFocused(false);
-  };
-  const handleChange = (e) => {
-    setSearchValue(e.target.value);
-  };
-
-  const handleClear = () => {
-    setSearchValue('');
+  const [siderWidth, setSiderWidth] = useState(250);
+  const handleSiderWidth = () => {
+    if (siderWidth === 250) {
+      setSiderWidth(0);
+    } else {
+      setSiderWidth(250);
+    }
   };
   return (
     <animated.div style={fallIn}>
       <Layout>
-        <Sider style={siderStyle}>
+        <Sider style={siderStyle} width={siderWidth}>
           <div className="slider-box">
             <div className="slider-header user-select">
               <RollbackOutlined
                 style={{ fontSize: '23px' }}
                 onClick={() => navigate('/')}
               />
-              <AlignRightOutlined style={{ fontSize: '23px' }} />
+              {/* <AlignRightOutlined style={{ fontSize: '23px' }} /> */}
             </div>
             <div className="slide-groups">
               {groups.map((group) => {
@@ -148,30 +109,27 @@ function Chat() {
         </Sider>
         <Content style={contentStyle}>
           <div
-            className="flx-justify-between"
-            style={{ padding: '0 20px 0 30px' }}
+            className="user-select"
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              padding: '0 20px',
+            }}
           >
-            <h2>{activeGroup.name}</h2>
-            <div className={`input-container ${focused ? 'focused' : ''}`}>
-              <input
-                type="text"
-                onFocus={handleFocus}
-                onBlur={handleBlur}
-                className="input-ctx"
-                placeholder="搜索"
-                value={searchValue}
-                onChange={handleChange}
-                style={{ border: 'none !important' }}
-              />
-              {searchValue ? (
-                <i
-                  className="iconfont mr-fork-1 icon-ctx"
-                  onClick={handleClear}
-                ></i>
-              ) : (
-                <i className="iconfont mr-search-1 icon-ctx"></i>
-              )}
-            </div>
+            <AlignRightOutlined
+              className="click-scale"
+              style={{
+                fontSize: '23px',
+                marginRight: '10px',
+                cursor: 'pointer',
+                position: 'absolute',
+                transform: siderWidth === 0 ? 'scaleX(-1)' : '',
+              }}
+              onClick={() => handleSiderWidth()}
+            />
+            <h2 style={{ textAlign: 'center', flex: '1' }}>
+              {activeGroup.name}
+            </h2>
           </div>
 
           <ChatCtx className="container-ctx" />
@@ -179,63 +137,6 @@ function Chat() {
             <FooterCtx />
           </footer>
         </Content>
-        <Sider style={siderStyle}>
-          <div className="slider-box">
-            <div className="slider-header user-select">
-              <div>在线状态</div>
-              {/* <i
-                className="iconfont mr-wangluozaixianbaozheng"
-                style={{
-                  fontSize: '20px',
-                  fontWeight: 'bold',
-                  color: '#00d726',
-                  transform: ' translateY(-3px)',
-                }}
-              ></i> */}
-              <div>
-                <QuestionCircleOutlined
-                  style={{
-                    fontSize: '18px',
-                    fontWeight: 'bold',
-                    filter: 'grayscale(100%)',
-                  }}
-                />
-                <RedoOutlined
-                  style={{
-                    fontSize: '18px',
-                    fontWeight: 'bold',
-                    marginLeft: '8px',
-                  }}
-                />
-              </div>
-            </div>
-
-            <div className="slide-members">
-              <span>管理员 - 6</span>
-              {members.map((member) => {
-                return (
-                  <div key={member.id}>
-                    <div className="slide-member-icon flx-center">
-                      <img src={userHead} height="28" />
-                    </div>
-                    <div>{member.name}</div>
-                  </div>
-                );
-              })}
-              <span>群成员 - 30</span>
-              {members.map((member) => {
-                return (
-                  <div key={member.id}>
-                    <div className="slide-member-icon flx-center">
-                      <img src={userHead} height="28" />
-                    </div>
-                    <div>{member.name}</div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </Sider>
       </Layout>
     </animated.div>
   );

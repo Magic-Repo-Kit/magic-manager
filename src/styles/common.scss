@@ -150,3 +150,11 @@
   -ms-user-select: none; /* IE , Edge */
   user-select: none; /* Standard syntax */
 }
+
+// 点击放大
+.click-scale {
+  transition: transform 80ms ease;
+  &:active {
+    transform: scale(0.9);
+  }
+}

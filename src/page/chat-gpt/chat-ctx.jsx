@@ -8,7 +8,8 @@ function ChatCtx() {
       id: 1,
       name: 'Mark',
       icon: 'head-1',
-      content: '你好👋',
+      content:
+        '你好👋你好👋你好👋你好👋你好👋你好👋你好👋你好👋你好👋你好👋你好👋你好👋你好👋你好👋你好👋你好👋你好👋你好👋你好👋你好👋你好👋你好👋你好👋你好👋你好👋你好👋你好👋你好👋你好👋你好👋你好👋你好👋你好👋你好👋你好👋你好👋你好👋你好👋你好👋你好👋你好👋你好👋你好👋你好👋你好👋你好👋你好👋你好👋你好👋你好👋你好👋你好👋你好👋你好👋你好👋你好👋你好👋',
       time: '2023.11.11 19:25:00',
     },
     {
@@ -108,15 +109,33 @@ function ChatCtx() {
       {historys.map((history) => {
         return (
           <div className="chat-history" key={history.id}>
-            <div className="chat-history-header flx-center">
-              <img src={userHead} alt="userHead" height="30" />
-            </div>
-            <div>
-              <div>
-                <span className="chat-history-name">{history.name}</span>
-                <span className="chat-history-time">{history.time}</span>
+            <div className="chat-history-gpt">
+              <div className="chat-history-header flx-center">
+                <i
+                  className="iconfont mr-chatgpt"
+                  style={{ fontSize: '25px' }}
+                ></i>
               </div>
-              <div className="chat-history-content">{history.content}</div>
+              <div>
+                <div>
+                  <span className="chat-history-time">{history.time}</span>
+                </div>
+                <div className="chat-history-content">{history.content}</div>
+              </div>
+            </div>
+            <div className="chat-history-self">
+              <div className="chat-history-header flx-center">
+                <i
+                  className="iconfont mr-chatgpt"
+                  style={{ fontSize: '25px' }}
+                ></i>
+              </div>
+              <div>
+                <div>
+                  <span className="chat-history-time">{history.time}</span>
+                </div>
+                <div className="chat-history-content">{history.content}</div>
+              </div>
             </div>
           </div>
         );

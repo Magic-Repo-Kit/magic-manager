@@ -98,7 +98,7 @@
     height: 100%;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-end;
     &-btn {
       display: flex;
       justify-content: center;
@@ -144,21 +144,26 @@
 .chat-history-box {
   flex: 1 1 auto;
   overflow: auto;
-  padding: 5px 22px;
+  padding: 5px 300px;
   .chat-history {
-    border-bottom: 1px solid #383b3f;
-    padding: 18px 22px;
-    display: flex;
-    align-items: center;
-    &:last-child {
-      border-bottom: none;
+    padding: 10px 22px;
+    &-gpt {
+      display: flex;
+      margin-bottom: 20px;
+    }
+    &-self {
+      display: flex;
+      flex-direction: row-reverse;
+
+      // justify-content: flex-end;
     }
     &-header {
       width: 35px;
       height: 35px;
       border-radius: 50%;
-      background: #ffffff;
-      margin-right: 10px;
+      // background: #ffffff;
+      margin-right: 5px;
+      margin-top: 3px;
     }
     &-name {
       font-size: 14px;
@@ -170,8 +175,13 @@
       color: #737472;
     }
     &-content {
-      font-size: 15px;
-      margin-top: 3px;
+      // display: inline-block;
+      font-size: 14px;
+      margin-top: 5px;
+      background-color: #f2f5f7;
+      color: #1e1e1e;
+      padding: 5px 8px;
+      border-radius: 5px;
     }
   }
 }
@@ -222,35 +232,56 @@
   .container-footer {
     padding: 20px 200px;
   }
+  .chat-history-box {
+    padding: 5px 250px;
+  }
 }
 @media screen and (max-width: 2000px) {
   .container-footer {
     padding: 20px 150px;
+  }
+  .chat-history-box {
+    padding: 5px 200px;
   }
 }
 @media screen and (max-width: 1800px) {
   .container-footer {
     padding: 20px 120px;
   }
+  .chat-history-box {
+    padding: 5px 150px;
+  }
 }
 @media screen and (max-width: 1600px) {
   .container-footer {
     padding: 20px 100px;
+  }
+  .chat-history-box {
+    padding: 5px 120px;
   }
 }
 @media screen and (max-width: 1500px) {
   .container-footer {
     padding: 20px 80px;
   }
+  .chat-history-box {
+    padding: 5px 100px;
+  }
 }
 @media screen and (max-width: 1200px) {
   .container-footer {
     padding: 20px 20px;
+  }
+  .chat-history-box {
+    padding: 5px 50px;
   }
 }
 @media screen and (max-width: 1000px) {
   .container-footer {
     min-width: 300px;
     padding: 20px 5px;
+  }
+  .chat-history-box {
+    padding: 5px 15px;
   }
 }

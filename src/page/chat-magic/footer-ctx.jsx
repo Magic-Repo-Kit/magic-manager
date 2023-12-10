@@ -26,6 +26,7 @@ function footerCtx() {
     color: '#292c2f',
     position: 'absolute',
     right: '132px',
+    bottom: '10px',
     fontSize: '18px',
     zIndex: '1',
     cursor: 'pointer',
