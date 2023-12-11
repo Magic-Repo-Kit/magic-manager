@@ -3,18 +3,13 @@ import './index.scss';
 import { useSpring, animated } from 'react-spring';
 import { fallLRIn } from '@/utils/animations';
 import { Layout } from 'antd';
-import {
-  RollbackOutlined,
-  AlignRightOutlined,
-  RedoOutlined,
-  QuestionCircleOutlined,
-} from '@ant-design/icons';
+import { RollbackOutlined, AlignRightOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 
 import ChatCtx from './chat-ctx';
 import FooterCtx from './footer-ctx';
 
-const { Header, Footer, Sider, Content } = Layout;
+const { Sider, Content } = Layout;
 
 function Chat() {
   const navigate = useNavigate();

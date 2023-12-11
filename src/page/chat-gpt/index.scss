@@ -153,6 +153,7 @@
     }
     &-self {
       display: flex;
+      // float: right;
       flex-direction: row-reverse;
 
       // justify-content: flex-end;
