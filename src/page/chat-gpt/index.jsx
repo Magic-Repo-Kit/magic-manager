@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import './index.scss';
 import { useSpring, animated } from 'react-spring';
 import { fallLRIn } from '@/utils/animations';
+import formatDate from '@/utils/formatDate';
+import { random } from '@/utils/tools';
 import { Layout } from 'antd';
 import { RollbackOutlined, AlignRightOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
@@ -75,6 +77,77 @@ function Chat() {
       setSiderWidth(250);
     }
   };
+
+  const [messages, setMessages] = useState([]); //消息
+
+  const BOT_MSGS = [
+    "Hi there, I'm Fabio and you?",
+    'Nice to meet you',
+    'How are you?',
+    'Not too bad, thanks',
+    'What do you do?',
+    "That's awesome",
+    'Codepen is a nice place to stay',
+    "I think you're a nice person",
+    'Why do you think that?',
+    'Can you explain?',
+    "Anyway I've gotta go now",
+    'It was a pleasure chat with you',
+    'Time to make a new codepen',
+    'Bye',
+    ':)',
+  ];
+  const [isLoading, setisLoading] = useState(false);
+  // 发起gpt请求
+  const getGptMsg = async (msg) => {
+    // 先插入一条空白消息，loading等待中
+    const id = 'reply' + Date.now();
+    insertMessage('reply', '', id);
+    setisLoading(true);
+
+    // 拿到请求数据，替换插入的空白消息
+
+    // 模拟请求延迟时间
+    setTimeout(() => {
+      // const res = await getGpt(msg);
+      // const res = 'This is an automated reply.回复：' + msg;
+
+      const r = random(0, BOT_MSGS.length - 1);
+      const res = BOT_MSGS[r] + msg;
+
+      setMessages((prevMessages) => {
+        const newMessages = prevMessages.slice();
+        const emptyMessageIndex = newMessages.findIndex(
+          (message) => message.id === id
+        );
+        if (emptyMessageIndex !== -1) {
+          newMessages[emptyMessageIndex] = {
+            type: 'reply',
+            content: res,
+            id,
+            timestamp: formatDate(new Date()),
+          };
+        }
+        return newMessages;
+      });
+      setisLoading(false);
+    }, 1000);
+  };
+
+  // 插入消息 【sent-发送 reply-回复】
+  const insertMessage = (type, content, id) => {
+    const newMessage = { type, content, id, timestamp: formatDate(new Date()) };
+    setMessages((prevMessages) => [...prevMessages, newMessage]);
+  };
+
+  // 触发父函数
+  const handleFooterValue = (msg) => {
+    // 前端插入
+    insertMessage('sent', msg, 'sent' + Date.now()); //虚拟一个id
+    // 后台请求插入
+    getGptMsg(msg);
+  };
+
   return (
     <animated.div style={fallIn}>
       <Layout>
@@ -127,9 +200,13 @@ function Chat() {
             </h2>
           </div>
 
-          <ChatCtx className="container-ctx" />
+          <ChatCtx
+            className="container-ctx"
+            messages={messages}
+            isLoading={isLoading}
+          />
           <footer className="container-footer">
-            <FooterCtx />
+            <FooterCtx onMsgChange={handleFooterValue} />
           </footer>
         </Content>
       </Layout>

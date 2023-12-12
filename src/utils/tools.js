@@ -65,3 +65,7 @@ export const handleFullScreenClick = () => {
   }
 };
 
+// 生成随机数
+export const random = (min, max) => {
+  return Math.floor(Math.random() * (max - min) + min);
+};
