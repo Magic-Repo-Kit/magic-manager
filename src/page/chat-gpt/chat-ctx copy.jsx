@@ -41,7 +41,7 @@ const ChatCtx = () => {
 
       // 模拟收到对方回复的延迟
       setTimeout(() => {
-        insertMessage('This is an automated reply.', 'reply');
+        insertMessage('This is an automated reply.', '  ');
       }, 1000);
     }
   };
