@@ -42,13 +42,20 @@ instance.interceptors.response.use((response) => {
     try {
       const refreshToken = getRefreshToken();
       const response = await instance.post('/system/auth/refresh-token', { refreshToken });
-      const newAccessToken = response.data.access_token;
-      // 将新的访问令牌存储在本地存储中
-      setAccessToken(newAccessToken);
-      // 更新请求头中的访问令牌
-      originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
-      // 重新发送原始请求
-      return instance(originalRequest);
+      if (response.code === 200) {
+        const newAccessToken = response.data.access_token;
+        // 将新的访问令牌存储在本地存储中
+        setAccessToken(newAccessToken);
+        // 更新请求头中的访问令牌
+        originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
+        // 重新发送原始请求
+        return instance(originalRequest);
+      } else {
+        removeAccessToken('access_token');
+        removeRefreshToken('refresh_token');
+        window.location.href('/auth');
+      }
+
     } catch (error) {
       // 刷新失败，清除令牌并重定向到登录页面【清除token，清除本地缓存帐号信息user-detail】
       removeAccessToken('access_token');

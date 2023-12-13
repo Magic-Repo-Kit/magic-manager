@@ -11,6 +11,9 @@ import { useNavigate } from 'react-router-dom';
 import ChatCtx from './chat-ctx';
 import FooterCtx from './footer-ctx';
 
+import createSSE from '@/request/fetchSSE';
+import { getAccessToken, getRefreshToken } from '@/utils/tools';
+
 const { Sider, Content } = Layout;
 
 function Chat() {
@@ -98,6 +101,43 @@ function Chat() {
     ':)',
   ];
   const [isLoading, setisLoading] = useState(false);
+
+  // SSE 连接
+  const [sseData, setSSEData] = useState('');
+  const [sseConnection, setSSEConnection] = useState(null);
+  // 处理收到的 SSE 消息
+  const handleSSEMessage = (data) => {
+    console.log('Received message:', data);
+    // setSSEData(data);
+  };
+  // 处理 SSE 错误
+  const handleSSEError = (error) => {
+    console.error('Error:', error);
+  };
+  // 创建SSE对象
+  // const sse = createSSE(
+  //   'https://124.222.46.195/chat/gpt/chat',
+  //   handleSSEMessage,
+  //   handleSSEError,
+  //   getAccessToken(),
+  //   getRefreshToken()
+  // );
+  // 创建 SSE 对象（仅当之前的连接不存在时）
+  useEffect(() => {
+    if (!sseConnection) {
+      const newSSEConnection = createSSE(
+        'https://124.222.46.195/chat/gpt/chat',
+        handleSSEMessage,
+        handleSSEError,
+        getAccessToken(),
+        getRefreshToken()
+      );
+      setSSEConnection(newSSEConnection);
+    }
+  }, [sseConnection]);
+  // 请求
+  // sse.send();
+
   // 发起gpt请求
   const getGptMsg = async (msg) => {
     // 先插入一条空白消息，loading等待中
@@ -176,6 +216,7 @@ function Chat() {
           </div>
         </Sider>
         <Content style={contentStyle}>
+          {sseData}
           <div
             className="user-select"
             style={{

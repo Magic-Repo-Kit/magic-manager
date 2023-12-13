@@ -18,11 +18,16 @@ npm install sass @vitejs/plugin-react-refresh --save-dev
 npm install -D tailwindcss postcss autoprefixer
 npx tailwindcss init -p //生成配置文件
 
-npm install react-icons
+react-icons
 
-npm install --save redux
+redux
 
-npm install react-spring
+react-spring
+
+@microsoft/fetch-event-source
+
 ```
-# 
+
+#
+
 路由懒加载
