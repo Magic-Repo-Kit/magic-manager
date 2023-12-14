@@ -11,8 +11,9 @@ import { useNavigate } from 'react-router-dom';
 import ChatCtx from './chat-ctx';
 import FooterCtx from './footer-ctx';
 
-import createSSE from '@/request/fetchSSE';
-import { getAccessToken, getRefreshToken } from '@/utils/tools';
+import sseRequest from '@/request/sseRequest';
+// import { getNewToken } from '@/request/auth';
+// import { getAccessToken, getRefreshToken } from '@/utils/tools';
 
 const { Sider, Content } = Layout;
 
@@ -104,39 +105,6 @@ function Chat() {
 
   // SSE 连接
   const [sseData, setSSEData] = useState('');
-  const [sseConnection, setSSEConnection] = useState(null);
-  // 处理收到的 SSE 消息
-  const handleSSEMessage = (data) => {
-    console.log('Received message:', data);
-    // setSSEData(data);
-  };
-  // 处理 SSE 错误
-  const handleSSEError = (error) => {
-    console.error('Error:', error);
-  };
-  // 创建SSE对象
-  // const sse = createSSE(
-  //   'https://124.222.46.195/chat/gpt/chat',
-  //   handleSSEMessage,
-  //   handleSSEError,
-  //   getAccessToken(),
-  //   getRefreshToken()
-  // );
-  // 创建 SSE 对象（仅当之前的连接不存在时）
-  useEffect(() => {
-    if (!sseConnection) {
-      const newSSEConnection = createSSE(
-        'https://124.222.46.195/chat/gpt/chat',
-        handleSSEMessage,
-        handleSSEError,
-        getAccessToken(),
-        getRefreshToken()
-      );
-      setSSEConnection(newSSEConnection);
-    }
-  }, [sseConnection]);
-  // 请求
-  // sse.send();
 
   // 发起gpt请求
   const getGptMsg = async (msg) => {
@@ -146,6 +114,23 @@ function Chat() {
     setisLoading(true);
 
     // 拿到请求数据，替换插入的空白消息
+    // sse请求;
+    const params = {
+      conversationId: '',
+      messageId: 'd9c2c7f1-8a80-4e5b-9b9d-7f5b43d1d98e',
+      parentMessageId: 'a5e8f2d3-6b0f-4c2a-9c3d-1e7f84b5a2b0',
+      content: msg,
+    };
+    const onMessage = (data) => {
+      console.log('Received message:', data);
+      setSSEData(data);
+    };
+    const onError = (error) => {
+      console.log('🚀 ~ file: index.jsx:124 ~ onError ~ error:', error.msg);
+      console.error('Error:', error);
+    };
+    const res = sseRequest('/chat/gpt/chat', params, onMessage, onError);
+    console.log('🚀 ~ file: index.jsx:134 ~ getGptMsg ~ res:', res);
 
     // 模拟请求延迟时间
     setTimeout(() => {
