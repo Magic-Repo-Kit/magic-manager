@@ -10,6 +10,8 @@ import {
 import './index.scss';
 import { loginAPI, getPlatformAuth, platformLoginAPI } from '@/request/auth';
 import { setAccessToken, setRefreshToken } from '@/utils/tools';
+import loginBc1 from '@/assets/images/login-vr.svg';
+import CircularText from '@/components/circular-text';
 
 function LoginForm() {
   const [username, setUsername] = useState('');
@@ -196,7 +198,7 @@ function LoginForm() {
             <button style={{ marginTop: '15px' }}>注 册</button>
           </form>
         </div>
-
+        {/* 另一侧 */}
         <div className="overlay-container">
           <div className="overlay">
             <div className="overlay-panel overlay-left">
@@ -213,10 +215,25 @@ function LoginForm() {
               </button>
             </div>
             <div className="overlay-panel overlay-right">
-              <h1>Hello Magicrepokit</h1>
-              <p>输入您的账户信息，与我们一起开始旅程。</p>
+              <div className="overlay-panel-title">
+                <h1>Hello Magicrepokit</h1>
+                <p>输入您的账户信息，与我们一起开始旅程。</p>
+              </div>
+
+              <img src={loginBc1} className="overlay-panel-img float-up-down" />
+              <CircularText
+                text="MAGIC REPO KIT MAGIC REPO KIT"
+                color="#fff"
+                style={{
+                  width: '50px',
+                  height: '50px',
+                  position: 'absolute',
+                  left: '20%',
+                  top: '35%',
+                }}
+              />
               <button
-                className="ghost"
+                className="ghost overlay-panel-btn"
                 id="signUp"
                 onClick={() => {
                   containerRef.current.classList.add('right-panel-active');

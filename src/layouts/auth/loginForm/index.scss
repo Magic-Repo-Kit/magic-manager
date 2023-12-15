@@ -83,8 +83,10 @@ input {
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
     position: relative;
     overflow: hidden;
-    width: 768px;
-    height: 480px;
+    width: 50vw;
+    height: 60vh;
+    min-width: 768px;
+    min-height: 480px;
     // 手机端
     @media screen and (max-width: 1000px) {
       width: 500px;
@@ -202,6 +204,20 @@ input {
   width: 50%;
   transform: translateX(0);
   transition: transform 0.6s ease-in-out;
+  .overlay-panel-img {
+    width: 90%;
+    position: absolute;
+    margin-top: 10%;
+    z-index: -1;
+  }
+  .overlay-panel-title {
+    position: absolute;
+    top: 10%;
+  }
+  .overlay-panel-btn {
+    position: absolute;
+    bottom: 10%;
+  }
 }
 
 .overlay-left {

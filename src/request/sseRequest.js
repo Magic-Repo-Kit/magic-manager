@@ -7,16 +7,15 @@ const refreshToken = getRefreshToken()
 
 
 function sseRequest(url, params, onMessage, onError) {
+  let eventSource = null;
+  let isTokenRefreshing = false;
+  const ctrl = new AbortController();
   let headers = {
     "Content-Type": "application/json",
     'Accept': '*/*',
     'User-Type': "pc",
     Authorization: `Bearer ${token}`
-  };
-  let eventSource = null;
-  let isTokenRefreshing = false;
-  const ctrl = new AbortController();
-
+  }
   const startSse = () => {
     eventSource = fetchEventSource(`/api${url}`, {
       method: "POST",

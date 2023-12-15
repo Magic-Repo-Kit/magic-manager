@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import LoginForm from './loginForm';
-import LoginFormPhone from './loginForm/form-phone';
+import LoginForm from './loginForm/pc-login';
+import LoginFormPhone from './loginForm/app-login';
 import MrFooter from '@/components/mr-footer';
+
 import './index.scss';
 
 import mrkLogoLight from '@/assets/images/mrk-light.png';
@@ -16,24 +17,24 @@ const { Header, Footer } = Layout;
 function Login() {
   const lines = ['top', 'right', 'bottom', 'left'];
   const [mode, setMode] = useState('dark');
-  useEffect(() => {
-    if (mode === 'dark') {
-      document.querySelector('.login-container').style.background = '#212534';
-    } else {
-      document.querySelector('.login-container').style.background = '#ffffff';
-    }
-  }, [mode]);
+  // useEffect(() => {
+  //   if (mode === 'dark') {
+  //     document.querySelector('.login-container').style.background = '#212534';
+  //   } else {
+  //     document.querySelector('.login-container').style.background = '#ffffff';
+  //   }
+  // }, [mode]);
   return (
     <div className="login-container flx-center">
       {/* PC端登陆页面 */}
       <div className="login-form-bc flx-center">
-        {lines.map((index) => (
+        {/* {lines.map((index) => (
           <div key={index} className="line"></div>
-        ))}
+        ))} */}
         {/* 左边背景 */}
-        <div className="login-form-left">
+        {/* <div className="login-form-left">
           <img src={loginBc1} />
-        </div>
+        </div> */}
         {/* 登陆页面 */}
         <LoginForm />
       </div>
@@ -49,7 +50,11 @@ function Login() {
           className="cursor-point flx-center "
           style={{ height: '60px' }}
         >
-          <img src={mrkLogo} height="25" style={{ marginRight: '5px' }} />
+          <img
+            src={mrkLogo}
+            height="25"
+            className="login-mrk-logo rotated-infinite"
+          />
           <img
             src={mode === 'default' ? mrkLogoLight : mrkLogoDark}
             alt="MRK"
@@ -76,7 +81,7 @@ function Login() {
         </div>
       </Header>
       {/* 底部说明 */}
-      <Footer
+      {/* <Footer
         style={{
           position: 'fixed',
           bottom: '0',
@@ -90,7 +95,10 @@ function Login() {
           <a className="color-text-fff user-select">条款</a>
         </div>
         <MrFooter />
-      </Footer>
+      </Footer> */}
+      {/* 背景元素 */}
+      <div className="login-circle-right float-left-top"></div>
+      <div className="login-circle-bottom float-left-top"></div>
     </div>
   );
 }
