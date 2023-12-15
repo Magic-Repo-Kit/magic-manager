@@ -10,4 +10,4 @@ export const getPlatformAuth = params => ajax.get('/system/auth/social-login-red
 export const platformLoginAPI = params => ajax.post('/system/auth/social-login', params);
 
 // refreshToken刷新token
-export const getNewToken = params => ajax.post('/system/auth/refresh-token', { refreshToken: params })
+export const getNewToken = refreshToken => ajax.post('/system/auth/refresh-token', { refreshToken })

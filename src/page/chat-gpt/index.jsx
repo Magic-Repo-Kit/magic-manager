@@ -116,47 +116,73 @@ function Chat() {
     // 拿到请求数据，替换插入的空白消息
     // sse请求;
     const params = {
-      conversationId: '',
+      conversationId: 'b174384d-af8f-4c79-b555-2aed14358a62',
       messageId: 'd9c2c7f1-8a80-4e5b-9b9d-7f5b43d1d98e',
       parentMessageId: 'a5e8f2d3-6b0f-4c2a-9c3d-1e7f84b5a2b0',
       content: msg,
     };
-    const onMessage = (data) => {
-      console.log('Received message:', data);
-      setSSEData(data);
-    };
-    const onError = (error) => {
-      console.log('🚀 ~ file: index.jsx:124 ~ onError ~ error:', error.msg);
-      console.error('Error:', error);
-    };
-    const res = sseRequest('/chat/gpt/chat', params, onMessage, onError);
-    console.log('🚀 ~ file: index.jsx:134 ~ getGptMsg ~ res:', res);
+
+    sseRequest(
+      '/chat/gpt/chat',
+      params,
+      (res) => {
+        console.log('🚀 ~ file: index.jsx:126 ~ onMessage ~ res:', res);
+        if (res === '[DONE]') {
+          console.log('结束');
+          return;
+        }
+        if (res) {
+          const { conversation_id, message } = res;
+          const content = JSON.parse(message.content.parts[0]);
+          // setSSEData(content);
+          setMessages((prevMessages) => {
+            const newMessages = prevMessages.slice();
+            const emptyMessageIndex = newMessages.findIndex(
+              (message) => message.id === id
+            );
+            if (emptyMessageIndex !== -1) {
+              newMessages[emptyMessageIndex] = {
+                type: 'reply',
+                content: content,
+                id,
+                timestamp: formatDate(new Date()),
+              };
+            }
+            return newMessages;
+          });
+          setisLoading(false);
+        }
+      },
+      (error) => {
+        console.error('Error:', error);
+      }
+    );
 
     // 模拟请求延迟时间
-    setTimeout(() => {
-      // const res = await getGpt(msg);
-      // const res = 'This is an automated reply.回复：' + msg;
+    // setTimeout(() => {
+    //   // const res = await getGpt(msg);
+    //   // const res = 'This is an automated reply.回复：' + msg;
 
-      const r = random(0, BOT_MSGS.length - 1);
-      const res = BOT_MSGS[r] + msg;
+    //   const r = random(0, BOT_MSGS.length - 1);
+    //   const res = BOT_MSGS[r] + msg;
 
-      setMessages((prevMessages) => {
-        const newMessages = prevMessages.slice();
-        const emptyMessageIndex = newMessages.findIndex(
-          (message) => message.id === id
-        );
-        if (emptyMessageIndex !== -1) {
-          newMessages[emptyMessageIndex] = {
-            type: 'reply',
-            content: res,
-            id,
-            timestamp: formatDate(new Date()),
-          };
-        }
-        return newMessages;
-      });
-      setisLoading(false);
-    }, 1000);
+    //   setMessages((prevMessages) => {
+    //     const newMessages = prevMessages.slice();
+    //     const emptyMessageIndex = newMessages.findIndex(
+    //       (message) => message.id === id
+    //     );
+    //     if (emptyMessageIndex !== -1) {
+    //       newMessages[emptyMessageIndex] = {
+    //         type: 'reply',
+    //         content: res,
+    //         id,
+    //         timestamp: formatDate(new Date()),
+    //       };
+    //     }
+    //     return newMessages;
+    //   });
+    //   setisLoading(false);
+    // }, 1000);
   };
 
   // 插入消息 【sent-发送 reply-回复】
@@ -201,7 +227,7 @@ function Chat() {
           </div>
         </Sider>
         <Content style={contentStyle}>
-          {sseData}
+          {/* {sseData} */}
           <div
             className="user-select"
             style={{
