@@ -221,7 +221,7 @@ function LoginForm() {
               </div>
 
               <img src={loginBc1} className="overlay-panel-img float-up-down" />
-              <CircularText
+              {/* <CircularText
                 text="MAGIC REPO KIT MAGIC REPO KIT"
                 color="#fff"
                 style={{
@@ -231,7 +231,7 @@ function LoginForm() {
                   left: '20%',
                   top: '35%',
                 }}
-              />
+              /> */}
               <button
                 className="ghost overlay-panel-btn"
                 id="signUp"

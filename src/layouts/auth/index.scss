@@ -13,34 +13,67 @@
 
 .login-container {
   position: relative;
-  overflow: hidden;
   width: 100vw;
   height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  overflow: hidden;
   font-family: 'Montserrat', sans-serif;
-  // box-shadow: inset 0 0 10px #03e9f4, 0 0 25px #03e9f4, 0 0 50px #03e9f4,
-  //   0 0 100px #03e9f4;
-  background: #212534;
-  // backdrop-filter: blur(6px);
-
+  // background: #212534;
+  // background-image: url('../../assets/images/login-bg-line.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
   // PC登陆页面
   .login-form-bc {
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    // padding: 30px;
     box-shadow: 0 0.75rem 2rem 0 rgba(0, 0, 0, 0.1);
     border-radius: 2px;
     backdrop-filter: blur(100px);
-    overflow: hidden;
-    padding: 120px;
-    @media screen and (max-width: 2000px) {
-      padding: 100px;
-    }
-    @media screen and (max-width: 1700px) {
-      padding: 50px;
-    }
+
     @media screen and (max-width: 1000px) {
       display: none;
-      padding: 0px;
+    }
+    .login-left {
+      width: 50%;
+      margin-right: 5%;
+      height: 100%;
+      // border-radius: 40px;
+      color: #ffffff;
+      // padding: 30px;
+      position: relative;
+
+      .login-left-bg {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 60%;
+        height: 100%;
+        background: linear-gradient(to right, #00c9d4, #0096dd);
+        z-index: -1;
+      }
+      .login-left-box {
+        box-sizing: border-box;
+        width: 100%;
+        height: 100%;
+        padding: 50px 40px;
+        .login-left-content {
+          box-sizing: border-box;
+          width: 100%;
+          height: 100%;
+
+          border-radius: 20px;
+          padding: 30px;
+          background: transparent;
+          backdrop-filter: saturate(50%) blur(6px);
+          box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.03),
+            0 1px 6px -1px rgba(61, 37, 37, 0.02),
+            0 2px 4px 0 rgba(0, 0, 0, 0.02);
+        }
+      }
+    }
+    .login-right {
+      width: 45%;
     }
     // 线条
     // .line {
@@ -48,7 +81,7 @@
     //   display: block;
     //   @media screen and (max-width: 1000px) {
     //     display: none;
-    //   }
+    //   }#ff#ffffff
     //   &:nth-child(1) {
     //     top: 0;
     //     left: -100%;
@@ -148,8 +181,19 @@
   }
   // 手机端登陆页面
   .login-form-phone {
+    width: 100%;
+    height: 100%;
     @media screen and (min-width: 1000px) {
       display: none;
+    }
+  }
+  // logo
+  .login-logo {
+    position: absolute;
+    right: 30px;
+    top: 30px;
+    > :first-child {
+      margin-right: 4px;
     }
   }
   // 头部

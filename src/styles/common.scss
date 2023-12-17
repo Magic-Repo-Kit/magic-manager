@@ -300,6 +300,8 @@
 }
 // 移动 旋转
 .rotate-move-infinite {
+  transform-style: preserve-3d;
+  transform: translate(0%, 0%) rotateX(-43deg) rotateY(-19deg) scale(1);
   animation: rotate-move 5s linear infinite;
 }
 @keyframes rotate-move {
