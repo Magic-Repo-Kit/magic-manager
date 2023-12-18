@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import LoginForm from './loginForm/pc-login';
 import LoginFormPhone from './loginForm/app-login';
 import MrFooter from '@/components/mr-footer';
+import Cube from '@/components/Cube';
 
 import './index.scss';
 
@@ -51,6 +52,7 @@ function Login() {
           <div className="login-left-box">
             <div className="login-left-content">
               <div>永远相信美好的事情</div>
+              <Cube />
             </div>
           </div>
         </div>
