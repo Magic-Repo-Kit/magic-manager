@@ -1,37 +1,21 @@
-$primary-color-theme1: #1890ff;
-$background-color-theme1: #f0f0f0;
-$text-color-theme1: #333;
+// 字体颜色
+$text-color-default: #191919;
+$text-color-dark: #ffffff;
 
-$primary-color-theme2: #f5222d;
-$background-color-theme2: #fff;
-$text-color-theme2: #000;
+// 背景颜色
+$background-color-default: #ffffff;
+$background-color-dark: #191919;
 
-$primary-color-theme3: #52c41a;
-$background-color-theme3: #000;
-$text-color-theme3: #fff;
+// 🚀 ~ file: theme.scss:10 ~ 分割线:", 分割线  🚀
 
-// 默认主题
-$primary-color: $primary-color-theme1;
-$background-color: $background-color-theme1;
-$text-color: $text-color-theme1;
+// // 默认模式
+// .theme-default {
+//   $text-color: $text-color-default;
+//   $background-color: $background-color-default;
+// }
 
-.theme1 {
-  // 主题1样式
-  $primary-color: $primary-color-theme1;
-  $background-color: $background-color-theme1;
-  $text-color: $text-color-theme1;
-}
-
-.theme2 {
-  // 主题2样式
-  $primary-color: $primary-color-theme2;
-  $background-color: $background-color-theme2;
-  $text-color: $text-color-theme2;
-}
-
-.theme3 {
-  // 主题3样式
-  $primary-color: $primary-color-theme3;
-  $background-color: $background-color-theme3;
-  $text-color: $text-color-theme3;
-}
+// // 黑暗模式
+// .theme-dark {
+//   $text-color: $text-color-dark;
+//   $background-color: $background-color-dark;
+// }

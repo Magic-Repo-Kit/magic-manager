@@ -1,0 +1,244 @@
+.login-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  font-family: 'Montserrat', sans-serif;
+  // background: #212534;
+  // background-image: url('../../assets/images/login-back.png');
+  // background-repeat: no-repeat;
+  // background-size: 100% 100%;
+  // PC登陆页面
+  .login-form-bc {
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    // padding: 30px;
+    box-shadow: 0 0.75rem 2rem 0 rgba(0, 0, 0, 0.1);
+    // backdrop-filter: blur(100px);
+    @media screen and (max-width: 1000px) {
+      display: none;
+    }
+    .login-left {
+      width: 50%;
+      margin-right: 5%;
+      height: 100%;
+      // border-radius: 40px;
+      color: #ffffff;
+      // padding: 30px;
+      position: relative;
+
+      .login-left-bg {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        // background: linear-gradient(to right, #00c9d4, #0096dd);
+        z-index: -1;
+      }
+      .login-left-box {
+        box-sizing: border-box;
+        width: 100%;
+        height: 100%;
+        padding: 50px 40px;
+        .login-left-content {
+          box-sizing: border-box;
+          width: 100%;
+          height: 100%;
+
+          border-radius: 20px;
+          padding: 30px;
+          background: transparent;
+          // backdrop-filter: saturate(50%) blur(6px);
+          box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.03),
+            0 1px 6px -1px rgba(61, 37, 37, 0.02),
+            0 2px 4px 0 rgba(0, 0, 0, 0.02);
+        }
+      }
+    }
+    .login-right {
+      width: 45%;
+    }
+    // 线条
+    // .line {
+    //   position: absolute;
+    //   display: block;
+    //   @media screen and (max-width: 1000px) {
+    //     display: none;
+    //   }#ff#ffffff
+    //   &:nth-child(1) {
+    //     top: 0;
+    //     left: -100%;
+    //     width: 100%;
+    //     height: 2px;
+    //     background: linear-gradient(90deg, transparent, #03e9f4);
+    //     animation: btn-anim1 8s linear infinite;
+    //   }
+    //   @keyframes btn-anim1 {
+    //     0% {
+    //       left: -100%;
+    //     }
+    //     50%,
+    //     100% {
+    //       left: 100%;
+    //     }
+    //   }
+    //   &:nth-child(2) {
+    //     top: -100%;
+    //     right: 0;
+    //     width: 2px;
+    //     height: 100%;
+    //     background: linear-gradient(180deg, transparent, #03e9f4);
+    //     animation: btn-anim2 8s linear infinite;
+    //     animation-delay: 2s;
+    //   }
+
+    //   @keyframes btn-anim2 {
+    //     0% {
+    //       top: -100%;
+    //     }
+    //     50%,
+    //     100% {
+    //       top: 100%;
+    //     }
+    //   }
+    //   &:nth-child(3) {
+    //     bottom: 0;
+    //     right: -100%;
+    //     width: 100%;
+    //     height: 2px;
+    //     background: linear-gradient(270deg, transparent, #03e9f4);
+    //     animation: btn-anim3 8s linear infinite;
+    //     animation-delay: 4s;
+    //   }
+
+    //   @keyframes btn-anim3 {
+    //     0% {
+    //       right: -100%;
+    //     }
+    //     50%,
+    //     100% {
+    //       right: 100%;
+    //     }
+    //   }
+    //   &:nth-child(4) {
+    //     bottom: -100%;
+    //     left: 0;
+    //     width: 2px;
+    //     height: 100%;
+    //     background: linear-gradient(360deg, transparent, #03e9f4);
+    //     animation: btn-anim4 8s linear infinite;
+    //     animation-delay: 6s;
+    //   }
+
+    //   @keyframes btn-anim4 {
+    //     0% {
+    //       bottom: -100%;
+    //     }
+    //     50%,
+    //     100% {
+    //       bottom: 100%;
+    //     }
+    //   }
+    // }
+    .login-form-left {
+      > img {
+        width: 500px;
+        margin-right: 150px;
+      }
+      @media screen and (max-width: 2300px) {
+        width: 450px;
+        margin-right: 150px;
+      }
+      @media screen and (max-width: 2000px) {
+        width: 400px;
+        margin-right: 150px;
+      }
+      @media screen and (max-width: 1700px) {
+        width: 300px;
+        margin-right: 250px;
+      }
+      @media screen and (max-width: 1500px) {
+        display: none;
+      }
+    }
+  }
+  // 手机端登陆页面
+  .login-form-phone {
+    width: 100%;
+    height: 100%;
+    @media screen and (min-width: 1000px) {
+      display: none;
+    }
+  }
+  // logo
+  .login-logo {
+    position: absolute;
+    right: 30px;
+    top: 30px;
+    > :first-child {
+      margin-right: 4px;
+    }
+  }
+  // 头部
+  .login-header {
+    width: 50%;
+    position: fixed;
+    top: 0;
+    background: transparent;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    // 适应屏幕
+    @media screen and (max-width: 1800px) {
+      width: 60%;
+    }
+    @media screen and (max-width: 1500px) {
+      width: 70%;
+    }
+    @media screen and (max-width: 1200px) {
+      width: 80%;
+    }
+    @media screen and (max-width: 768px) {
+      width: 100%;
+    }
+    .login-mrk-logo {
+      margin-right: 5px;
+    }
+  }
+  // 背景元素
+  .login-circle-right {
+    position: absolute;
+    right: -21%;
+    top: -37%;
+    width: 30vw;
+    height: 30vw;
+    border-radius: 50%;
+    border: 150px solid transparent;
+    border-color: #029de4;
+  }
+  .login-circle-bottom {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 10vw;
+    height: 10vw;
+    border-radius: 50%;
+    border: 50px solid transparent;
+    border-color: #029de4;
+  }
+}
+
+.login-icon {
+  color: #ffffff;
+  display: inline-block;
+  width: 20px;
+  font-size: 20px;
+  margin: 8px;
+  cursor: pointer;
+  transition: transform 80ms ease-in;
+  &:active {
+    font-size: 19px;
+  }
+}
