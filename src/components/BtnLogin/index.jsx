@@ -6,6 +6,7 @@ const btnLogin = ({ content }) => {
     <>
       <button className="login-btn">
         <div className="contDefault">{content}</div>
+
         <div className="arrow-wrapper">
           <div className="arrow"></div>
         </div>

@@ -1,14 +1,14 @@
 @import '@/styles/theme';
 .login-container {
+  box-sizing: border-box;
   transition: color 0.5s, background-color 0.5s;
   color: $text-200;
   background-color: $bg-100;
   position: relative;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  min-height: 100%;
   overflow: hidden;
-  // font-family: 'Montserrat', sans-serif;
-  font-family: inherit;
+  font-family: 'Montserrat', sans-serif;
   // background-image: url('../../assets/images/logo-bg-white.png');
   // background-repeat: no-repeat;
   // background-size: cover;
@@ -20,11 +20,21 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    .mrkLogo {
+    .mrk-logo {
       position: absolute;
       left: 20px;
       height: 28px;
+      display: flex;
+      align-items: center;
+      img {
+        height: 100%;
+        &:last-child {
+          margin-left: 5px;
+          height: 70%;
+        }
+      }
     }
+
     .btn-box {
       display: flex;
       align-items: center;
@@ -38,7 +48,94 @@
     }
   }
   main {
-    padding: 20px;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 50px;
+    padding-top: 100px;
+    display: flex;
+    justify-content: space-between;
+    section {
+      width: 50%;
+      overflow: hidden;
+      img {
+        max-width: 80%;
+        height: 100%;
+      }
+      .login-main-explain {
+        padding-bottom: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        > :first-child {
+          font-size: 48px;
+          font-weight: 700;
+          padding: 20px;
+          padding-bottom: 15px;
+          background: -webkit-linear-gradient(
+            144deg,
+            #9500ff,
+            $primary-500 80%,
+            #00ddeb
+          );
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
+        > :nth-child(2) {
+          font-size: 18px;
+        }
+        > :nth-child(3) {
+          margin-top: 100px;
+          cursor: pointer;
+        }
+      }
+      .login-main-box {
+        width: 100%;
+        text-align: center;
+        position: relative;
+        &::before {
+          width: 280px;
+          height: 280px;
+          content: '';
+          position: absolute;
+          background-color: rgb(144, 161, 255);
+          border-radius: 50%;
+          left: 25%;
+          top: 25%;
+          transition: all 1s;
+        }
+        &:hover::before {
+          transform: translate(-50px, 50px) scale(1.05);
+        }
+        .loginMain {
+          min-width: 300px;
+          box-sizing: border-box;
+          padding: 20px;
+          border-radius: 10px;
+          backdrop-filter: blur(30px);
+          // background-color: rgba(65, 65, 65, 0.308);
+          // border: 1px solid rgba(255, 255, 255, 0.089);
+          // cursor: pointer;
+        }
+      }
+    }
+    // 媒体查询 <780px
+    @media screen and (max-width: 780px) {
+      flex-direction: column-reverse;
+      padding: 25px;
+      section {
+        width: 100%;
+        .login-main-box::before {
+          width: 200px;
+          height: 200px;
+        }
+        .login-main-explain {
+          > :nth-child(3) {
+            margin-top: 50px;
+          }
+        }
+      }
+    }
   }
 }
 
@@ -51,8 +148,14 @@
     .mrkLogo {
       filter: grayscale(100%) brightness(200%); //白
     }
-    // .space-line{
-    //   c
-    // }
   }
+  // main {
+  //   section {
+  //     .login-main-explain {
+  //       > :nth-child(3) {
+
+  //       }
+  //     }
+  //   }
+  // }
 }
