@@ -1,22 +1,58 @@
 @import '@/styles/theme';
 .login-container {
-  color: $text-color-default;
-  background-color: $background-color-default;
+  transition: color 0.5s, background-color 0.5s;
+  color: $text-200;
+  background-color: $bg-100;
   position: relative;
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  font-family: 'Montserrat', sans-serif;
-
+  // font-family: 'Montserrat', sans-serif;
+  font-family: inherit;
   // background-image: url('../../assets/images/logo-bg-white.png');
   // background-repeat: no-repeat;
   // background-size: cover;
   // background-position: left bottom;
   // filter: blur(10px);
+  header {
+    padding: 0 20px;
+    height: 65px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    .mrkLogo {
+      position: absolute;
+      left: 20px;
+      height: 28px;
+    }
+    .btn-box {
+      display: flex;
+      align-items: center;
+      height: 100%;
+      .space-line {
+        margin: 0 15px;
+        width: 1px;
+        height: 15px;
+        background-color: #e8e8e8;
+      }
+    }
+  }
+  main {
+    padding: 20px;
+  }
 }
 
 // 黑暗模式
 .login-container.dark-mode {
-  color: $text-color-dark;
-  background-color: $background-color-dark;
+  transition: color 0.5s, background-color 0.5s;
+  color: $bg-100;
+  background-color: $text-200;
+  header {
+    .mrkLogo {
+      filter: grayscale(100%) brightness(200%); //白
+    }
+    // .space-line{
+    //   c
+    // }
+  }
 }

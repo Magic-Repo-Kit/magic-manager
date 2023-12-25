@@ -1,7 +1,8 @@
 import React, { useContext } from 'react';
 import { DarkModeContext } from '@/components/DarkModeProvider';
+import './index.scss';
 
-const DarkModeToggle = ({ size }) => {
+const DarkModeToggle = () => {
   const { darkMode, setDarkMode } = useContext(DarkModeContext);
 
   const toggleDarkMode = () => {
@@ -10,11 +11,10 @@ const DarkModeToggle = ({ size }) => {
 
   return (
     <>
-      <i
-        className="iconfont mr-evening-moon2"
-        onClick={toggleDarkMode}
-        style={{ cursor: 'pointer', fontSize: size }}
-      ></i>
+      <label className="switch-dark-mode">
+        <input type="checkbox" checked={darkMode} onChange={toggleDarkMode} />
+        <span className="slider"></span>
+      </label>
     </>
   );
 };

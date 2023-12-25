@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 4291850 */
-  src: url('iconfont.woff2?t=1702200802365') format('woff2'),
-       url('iconfont.woff?t=1702200802365') format('woff'),
-       url('iconfont.ttf?t=1702200802365') format('truetype');
+  src: url('iconfont.woff2?t=1703494731495') format('woff2'),
+       url('iconfont.woff?t=1703494731495') format('woff'),
+       url('iconfont.ttf?t=1703494731495') format('truetype');
 }
 
 .iconfont {
@@ -11,6 +11,342 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.mr-my:before {
+  content: "\e7f1";
+}
+
+.mr-bulb1:before {
+  content: "\e856";
+}
+
+.mr-cooperation-full:before {
+  content: "\e85d";
+}
+
+.mr-idea-full:before {
+  content: "\e861";
+}
+
+.mr-alarm:before {
+  content: "\e871";
+}
+
+.mr-shield-full:before {
+  content: "\e875";
+}
+
+.mr-inbox:before {
+  content: "\e896";
+}
+
+.mr-inbox-full:before {
+  content: "\e897";
+}
+
+.mr-search:before {
+  content: "\e8ab";
+}
+
+.mr-search-full:before {
+  content: "\e8ac";
+}
+
+.mr-where-full:before {
+  content: "\e8e6";
+}
+
+.mr-fingerprint:before {
+  content: "\e905";
+}
+
+.mr-record-sound:before {
+  content: "\e971";
+}
+
+.mr-home-full:before {
+  content: "\e973";
+}
+
+.mr-home:before {
+  content: "\e974";
+}
+
+.mr-login-full:before {
+  content: "\e97e";
+}
+
+.mr-exit-full:before {
+  content: "\e97f";
+}
+
+.mr-power-full:before {
+  content: "\e980";
+}
+
+.mr-refresh-full:before {
+  content: "\e981";
+}
+
+.mr-load-full:before {
+  content: "\e986";
+}
+
+.mr-lightning:before {
+  content: "\e995";
+}
+
+.mr-lightning-full:before {
+  content: "\e996";
+}
+
+.mr-like:before {
+  content: "\e9a2";
+}
+
+.mr-like-full:before {
+  content: "\e9a3";
+}
+
+.mr-badreview:before {
+  content: "\e9a4";
+}
+
+.mr-calendar-v2:before {
+  content: "\e9aa";
+}
+
+.mr-calendar-full:before {
+  content: "\e9ab";
+}
+
+.mr-clock:before {
+  content: "\e9ac";
+}
+
+.mr-visible-full:before {
+  content: "\e9ae";
+}
+
+.mr-visible:before {
+  content: "\e9af";
+}
+
+.mr-invisible:before {
+  content: "\e9b0";
+}
+
+.mr-invert:before {
+  content: "\e9c6";
+}
+
+.mr-invert-full:before {
+  content: "\e9c7";
+}
+
+.mr-rocket:before {
+  content: "\e9d7";
+}
+
+.mr-rocket-full:before {
+  content: "\e9d8";
+}
+
+.mr-location-full:before {
+  content: "\e9f1";
+}
+
+.mr-location:before {
+  content: "\e9f2";
+}
+
+.mr-pin:before {
+  content: "\e9f3";
+}
+
+.mr-pin-full:before {
+  content: "\e9f4";
+}
+
+.mr-flag-full:before {
+  content: "\e9f5";
+}
+
+.mr-flag:before {
+  content: "\e9f6";
+}
+
+.mr-branch:before {
+  content: "\e9fd";
+}
+
+.mr-combine-full:before {
+  content: "\e9fe";
+}
+
+.mr-map-site-full:before {
+  content: "\ea00";
+}
+
+.mr-map-finger-full:before {
+  content: "\ea04";
+}
+
+.mr-locus-full:before {
+  content: "\ea05";
+}
+
+.mr-locus:before {
+  content: "\ea06";
+}
+
+.mr-bookmark:before {
+  content: "\ea0f";
+}
+
+.mr-bookmark-full:before {
+  content: "\ea10";
+}
+
+.mr-share-full:before {
+  content: "\ea1c";
+}
+
+.mr-link:before {
+  content: "\ea23";
+}
+
+.mr-link-off:before {
+  content: "\ea24";
+}
+
+.mr-upload-full:before {
+  content: "\ea25";
+}
+
+.mr-upload:before {
+  content: "\ea26";
+}
+
+.mr-download:before {
+  content: "\ea27";
+}
+
+.mr-printing:before {
+  content: "\ea28";
+}
+
+.mr-folder:before {
+  content: "\ea29";
+}
+
+.mr-four-squares:before {
+  content: "\ea3e";
+}
+
+.mr-image-full:before {
+  content: "\ea41";
+}
+
+.mr-json-full:before {
+  content: "\ea42";
+}
+
+.mr-excel-full:before {
+  content: "\ea45";
+}
+
+.mr-ppt-full:before {
+  content: "\ea46";
+}
+
+.mr-audio-full:before {
+  content: "\ea48";
+}
+
+.mr-avi-full:before {
+  content: "\ea49";
+}
+
+.mr-zip-full:before {
+  content: "\ea4a";
+}
+
+.mr-sort-full:before {
+  content: "\ea4b";
+}
+
+.mr-sort-down-full:before {
+  content: "\ea4d";
+}
+
+.mr-double-arrow-down:before {
+  content: "\ea4e";
+}
+
+.mr-radio-off-full:before {
+  content: "\ea6b";
+}
+
+.mr-checkbox-plus-full:before {
+  content: "\ea6e";
+}
+
+.mr-checkbox-plus:before {
+  content: "\ea6f";
+}
+
+.mr-multiply-full:before {
+  content: "\ea71";
+}
+
+.mr-ok-full:before {
+  content: "\ea72";
+}
+
+.mr-plus-full:before {
+  content: "\ea73";
+}
+
+.mr-minus-full:before {
+  content: "\ea74";
+}
+
+.mr-question-full:before {
+  content: "\ea75";
+}
+
+.mr-careful-full:before {
+  content: "\ea76";
+}
+
+.mr-percentage-full:before {
+  content: "\ea7a";
+}
+
+.mr-percentage:before {
+  content: "\ea7b";
+}
+
+.mr-number-sign-full:before {
+  content: "\ea7c";
+}
+
+.mr-number-sign:before {
+  content: "\ea7d";
+}
+
+.mr-mid:before {
+  content: "\ea82";
+}
+
+.mr-expand:before {
+  content: "\ea84";
+}
+
+.mr-tuichudenglu:before {
+  content: "\e618";
 }
 
 .mr-service_ChatGPT:before {

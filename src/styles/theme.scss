@@ -1,21 +1,22 @@
-// 字体颜色
-$text-color-default: #191919;
-$text-color-dark: #ffffff;
+$text-100: #000000;
+$text-200: #191919;
+$text-300: #303136;
+$text-400: #2c2c2c;
+$text-500: #454545;
 
-// 背景颜色
-$background-color-default: #ffffff;
-$background-color-dark: #191919;
+$bg-100: #ffffff;
+$bg-200: #f4f4f5;
+$bg-300: #e0e0e0;
+$bg-400: #9e9e9e;
 
-// 🚀 ~ file: theme.scss:10 ~ 分割线:", 分割线  🚀
+$primary-100: #5b42f3; //主要颜色
+$primary-200: #4f46e5;
+$primary-300: #af40ff;
+$primary-400: #fd4a9e;
+$primary-500: #00ddeb;
+$primary-600: #94cdf8;
 
-// // 默认模式
-// .theme-default {
-//   $text-color: $text-color-default;
-//   $background-color: $background-color-default;
-// }
-
-// // 黑暗模式
-// .theme-dark {
-//   $text-color: $text-color-dark;
-//   $background-color: $background-color-dark;
-// }
+$accent-100: #f64d28; //强调颜色
+$accent-200: #006fff;
+$accent-300: #e1ffff;
+$accent-400: #ffc700;
