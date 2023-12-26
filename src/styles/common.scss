@@ -159,6 +159,16 @@
   }
 }
 
+// 背景小点
+.bg-dots {
+  background-image: radial-gradient(
+    rgba(255, 255, 255, 0.1) 1px,
+    transparent 1px
+  );
+  background-position: 50% 50%;
+  background-size: 1.1rem 1.1rem;
+}
+
 // loading-rocks效果-实例
 // <div className="loading-rocks">
 //   <span className="rock"></span>

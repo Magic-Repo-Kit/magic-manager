@@ -6,6 +6,97 @@
   "description": "百宝袋",
   "glyphs": [
     {
+      "icon_id": "3904594",
+      "name": "智能芯片＊",
+      "font_class": "zhinengxinpian",
+      "unicode": "e6a0",
+      "unicode_decimal": 59040
+    },
+    {
+      "icon_id": "5142620",
+      "name": "ai customer",
+      "font_class": "aicustomer",
+      "unicode": "e812",
+      "unicode_decimal": 59410
+    },
+    {
+      "icon_id": "5961321",
+      "name": "AI",
+      "font_class": "wuguan",
+      "unicode": "ec5f",
+      "unicode_decimal": 60511
+    },
+    {
+      "icon_id": "18068818",
+      "name": "自动生成",
+      "font_class": "ziyuan49",
+      "unicode": "e61c",
+      "unicode_decimal": 58908
+    },
+    {
+      "icon_id": "20472788",
+      "name": "sca 智能对话分析",
+      "font_class": "scazhinengduihuafenxi",
+      "unicode": "e8e8",
+      "unicode_decimal": 59624
+    },
+    {
+      "icon_id": "21284171",
+      "name": "ai1",
+      "font_class": "ai1",
+      "unicode": "e64f",
+      "unicode_decimal": 58959
+    },
+    {
+      "icon_id": "26537724",
+      "name": "AIyuqing",
+      "font_class": "AIyuqing",
+      "unicode": "e6f9",
+      "unicode_decimal": 59129
+    },
+    {
+      "icon_id": "28282644",
+      "name": "智能客服中心",
+      "font_class": "zhinengkefuzhongxin",
+      "unicode": "e615",
+      "unicode_decimal": 58901
+    },
+    {
+      "icon_id": "29151402",
+      "name": "AI",
+      "font_class": "N5",
+      "unicode": "e65d",
+      "unicode_decimal": 58973
+    },
+    {
+      "icon_id": "33311155",
+      "name": "04",
+      "font_class": "a-04",
+      "unicode": "e63c",
+      "unicode_decimal": 58940
+    },
+    {
+      "icon_id": "34862076",
+      "name": "lunyu",
+      "font_class": "lunyu",
+      "unicode": "e60a",
+      "unicode_decimal": 58890
+    },
+    {
+      "icon_id": "34925397",
+      "name": "icon_AI-copy",
+      "font_class": "icon_AI",
+      "unicode": "e644",
+      "unicode_decimal": 58948
+    },
+    {
+      "icon_id": "35537414",
+      "name": "智能 (9)",
+      "font_class": "a-zhineng9",
+      "unicode": "eb36",
+      "unicode_decimal": 60214
+    },
+    {
       "icon_id": "11184936",
       "name": "my",
       "font_class": "my",

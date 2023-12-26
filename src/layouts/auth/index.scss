@@ -14,63 +14,75 @@
   // background-size: cover;
   // background-position: left bottom;
   // filter: blur(10px);
+
   header {
-    padding: 0 20px;
-    height: 65px;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    .mrk-logo {
-      position: absolute;
-      left: 20px;
-      height: 28px;
+    max-width: 1250px;
+    margin: 0 auto;
+    .header-content {
+      padding: 0 20px;
+      height: 65px;
       display: flex;
+      justify-content: space-between;
       align-items: center;
-      img {
-        height: 100%;
-        &:last-child {
-          margin-left: 5px;
-          height: 70%;
+      .mrk-logo {
+        height: 28px;
+        display: flex;
+        align-items: center;
+        img {
+          height: 100%;
+          &:last-child {
+            margin-left: 5px;
+            height: 70%;
+          }
         }
       }
-    }
 
-    .btn-box {
-      display: flex;
-      align-items: center;
-      height: 100%;
-      .space-line {
-        margin: 0 15px;
-        width: 1px;
-        height: 15px;
-        background-color: #e8e8e8;
+      .btn-box {
+        display: flex;
+        align-items: center;
+        height: 100%;
+        .space-line {
+          margin: 0 15px;
+          width: 1px;
+          height: 15px;
+          background-color: #e8e8e8;
+        }
       }
     }
   }
   main {
     box-sizing: border-box;
     width: 100%;
-    padding: 50px;
+    max-width: 1250px;
+    margin: 0 auto;
+    height: calc(100vh - 65px);
+    // padding: 20px;
     padding-top: 100px;
     display: flex;
     justify-content: space-between;
+    overflow: auto;
     section {
       width: 50%;
-      overflow: hidden;
+
+      > :last-child {
+        overflow: hidden;
+      }
       img {
         max-width: 80%;
         height: 100%;
       }
       .login-main-explain {
-        padding-bottom: 10px;
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        > :first-child {
+        padding: 30px;
+        padding-bottom: 10px;
+
+        .ai-title {
+          display: flex;
+          align-items: center;
           font-size: 48px;
           font-weight: 700;
-          padding: 20px;
+          padding: 20px 0;
           padding-bottom: 15px;
           background: -webkit-linear-gradient(
             144deg,
@@ -80,57 +92,54 @@
           );
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
+          .ai-icon {
+            font-size: 35px;
+            margin-left: 10px;
+          }
         }
         > :nth-child(2) {
           font-size: 18px;
         }
-        > :nth-child(3) {
+        .explain-btn {
           margin-top: 100px;
           cursor: pointer;
         }
       }
       .login-main-box {
         width: 100%;
-        text-align: center;
+        text-align: right;
         position: relative;
-        &::before {
-          width: 280px;
-          height: 280px;
-          content: '';
+        .loginBg {
           position: absolute;
-          background-color: rgb(144, 161, 255);
-          border-radius: 50%;
-          left: 25%;
-          top: 25%;
-          transition: all 1s;
-        }
-        &:hover::before {
-          transform: translate(-50px, 50px) scale(1.05);
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
         }
         .loginMain {
           min-width: 300px;
           box-sizing: border-box;
-          padding: 20px;
-          border-radius: 10px;
+          // padding: 20px;
           backdrop-filter: blur(30px);
-          // background-color: rgba(65, 65, 65, 0.308);
-          // border: 1px solid rgba(255, 255, 255, 0.089);
-          // cursor: pointer;
         }
       }
     }
     // 媒体查询 <780px
     @media screen and (max-width: 780px) {
       flex-direction: column-reverse;
-      padding: 25px;
       section {
         width: 100%;
-        .login-main-box::before {
-          width: 200px;
-          height: 200px;
+        .login-main-box {
+          text-align: center;
+          .loginMain {
+            padding-left: 25px;
+          }
         }
         .login-main-explain {
-          > :nth-child(3) {
+          padding: 20px;
+          .ai-title {
+            justify-content: center;
+          }
+          .explain-btn {
             margin-top: 50px;
           }
         }
@@ -145,17 +154,20 @@
   color: $bg-100;
   background-color: $text-200;
   header {
-    .mrkLogo {
-      filter: grayscale(100%) brightness(200%); //白
+    .header-content {
+      .mrkLogo {
+        filter: grayscale(100%) brightness(200%); //白
+      }
     }
   }
-  // main {
-  //   section {
-  //     .login-main-explain {
-  //       > :nth-child(3) {
+  main {
+    // background-color: $text-200;
+    // section {
+    //   .login-main-explain {
+    //     > :nth-child(3) {
 
-  //       }
-  //     }
-  //   }
-  // }
+    //     }
+    //   }
+    // }
+  }
 }

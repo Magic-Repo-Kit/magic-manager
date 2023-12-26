@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 4291850 */
-  src: url('iconfont.woff2?t=1703494731495') format('woff2'),
-       url('iconfont.woff?t=1703494731495') format('woff'),
-       url('iconfont.ttf?t=1703494731495') format('truetype');
+  src: url('iconfont.woff2?t=1703570369208') format('woff2'),
+       url('iconfont.woff?t=1703570369208') format('woff'),
+       url('iconfont.ttf?t=1703570369208') format('truetype');
 }
 
 .iconfont {
@@ -11,6 +11,58 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.mr-zhinengxinpian:before {
+  content: "\e6a0";
+}
+
+.mr-aicustomer:before {
+  content: "\e812";
+}
+
+.mr-wuguan:before {
+  content: "\ec5f";
+}
+
+.mr-ziyuan49:before {
+  content: "\e61c";
+}
+
+.mr-scazhinengduihuafenxi:before {
+  content: "\e8e8";
+}
+
+.mr-ai1:before {
+  content: "\e64f";
+}
+
+.mr-AIyuqing:before {
+  content: "\e6f9";
+}
+
+.mr-zhinengkefuzhongxin:before {
+  content: "\e615";
+}
+
+.mr-N5:before {
+  content: "\e65d";
+}
+
+.mr-a-04:before {
+  content: "\e63c";
+}
+
+.mr-lunyu:before {
+  content: "\e60a";
+}
+
+.mr-icon_AI:before {
+  content: "\e644";
+}
+
+.mr-a-zhineng9:before {
+  content: "\eb36";
 }
 
 .mr-my:before {
