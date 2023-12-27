@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom';
 import ChatCtx from './chat-ctx';
 import FooterCtx from './footer-ctx';
 
-import sseRequest from '@/request/sseRequest';
+// import sseRequest from '@/request/sseRequest';
 // import { getNewToken } from '@/request/auth';
 // import { getAccessToken, getRefreshToken } from '@/utils/tools';
 
@@ -122,41 +122,41 @@ function Chat() {
       content: msg,
     };
 
-    sseRequest(
-      '/chat/gpt/chat',
-      params,
-      (res) => {
-        console.log('🚀 ~ file: index.jsx:126 ~ onMessage ~ res:', res);
-        if (res === '[DONE]') {
-          console.log('结束');
-          return;
-        }
-        if (res) {
-          const { conversation_id, message } = res;
-          const content = JSON.parse(message.content.parts[0]);
-          // setSSEData(content);
-          setMessages((prevMessages) => {
-            const newMessages = prevMessages.slice();
-            const emptyMessageIndex = newMessages.findIndex(
-              (message) => message.id === id
-            );
-            if (emptyMessageIndex !== -1) {
-              newMessages[emptyMessageIndex] = {
-                type: 'reply',
-                content: content,
-                id,
-                timestamp: formatDate(new Date()),
-              };
-            }
-            return newMessages;
-          });
-          setisLoading(false);
-        }
-      },
-      (error) => {
-        console.error('Error:', error);
-      }
-    );
+    // sseRequest(
+    //   '/chat/gpt/chat',
+    //   params,
+    //   (res) => {
+    //     console.log('🚀 ~ file: index.jsx:126 ~ onMessage ~ res:', res);
+    //     if (res === '[DONE]') {
+    //       console.log('结束');
+    //       return;
+    //     }
+    //     if (res) {
+    //       const { conversation_id, message } = res;
+    //       const content = JSON.parse(message.content.parts[0]);
+    //       // setSSEData(content);
+    //       setMessages((prevMessages) => {
+    //         const newMessages = prevMessages.slice();
+    //         const emptyMessageIndex = newMessages.findIndex(
+    //           (message) => message.id === id
+    //         );
+    //         if (emptyMessageIndex !== -1) {
+    //           newMessages[emptyMessageIndex] = {
+    //             type: 'reply',
+    //             content: content,
+    //             id,
+    //             timestamp: formatDate(new Date()),
+    //           };
+    //         }
+    //         return newMessages;
+    //       });
+    //       setisLoading(false);
+    //     }
+    //   },
+    //   (error) => {
+    //     console.error('Error:', error);
+    //   }
+    // );
 
     // 模拟请求延迟时间
     // setTimeout(() => {
