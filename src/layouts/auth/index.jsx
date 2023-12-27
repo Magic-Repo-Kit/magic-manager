@@ -203,11 +203,14 @@ function Login() {
       <WholeLoading isLoading={isLoading} />
       {/* 弹框 */}
       <Modal
-        title="Modal 1000px width"
+        // title="登陆"
         centered
         open={isModalVisible}
         onOk={onConfirmLogin}
         onCancel={() => setIsModalVisible(false)}
+        okText="确认"
+        cancelText="取消"
+        footer=""
       >
         <FormModal />
       </Modal>

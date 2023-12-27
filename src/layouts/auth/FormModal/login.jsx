@@ -4,38 +4,33 @@ import './index.scss';
 const Login = () => {
   return (
     <div className="login-container">
-      12121
       <form className="form">
         <div className="flex-column">
-          <label>Email </label>
+          <label>账号：</label>
         </div>
         <div className="inputForm">
-          <input type="text" className="input" placeholder="Enter your Email" />
+          <input type="text" className="input" placeholder="输入您的账号" />
         </div>
 
         <div className="flex-column">
-          <label>Password </label>
+          <label>密码：</label>
         </div>
         <div className="inputForm">
-          <input
-            type="password"
-            className="input"
-            placeholder="Enter your Password"
-          />
+          <input type="password" className="input" placeholder="输入您的密码" />
         </div>
 
         <div className="flex-row">
           <div>
             <input type="checkbox" />
-            <label>Remember me </label>
+            <label>记住密码</label>
           </div>
-          <span className="span">Forgot password?</span>
+          <span className="span">忘记密码?</span>
         </div>
-        <button className="button-submit">Sign In</button>
+        <button className="button-submit">登陆</button>
         <p className="p">
-          Don&apos;t have an account? <span className="span">Sign Up</span>
+          没有账户? <span className="span">去注册</span>
         </p>
-        <p className="p line">Or With</p>
+        <p className="pline">快速登陆</p>
 
         <div className="flex-row">
           <button className="btn google">Google</button>
