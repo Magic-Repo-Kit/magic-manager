@@ -1,24 +1,46 @@
 import React, { useState, useEffect, useContext } from 'react';
 import './index.scss';
 
-import { DarkModeContext } from '@/components/DarkModeProvider';
+import IconList from './IconList';
+import { DarkModeContext } from '@/components/DarkModeProvider'; //夜间模式
 import DarkModeToggle from '@/components/DarkModeToggle';
 import BtnLogin from '@/components/BtnLogin';
 import CubeBg from '@/components/cube-bg';
 import TypedText from '@/components/TypedText';
-import IconList from './IconList';
+import WholeLoading from '@/components/whole-loading';
+import FormModal from './FormModal';
 
 import mrkLogo from '@/assets/images/logo-mrk.png';
 import mrkLight from '@/assets/images/mrk-title-light.png';
 import mrkDark from '@/assets/images/mrk-title-dark.png';
 import loginMain from '@/assets/images/login-main.png';
 
+// antd组件
+import { Modal } from 'antd';
+
 function Login() {
   const { darkMode } = useContext(DarkModeContext);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
+  // 触发
+  const handleLoginBtn = () => {
+    setIsModalVisible(true);
+  };
+  // 提交
+  const onConfirmLogin = () => {
+    setIsLoading(true);
+    // 定时器
+    setTimeout(() => {
+      setIsLoading(false);
+      setIsModalVisible(false);
+    }, 3000);
+  };
   return (
     <div className={`login-container ${darkMode ? 'dark-mode' : ''}`}>
-      <header>
+      <header
+        style={{ backdropFilter: isModalVisible ? 'none' : 'blur(30px)' }}
+      >
         <div className="header-content">
           <div className="mrk-logo">
             <img src={mrkLogo} alt="" className="mrkLogo" />
@@ -28,7 +50,9 @@ function Login() {
           <div className="btn-box">
             <DarkModeToggle size="20px" />
             <div className="space-line"></div>
-            <BtnLogin iconName="mr-login-full" content="Login" />
+            <div onClick={handleLoginBtn}>
+              <BtnLogin iconName="mr-login-full" content="Login" />
+            </div>
           </div>
         </div>
       </header>
@@ -173,8 +197,20 @@ function Login() {
             </div>
           </article>
         </div>
-        <div className="rocket-"></div>
+        {/* <div className="rocket-"></div> */}
       </main>
+      {/* loading */}
+      <WholeLoading isLoading={isLoading} />
+      {/* 弹框 */}
+      <Modal
+        title="Modal 1000px width"
+        centered
+        open={isModalVisible}
+        onOk={onConfirmLogin}
+        onCancel={() => setIsModalVisible(false)}
+      >
+        <FormModal />
+      </Modal>
     </div>
   );
 }
