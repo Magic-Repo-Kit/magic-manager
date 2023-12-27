@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 4291850 */
-  src: url('iconfont.woff2?t=1703570369208') format('woff2'),
-       url('iconfont.woff?t=1703570369208') format('woff'),
-       url('iconfont.ttf?t=1703570369208') format('truetype');
+  src: url('iconfont.woff2?t=1703661315667') format('woff2'),
+       url('iconfont.woff?t=1703661315667') format('woff'),
+       url('iconfont.ttf?t=1703661315667') format('truetype');
 }
 
 .iconfont {
@@ -11,6 +11,118 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.mr-github1:before {
+  content: "\e673";
+}
+
+.mr-shujutongji:before {
+  content: "\e603";
+}
+
+.mr-1huojian:before {
+  content: "\e647";
+}
+
+.mr-yidongyunkongzhitaiicon58:before {
+  content: "\e74d";
+}
+
+.mr-insert_tag_field:before {
+  content: "\e6f7";
+}
+
+.mr-chuangxindian:before {
+  content: "\e7ad";
+}
+
+.mr-renjijiaohu:before {
+  content: "\eb66";
+}
+
+.mr-chajian1:before {
+  content: "\e69d";
+}
+
+.mr-liujisuan:before {
+  content: "\ec56";
+}
+
+.mr-shujujianmo:before {
+  content: "\e641";
+}
+
+.mr-icon_xinyong_xianxing_jijin-:before {
+  content: "\e60b";
+}
+
+.mr-shujucaiji:before {
+  content: "\e6a1";
+}
+
+.mr-shujuguanli:before {
+  content: "\e616";
+}
+
+.mr-shujumokuai:before {
+  content: "\e62c";
+}
+
+.mr--shuju:before {
+  content: "\e626";
+}
+
+.mr--shuju1:before {
+  content: "\e62d";
+}
+
+.mr-shujuguanlian:before {
+  content: "\e639";
+}
+
+.mr-shujumoxing:before {
+  content: "\e617";
+}
+
+.mr-shujujiekou:before {
+  content: "\e619";
+}
+
+.mr-shujukaifa:before {
+  content: "\e61b";
+}
+
+.mr-shujuzhongxin:before {
+  content: "\e648";
+}
+
+.mr-icon_xinyong_xianxing_jijin-1:before {
+  content: "\e642";
+}
+
+.mr-bg-code:before {
+  content: "\e63d";
+}
+
+.mr-kuozhangongneng:before {
+  content: "\eaa0";
+}
+
+.mr-people-network:before {
+  content: "\e865";
+}
+
+.mr-linghuokuozhan:before {
+  content: "\e992";
+}
+
+.mr-xitongwenti:before {
+  content: "\e6fa";
+}
+
+.mr-a-kuozhanicon_huaban1fuben40:before {
+  content: "\e64d";
 }
 
 .mr-zhinengxinpian:before {

@@ -1,0 +1,59 @@
+@import '@/styles/theme';
+.icon-list-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 130px;
+  .social-link {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: 0.25s;
+    &:hover {
+      color: $bg-100;
+      animation: bounce_613 0.4s linear;
+    }
+    > i {
+      font-size: 45px;
+    }
+  }
+
+  .link-github:hover {
+    background: #f09433;
+    background: linear-gradient(
+      45deg,
+      #f09433 0%,
+      #e6683c 25%,
+      #dc2743 50%,
+      #cc2366 75%,
+      #bc1888 100%
+    );
+  }
+
+  .link-gitee:hover {
+    background-color: #c71d23;
+  }
+
+  @keyframes bounce_613 {
+    40% {
+      transform: scale(1.4);
+    }
+
+    60% {
+      transform: scale(0.8);
+    }
+
+    80% {
+      transform: scale(1.2);
+    }
+
+    100% {
+      transform: scale(1);
+    }
+  }
+}

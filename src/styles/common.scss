@@ -158,6 +158,11 @@
     transform: scale(0.9);
   }
 }
+// 去除a标签默认样式
+a.no-style {
+  color: inherit;
+  text-decoration: none;
+}
 
 // 背景小点
 .bg-dots {

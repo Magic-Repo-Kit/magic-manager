@@ -7,19 +7,17 @@
   position: relative;
   width: 100%;
   min-height: 100%;
-  overflow: hidden;
+  overflow: auto;
   font-family: 'Montserrat', sans-serif;
-  // background-image: url('../../assets/images/logo-bg-white.png');
-  // background-repeat: no-repeat;
-  // background-size: cover;
-  // background-position: left bottom;
-  // filter: blur(10px);
-
   header {
-    max-width: 1250px;
-    margin: 0 auto;
+    width: 100%;
+    z-index: 1;
+    position: fixed;
+    top: 0;
+    background: transparent;
+    backdrop-filter: blur(30px);
     .header-content {
-      padding: 0 20px;
+      padding: 0 25px;
       height: 65px;
       display: flex;
       justify-content: space-between;
@@ -54,97 +52,263 @@
     box-sizing: border-box;
     width: 100%;
     max-width: 1250px;
-    margin: 0 auto;
-    height: calc(100vh - 65px);
-    // padding: 20px;
-    padding-top: 100px;
-    display: flex;
-    justify-content: space-between;
-    overflow: auto;
-    section {
-      width: 50%;
-
-      > :last-child {
-        overflow: hidden;
-      }
-      img {
-        max-width: 80%;
-        height: 100%;
-      }
-      .login-main-explain {
-        display: flex;
-        flex-direction: column;
-        padding: 30px;
-        padding-bottom: 10px;
-
-        .ai-title {
-          display: flex;
-          align-items: center;
-          font-size: 48px;
-          font-weight: 700;
-          padding: 20px 0;
-          padding-bottom: 15px;
-          background: -webkit-linear-gradient(
-            144deg,
-            #9500ff,
-            $primary-500 80%,
-            #00ddeb
-          );
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          .ai-icon {
-            font-size: 35px;
-            margin-left: 10px;
+    margin: 65px auto;
+    .rocket-box {
+      position: relative;
+      padding: 160px 0 100px 0;
+      width: 100%;
+      overflow: hidden;
+      .rocket-bg {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        animation: move 50s linear infinite;
+        @keyframes move {
+          0% {
+            transform: translate(-100%, -50%);
+          }
+          50% {
+            transform: translate(100%, -50%);
+          }
+          100% {
+            transform: translate(-100%, -50%);
           }
         }
-        .ai-explain {
-          min-height: 3em;
-          font-size: 20px;
-        }
-        // .ai-introduce {
-        // }
-        .explain-btn {
-          margin-top: 100px;
-          cursor: pointer;
+      }
+      .rocket-container {
+        display: flex;
+        justify-content: space-between;
+        backdrop-filter: blur(30px);
+        section {
+          width: 50%;
+          img {
+            max-width: 80%;
+            height: 100%;
+          }
+          .login-main-explain {
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            padding: 30px;
+            padding-bottom: 10px;
+            .ai-title {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              font-size: 48px;
+              font-weight: 700;
+              padding: 20px 0;
+              padding-bottom: 15px;
+              background: -webkit-linear-gradient(
+                144deg,
+                #9500ff,
+                $primary-500 80%,
+                #00ddeb
+              );
+              -webkit-background-clip: text;
+              -webkit-text-fill-color: transparent;
+              .ai-icon {
+                font-size: 35px;
+                margin-left: 10px;
+              }
+            }
+            .ai-subtitle {
+              font-size: 35px;
+              font-weight: 700;
+              padding-bottom: 20px;
+            }
+            .ai-point {
+              padding-bottom: 20px;
+              font-size: 25px;
+              font-weight: 700;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              .space-line {
+                margin: 0 15px;
+                width: 2px;
+                height: 16px;
+                background-color: #e8e8e8;
+              }
+            }
+            .ai-explain {
+              min-height: 3em;
+              font-size: 18px;
+            }
+            .explain-btn {
+              font-weight: 600;
+              letter-spacing: 1.8px;
+              margin-top: 40px;
+              display: flex;
+              justify-content: center;
+              > div {
+                color: $bg-100;
+                cursor: pointer;
+                text-decoration: none;
+                padding: 10px 24px;
+                border-radius: 24px;
+                border: none;
+                transition: all 80ms ease-in-out;
+              }
+              > :first-child {
+                margin-right: 20px;
+                background: linear-gradient(
+                  -45deg,
+                  $accent-500 0%,
+                  $accent-600 100%
+                );
+                outline: 2px solid transparent;
+
+                &:hover {
+                  transform: scale(1.05);
+                  outline: 2px solid $text-300;
+                  background: transparent;
+                  color: $text-300;
+                }
+                &:active {
+                  transform: scale(0.95);
+                }
+              }
+              > :last-child {
+                background-color: rgba($text-300, 0.8);
+                overflow: hidden;
+                position: relative;
+                .explain-text {
+                  transform: translateY(0%);
+                  opacity: 1;
+                  transition: all 0.2s;
+                }
+                &:after {
+                  content: 'M-DOC';
+                  position: absolute;
+                  left: 23px;
+                  transform: translateY(50%);
+                  opacity: 0;
+                  transition: all 0.2s;
+                }
+                &:hover {
+                  transform: scale(1.05);
+                  outline: 2px solid $text-300;
+                  background: transparent;
+                  color: $text-300;
+                  .explain-text {
+                    transform: translateY(-100%);
+                    opacity: 0;
+                  }
+                }
+                &:hover::after {
+                  transform: translateY(-100%);
+                  opacity: 1;
+                }
+                &:active {
+                  transform: scale(0.95);
+                }
+              }
+            }
+          }
+          .login-main {
+            width: 100%;
+            text-align: center;
+            position: relative;
+            min-width: 300px;
+            box-sizing: border-box;
+          }
         }
       }
-      .login-main-box {
-        width: 100%;
-        text-align: right;
-        position: relative;
-        .loginBg {
-          position: absolute;
-          left: 50%;
-          top: 50%;
-          transform: translate(-50%, -50%);
+      // 媒体查询 <780px
+      @media screen and (max-width: 780px) {
+        padding: 20px 0;
+        .rocket-bg {
+          animation: none;
         }
-        .loginMain {
-          min-width: 300px;
-          box-sizing: border-box;
-          // padding: 20px;
-          backdrop-filter: blur(30px);
+        .rocket-container {
+          flex-direction: column-reverse;
+          section {
+            width: 100%;
+            .login-main {
+              padding-left: 25px;
+            }
+            .login-main-explain {
+              padding: 20px;
+              .explain-btn {
+                margin-top: 20px;
+              }
+            }
+          }
         }
       }
     }
-    // 媒体查询 <780px
-    @media screen and (max-width: 780px) {
-      flex-direction: column-reverse;
-      section {
-        width: 100%;
-        .login-main-box {
-          text-align: center;
-          .loginMain {
-            padding-left: 25px;
+    .rocket-introduce {
+      display: flex;
+      flex-wrap: wrap;
+      box-sizing: border-box;
+      article {
+        width: calc(100% / 3);
+        padding: 10px;
+        box-sizing: border-box;
+        .article-container {
+          height: 120px;
+          border-radius: 20px;
+          padding: 30px;
+          border: 2px solid transparent;
+          background-color: $bg-200;
+          opacity: 0.6;
+          transition: all 0.1s;
+          &:hover {
+            opacity: 1;
+            background-color: $bg-500;
+            border-color: $text-200;
+            background-image: radial-gradient(
+              rgba($text-100, 0.2) 1px,
+              transparent 1px
+            );
+            background-position: 50% 50%;
+            background-size: 1.5rem 1.5rem;
+
+            .article-ctx {
+              opacity: 1;
+              transform: translateY(-40%);
+            }
+            .article-icon {
+              transform: translateY(-20%);
+              > i {
+                font-size: 35px;
+              }
+            }
+            .article-header {
+              transform: translateY(-40%);
+            }
+          }
+          .article-icon {
+            text-align: center;
+            padding: 10px 0 15px 0;
+            > i {
+              font-size: 50px;
+              transition: all 0.1s;
+            }
+          }
+          .article-header {
+            font-size: 18px;
+            text-align: center;
+            padding-bottom: 20px;
+            letter-spacing: 1px;
+          }
+          .article-ctx {
+            transform: translateY(0%);
+            opacity: 0;
+            transition: transform 0.2s ease, opacity 0.2s ease;
           }
         }
-        .login-main-explain {
-          padding: 20px;
-          .ai-title {
-            justify-content: center;
-          }
-          .explain-btn {
-            margin-top: 50px;
-          }
+      }
+      @media screen and (max-width: 1000px) {
+        article {
+          width: calc(100% / 2);
+        }
+      }
+      @media screen and (max-width: 780px) {
+        article {
+          width: 100%;
         }
       }
     }
@@ -164,13 +328,44 @@
     }
   }
   main {
-    // background-color: $text-200;
-    // section {
-    //   .login-main-explain {
-    //     > :nth-child(3) {
-
-    //     }
-    //   }
-    // }
+    .rocket-box {
+      .rocket-container {
+        section {
+          .login-main-explain {
+            .explain-btn {
+              > :first-child {
+                &:hover {
+                  background: transparent;
+                  outline: 2px solid $bg-200;
+                  color: $bg-200;
+                }
+              }
+              > :last-child {
+                &:hover {
+                  background: transparent;
+                  outline: 2px solid $bg-200;
+                  color: $bg-200;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    .rocket-introduce {
+      article {
+        .article-container {
+          background-color: $text-600;
+          &:hover {
+            border-color: $bg-100;
+            background-color: $text-700;
+            background-image: radial-gradient(
+              rgba($bg-100, 0.1) 1px,
+              transparent 1px
+            );
+          }
+        }
+      }
+    }
   }
 }
