@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 4291850 */
-  src: url('iconfont.woff2?t=1703661315667') format('woff2'),
-       url('iconfont.woff?t=1703661315667') format('woff'),
-       url('iconfont.ttf?t=1703661315667') format('truetype');
+  src: url('iconfont.woff2?t=1703728298249') format('woff2'),
+       url('iconfont.woff?t=1703728298249') format('woff'),
+       url('iconfont.ttf?t=1703728298249') format('truetype');
 }
 
 .iconfont {
@@ -11,6 +11,74 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.mr-shouji:before {
+  content: "\e61e";
+}
+
+.mr-suoding:before {
+  content: "\e61f";
+}
+
+.mr-mima:before {
+  content: "\e653";
+}
+
+.mr-jiesuo:before {
+  content: "\e65b";
+}
+
+.mr-fanhui:before {
+  content: "\e65f";
+}
+
+.mr-baocun:before {
+  content: "\e620";
+}
+
+.mr-daoru:before {
+  content: "\e623";
+}
+
+.mr-daochu:before {
+  content: "\e624";
+}
+
+.mr-guanbi:before {
+  content: "\e62f";
+}
+
+.mr-danren:before {
+  content: "\e630";
+}
+
+.mr-shangyixiang:before {
+  content: "\e631";
+}
+
+.mr-tongguowancheng:before {
+  content: "\e633";
+}
+
+.mr-xiazai:before {
+  content: "\e634";
+}
+
+.mr-xiayixiang:before {
+  content: "\e635";
+}
+
+.mr-zhuanhuan:before {
+  content: "\e636";
+}
+
+.mr-chakan_yulan:before {
+  content: "\e637";
+}
+
+.mr-jinzhichakan:before {
+  content: "\e638";
 }
 
 .mr-github1:before {

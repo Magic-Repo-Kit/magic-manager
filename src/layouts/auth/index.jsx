@@ -4,6 +4,7 @@ import './index.scss';
 import IconList from './IconList';
 import { DarkModeContext } from '@/components/DarkModeProvider'; //夜间模式
 import DarkModeToggle from '@/components/DarkModeToggle';
+import SwitchBtn from '@/components/switch-btn';
 import BtnLogin from '@/components/BtnLogin';
 import CubeBg from '@/components/cube-bg';
 import TypedText from '@/components/TypedText';
@@ -22,6 +23,7 @@ function Login() {
   const { darkMode } = useContext(DarkModeContext);
   const [isLoading, setIsLoading] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isRegister, setIsRegister] = useState(false);
 
   // 触发
   const handleLoginBtn = () => {
@@ -100,6 +102,10 @@ function Login() {
                       window.location.assign(
                         'https://mrk-doc.auroralpixel.world/'
                       );
+                      //  window.open(
+                      //    'https://mrk-doc.auroralpixel.world/',
+                      //    '_blank'
+                      //  );
                     }}
                   >
                     <div className="explain-text">查看文档</div>
@@ -203,7 +209,14 @@ function Login() {
       <WholeLoading isLoading={isLoading} />
       {/* 弹框 */}
       <Modal
-        // title="登陆"
+        title={
+          <div className="form-switch">
+            <SwitchBtn
+              isRegister={isRegister}
+              handRegisterChange={() => setIsRegister(!isRegister)}
+            />
+          </div>
+        }
         centered
         open={isModalVisible}
         onOk={onConfirmLogin}
@@ -212,7 +225,7 @@ function Login() {
         cancelText="取消"
         footer=""
       >
-        <FormModal />
+        <FormModal isRegister={isRegister} />
       </Modal>
     </div>
   );
