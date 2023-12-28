@@ -1,3 +1,4 @@
+
 /**
  * 设置accessToken
  * @param access_token
@@ -69,3 +70,13 @@ export const handleFullScreenClick = () => {
 export const random = (min, max) => {
   return Math.floor(Math.random() * (max - min) + min);
 };
+
+// 校验输入:字母 数字 _ - . @  12位
+export const filterInput = (e, setValue) => {
+  const inputValue = e.target.value;
+  const filteredValue = inputValue.replace(/[^a-zA-Z0-9_\-.@]/g, '');
+  const maxLengthValue = filteredValue.match(/^.{0,12}/)[0]; // 最多匹配前12个字符
+  setValue(maxLengthValue);
+};
+
+

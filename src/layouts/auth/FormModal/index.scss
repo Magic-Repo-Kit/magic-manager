@@ -17,6 +17,15 @@
         color: $text-200;
         font-weight: 600;
         margin-left: 3px;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .title-tips {
+          font-weight: 500;
+          font-size: 12px;
+          color: $accent-100;
+        }
       }
       .input-content {
         box-sizing: border-box;

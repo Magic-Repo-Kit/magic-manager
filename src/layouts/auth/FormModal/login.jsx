@@ -1,27 +1,110 @@
 import React, { useState } from 'react';
 import './index.scss';
+import { throttle } from 'lodash'; //lodash 节流函数
+import { loginAPI } from '@/request/auth';
+import { setAccessToken, setRefreshToken } from '@/utils/tools';
+import { useNavigate } from 'react-router-dom';
 
+// 静态组件
 import google from '@/assets/images/google.png';
 import github from '@/assets/images/github.png';
 import gitee from '@/assets/images/gitee.png';
+import WholeLoading from '@/components/whole-loading';
+
+// antd组件
+import { message } from 'antd';
 
 const Login = () => {
+  // 参数
   const [showPassword, setShowPassword] = useState(false);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [showUsernameTips, setShowUsernameTips] = useState(false);
+  const [showPasswordTips, setShowPasswordTips] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const navigate = useNavigate();
+
+  // 过滤输入 | 控制显示消息
+  const filterInput = (e, setValue, setShowTips) => {
+    const inputValue = e.target.value;
+    const filteredValue = inputValue.replace(/[^a-zA-Z0-9_\-.@]/g, '');
+    const maxLengthValue = filteredValue.match(/^.{0,12}/)[0]; // 最多匹配前12个字符
+    setValue(maxLengthValue);
+    if (filteredValue !== inputValue) {
+      setShowTips(true); // 显示提示信息
+    } else {
+      setShowTips(false); // 隐藏提示信息
+    }
+  };
+
+  // 账号登录
+  const handleLogin = throttle(async (e) => {
+    setIsLoading(true);
+    e.preventDefault();
+    // 校验
+    if (!username) {
+      message.warning('请输入账号');
+      return;
+    }
+    if (!password) {
+      message.success('请输入密码');
+    }
+    // 添加登录处理函数
+    try {
+      const res = await loginAPI({ username, password });
+      if (res.code === 200) {
+        const { access_token, refresh_token } = res.data;
+        setAccessToken(access_token);
+        setRefreshToken(refresh_token);
+        navigate('/admin');
+        // message.success('登录成功');
+        setIsLoading(false);
+      } else {
+        message.error(res.msg || '登录失败');
+      }
+    } catch (error) {
+      message.error(error.msg || '登录失败');
+    } finally {
+      // setIsLoading(false);
+    }
+  }, 1000);
+
   return (
     <div className="login-container">
       <div className="form-box user-select">
         {/* 账号 */}
-        <div className="input-title">账号：</div>
+        <div className="input-title">
+          账号：
+          {username.length < 12 ? (
+            showUsernameTips && (
+              <span className="title-tips">请输入数字、字母或 _ - . @</span>
+            )
+          ) : (
+            <span className="title-tips">最大长度不能超过12</span>
+          )}
+        </div>
         <div className="input-content">
           <i className="iconfont mr-danren"></i>
           <input
             type="text"
             className="input-text"
             placeholder="输入您的账号"
+            value={username}
+            onChange={(e) => filterInput(e, setUsername, setShowUsernameTips)}
           />
         </div>
         {/* 密码 */}
-        <div className="input-title">密码：</div>
+        <div className="input-title">
+          密码：
+          {password.length < 12 ? (
+            showPasswordTips && (
+              <span className="title-tips">请输入数字、字母或 _ - . @</span>
+            )
+          ) : (
+            <span className="title-tips">最大长度不能超过12</span>
+          )}
+        </div>
         <div className="input-content">
           <i
             className={`iconfont ${showPassword ? 'mr-jiesuo' : 'mr-mima'} `}
@@ -30,6 +113,8 @@ const Login = () => {
             type={showPassword ? 'text' : 'password'}
             className="input-text"
             placeholder="输入您的密码"
+            value={password}
+            onChange={(e) => filterInput(e, setPassword, setShowPasswordTips)}
           />
           <div
             className="icon-eyes-box"
@@ -49,7 +134,9 @@ const Login = () => {
           <span className="link">忘记密码?</span>
         </div>
 
-        <button className="button-submit">登 录</button>
+        <button className="button-submit" onClick={handleLogin}>
+          登 录
+        </button>
         <div className="form-login-or">OR</div>
         <div className="fast-box">
           <button className="fast-btn github">
@@ -68,6 +155,8 @@ const Login = () => {
           还没账户? <span className="link">去注册</span>
         </p>
       </div>
+      {/* loading */}
+      <WholeLoading isLoading={isLoading} />
     </div>
   );
 };

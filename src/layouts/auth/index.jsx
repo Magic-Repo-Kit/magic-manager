@@ -19,7 +19,7 @@ import loginMain from '@/assets/images/login-main.png';
 // antd组件
 import { Modal } from 'antd';
 
-function Login() {
+function Auth() {
   const { darkMode } = useContext(DarkModeContext);
   const [isLoading, setIsLoading] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -231,4 +231,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Auth;
