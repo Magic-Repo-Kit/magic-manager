@@ -5,7 +5,7 @@ import { Flex, Typography, Popconfirm } from 'antd';
 import { useNavigate } from 'react-router-dom';
 
 // import mrkLogoLight from '@/assets/images/mrk-light.png';
-import mrkLogoDark from '@/assets/images/mrk-dark.png';
+// import mrkLogoDark from '@/assets/images/mrk-dark.png';
 import mrkLogo from '@/assets/images/logo-mrk.png';
 
 const { Title } = Typography;

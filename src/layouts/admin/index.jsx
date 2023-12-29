@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Outlet } from 'react-router-dom'; //渲染子路由
 import { useLocation } from 'react-router-dom';
 import './index.scss';
-import MrHeader from '@/components/mr-header';
+// import MrHeader from '@/components/mr-header';
 import MrSidebar from '@/components/mr-sidebar';
 import MrCard from '@/components/mr-card';
 
@@ -45,12 +45,12 @@ function Admin() {
     //   callback: () => window.location.replace('/auth'),
     // },
   ];
-  const handleIconClick = (iconId) => {
-    const clickedIcon = headerIcons.find((icon) => icon.id === iconId);
-    if (clickedIcon) {
-      clickedIcon.callback();
-    }
-  };
+  // const handleIconClick = (iconId) => {
+  //   const clickedIcon = headerIcons.find((icon) => icon.id === iconId);
+  //   if (clickedIcon) {
+  //     clickedIcon.callback();
+  //   }
+  // };
 
   // 主题监听
   useEffect(() => {
@@ -116,14 +116,14 @@ function Admin() {
           className={showShadow ? 'headerStyle' : 'headerStyle header-shadow'}
           style={{ display: isDisplay }}
         >
-          <MrHeader
+          {/* <MrHeader
             slotTitle="Magicrepokit"
             slotIcon={headerIcons}
             mode={mode}
             onIconClick={(icon) => {
               handleIconClick(icon.id);
             }}
-          />
+          /> */}
         </Header>
         <Layout className="layout-content">
           <Sider className="siderStyle" width="280" style={{ opacity }}>
