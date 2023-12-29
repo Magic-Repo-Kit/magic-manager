@@ -7,7 +7,7 @@ import Cube from '@/components/Cube';
 import './index.scss';
 
 // import mrkLogoLight from '@/assets/images/mrk-light.png';
-import mrkLogoDark from '@/assets/images/mrk-dark.png';
+// import mrkLogoDark from '@/assets/images/mrk-dark.png';
 import mrkLogo from '@/assets/images/logo-mrk.png';
 import loginBc1 from '@/assets/images/login-vr.svg';
 
