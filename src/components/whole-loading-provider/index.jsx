@@ -3,10 +3,10 @@ import React, { createContext, useState } from 'react';
 export const WholeLoadingContext = createContext();
 
 const WholeLoadingProvider = ({ children }) => {
-  const [isWholeLoading, setIsWholeLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   return (
-    <WholeLoadingContext.Provider value={{ isWholeLoading, setIsWholeLoading }}>
+    <WholeLoadingContext.Provider value={{ isLoading, setIsLoading }}>
       {children}
     </WholeLoadingContext.Provider>
   );

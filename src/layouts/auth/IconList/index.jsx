@@ -1,7 +1,7 @@
 import React from 'react';
 import './index.scss';
 
-const IconList = () => {
+function IconList() {
   return (
     <>
       <div className="icon-list-box">
@@ -24,6 +24,6 @@ const IconList = () => {
       </div>
     </>
   );
-};
+}
 
 export default IconList;

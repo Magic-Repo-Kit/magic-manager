@@ -1,6 +1,6 @@
 import axios from 'axios';
-import NProgress from "nprogress";  //进度条
-import "nprogress/nprogress.css";
+// import NProgress from "nprogress";  //进度条
+// import "nprogress/nprogress.css";
 
 import { getAccessToken, setAccessToken, removeAccessToken, getRefreshToken, removeRefreshToken } from "@/utils/tools";
 // 创建 axios 实例
@@ -23,7 +23,7 @@ instance.interceptors.request.use((config) => {
       Authorization: `Bearer ${access_token}`
     }, config.headers);
   }
-  NProgress.start();  //启动loading
+  // NProgress.start();  //启动loading
   return config;
 }, (error) => {
   console.log(error);
@@ -32,7 +32,7 @@ instance.interceptors.request.use((config) => {
 
 // 响应拦截器
 instance.interceptors.response.use((response) => {
-  NProgress.done(); // 关闭loading
+  // NProgress.done(); // 关闭loading
   return response;
 }, async error => {
   const originalRequest = error.config;

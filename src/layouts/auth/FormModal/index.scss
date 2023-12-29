@@ -181,8 +181,9 @@
             margin-top: 5px;
           }
           &:active {
-            width: 90%;
-            opacity: 0;
+            // width: 90%;
+            // opacity: 0;
+            transform: translateY(2px);
           }
           img {
             height: 30px;

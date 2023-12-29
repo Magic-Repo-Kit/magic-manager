@@ -16,6 +16,13 @@
     position: fixed;
     top: 0;
     background: transparent;
+    transform: translateZ(0); //触发 GPU 硬件加速
+    -webkit-transform: translateZ(0);
+    -moz-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    -o-transform: translateZ(0);
+    backface-visibility: hidden; //解决ios上内容闪动的问题
+    -webkit-backdrop-filter: blur(30px);
     backdrop-filter: blur(30px);
     .header-content {
       padding: 0 25px;
@@ -80,7 +87,15 @@
       .rocket-container {
         display: flex;
         justify-content: space-between;
+        transform: translateZ(0); //触发 GPU 硬件加速
+        -webkit-transform: translateZ(0);
+        -moz-transform: translateZ(0);
+        -ms-transform: translateZ(0);
+        -o-transform: translateZ(0);
+        backface-visibility: hidden; //解决ios上内容闪动的问题
+        -webkit-backdrop-filter: blur(30px); //兼容设备
         backdrop-filter: blur(30px);
+
         section {
           width: 50%;
           img {
@@ -120,6 +135,7 @@
               padding-bottom: 20px;
             }
             .ai-point {
+              opacity: 1;
               padding-bottom: 20px;
               font-size: 25px;
               font-weight: 700;
@@ -134,8 +150,9 @@
               }
             }
             .ai-explain {
+              opacity: 0.6;
               min-height: 3em;
-              font-size: 18px;
+              font-size: 16px;
             }
             .explain-btn {
               font-weight: 600;
@@ -172,7 +189,7 @@
                 }
               }
               > :last-child {
-                background-color: rgba($text-300, 0.8);
+                background-color: $text-200;
                 overflow: hidden;
                 position: relative;
                 .explain-text {
@@ -221,6 +238,7 @@
       @media screen and (max-width: 780px) {
         padding: 20px 0;
         .rocket-bg {
+          top: 30%;
           animation: none;
         }
         .rocket-container {
@@ -228,10 +246,16 @@
           section {
             width: 100%;
             .login-main {
-              padding-left: 25px;
+              height: 400px;
+              padding-left: 10px;
             }
             .login-main-explain {
               padding: 20px;
+
+              .ai-explain {
+                font-size: 14px;
+                opacity: 0.6;
+              }
               .explain-btn {
                 margin-top: 20px;
               }
@@ -333,6 +357,9 @@
       .rocket-container {
         section {
           .login-main-explain {
+            .ai-point {
+              opacity: 0.6;
+            }
             .explain-btn {
               > :first-child {
                 &:hover {
@@ -342,6 +369,7 @@
                 }
               }
               > :last-child {
+                background-color: rgba($text-300, 0.8);
                 &:hover {
                   background: transparent;
                   outline: 2px solid $bg-200;

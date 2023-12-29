@@ -1,43 +1,90 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, createContext } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import './index.scss';
-
-import IconList from './IconList';
 import { DarkModeContext } from '@/components/DarkModeProvider'; //夜间模式
 import DarkModeToggle from '@/components/DarkModeToggle';
+import WholeLoading from '@/components/whole-loading';
+import { WholeLoadingContext } from '@/components/whole-loading-provider'; //全局Loading控制
 import SwitchBtn from '@/components/switch-btn';
 import BtnLogin from '@/components/BtnLogin';
 import CubeBg from '@/components/cube-bg';
 import TypedText from '@/components/TypedText';
-import WholeLoading from '@/components/whole-loading';
 import FormModal from './FormModal';
-
+import IconList from './IconList';
+// 方法
+import { platformLoginAPI } from '@/request/auth';
+import { setAccessToken, setRefreshToken } from '@/utils/tools';
+// 图片
 import mrkLogo from '@/assets/images/logo-mrk.png';
 import mrkLight from '@/assets/images/mrk-title-light.png';
 import mrkDark from '@/assets/images/mrk-title-dark.png';
 import loginMain from '@/assets/images/login-main.png';
 
 // antd组件
-import { Modal } from 'antd';
+import { Modal, message } from 'antd';
+
+// 创建登录/注册上下文
+export const IsRegisterContext = createContext();
 
 function Auth() {
+  // 共享参数
   const { darkMode } = useContext(DarkModeContext);
-  const [isLoading, setIsLoading] = useState(false);
+  const { isLoading, setIsLoading } = useContext(WholeLoadingContext);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isRegister, setIsRegister] = useState(false);
 
-  // 触发
-  const handleLoginBtn = () => {
-    setIsModalVisible(true);
-  };
-  // 提交
-  const onConfirmLogin = () => {
-    setIsLoading(true);
-    // 定时器
-    setTimeout(() => {
-      setIsLoading(false);
-      setIsModalVisible(false);
-    }, 3000);
-  };
+  const navigate = useNavigate();
+  const locationObj = useLocation();
+
+  // 监听地址栏 | 判断是否有第三方参数
+  useEffect(() => {
+    const fetchData = async () => {
+      // 从地址栏里面获取参数
+      const urlParams = new URLSearchParams(locationObj.search);
+      const code = urlParams.get('code');
+      const state = urlParams.get('state');
+
+      if (code && state) {
+        setIsLoading(true);
+        try {
+          const res = await platformLoginAPI({
+            type: sessionStorage.getItem('platformType'),
+            code,
+            state,
+          });
+          if (res.code === 200) {
+            const { access_token, refresh_token } = res.data;
+            setAccessToken(access_token);
+            setRefreshToken(refresh_token);
+            navigate('/admin');
+            message.success('登录成功');
+          } else {
+            setIsLoading(false);
+            message.error(res.msg || '登录失败');
+            // 如果跳转失败，删除多余参数，并替换路径
+            urlParams.delete('code');
+            urlParams.delete('state');
+            const newUrl = `${locationObj.pathname}`;
+            window.history.replaceState({}, '', newUrl);
+          }
+        } catch (error) {
+          setIsLoading(false);
+          message.error(error.msg || '登录失败');
+          // 如果跳转失败，删除多余参数，并替换路径
+          urlParams.delete('code');
+          urlParams.delete('state');
+          const newUrl = `${locationObj.pathname}`;
+          window.history.replaceState({}, '', newUrl);
+        } finally {
+          setTimeout(() => {
+            setIsLoading(false);
+          }, 2000);
+        }
+      }
+    };
+    fetchData();
+  }, [locationObj.search, locationObj.pathname, navigate, setIsLoading]);
+
   return (
     <div className={`login-container ${darkMode ? 'dark-mode' : ''}`}>
       <header
@@ -52,7 +99,7 @@ function Auth() {
           <div className="btn-box">
             <DarkModeToggle size="20px" />
             <div className="space-line"></div>
-            <div onClick={handleLoginBtn}>
+            <div onClick={() => setIsModalVisible(true)}>
               <BtnLogin iconName="mr-login-full" content="Login" />
             </div>
           </div>
@@ -73,7 +120,7 @@ function Auth() {
                 <div className="ai-subtitle font-family-dingding">
                   MagicRepokit
                 </div>
-                <div className="ai-point">
+                <div className="ai-point font-family-dingding">
                   自由
                   <div className="space-line"></div>
                   简单
@@ -205,8 +252,7 @@ function Auth() {
         </div>
         {/* <div className="rocket-"></div> */}
       </main>
-      {/* loading */}
-      <WholeLoading isLoading={isLoading} />
+
       {/* 弹框 */}
       <Modal
         title={
@@ -219,14 +265,15 @@ function Auth() {
         }
         centered
         open={isModalVisible}
-        onOk={onConfirmLogin}
         onCancel={() => setIsModalVisible(false)}
-        okText="确认"
-        cancelText="取消"
         footer=""
       >
-        <FormModal isRegister={isRegister} />
+        <IsRegisterContext.Provider value={{ isRegister, setIsRegister }}>
+          <FormModal />
+        </IsRegisterContext.Provider>
       </Modal>
+      {/* loading */}
+      <WholeLoading isLoading={isLoading} />
     </div>
   );
 }
