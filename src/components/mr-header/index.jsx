@@ -4,7 +4,7 @@ import { Flex, Typography, Popconfirm } from 'antd';
 // import { UserOutlined, LoginOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 
-import mrkLogoLight from '@/assets/images/mrk-light.png';
+// import mrkLogoLight from '@/assets/images/mrk-light.png';
 import mrkLogoDark from '@/assets/images/mrk-dark.png';
 import mrkLogo from '@/assets/images/logo-mrk.png';
 
@@ -28,11 +28,11 @@ const MrHeader = (props) => {
         style={{ height: '60px' }}
       >
         <img src={mrkLogo} height="30" style={{ marginRight: '5px' }} />
-        <img
+        {/* <img
           src={mode === 'default' ? mrkLogoLight : mrkLogoDark}
           alt="MRK"
           height="25"
-        />
+        /> */}
       </div>
 
       {/* 右侧 */}

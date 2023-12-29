@@ -6,7 +6,7 @@ import Cube from '@/components/Cube';
 
 import './index.scss';
 
-import mrkLogoLight from '@/assets/images/mrk-light.png';
+// import mrkLogoLight from '@/assets/images/mrk-light.png';
 import mrkLogoDark from '@/assets/images/mrk-dark.png';
 import mrkLogo from '@/assets/images/logo-mrk.png';
 import loginBc1 from '@/assets/images/login-vr.svg';
@@ -69,7 +69,7 @@ function Login() {
       {/* logo */}
       <div className="login-logo flx-center">
         <img src={mrkLogo} alt="" height="18" />
-        <img src={mrkLogoLight} alt="MRK" height="16" />
+        {/* <img src={mrkLogoLight} alt="MRK" height="16" /> */}
       </div>
 
       {/* 头部 */}
