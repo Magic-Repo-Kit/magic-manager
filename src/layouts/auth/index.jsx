@@ -170,7 +170,7 @@ function Auth() {
             </section>
           </div>
         </div>
-        <div className="rocket-introduce">
+        <div className="rocket-introduce user-select ">
           <article>
             <div className="article-container">
               <div className="article-icon">

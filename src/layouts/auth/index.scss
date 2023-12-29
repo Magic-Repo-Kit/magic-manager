@@ -231,6 +231,10 @@
             position: relative;
             min-width: 300px;
             box-sizing: border-box;
+            > img {
+              -webkit-touch-callout: none; /* 禁止长按弹出默认菜单 */
+              user-select: none; /* 禁用选择文本 */
+            }
           }
         }
       }

@@ -175,7 +175,7 @@ function Login() {
         </button>
 
         {/* 第三方平台登录 */}
-        <div className="form-login-or">OR</div>
+        <div className="form-login-or font-family-dingding">OR</div>
         <div className="fast-box">
           <button
             className="fast-btn github"

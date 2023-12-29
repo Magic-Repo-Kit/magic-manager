@@ -28,6 +28,20 @@ function Admin() {
             <div>
               <BtnLogin iconName="mr-admin-full" content="Login" />
             </div>
+            <div>
+              <i
+                onClick={() => {
+                  window.location.href = '/auth';
+                }}
+                className="iconfont mr-tuichu"
+                style={{
+                  color: '#d81e06',
+                  marginRight: '8px',
+                  fontSize: '18px',
+                  marginLeft: '10px',
+                }}
+              ></i>
+            </div>
           </div>
         </div>
       </header>
