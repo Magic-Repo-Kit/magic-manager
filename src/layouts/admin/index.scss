@@ -1,12 +1,20 @@
-.layout {
-  // 头部
-  .headerStyle {
-    padding-right: 10px;
-    z-index: 1;
-    position: sticky;
-    top: 0;
-    height: 60px;
+@import '@/styles/theme';
+.admin-container {
+  box-sizing: border-box;
+  transition: color 0.5s, background-color 0.5s;
+  color: $text-200;
+  background-color: $bg-100;
+  position: relative;
+  width: 100%;
+  min-height: 100%;
+  // overflow: auto;
+  overflow: hidden;
+  font-family: 'Montserrat', sans-serif;
+  header {
     width: 100%;
+    z-index: 1;
+    position: fixed;
+    top: 0;
     background: transparent;
     transform: translateZ(0); //触发 GPU 硬件加速
     -webkit-transform: translateZ(0);
@@ -14,34 +22,52 @@
     -ms-transform: translateZ(0);
     -o-transform: translateZ(0);
     backface-visibility: hidden; //解决ios上内容闪动的问题
-    -webkit-backdrop-filter: saturate(50%) blur(6px);
-    backdrop-filter: saturate(50%) blur(6px);
-    // cursor: url('../../assets/icons/cursor-1.png'), auto;
-    transition: all 1s ease-out;
-  }
-  .headerStyle.header-shadow {
-    // border-bottom: 1px solid rgba(5, 5, 5, 0.06);
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.03),
-      0 1px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px 0 rgba(0, 0, 0, 0.02);
-  }
-  .layout-content {
-    // 侧边菜单
-    .siderStyle {
-      overflow: auto;
-      position: fixed;
-      left: 0;
-      height: calc(100% - 60px);
-      padding-top: 30px;
-      border-inline-start: 1px solid rgba(5, 5, 5, 0.06);
+    -webkit-backdrop-filter: blur(30px);
+    backdrop-filter: blur(30px);
+    .header-content {
+      padding: 0 25px;
+      height: 65px;
       display: flex;
-      flex-direction: column;
-      overflow: auto;
-      direction: rtl; //滚动条从右到左
+      justify-content: space-between;
+      align-items: center;
+      .mrk-logo {
+        height: 28px;
+        display: flex;
+        align-items: center;
+        img {
+          height: 100%;
+          &:last-child {
+            margin-left: 5px;
+            height: 70%;
+          }
+        }
+      }
+
+      .btn-box {
+        display: flex;
+        align-items: center;
+        height: 100%;
+        .space-line {
+          margin: 0 15px;
+          width: 1px;
+          height: 15px;
+          background-color: #e8e8e8;
+        }
+      }
     }
-    // 内容区
-    .contentStyle {
-      overflow: auto;
-      min-height: calc(100vh - 60px);
+  }
+}
+
+// 黑暗模式
+.admin-container.dark-mode {
+  transition: color 0.5s, background-color 0.5s;
+  color: $bg-100;
+  background-color: $text-200;
+  header {
+    .header-content {
+      .mrkLogo {
+        filter: grayscale(100%) brightness(200%); //白
+      }
     }
   }
 }

@@ -45,6 +45,7 @@ const LoginLog = lazy(() => import('@/page/users/children/login-log'));
 const About = lazy(() => import('@/page/about'));
 
 const routes = [
+  // 通过权限页面
   {
     path: 'admin',
     element: <AdminLayout />,
@@ -104,6 +105,7 @@ const routes = [
       },
     ],
   },
+  // 鉴权
   {
     path: 'auth',
     element: <AuthLayout />,
