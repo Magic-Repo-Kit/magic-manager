@@ -1,0 +1,31 @@
+/**
+ * Rocket design made by: https://www.behance.net/barrud
+ */
+.rocket-svg {
+  padding: 5%;
+  text-align: center;
+  @keyframes rocket-move {
+    to {
+      transform: translateY(10px);
+    }
+  }
+
+  .pen-header {
+    color: #fff;
+    text-align: center;
+  }
+
+  .rocket {
+    animation: rocket-move 2s ease-in-out infinite alternate;
+  }
+
+  .pen-footer {
+    color: #fff;
+    font-size: 14px;
+    text-align: center;
+  }
+
+  a {
+    color: inherit;
+  }
+}

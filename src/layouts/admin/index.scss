@@ -26,6 +26,7 @@
     backdrop-filter: blur(30px);
     .header-content {
       padding: 0 25px;
+      padding-right: 15px;
       height: 65px;
       display: flex;
       justify-content: space-between;
@@ -48,10 +49,26 @@
         align-items: center;
         height: 100%;
         .space-line {
-          margin: 0 15px;
+          margin: 0 10px;
           width: 1px;
           height: 15px;
           background-color: #e8e8e8;
+        }
+        .admin-language-switch {
+          cursor: pointer;
+          margin-left: 10px;
+          i {
+            font-size: 22px;
+          }
+        }
+        .admin-user-container {
+          cursor: pointer;
+          // border: 2px solid #e8e8e8;
+          border-radius: 50%;
+          padding: 5px;
+          i {
+            font-size: 22px;
+          }
         }
       }
     }

@@ -11,6 +11,9 @@ import CubeBg from '@/components/cube-bg';
 import TypedText from '@/components/TypedText';
 import FormModal from './FormModal';
 import IconList from './IconList';
+import Introduce from './introduce'; //功能介绍
+import MagicRepoKit from './magic-repo-kit';
+import Rocket from '@/components/Rocket';
 // 方法
 import { platformLoginAPI } from '@/request/auth';
 import { setAccessToken, setRefreshToken } from '@/utils/tools';
@@ -165,92 +168,21 @@ function Auth() {
             </section>
             <section>
               <div className="login-main">
-                <img src={loginMain} className="float-up-down " />
+                <img src={loginMain} className="rocket-wiggle" />
               </div>
             </section>
           </div>
         </div>
-        <div className="rocket-introduce user-select ">
-          <article>
-            <div className="article-container">
-              <div className="article-icon">
-                <i className="iconfont mr-shujujiekou"></i>
-              </div>
-              <div className="article-header font-family-dingding">
-                智能扩展
-              </div>
-              <div className="article-ctx">
-                提供了智能模型的扩展，增强了其处理和交互能力。
-              </div>
-            </div>
-          </article>
-          <article>
-            <div className="article-container">
-              <div className="article-icon">
-                <i className="iconfont mr-shujucaiji"></i>
-              </div>
-              <div className="article-header font-family-dingding">
-                数据融合
-              </div>
-              <div className="article-ctx">
-                实现了数据源与模型的有效融合，增强了信息处理的深度和广度。
-              </div>
-            </div>
-          </article>
-          <article>
-            <div className="article-container">
-              <div className="article-icon">
-                <i className="iconfont mr-renjijiaohu"></i>
-              </div>
-              <div className="article-header font-family-dingding">
-                交互增强
-              </div>
-              <div className="article-ctx">
-                优化了用户与模型的交互体验，提高了响应的准确性和相关性。
-              </div>
-            </div>
-          </article>
-          <article>
-            <div className="article-container">
-              <div className="article-icon">
-                <i className="iconfont mr-kuozhangongneng"></i>
-              </div>
-              <div className="article-header font-family-dingding">
-                功能丰富
-              </div>
-              <div className="article-ctx">
-                引入了多样化的功能，拓宽了语言模型的应用场景。
-              </div>
-            </div>
-          </article>
-          <article>
-            <div className="article-container">
-              <div className="article-icon">
-                <i className="iconfont mr-insert_tag_field"></i>
-              </div>
-              <div className="article-header font-family-dingding">
-                开源共享
-              </div>
-              <div className="article-ctx">
-                作为一个开源项目，鼓励社区参与和共同发展。
-              </div>
-            </div>
-          </article>
-          <article>
-            <div className="article-container">
-              <div className="article-icon">
-                <i className="iconfont mr-1huojian"></i>
-              </div>
-              <div className="article-header font-family-dingding">
-                创新引领
-              </div>
-              <div className="article-ctx">
-                代表了人工智能和自然语言处理领域的创新方向。
-              </div>
-            </div>
-          </article>
+        {/* 功能介绍 */}
+        <div className="rocket-introduce user-select">
+          <Introduce />
         </div>
-        {/* <div className="rocket-"></div> */}
+        <div>
+          <Rocket />
+        </div>
+        <div className="login-magicrepokit">
+          <MagicRepoKit />
+        </div>
       </main>
 
       {/* 弹框 */}

@@ -153,6 +153,9 @@
               opacity: 0.6;
               min-height: 3em;
               font-size: 16px;
+              &:hover {
+                opacity: 1;
+              }
             }
             .explain-btn {
               font-weight: 600;
@@ -195,7 +198,7 @@
                 .explain-text {
                   transform: translateY(0%);
                   opacity: 1;
-                  transition: all 0.2s;
+                  transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
                 }
                 &:after {
                   content: 'M-DOC';
@@ -203,7 +206,7 @@
                   left: 23px;
                   transform: translateY(50%);
                   opacity: 0;
-                  transition: all 0.2s;
+                  transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
                 }
                 &:hover {
                   transform: scale(1.05);
@@ -351,6 +354,11 @@
   background-color: $text-200;
   header {
     .header-content {
+      &:hover {
+        .mrkLogo {
+          filter: none;
+        }
+      }
       .mrkLogo {
         filter: grayscale(100%) brightness(200%); //白
       }
@@ -363,6 +371,9 @@
           .login-main-explain {
             .ai-point {
               opacity: 0.6;
+              &:hover {
+                opacity: 1;
+              }
             }
             .explain-btn {
               > :first-child {

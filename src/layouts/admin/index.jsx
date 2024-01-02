@@ -4,7 +4,7 @@ import { Outlet } from 'react-router-dom'; //渲染子路由
 import './index.scss';
 import { DarkModeContext } from '@/components/DarkModeProvider'; //夜间模式
 import DarkModeToggle from '@/components/DarkModeToggle';
-import BtnLogin from '@/components/BtnLogin';
+import HeaderTabs from './header-tabs';
 
 // 图片
 import mrkLogo from '@/assets/images/logo-mrk.png';
@@ -21,14 +21,21 @@ function Admin() {
             <img src={mrkLogo} alt="" className="mrkLogo" />
             <img src={darkMode ? mrkDark : mrkLight} className="mrkTitle" />
           </div>
-
+          {/* 中间 */}
+          <div className="user-select">
+            <HeaderTabs />
+          </div>
+          {/* 右侧 */}
           <div className="btn-box">
             <DarkModeToggle size="20px" />
-            <div className="space-line"></div>
-            <div>
-              <BtnLogin iconName="mr-admin-full" content="Login" />
+            <div className="admin-language-switch flx-center">
+              <i className="iconfont mr-qiehuanyuyan"></i>
             </div>
-            <div>
+            <div className="space-line"></div>
+            <div className="admin-user-container">
+              <i className="iconfont mr-user--line"></i>
+            </div>
+            {/* <div>
               <i
                 onClick={() => {
                   window.location.href = '/auth';
@@ -41,7 +48,7 @@ function Admin() {
                   marginLeft: '10px',
                 }}
               ></i>
-            </div>
+            </div> */}
           </div>
         </div>
       </header>

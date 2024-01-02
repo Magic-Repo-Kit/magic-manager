@@ -25,7 +25,7 @@ function Router() {
     }
   };
 
-  // 递归路由
+  // 定义路由 | 递归
   const RouteNav = (param) => {
     return param.map((item) => {
       return (

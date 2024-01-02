@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 4291850 */
-  src: url('iconfont.woff2?t=1703728298249') format('woff2'),
-       url('iconfont.woff?t=1703728298249') format('woff'),
-       url('iconfont.ttf?t=1703728298249') format('truetype');
+  src: url('iconfont.woff2?t=1704185518764') format('woff2'),
+       url('iconfont.woff?t=1704185518764') format('woff'),
+       url('iconfont.ttf?t=1704185518764') format('truetype');
 }
 
 .iconfont {
@@ -13,12 +13,36 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.mr-shouji:before {
-  content: "\e61e";
+.mr-ic_user:before {
+  content: "\e6ba";
 }
 
-.mr-suoding:before {
+.mr-user--line:before {
+  content: "\e791";
+}
+
+.mr-ic_user1:before {
+  content: "\e68d";
+}
+
+.mr-user1:before {
+  content: "\e730";
+}
+
+.mr-useryonghu:before {
+  content: "\e858";
+}
+
+.mr-user-admin:before {
+  content: "\e63a";
+}
+
+.mr-tishi:before {
   content: "\e61f";
+}
+
+.mr-shouji:before {
+  content: "\e61e";
 }
 
 .mr-mima:before {

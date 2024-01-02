@@ -117,12 +117,15 @@
         height: 45px;
         width: 100%;
         cursor: pointer;
-        transition: 0.2s;
+        transition: all 0.5s ease;
         &:hover {
+          letter-spacing: 3px;
           background-color: $text-600;
         }
         &:active {
-          transform: translateY(2px);
+          letter-spacing: 3px;
+          transform: translateY(5px);
+          transition: 100ms;
         }
       }
       .form-login-or {
@@ -175,7 +178,7 @@
           border: 1px solid #ededef;
           background-color: white;
           cursor: pointer;
-          transition: 0.2s ease-in-out;
+          transition: all 0.5s ease;
           outline: 2px solid transparent;
           &:first-child {
             margin-top: 5px;
@@ -183,19 +186,24 @@
           &:active {
             // width: 90%;
             // opacity: 0;
-            transform: translateY(2px);
+            letter-spacing: 3px;
+            transform: translateY(5px);
+            transition: 100ms;
           }
           img {
             height: 30px;
           }
         }
         .github:hover {
+          letter-spacing: 1px;
           outline: 2px solid $text-300;
         }
         .gitee:hover {
+          letter-spacing: 1px;
           outline: 2px solid #c71d23;
         }
         .google:hover {
+          letter-spacing: 1px;
           outline: 2px solid $accent-700;
         }
       }
