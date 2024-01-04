@@ -17,32 +17,15 @@ function Admin() {
   // 共享参数
   const { darkMode } = useContext(DarkModeContext);
 
-  const items = [
-    {
-      label: (
-        <>
-          <span>Admin</span>
-        </>
-      ),
-      key: '1',
-    },
-    {
-      label: (
-        <>
-          <span>GPT</span>
-        </>
-      ),
-      key: '2',
-    },
-    {
-      label: (
-        <>
-          <span>聊天室</span>
-        </>
-      ),
-      key: '3',
-    },
-  ];
+  // 自定义下拉
+  const renderDropdown = () => {
+    return (
+      <div className="custom-dropdown-app ${darkMode ? 'dark-mode' : ''}`}">
+        12321321
+      </div>
+    );
+  };
+
   return (
     <div className={`admin-container ${darkMode ? 'dark-mode' : ''}`}>
       <header>
@@ -56,14 +39,7 @@ function Admin() {
             <HeaderTabs />
           </div> */}
 
-          <Dropdown
-            menu={{
-              items,
-              selectable: true,
-              defaultSelectedKeys: ['3'],
-            }}
-            placement="bottom"
-          >
+          <Dropdown dropdownRender={renderDropdown} placement="bottom">
             <div className="mrk-select-app user-select">
               <span className="font-family-dingding">GPT</span>
               <i className="iconfont mr-double-arrow-down"></i>
