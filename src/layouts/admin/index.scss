@@ -10,7 +10,7 @@
   // overflow: auto;
   overflow: hidden;
   font-family: 'Montserrat', sans-serif;
-  header {
+  > header {
     width: 100%;
     z-index: 1;
     position: fixed;
@@ -37,10 +37,19 @@
         align-items: center;
         img {
           height: 100%;
-          &:last-child {
-            margin-left: 5px;
-            height: 70%;
-          }
+        }
+        .mrkTitle {
+          margin-left: 5px;
+          height: 70%;
+        }
+      }
+      .mrk-select-app {
+        border-radius: 8px;
+        background-color: $bg-200;
+        padding: 8px 20px;
+        > i {
+          margin-left: 10px;
+          font-size: 12px;
         }
       }
 
@@ -54,24 +63,23 @@
           height: 15px;
           background-color: #e8e8e8;
         }
-        .admin-language-switch {
+        .admin-switch {
           cursor: pointer;
-          margin-left: 10px;
+          padding: 6px;
+          // margin-right: 10px;
           i {
-            font-size: 22px;
+            font-size: 24px;
           }
         }
         .admin-user-container {
-          cursor: pointer;
           // border: 2px solid #e8e8e8;
           border-radius: 50%;
-          padding: 5px;
-          i {
-            font-size: 22px;
-          }
         }
       }
     }
+  }
+  > main {
+    padding-top: 65px;
   }
 }
 
@@ -80,10 +88,15 @@
   transition: color 0.5s, background-color 0.5s;
   color: $bg-100;
   background-color: $text-200;
-  header {
+  > header {
     .header-content {
-      .mrkLogo {
-        filter: grayscale(100%) brightness(200%); //白
+      .mrk-logo {
+        .mrkLogo {
+          filter: grayscale(100%) brightness(200%); //白
+        }
+      }
+      .mrk-select-app {
+        background-color: $text-300;
       }
     }
   }

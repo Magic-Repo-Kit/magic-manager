@@ -26,7 +26,8 @@ import AdminLayout from '@/layouts/admin';
 // 导入组件(懒加载)
 const AuthLayout = lazy(() => import('@/layouts/auth'));
 const FailLayout = lazy(() => import('@/layouts/fail'));
-const Home = lazy(() => import('@/page/home'));
+
+const Manage = lazy(() => import('@/page/manage'));
 const ChatMagic = lazy(() => import('@/page/chat-magic'));
 const ChatGPT = lazy(() => import('@/page/chat-gpt'));
 
@@ -53,11 +54,11 @@ const routes = [
       // 空路径 匹配 "/admin" 重定向到 "/admin/home"
       {
         path: '',
-        element: <Navigate to="home" />,
+        element: <Navigate to="manage" />,
       },
       {
-        path: 'home',
-        element: lazyLoad(<Home />),
+        path: 'manage',
+        element: lazyLoad(<Manage />),
       },
       {
         path: 'chat-magic',

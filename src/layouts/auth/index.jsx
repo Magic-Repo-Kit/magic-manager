@@ -168,7 +168,7 @@ function Auth() {
             </section>
             <section>
               <div className="login-main">
-                <img src={loginMain} className="rocket-wiggle" />
+                <img src={loginMain} className="float-up-down" />
               </div>
             </section>
           </div>
@@ -177,12 +177,12 @@ function Auth() {
         <div className="rocket-introduce user-select">
           <Introduce />
         </div>
-        <div>
+        {/* <div>
           <Rocket />
-        </div>
-        <div className="login-magicrepokit">
+        </div> */}
+        {/* <div className="login-magicrepokit">
           <MagicRepoKit />
-        </div>
+        </div> */}
       </main>
 
       {/* 弹框 */}

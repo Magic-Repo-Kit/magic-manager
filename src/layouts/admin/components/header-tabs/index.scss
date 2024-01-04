@@ -1,0 +1,90 @@
+@import '@/styles/theme';
+// 中间
+.header-tabs {
+  .tabs {
+    display: flex;
+    align-items: center;
+    position: relative;
+    // background-color: $bg-200;
+    padding: 5px 8px;
+    border-radius: 50px;
+    .custom-link {
+      color: inherit;
+      text-decoration: none;
+    }
+    .tab-icon {
+      font-size: 15px;
+      margin-right: 5px;
+    }
+    input[type='radio'] {
+      display: none;
+    }
+    input[type='radio']:checked + label {
+      opacity: 1;
+    }
+
+    input[id='radio-1']:checked ~ .glider {
+      transform: translateX(0);
+    }
+
+    input[id='radio-2']:checked ~ .glider {
+      transform: translateX(100%);
+    }
+
+    input[id='radio-3']:checked ~ .glider {
+      transform: translateX(200%);
+    }
+    input[id='radio-4']:checked ~ .glider {
+      transform: translateX(300%);
+    }
+
+    .tab {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 30px;
+      width: 80px;
+      font-size: 0.8rem;
+      color: $text-100;
+      opacity: 0.6;
+      font-weight: 500;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: color 0.15s ease-in;
+    }
+    .glider {
+      pointer-events: none; /* 新增样式 */
+      position: absolute;
+      display: flex;
+      height: 30px;
+      width: 80px;
+      background-color: $bg-100;
+      z-index: 1;
+      border-radius: 50px;
+      transition: 0.25s ease-out;
+    }
+  }
+  .tabs * {
+    z-index: 2;
+  }
+  @media (max-width: 700px) {
+    .tabs {
+      display: none;
+    }
+  }
+}
+
+// 黑暗模式
+.admin-container.dark-mode {
+  .header-tabs {
+    .tabs {
+      // background-color: $text-300;
+      .tab {
+        color: $bg-100;
+      }
+      .glider {
+        background-color: $text-200;
+      }
+    }
+  }
+}

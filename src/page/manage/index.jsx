@@ -3,7 +3,7 @@ import './index.scss';
 import { Area } from '@ant-design/plots';
 import Typewriter from '@/components/Typewriter';
 
-function Home() {
+function Manage() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -33,7 +33,7 @@ function Home() {
   };
 
   return (
-    <div className="home-container">
+    <div className="manage-container">
       {/* <header>
         <div
           className="text-center"
@@ -59,7 +59,7 @@ function Home() {
           <div></div>
         </div> */}
       </main>
-      <section>
+      {/* <section>
         <div></div>
         <div></div>
         <div></div>
@@ -71,8 +71,8 @@ function Home() {
         <div></div>
         <div></div>
         <div></div>
-      </footer>
+      </footer> */}
     </div>
   );
 }
-export default Home;
+export default Manage;
