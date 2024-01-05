@@ -6,6 +6,48 @@
   "description": "百宝袋",
   "glyphs": [
     {
+      "icon_id": "11891790",
+      "name": "chat",
+      "font_class": "chat",
+      "unicode": "e66d",
+      "unicode_decimal": 58989
+    },
+    {
+      "icon_id": "681353",
+      "name": "new纯色",
+      "font_class": "newchunse",
+      "unicode": "e75f",
+      "unicode_decimal": 59231
+    },
+    {
+      "icon_id": "6806235",
+      "name": "New-Tga 4",
+      "font_class": "New-Tga",
+      "unicode": "ea8a",
+      "unicode_decimal": 60042
+    },
+    {
+      "icon_id": "8358882",
+      "name": "new4",
+      "font_class": "new",
+      "unicode": "e68e",
+      "unicode_decimal": 59022
+    },
+    {
+      "icon_id": "11219390",
+      "name": "sms-new",
+      "font_class": "sms-new",
+      "unicode": "e63e",
+      "unicode_decimal": 58942
+    },
+    {
+      "icon_id": "763621",
+      "name": "star_01",
+      "font_class": "star01",
+      "unicode": "e658",
+      "unicode_decimal": 58968
+    },
+    {
       "icon_id": "6829321",
       "name": "ic_user",
       "font_class": "ic_user",

@@ -75,8 +75,8 @@ function Admin() {
   const [isDisplay, SetIsDisplay] = useState('block');
   useEffect(() => {
     if (
-      location.pathname.includes('/chat-magic') ||
-      location.pathname.includes('/chat-gpt')
+      location.pathname.includes('/chat') ||
+      location.pathname.includes('/gpt')
     ) {
       setOpacity(0);
       SetMarginLeft('0');

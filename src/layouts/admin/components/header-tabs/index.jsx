@@ -40,7 +40,7 @@ function HeaderTabs() {
           name="tabs"
           onChange={handleTabChange}
         />
-        <Link to="chat-gpt" className="custom-link">
+        <Link to="gpt" className="custom-link">
           <label className="tab" htmlFor="radio-2">
             <i className="iconfont mr-chatgpt tab-icon"></i>
             GPT
@@ -52,7 +52,7 @@ function HeaderTabs() {
           name="tabs"
           onChange={handleTabChange}
         />
-        <Link to="chat-magic" className="custom-link">
+        <Link to="chat" className="custom-link">
           <label className="tab" htmlFor="radio-3">
             <i className="iconfont mr-number-sign tab-icon"></i>
             聊天

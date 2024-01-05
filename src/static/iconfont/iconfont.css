@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 4291850 */
-  src: url('iconfont.woff2?t=1704185518764') format('woff2'),
-       url('iconfont.woff?t=1704185518764') format('woff'),
-       url('iconfont.ttf?t=1704185518764') format('truetype');
+  src: url('iconfont.woff2?t=1704436131136') format('woff2'),
+       url('iconfont.woff?t=1704436131136') format('woff'),
+       url('iconfont.ttf?t=1704436131136') format('truetype');
 }
 
 .iconfont {
@@ -11,6 +11,30 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.mr-chat:before {
+  content: "\e66d";
+}
+
+.mr-newchunse:before {
+  content: "\e75f";
+}
+
+.mr-New-Tga:before {
+  content: "\ea8a";
+}
+
+.mr-new:before {
+  content: "\e68e";
+}
+
+.mr-sms-new:before {
+  content: "\e63e";
+}
+
+.mr-star01:before {
+  content: "\e658";
 }
 
 .mr-ic_user:before {

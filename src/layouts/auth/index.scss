@@ -237,6 +237,7 @@
             > img {
               -webkit-touch-callout: none; /* 禁止长按弹出默认菜单 */
               user-select: none; /* 禁用选择文本 */
+              filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5));
             }
           }
         }
