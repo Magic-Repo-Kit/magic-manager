@@ -20,10 +20,10 @@ function DropdownUser({ setUserOpen }) {
         <div>121</div>
         <div>121</div>
       </main>
-      <footer>
+      <footer onClick={() => window.location.replace('/auth')}>
         <div>
           <i className="iconfont mr-daoru"></i>
-          <span>退出</span>
+          <span>退出登录</span>
         </div>
       </footer>
     </div>
