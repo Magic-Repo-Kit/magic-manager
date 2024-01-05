@@ -7,7 +7,7 @@ import DropdownApps from './components/dropdown-apps';
 import DropdownUser from './components/dropdown-user';
 
 // antd组件
-import { Dropdown } from 'antd';
+import { Dropdown, Drawer } from 'antd';
 
 // 图片
 import mrkLogo from '@/assets/images/logo-mrk.png';
@@ -20,6 +20,7 @@ function Admin() {
   const navigate = useNavigate(); //路由
 
   const [selectedAppName, setSelectedAppName] = useState('');
+  const [userOpen, setUserOpen] = useState(false); //user抽屉
 
   useEffect(() => {
     const storedAppName = localStorage.getItem('selectedAppName');
@@ -60,35 +61,21 @@ function Admin() {
               <i className="iconfont mr-qiehuanyuyan"></i>
             </div>
             {/* user */}
-            <Dropdown
-              dropdownRender={() => (
-                <DropdownUser
-                  selectedAppName={selectedAppName}
-                  setSelectedAppName={setSelectedAppName}
-                />
-              )}
-              trigger={['click']}
-              placement="bottom"
+            <div
+              className="admin-switch admin-user-container"
+              onClick={() => setUserOpen(true)}
             >
-              <div className="admin-switch admin-user-container">
-                <i className="iconfont mr-user--line"></i>
-              </div>
-            </Dropdown>
-
-            {/* <div>
-              <i
-                onClick={() => {
-                  window.location.href = '/auth';
-                }}
-                className="iconfont mr-tuichu"
-                style={{
-                  color: '#d81e06',
-                  marginRight: '8px',
-                  fontSize: '18px',
-                  marginLeft: '10px',
-                }}
-              ></i>
-            </div> */}
+              <i className="iconfont mr-user--line"></i>
+            </div>
+            <Drawer
+              closeIcon={null}
+              placement="right"
+              maskClosable={false}
+              open={userOpen}
+              className="user-custom-drawer"
+            >
+              <DropdownUser setUserOpen={setUserOpen} />
+            </Drawer>
           </div>
         </div>
       </header>

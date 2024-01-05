@@ -44,6 +44,7 @@
         }
       }
       .mrk-select-app {
+        cursor: pointer;
         border-radius: 8px;
         // background-color: $bg-200;
         // padding: 8px 20px;
@@ -103,5 +104,18 @@
         // background-color: $text-300;
       }
     }
+  }
+}
+
+// 修改antd组件默认样式
+.ant-drawer {
+  .ant-drawer-header,
+  .ant-drawer-body {
+    padding: 0px;
+    border: none;
+  }
+  .ant-drawer-header-title {
+    padding: 12px;
+    background-color: rgba(0, 0, 0, 0);
   }
 }

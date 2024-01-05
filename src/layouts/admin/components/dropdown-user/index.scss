@@ -4,106 +4,36 @@
 .custom-dropdown-user {
   color: $text-200;
   background-color: $bg-100;
-  box-shadow: 0 6px 10px 0 rgba($bg-700, 0.1);
-  padding: 10px;
-  border-radius: 8px;
+  padding: 0 16px;
   display: flex;
-  align-items: flex-start;
-  height: 310px;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
   box-sizing: border-box;
-  .dropdown-list {
-    margin-right: 5px;
-    width: 400px;
+
+  > header {
+    width: 100%;
+    padding: 16px 0;
     display: flex;
-    flex-wrap: wrap;
-    align-items: flex-start;
-    > div {
-      width: 190px;
-      height: 50px;
-      background-color: $bg-500;
-      border-radius: 8px;
-      box-sizing: border-box;
-      padding: 10px;
-      margin: 5px;
-      display: flex;
-      align-items: center;
-      cursor: pointer;
-      opacity: 0.6;
-      &.active {
-        opacity: 1;
-      }
-      &:hover {
-        background-color: $bg-600;
-        opacity: 1;
-      }
-    }
-    .dropdown-list-allapps {
-      width: 400px;
-      margin-top: 0;
-      display: flex;
-      justify-content: space-between;
-      opacity: 1;
-      > i {
-        font-size: 20px;
-      }
-    }
-    .dropdown-list-new-icon {
-      margin-left: 10px;
-      font-size: 18px;
-      color: $accent-800;
+    justify-content: space-between;
+    > i {
+      font-size: 16px;
     }
   }
-  .dropdown-right {
-    width: 220px;
-    height: 100%;
-    flex-direction: column;
-    color: $bg-100;
-    border-radius: 8px;
-    background-image: -webkit-linear-gradient(
-      144deg,
-      #9500ff,
-      $primary-500 80%,
-      #00ddeb
-    );
-    .icon-github {
-      font-size: 35px;
-    }
-    .dropdown-right-title {
-      font-size: 18px;
-      font-weight: 600;
-    }
-    .dropdown-right-btn {
-      cursor: pointer;
-      background-color: $text-200;
-      padding: 8px 10px;
-      border-radius: 8px;
-      width: 70%;
-      box-sizing: border-box;
-      text-align: center;
-      margin-top: 40px;
-      margin-bottom: 5px;
-      > i {
-        font-size: 14px;
-        color: $accent-400;
-        margin-right: 6%;
-      }
-      &:hover {
-        background-color: $text-400;
-      }
-    }
+  > main {
+    width: 100%;
+    flex: 1;
+  }
+  > footer {
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
   }
 }
 // 自定义下拉 - 黑暗模式
-.custom-dropdown-app.dark-mode {
+.custom-dropdown-user.dark-mode {
   color: $bg-100;
-  background-color: $bg-700;
+  background-color: $text-200;
   box-shadow: none;
-  .dropdown-list {
-    > div {
-      background-color: $text-400;
-      &:hover {
-        background-color: $text-700;
-      }
-    }
-  }
 }
