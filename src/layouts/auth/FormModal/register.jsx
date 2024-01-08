@@ -135,8 +135,8 @@ function Register() {
           <input
             type="text"
             className="input-text"
-            value={username}
-            onChange={(e) => filterInput(e, setUsername, setShowUsernameTips)}
+            defaultValue={username}
+            onBlur={(e) => filterInput(e, setUsername, setShowUsernameTips)}
           />
         </div>
         {/* 密码 */}
@@ -157,8 +157,8 @@ function Register() {
           <input
             type={showPassword ? 'text' : 'password'}
             className="input-text"
-            value={password}
-            onChange={(e) => filterInput(e, setPassword, setShowPasswordTips)}
+            defaultValue={password}
+            onBlur={(e) => filterInput(e, setPassword, setShowPasswordTips)}
           />
           <div
             className="icon-eyes-box"
@@ -187,8 +187,8 @@ function Register() {
           <input
             type={showPassword ? 'text' : 'password'}
             className="input-text"
-            value={repeatPwd}
-            onChange={(e) => filterInput(e, setRepeatPwd, setShowRepeatPwdTips)}
+            defaultValue={repeatPwd}
+            onBlur={(e) => filterInput(e, setRepeatPwd, setShowRepeatPwdTips)}
           />
           <div
             className="icon-eyes-box"

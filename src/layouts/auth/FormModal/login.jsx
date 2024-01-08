@@ -32,7 +32,7 @@ function Login() {
 
   const navigate = useNavigate();
 
-  // 过滤输入 | 控制显示消息
+  // 过滤输入 | 控制显示消息 【此处留一个问题，compositionstart和compositionend事件，compositionend事件在react中不会触发？】
   const filterInput = (e, setValue, setShowTips) => {
     const inputValue = e.target.value;
     const filteredValue = inputValue.replace(/[^a-zA-Z0-9_\-.@]/g, '');
@@ -57,6 +57,15 @@ function Login() {
       message.warning('请输入密码');
       return;
     }
+    if (showUsernameTips) {
+      message.warning('请输入正确格式账号');
+      return;
+    }
+    if (showPasswordTips) {
+      message.warning('请输入正确格式密码');
+      return;
+    }
+
     setIsLoading(true);
     // 添加登录处理函数
     try {
@@ -127,7 +136,8 @@ function Login() {
             className="input-text"
             placeholder="输入您的账号"
             value={username}
-            onChange={(e) => filterInput(e, setUsername, setShowUsernameTips)}
+            onChange={(e) => setUsername(e.target.value)}
+            onBlur={(e) => filterInput(e, setUsername, setShowUsernameTips)}
           />
         </div>
         {/* 密码 */}
@@ -150,7 +160,8 @@ function Login() {
             className="input-text"
             placeholder="输入您的密码"
             value={password}
-            onChange={(e) => filterInput(e, setPassword, setShowPasswordTips)}
+            onChange={(e) => setPassword(e.target.value)}
+            onBlur={(e) => filterInput(e, setPassword, setShowPasswordTips)}
           />
           <div
             className="icon-eyes-box"
