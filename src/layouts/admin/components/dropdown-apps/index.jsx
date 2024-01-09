@@ -45,11 +45,11 @@ function DropdownApps({ selectedAppName, setSelectedAppName }) {
         </div>
         <div
           className={`flx-justify-between ${
-            selectedAppName === 'Admin' ? 'active' : ''
+            selectedAppName === '百宝袋' ? 'active' : ''
           }`}
-          onClick={() => handleAppClick('Admin', 'manage')}
+          onClick={() => handleAppClick('百宝袋', 'manage')}
         >
-          <span>Admin</span>
+          <span>百宝袋</span>
           <i className="iconfont mr-1huojian"></i>
         </div>
       </div>

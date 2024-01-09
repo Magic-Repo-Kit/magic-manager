@@ -25,7 +25,7 @@ function Admin() {
   useEffect(() => {
     const storedAppName = localStorage.getItem('selectedAppName');
     const storedApp = localStorage.getItem('selectedApp');
-    setSelectedAppName(storedAppName || 'Admin'); // 如果本地存储中没有值，默认选择 'GPT'
+    setSelectedAppName(storedAppName || '百宝袋'); // 如果本地存储中没有值，默认选择 '百宝袋'
     storedApp ? navigate(`${storedApp}`) : navigate('manage');
   }, [navigate]);
 
@@ -47,7 +47,7 @@ function Admin() {
             )}
             placement="bottom"
           >
-            <div className="mrk-select-app user-select flx-center">
+            <div className="mrk-select-app user-select flx-center font-family-dingding">
               <span>{selectedAppName}</span>
               <i className="iconfont mr-double-arrow-down"></i>
             </div>

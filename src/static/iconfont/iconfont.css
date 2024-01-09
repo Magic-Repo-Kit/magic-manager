@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 4291850 */
-  src: url('iconfont.woff2?t=1704436131136') format('woff2'),
-       url('iconfont.woff?t=1704436131136') format('woff'),
-       url('iconfont.ttf?t=1704436131136') format('truetype');
+  src: url('iconfont.woff2?t=1704786783397') format('woff2'),
+       url('iconfont.woff?t=1704786783397') format('woff'),
+       url('iconfont.ttf?t=1704786783397') format('truetype');
 }
 
 .iconfont {
@@ -11,6 +11,42 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.mr-michi:before {
+  content: "\e61d";
+}
+
+.mr-a-1_huaban1:before {
+  content: "\e643";
+}
+
+.mr-guanbi1:before {
+  content: "\e646";
+}
+
+.mr-queren:before {
+  content: "\e649";
+}
+
+.mr-zan:before {
+  content: "\e63f";
+}
+
+.mr-dianzan2-mianxing:before {
+  content: "\e699";
+}
+
+.mr-dianzan2-xianxing:before {
+  content: "\e69a";
+}
+
+.mr-dianzan4-xianxing:before {
+  content: "\e69b";
+}
+
+.mr-dianzan4-mianxing:before {
+  content: "\e69c";
 }
 
 .mr-chat:before {
@@ -713,16 +749,8 @@
   content: "\e612";
 }
 
-.mr-right-1:before {
-  content: "\e61d";
-}
-
 .mr-likes-1:before {
   content: "\e61a";
-}
-
-.mr-fork-1:before {
-  content: "\e628";
 }
 
 .mr-photo-1:before {

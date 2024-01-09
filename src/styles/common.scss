@@ -158,6 +158,15 @@
     transform: scale(0.9);
   }
 }
+
+// 按钮点击跳动
+.click-jump {
+  &:active {
+    transform: translateY(2px);
+    transition: 100ms;
+  }
+}
+
 // 去除a标签默认样式
 a.no-style {
   color: inherit;

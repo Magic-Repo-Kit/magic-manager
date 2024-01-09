@@ -31,7 +31,7 @@ function HeaderTabs() {
         <Link to="manage" className="custom-link">
           <label className="tab" htmlFor="radio-1">
             <i className="iconfont mr-menu-4 tab-icon"></i>
-            Admin
+            百宝袋
           </label>
         </Link>
         <input

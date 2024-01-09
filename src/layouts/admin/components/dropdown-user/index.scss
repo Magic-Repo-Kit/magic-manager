@@ -1,6 +1,6 @@
 @import '@/styles/theme';
 
-// 自定义下拉
+// 白天模式
 .custom-dropdown-user {
   color: $text-200;
   background-color: $bg-100;
@@ -25,7 +25,6 @@
     width: 100%;
     flex: 1;
     .dropdown-main-top {
-      margin-bottom: 15px;
       background-color: $accent-200;
       color: $bg-100;
       height: 200px;
@@ -50,22 +49,183 @@
             margin-bottom: 5px;
           }
         }
-        .dropdown-main-timer {
+        .dropdown-main-user {
           margin-bottom: 5px;
-          font-size: 14px;
+          font-size: 16px;
+          display: flex;
+          align-items: center;
+          > i {
+            font-size: 25px;
+            margin-right: 2px;
+          }
         }
       }
-
-      .dropdown-main-head {
-        width: 90px;
-        height: 90px;
-        border-radius: 50%;
-        margin-right: 3px;
-        border: 3px solid $bg-500;
-        > img {
-          width: 100%;
-          height: 100%;
+      .dropdown-main-top-right {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .dropdown-main-head {
+          width: 90px;
+          height: 90px;
           border-radius: 50%;
+          margin-right: 3px;
+          border: 3px solid $bg-500;
+          > img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+          }
+        }
+        .dropdown-main-star {
+          margin-top: 15px;
+        }
+      }
+    }
+    .dropdown-main-info {
+      margin-top: 15px;
+      border-radius: 6px;
+      padding: 15px;
+      width: 100%;
+      box-sizing: border-box;
+      background-color: $bg-200;
+      position: relative;
+      .dropdown-main-info-edit {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        position: absolute;
+        right: 12px;
+        top: 12px;
+        font-size: 12px;
+
+        .dropdown-main-info-edit-icon {
+          position: relative;
+          i {
+            margin-right: 4px;
+            font-size: 14px;
+            &.right-icon {
+              margin-right: 12px;
+            }
+          }
+        }
+      }
+      .dropdown-main-info-title {
+        font-size: 16px;
+        margin-bottom: 10px;
+        letter-spacing: 1px;
+      }
+      .dropdown-main-info-item {
+        margin: 8px 0;
+        display: flex;
+        align-items: center;
+        color: $text-400;
+        transition: 0.1s;
+        &:hover {
+          color: $text-100;
+        }
+        .title {
+          margin-right: 8px;
+        }
+      }
+      .input-text {
+        border: 1.5px solid $bg-600;
+        background-color: $bg-100;
+        box-sizing: border-box;
+        border-radius: 5px;
+        margin: 0 2px;
+        height: 30px;
+        padding: 0 8px;
+        &:focus {
+          border: 1.5px solid rgba($color: $accent-200, $alpha: 0.6);
+          outline: none;
+        }
+      }
+    }
+    .dropdown-main-info-setting {
+      .dropdown-main-info-setting-code {
+        cursor: pointer;
+        .title {
+          margin-right: 8px;
+        }
+        .change-icon {
+          background-color: rgba($color: $bg-100, $alpha: 0.5);
+          width: 35px;
+          height: 35px;
+          border-radius: 50%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          transition: 80ms;
+          &:hover {
+            background-color: rgba($color: $bg-100, $alpha: 1);
+          }
+
+          > i {
+            margin: 0 8px;
+            font-size: 16px;
+          }
+        }
+
+        .tips {
+          position: absolute;
+          right: 0;
+          color: $accent-800;
+          font-size: 12px;
+        }
+      }
+      // 修改密码
+      .dropdown-main-info-setting-pwd-box {
+        flex-direction: column;
+        padding: 0;
+        opacity: 0;
+        max-height: 0;
+        display: none;
+        // transition: padding 0.3s, border-top 0.3s, border-bottom 0.3s,
+        //   opacity 0.4s ease, max-height 0.3s ease;
+        &.pwd-box-expanded {
+          display: block;
+          padding: 15px 0;
+          border-top: 1px solid $bg-300;
+          border-bottom: 1px solid $bg-300;
+          opacity: 1;
+          max-height: 500px; /* 设置最大高度 */
+        }
+        .dropdown-main-info-setting-pwd {
+          display: flex;
+          align-items: center;
+          width: 100%;
+          margin-bottom: 10px;
+          &:last-child {
+            margin-bottom: 0;
+          }
+          .input-content {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            > input {
+              flex: 1;
+              margin: 0 8px;
+            }
+            .icon-eyes-box {
+              overflow: hidden;
+              display: flex;
+              align-items: center;
+              position: relative;
+              .icon-line {
+                position: absolute;
+                left: 0;
+                width: 24px;
+                height: 2px;
+                background-color: $text-300;
+                transition: 0.2s;
+                opacity: 0;
+              }
+              .icon-line.line-w {
+                transform: rotate(-45deg) translateX(0);
+                opacity: 1;
+              }
+            }
+          }
         }
       }
     }
@@ -112,11 +272,58 @@
     }
   }
 }
-// 自定义下拉 - 黑暗模式
+
+// 黑暗模式
 .custom-dropdown-user.dark-mode {
   color: $bg-100;
   background-color: $text-200;
   box-shadow: none;
+  > main {
+    .dropdown-main-info {
+      background-color: $bg-700;
+      .dropdown-main-info-item {
+        margin: 8px 0;
+        color: $bg-800;
+        transition: 0.1s;
+        &:hover {
+          color: $bg-100;
+        }
+      }
+      .input-text {
+        border: 1.5px solid rgba($color: $bg-600, $alpha: 0.3);
+        background-color: $text-200;
+        color: $bg-100;
+        &:focus {
+          border: 1.5px solid rgba($color: $bg-600, $alpha: 0.8);
+        }
+      }
+    }
+    .dropdown-main-info-setting {
+      .dropdown-main-info-setting-code {
+        .change-icon {
+          background-color: rgba($color: $text-200, $alpha: 0.5);
+          &:hover {
+            background-color: rgba($color: $text-200, $alpha: 1);
+          }
+        }
+      }
+      // 修改密码
+      .dropdown-main-info-setting-pwd-box {
+        border-top: 1px solid $text-300;
+        border-bottom: 1px solid $text-300;
+        .dropdown-main-info-setting-pwd {
+          .input-content {
+            .icon-eyes-box {
+              .icon-line {
+                background-color: $bg-800;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
   > footer {
     .space-line {
       background-color: $text-300;
