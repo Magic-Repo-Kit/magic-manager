@@ -286,7 +286,10 @@ function DropdownUser({ setUserOpen }) {
           <div className="dropdown-main-info-item">
             <div className="title">更换头像</div>
             <div>
-              <UploadImage />
+              <UploadImage
+                maxCount={1}
+                acceptedFileTypes={['image/jpeg', 'image/png']}
+              />
             </div>
           </div>
           <div className="dropdown-main-info-item">
