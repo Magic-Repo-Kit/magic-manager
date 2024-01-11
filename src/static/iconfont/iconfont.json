@@ -6,6 +6,27 @@
   "description": "百宝袋",
   "glyphs": [
     {
+      "icon_id": "666891",
+      "name": "图片",
+      "font_class": "tupian",
+      "unicode": "e695",
+      "unicode_decimal": 59029
+    },
+    {
+      "icon_id": "4511754",
+      "name": "绘图、调色盘",
+      "font_class": "huitutiaosepan",
+      "unicode": "e64a",
+      "unicode_decimal": 58954
+    },
+    {
+      "icon_id": "15509782",
+      "name": "设计_画图",
+      "font_class": "sheji_huatu",
+      "unicode": "e68f",
+      "unicode_decimal": 59023
+    },
+    {
       "icon_id": "1187",
       "name": "密匙",
       "font_class": "michi",

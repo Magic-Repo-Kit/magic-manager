@@ -80,6 +80,16 @@
         .admin-user-container {
           // border: 2px solid #e8e8e8;
           border-radius: 50%;
+          padding: 0;
+          height: 45px;
+          width: 45px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          > img {
+            height: 80%;
+            border-radius: 50%;
+          }
         }
       }
     }

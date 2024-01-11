@@ -30,6 +30,7 @@ const FailLayout = lazy(() => import('@/layouts/fail'));
 const Manage = lazy(() => import('@/page/manage'));
 const Chat = lazy(() => import('@/page/chat'));
 const GPT = lazy(() => import('@/page/gpt'));
+const AiHelper = lazy(() => import('@/page/ai-helper'));
 
 const TreeFiter = lazy(() => import('@/page/superTable/children/treeFiter'));
 const SelectFiter = lazy(() =>
@@ -56,18 +57,27 @@ const routes = [
         path: '',
         element: <Navigate to="manage" />,
       },
+      // 工作台
       {
         path: 'manage',
         element: lazyLoad(<Manage />),
       },
+      // 闪聊
       {
         path: 'chat',
         element: lazyLoad(<Chat />),
         children: [],
       },
+      // 一问一答
       {
         path: 'gpt',
         element: lazyLoad(<GPT />),
+        children: [],
+      },
+      // AI助手
+      {
+        path: 'ai-helper',
+        element: lazyLoad(<AiHelper />),
         children: [],
       },
       {

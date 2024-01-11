@@ -3,6 +3,9 @@ import { useNavigate } from 'react-router-dom'; //渲染子路由
 import { DarkModeContext } from '@/components/DarkModeProvider'; //夜间模式
 import './index.scss';
 
+// antd组件
+import { Tooltip } from 'antd';
+
 function DropdownApps({ selectedAppName, setSelectedAppName }) {
   // 共享参数
   const { darkMode } = useContext(DarkModeContext);
@@ -22,34 +25,83 @@ function DropdownApps({ selectedAppName, setSelectedAppName }) {
           <span>All Apps</span>
           <i className="iconfont mr-home-3"></i>
         </div>
+        {/* Item - 一问一答 */}
         <div
           className={`flx-justify-between ${
-            selectedAppName === 'GPT' ? 'active' : ''
+            selectedAppName === '一问一答' ? 'active' : ''
           }`}
-          onClick={() => handleAppClick('GPT', 'gpt')}
+          onClick={() => handleAppClick('一问一答', 'gpt')}
         >
-          <span>GPT</span>
+          <span>一问一答</span>
           <i className="iconfont mr-ziyuan49"></i>
         </div>
+        {/* Item - AI助手 */}
         <div
           className={`flx-justify-between ${
-            selectedAppName === '聊天室' ? 'active' : ''
+            selectedAppName === 'AI助手' ? 'active' : ''
           }`}
-          onClick={() => handleAppClick('聊天室', 'chat')}
+          onClick={() => handleAppClick('AI助手', 'ai-helper')}
+        >
+          <span>AI助手</span>
+          <i className="iconfont mr-service_ChatGPT"></i>
+        </div>
+        {/* Item - 闪聊 */}
+        <div
+          className={`flx-justify-between ${
+            selectedAppName === '闪聊' ? 'active' : ''
+          }`}
+          onClick={() => handleAppClick('闪聊', 'chat')}
         >
           <div>
-            <span>聊天室</span>
+            <span>闪聊</span>
             <i className="dropdown-list-new-icon iconfont mr-newchunse"></i>
           </div>
           <i className="iconfont mr-chat"></i>
         </div>
+
+        {/* Item - AI绘图 */}
+        <Tooltip
+          title="内测中，还未开放嘞"
+          arrow={false}
+          color={'rgba(25, 25, 25, 0.8)'}
+        >
+          <div
+            className={`flx-justify-between ${
+              selectedAppName === 'AI绘图' ? 'active' : ''
+            }`}
+          >
+            <div>
+              <span>AI绘图</span>
+            </div>
+            <i className="iconfont mr-sheji_huatu"></i>
+          </div>
+        </Tooltip>
+        {/* Item - 频道 */}
+        <Tooltip
+          title="内测中，还未开放嘞"
+          arrow={false}
+          color={'rgba(25, 25, 25, 0.8)'}
+        >
+          <div
+            className={`flx-justify-between ${
+              selectedAppName === '频道' ? 'active' : ''
+            }`}
+          >
+            <div>
+              <span>频道</span>
+            </div>
+            <i className="iconfont mr-record-sound"></i>
+          </div>
+        </Tooltip>
+
+        {/* Item - 工作台 */}
         <div
           className={`flx-justify-between ${
-            selectedAppName === '百宝袋' ? 'active' : ''
+            selectedAppName === '工作台' ? 'active' : ''
           }`}
-          onClick={() => handleAppClick('百宝袋', 'manage')}
+          onClick={() => handleAppClick('工作台', 'manage')}
         >
-          <span>百宝袋</span>
+          <span>工作台</span>
           <i className="iconfont mr-1huojian"></i>
         </div>
       </div>

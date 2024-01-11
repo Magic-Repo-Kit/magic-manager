@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { PlusOutlined } from '@ant-design/icons';
 import { Modal, Upload } from 'antd';
-
+import './index.scss';
 import PropTypes from 'prop-types';
 // antd组件
 import { message } from 'antd';
@@ -46,7 +46,7 @@ function UploadImage({ maxCount, maxNums, acceptedFileTypes, maxSize }) {
   const uploadButton = (
     <div>
       <PlusOutlined />
-      <div style={{ marginTop: 8 }}>上传</div>
+      {/* <div style={{ marginTop: 8 }}>上传</div> */}
     </div>
   );
 
@@ -71,18 +71,22 @@ function UploadImage({ maxCount, maxNums, acceptedFileTypes, maxSize }) {
 
   return (
     <>
-      <Upload
-        action="https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188"
-        listType="picture-circle"
-        fileList={fileList}
-        onPreview={handlePreview}
-        onChange={handleChange}
-        maxCount={maxCount}
-        beforeUpload={beforeUpload}
-      >
-        {fileList.length >= maxNums ? null : uploadButton}
-      </Upload>
-      {/* 展示 */}
+      <div className="upload-container">
+        <Upload
+          action="https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188"
+          listType="picture-circle"
+          fileList={fileList}
+          onPreview={handlePreview}
+          onChange={handleChange}
+          maxCount={maxCount}
+          beforeUpload={beforeUpload}
+          style={{ display: 'none' }}
+        >
+          {fileList.length >= maxNums ? null : uploadButton}
+        </Upload>
+      </div>
+
+      {/* 预览 */}
       <Modal
         open={previewOpen}
         title={previewTitle}

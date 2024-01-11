@@ -13,6 +13,7 @@ import { Dropdown, Drawer } from 'antd';
 import mrkLogo from '@/assets/images/logo-mrk.png';
 import mrkLight from '@/assets/images/mrk-title-light.png';
 import mrkDark from '@/assets/images/mrk-title-dark.png';
+import userHead from '@/assets/images/user-head.png';
 
 function Admin() {
   // 共享参数
@@ -21,12 +22,14 @@ function Admin() {
 
   const [selectedAppName, setSelectedAppName] = useState('');
   const [userOpen, setUserOpen] = useState(false); //user抽屉
+  const [dropdownOpen, setDropdownOpen] = useState(false); //下拉
 
   useEffect(() => {
     const storedAppName = localStorage.getItem('selectedAppName');
     const storedApp = localStorage.getItem('selectedApp');
     setSelectedAppName(storedAppName || '百宝袋'); // 如果本地存储中没有值，默认选择 '百宝袋'
     storedApp ? navigate(`${storedApp}`) : navigate('manage');
+    setDropdownOpen(false); // 关闭下拉菜单
   }, [navigate]);
 
   return (
@@ -46,10 +49,13 @@ function Admin() {
               />
             )}
             placement="bottom"
+            trigger={['click']}
+            open={dropdownOpen}
+            onOpenChange={(dropdownOpen) => setDropdownOpen(dropdownOpen)}
           >
             <div className="mrk-select-app user-select flx-center font-family-dingding">
               <span>{selectedAppName}</span>
-              <i className="iconfont mr-double-arrow-down"></i>
+              <i className="iconfont mr-menu-4"></i>
             </div>
           </Dropdown>
 
@@ -65,7 +71,8 @@ function Admin() {
               className="admin-switch admin-user-container"
               onClick={() => setUserOpen(true)}
             >
-              <i className="iconfont mr-user--line"></i>
+              {/* <i className="iconfont mr-user--line"></i> */}
+              <img src={userHead} alt="" />
             </div>
             <Drawer
               closeIcon={null}
