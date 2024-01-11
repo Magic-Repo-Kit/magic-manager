@@ -22,8 +22,8 @@
     -ms-transform: translateZ(0);
     -o-transform: translateZ(0);
     backface-visibility: hidden; //解决ios上内容闪动的问题
-    -webkit-backdrop-filter: blur(30px);
-    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
     .header-content {
       padding: 0 25px;
       height: 65px;
@@ -93,8 +93,8 @@
         -ms-transform: translateZ(0);
         -o-transform: translateZ(0);
         backface-visibility: hidden; //解决ios上内容闪动的问题
-        -webkit-backdrop-filter: blur(30px); //兼容设备
-        backdrop-filter: blur(30px);
+        -webkit-backdrop-filter: blur(20px); //兼容设备
+        backdrop-filter: blur(20px);
 
         section {
           width: 50%;
@@ -362,6 +362,11 @@
       }
       .mrkLogo {
         filter: grayscale(100%) brightness(200%); //白
+      }
+      .btn-box {
+        .space-line {
+          opacity: 0.2;
+        }
       }
     }
   }

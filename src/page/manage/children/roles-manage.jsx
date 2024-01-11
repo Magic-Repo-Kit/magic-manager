@@ -10,7 +10,7 @@ import {
   DownloadOutlined,
 } from '@ant-design/icons';
 
-function RolesAdmin() {
+function RolesManage() {
   const slotbtns = [
     {
       name: '添加',
@@ -55,4 +55,4 @@ function RolesAdmin() {
   );
 }
 
-export default RolesAdmin;
+export default RolesManage;

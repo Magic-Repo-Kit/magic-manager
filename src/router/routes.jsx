@@ -21,30 +21,26 @@ const lazyLoad = (component) => {
   );
 };
 
-// AdminLayout不需要懒加载
+// 结构路由(懒加载)
 import AdminLayout from '@/layouts/admin';
-// 导入组件(懒加载)
+// const AdminLayout = lazy(() => import('@/layouts/admin'));
 const AuthLayout = lazy(() => import('@/layouts/auth'));
 const FailLayout = lazy(() => import('@/layouts/fail'));
 
+// 工作台
 const Manage = lazy(() => import('@/page/manage'));
+const WorkPlatform = lazy(() => import('@/page/manage/children/work-platform'));
+const Knowledge = lazy(() => import('@/page/manage/children/knowledge'));
+const UserManage = lazy(() => import('@/page/manage/children/user-manage'));
+const RolesManage = lazy(() => import('@/page/manage/children/roles-manage'));
+const ContactUs = lazy(() => import('@/page/manage/children/contact-us'));
+const SettingManage = lazy(() =>
+  import('@/page/manage/children/setting-manage')
+);
+
 const Chat = lazy(() => import('@/page/chat'));
 const GPT = lazy(() => import('@/page/gpt'));
 const AiHelper = lazy(() => import('@/page/ai-helper'));
-
-const TreeFiter = lazy(() => import('@/page/superTable/children/treeFiter'));
-const SelectFiter = lazy(() =>
-  import('@/page/superTable/children/selectFiter')
-);
-const ChartBoard = lazy(() => import('@/page/databoard/chartBoard'));
-const ImgBoard = lazy(() => import('@/page/databoard/imgBoard'));
-
-// 用户管理
-const UsersAdmin = lazy(() => import('@/page/users/children/users-admin'));
-const RolesAdmin = lazy(() => import('@/page/users/children/roles-admin'));
-const LoginLog = lazy(() => import('@/page/users/children/login-log'));
-
-const About = lazy(() => import('@/page/about'));
 
 const routes = [
   // 通过权限页面
@@ -55,12 +51,47 @@ const routes = [
       // 空路径 匹配 "/admin" 重定向到 "/admin/home"
       {
         path: '',
-        element: <Navigate to="manage" />,
+        element: <Navigate to="manage" replace />,
       },
       // 工作台
       {
         path: 'manage',
         element: lazyLoad(<Manage />),
+        children: [
+          {
+            path: '',
+            element: <Navigate to="work-platform" replace />, //默认工作台首页
+          },
+          {
+            path: 'work-platform',
+            element: lazyLoad(<WorkPlatform />),
+          },
+          // 知识库
+          {
+            path: 'knowledge',
+            element: lazyLoad(<Knowledge />),
+          },
+          // 账号管理
+          {
+            path: 'user-manage',
+            element: lazyLoad(<UserManage />),
+          },
+          // 权限管理
+          {
+            path: 'roles-manage',
+            element: lazyLoad(<RolesManage />),
+          },
+          // 联系我们
+          {
+            path: 'contact-us',
+            element: lazyLoad(<ContactUs />),
+          },
+          // 工作台设置
+          {
+            path: 'setting-manage',
+            element: lazyLoad(<SettingManage />),
+          },
+        ],
       },
       // 闪聊
       {
@@ -79,40 +110,6 @@ const routes = [
         path: 'ai-helper',
         element: lazyLoad(<AiHelper />),
         children: [],
-      },
-      {
-        path: 'tree-fiter',
-        element: lazyLoad(<TreeFiter />),
-      },
-      {
-        path: 'select-fiter',
-        element: lazyLoad(<SelectFiter />),
-      },
-      {
-        path: 'chart-board',
-        element: lazyLoad(<ChartBoard />),
-      },
-      {
-        path: 'img-board',
-        element: lazyLoad(<ImgBoard />),
-      },
-      // 用户管理
-      {
-        path: 'users-admin',
-        element: lazyLoad(<UsersAdmin />),
-      },
-      {
-        path: 'roles-admin',
-        element: lazyLoad(<RolesAdmin />),
-      },
-      {
-        path: 'login-log',
-        element: lazyLoad(<LoginLog />),
-      },
-
-      {
-        path: 'about',
-        element: lazyLoad(<About />),
       },
     ],
   },

@@ -110,8 +110,8 @@ function DropdownUser({ setUserOpen }) {
               <img src={userHead} alt="" />
             </div>
             <div className="dropdown-main-star">
-              126个
-              <i className="iconfont mr-dianzan2-mianxing"></i>
+              <span>126个</span>
+              <i className="iconfont mr-like-full"></i>
             </div>
           </div>
         </div>

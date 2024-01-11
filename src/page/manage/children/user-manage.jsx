@@ -10,7 +10,7 @@ import {
   DownloadOutlined,
 } from '@ant-design/icons';
 
-function UsersAdmin() {
+function UserManage() {
   const slotbtns = [
     {
       name: '添加',
@@ -55,4 +55,4 @@ function UsersAdmin() {
   );
 }
 
-export default UsersAdmin;
+export default UserManage;

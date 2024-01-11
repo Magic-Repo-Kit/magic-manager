@@ -93,7 +93,7 @@ function Auth() {
   return (
     <div className={`login-container ${darkMode ? 'dark-mode' : ''}`}>
       <header
-        style={{ backdropFilter: isModalVisible ? 'none' : 'blur(30px)' }}
+        style={{ backdropFilter: isModalVisible ? 'none' : 'blur(20px)' }}
       >
         <div className="header-content">
           <div className="mrk-logo">

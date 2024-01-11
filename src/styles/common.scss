@@ -183,12 +183,6 @@ a.no-style {
   background-size: 1.1rem 1.1rem;
 }
 
-// loading-rocks效果-实例
-// <div className="loading-rocks">
-//   <span className="rock"></span>
-//   <span className="rock"></span>
-//   <span className="rock"></span>
-// </div>
 .loading-rocks {
   display: flex;
   justify-content: center;
@@ -422,5 +416,22 @@ a.no-style {
   &:hover::after {
     opacity: 1;
     transform: scale(1, 1);
+  }
+}
+
+// 动画 右往左滑入
+.slide-in-left {
+  /* 添加动画 */
+  animation-name: slideInLeft;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+  /* 定义动画 */
+  @keyframes slideInLeft {
+    from {
+      transform: translateX(500%);
+    }
+    to {
+      transform: translateX(0);
+    }
   }
 }

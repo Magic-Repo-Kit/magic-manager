@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 4291850 */
-  src: url('iconfont.woff2?t=1704942720763') format('woff2'),
-       url('iconfont.woff?t=1704942720763') format('woff'),
-       url('iconfont.ttf?t=1704942720763') format('truetype');
+  src: url('iconfont.woff2?t=1704955938305') format('woff2'),
+       url('iconfont.woff?t=1704955938305') format('woff'),
+       url('iconfont.ttf?t=1704955938305') format('truetype');
 }
 
 .iconfont {
@@ -11,6 +11,14 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.mr-zhankaimulu:before {
+  content: "\e823";
+}
+
+.mr-yincangmulu:before {
+  content: "\e824";
 }
 
 .mr-tupian:before {

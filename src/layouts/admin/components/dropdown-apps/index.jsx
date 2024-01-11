@@ -35,14 +35,14 @@ function DropdownApps({ selectedAppName, setSelectedAppName }) {
           <span>一问一答</span>
           <i className="iconfont mr-ziyuan49"></i>
         </div>
-        {/* Item - AI助手 */}
+        {/* Item - AI虚拟助手 */}
         <div
           className={`flx-justify-between ${
-            selectedAppName === 'AI助手' ? 'active' : ''
+            selectedAppName === 'AI虚拟助手' ? 'active' : ''
           }`}
-          onClick={() => handleAppClick('AI助手', 'ai-helper')}
+          onClick={() => handleAppClick('AI虚拟助手', 'ai-helper')}
         >
-          <span>AI助手</span>
+          <span>AI虚拟助手</span>
           <i className="iconfont mr-service_ChatGPT"></i>
         </div>
         {/* Item - 闪聊 */}

@@ -9,21 +9,21 @@ function Router() {
   const access_token = getAccessToken();
 
   const handleRedirect = (item) => {
-    // if (pathname === '/') {
-    //   return <Navigate to="/admin" />;
-    // }
-    // if (pathname !== '/auth' && !access_token) {
-    //   //已授权页面，无token
-    //   return <Navigate to="/auth" replace={true} />;
-    // } else {
-    //   // 去登陆页面，清除信息
-    //   if (pathname === '/auth') {
-    //     logout();
-    //   }
-    //   // 已授权页面，有token
-    //   return item.element;
-    // }
-    return item.element;
+    if (pathname === '/') {
+      return <Navigate to="/admin" />;
+    }
+    if (pathname !== '/auth' && !access_token) {
+      //已授权页面，无token
+      return <Navigate to="/auth" replace={true} />;
+    } else {
+      // 去登陆页面，清除信息
+      if (pathname === '/auth') {
+        logout();
+      }
+      // 已授权页面，有token
+      return item.element;
+    }
+    // return item.element;
   };
 
   // 定义路由 | 递归

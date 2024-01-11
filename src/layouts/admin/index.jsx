@@ -28,7 +28,7 @@ function Admin() {
     const storedAppName = localStorage.getItem('selectedAppName');
     const storedApp = localStorage.getItem('selectedApp');
     setSelectedAppName(storedAppName || '百宝袋'); // 如果本地存储中没有值，默认选择 '百宝袋'
-    storedApp ? navigate(`${storedApp}`) : navigate('manage');
+    // storedApp ? navigate(`${storedApp}`) : navigate('manage');
     setDropdownOpen(false); // 关闭下拉菜单
   }, [navigate]);
 

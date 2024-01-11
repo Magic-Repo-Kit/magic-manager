@@ -78,6 +78,10 @@
         }
         .dropdown-main-star {
           margin-top: 15px;
+          > :last-child {
+            font-size: 15px;
+            margin-left: 4px;
+          }
         }
       }
     }
