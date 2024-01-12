@@ -1,5 +1,4 @@
-import React from 'react';
-import '../index.scss';
+import './index.scss';
 import TableHeader from '@/components/table/table-header';
 import TableBody from '@/components/table/table-body';
 

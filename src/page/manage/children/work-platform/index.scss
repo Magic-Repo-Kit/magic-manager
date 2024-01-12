@@ -1,0 +1,60 @@
+@import '@/styles/theme';
+.work-platform-container {
+  padding: 10px 5px;
+  padding-right: 10px;
+  > main {
+    > section {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 10px;
+      > div {
+        border-radius: 10px;
+        box-sizing: border-box;
+        padding: 10px;
+        background-color: $bg-200;
+        // border: 1px solid $border-color-200;
+        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+      }
+    }
+    .work-platform-main-card-header {
+      > div {
+        flex: 1;
+      }
+      .work-platform-main-visitor {
+        position: relative;
+        .work-platform-visitor-update {
+          position: absolute;
+          top: 10px;
+          right: 12px;
+        }
+      }
+    }
+    .work-platform-main-middle {
+      > :first-child {
+        height: 450px;
+        flex: 1;
+      }
+      > :last-child {
+        width: 450px;
+        background-image: url(../../../../assets/images/work-platform-section-bg.png);
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: 100%;
+        // filter: grayscale(100%); //灰度
+        backdrop-filter: blur(20px);
+      }
+    }
+  }
+}
+
+// 黑暗模式
+.work-platform-container.dark-mode {
+  > main {
+    > section {
+      > div {
+        background-color: $text-600;
+        // border: 1px solid $border-color-100;
+      }
+    }
+  }
+}

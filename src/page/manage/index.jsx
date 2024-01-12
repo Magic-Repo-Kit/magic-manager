@@ -14,12 +14,13 @@ function Manage() {
   const navigate = useNavigate(); //路由
 
   const [manageMenuUrl, setManageMenuUrl] = useState('');
+  const [manageMenuName, setManageMenuName] = useState('工作台');
 
-  const handleAppClick = (url) => {
-    console.log('🚀 ~ handleAppClick ~ url:', url);
+  const handleAppClick = (url, name) => {
     setManageMenuUrl(url);
-    localStorage.setItem('manageMenuUrl', url);
     navigate(`${url}`);
+    localStorage.setItem('manageMenuUrl', url);
+    setManageMenuName(name);
   };
   useEffect(() => {
     const storedManageMenuUrl = localStorage.getItem('manageMenuUrl');
@@ -40,7 +41,7 @@ function Manage() {
               className={`aside-first ${
                 manageMenuUrl === 'work-platform' ? 'active' : ''
               }`}
-              onClick={() => handleAppClick('work-platform')}
+              onClick={() => handleAppClick('work-platform', '工作台')}
             >
               <img src={mrkLogo} alt="" className="mrkLogo" />
             </div>
@@ -57,7 +58,7 @@ function Manage() {
               className={`aside-item-active ${
                 manageMenuUrl === 'knowledge' ? 'active' : ''
               }`}
-              onClick={() => handleAppClick('knowledge')}
+              onClick={() => handleAppClick('knowledge', '知识库')}
             >
               <i className="iconfont mr-inbox"></i>
             </div>
@@ -73,7 +74,7 @@ function Manage() {
               className={`aside-item-active ${
                 manageMenuUrl === 'user-manage' ? 'active' : ''
               }`}
-              onClick={() => handleAppClick('user-manage')}
+              onClick={() => handleAppClick('user-manage', '账号管理')}
             >
               <i className="iconfont mr-user-admin"></i>
             </div>
@@ -90,7 +91,7 @@ function Manage() {
               className={`aside-item-active ${
                 manageMenuUrl === 'roles-manage' ? 'active' : ''
               }`}
-              onClick={() => handleAppClick('roles-manage')}
+              onClick={() => handleAppClick('roles-manage', '权限管理')}
             >
               <i className="iconfont mr-fingerprint"></i>
             </div>
@@ -106,7 +107,7 @@ function Manage() {
               className={`aside-item-active ${
                 manageMenuUrl === 'contact-us' ? 'active' : ''
               }`}
-              onClick={() => handleAppClick('contact-us')}
+              onClick={() => handleAppClick('contact-us', '联系我们')}
             >
               <i className="iconfont mr-lightning"></i>
             </div>
@@ -124,7 +125,7 @@ function Manage() {
                 className={`aside-item-active ${
                   manageMenuUrl === 'setting-manage' ? 'active' : ''
                 }`}
-                onClick={() => handleAppClick('setting-manage')}
+                onClick={() => handleAppClick('setting-manage', '设置')}
               >
                 <i className="iconfont mr-setting-3"></i>
               </div>
@@ -137,7 +138,7 @@ function Manage() {
             >
               {/* 折叠 */}
               <div>
-                <i className="iconfont mr-zhankaimulu"></i>
+                <i className="iconfont mr-yincangmulu"></i>
               </div>
             </Tooltip>
           </div>
@@ -145,8 +146,13 @@ function Manage() {
       </aside>
       <main>
         <header>
-          <div className="text-center">
-            <span className="gradient-text">Welcome to the MarginRepoKit</span>
+          <div className="manage-header-item-box font-family-dingding">
+            <div className="manage-header-item flx-center">
+              <i className="iconfont mr-rocket-full"></i>
+              <span>{manageMenuName}</span>
+            </div>
+            <div className="manage-header-title">下午好！</div>
+            <div className="manage-header-title">通知通知XXXXXX</div>
           </div>
         </header>
         {/* 渲染子路由 */}

@@ -5,11 +5,11 @@ import { CloseOutlined } from '@ant-design/icons';
 
 const { TextArea } = Input;
 // 动态引入图片的函数
-async function importImage(imagePath) {
-  const image = await import(imagePath);
-  return image.default;
-}
-function footerCtx() {
+// async function importImage(imagePath) {
+//   const image = await import(imagePath);
+//   return image.default;
+// }
+function FooterCtx() {
   const inputRef = useRef(null);
   const [value, setValue] = useState('');
   const [isExpanded, setIsExpanded] = useState(false);
@@ -32,24 +32,24 @@ function footerCtx() {
     cursor: 'pointer',
     display: value ? 'block' : 'none',
   };
-  const imageNames = [
-    'emoji-1.svg',
-    'emoji-2.svg',
-    'emoji-3.svg',
-    'emoji-4.svg',
-    'emoji-5.svg',
-  ];
-  const images = imageNames.map((imageName, index) => {
-    const imagePath = `./emoji/${imageName}`;
-    return (
-      <img
-        key={index}
-        src={importImage(imagePath)}
-        alt={`Emoji ${index + 1}`}
-        style={{ width: '22px' }}
-      />
-    );
-  });
+  // const imageNames = [
+  //   'emoji-1.svg',
+  //   'emoji-2.svg',
+  //   'emoji-3.svg',
+  //   'emoji-4.svg',
+  //   'emoji-5.svg',
+  // ];
+  // const images = imageNames.map((imageName, index) => {
+  //   const imagePath = `./emoji/${imageName}`;
+  //   return (
+  //     <img
+  //       key={index}
+  //       src={importImage(imagePath)}
+  //       alt={`Emoji ${index + 1}`}
+  //       style={{ width: '22px' }}
+  //     />
+  //   );
+  // });
   return (
     <div className="container-footer-box">
       <div className="container-footer-box-btn" onClick={handleExpandClick}>
@@ -83,4 +83,4 @@ function footerCtx() {
     </div>
   );
 }
-export default footerCtx;
+export default FooterCtx;

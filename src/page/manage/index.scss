@@ -1,11 +1,9 @@
 @import '@/styles/theme';
 .manage-container {
   box-sizing: border-box;
-  min-height: calc(100vh - 65px);
-  padding: 15px 25px;
   font-size: 16px;
   position: relative;
-  aside {
+  > aside {
     box-sizing: border-box;
     height: calc(100vh - 65px);
     width: 75px;
@@ -14,7 +12,7 @@
     left: 0;
     top: 0;
 
-    nav {
+    > nav {
       border-radius: 10px;
       height: 100%;
       box-sizing: border-box;
@@ -27,7 +25,6 @@
       // justify-content: center;
       align-items: center;
       > div {
-        // background: pink;
         padding: 10px;
         margin-bottom: 18px;
         border-radius: 14px;
@@ -46,6 +43,11 @@
         > img {
           width: 30px;
           filter: grayscale(100%) brightness(200%); //白
+        }
+        &.active {
+          img {
+            animation: rotated 2.5s infinite;
+          }
         }
       }
 
@@ -84,6 +86,9 @@
         &:hover {
           opacity: 1;
           background-color: $bg-200;
+          &:not(.active) > i {
+            animation: 1.5s ease-in-out 0s infinite alternate both wiggle;
+          }
         }
         &.active {
           opacity: 1;
@@ -116,15 +121,42 @@
       }
     }
   }
-  main {
-    margin-left: 65px;
+  > main {
+    max-width: 1250px;
+    padding-left: 70px;
+    margin: 0 auto;
+
+    > header {
+      padding: 10px 5px;
+      padding-right: 10px;
+      .manage-header-item-box {
+        display: flex;
+        // justify-content: space-between;
+        align-items: center;
+        font-size: 18px;
+        .manage-header-item {
+          > i {
+            font-size: 20px;
+            margin-right: 5px;
+            background-image: linear-gradient(#af40ff, #5b42f3 50%, #00ddeb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+          }
+        }
+        .manage-header-title {
+          font-size: 16px;
+          margin-left: 8px;
+          border-radius: 10px;
+        }
+      }
+    }
   }
 }
 
 // 黑暗模式
 .manage-container.dark-mode {
-  aside {
-    nav {
+  > aside {
+    > nav {
       .aside-last {
         .space-line {
           opacity: 0.2;
@@ -136,6 +168,20 @@
         }
         &.active {
           background-color: $text-700;
+          &::before {
+            background-image: linear-gradient(40deg, #ff0080, #ff8c00 70%);
+          }
+        }
+      }
+    }
+  }
+  > main {
+    > header {
+      .manage-header-item-box {
+        .manage-header-item {
+          > i {
+            background-image: linear-gradient(40deg, #ff0080, #ff8c00 70%);
+          }
         }
       }
     }

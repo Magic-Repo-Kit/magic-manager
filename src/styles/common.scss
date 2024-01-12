@@ -132,8 +132,18 @@
 }
 // 文字背景渐变
 .gradient-text {
-  background: linear-gradient(to right, #0040f8, #03ffd0);
-  // background-image: url('../assets/images/text-bc.png');
+  background-image: linear-gradient(to right, #0040f8, #03ffd0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+// 文字渐变
+.gradient-text-2 {
+  background-image: linear-gradient(
+    43deg,
+    #4158d0 0%,
+    #c850c0 46%,
+    #ffcc70 100%
+  );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
