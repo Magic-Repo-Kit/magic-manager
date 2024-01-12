@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { PlusOutlined } from '@ant-design/icons';
 import { Modal, Upload } from 'antd';
 import './index.scss';
 import PropTypes from 'prop-types';
+
+import { DarkModeContext } from '@/components/DarkModeProvider'; //夜间模式
 // antd组件
 import { message } from 'antd';
 
@@ -20,6 +22,9 @@ function UploadImage({ maxCount, maxNums, acceptedFileTypes, maxSize }) {
   const [previewImage, setPreviewImage] = useState('');
   const [previewTitle, setPreviewTitle] = useState('');
   const [fileList, setFileList] = useState([]);
+
+  // 共享参数
+  const { darkMode } = useContext(DarkModeContext);
 
   const handleCancel = () => setPreviewOpen(false);
 
@@ -45,7 +50,7 @@ function UploadImage({ maxCount, maxNums, acceptedFileTypes, maxSize }) {
 
   const uploadButton = (
     <div>
-      <PlusOutlined />
+      <PlusOutlined style={{ color: darkMode ? '#ffffff' : '' }} />
       {/* <div style={{ marginTop: 8 }}>上传</div> */}
     </div>
   );
@@ -71,7 +76,7 @@ function UploadImage({ maxCount, maxNums, acceptedFileTypes, maxSize }) {
 
   return (
     <>
-      <div className="upload-container">
+      <div className={`upload-container ${darkMode ? 'dark-mode' : ''}`}>
         <Upload
           action="https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188"
           listType="picture-circle"

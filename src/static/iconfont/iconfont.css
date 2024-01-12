@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 4291850 */
-  src: url('iconfont.woff2?t=1704955938305') format('woff2'),
-       url('iconfont.woff?t=1704955938305') format('woff'),
-       url('iconfont.ttf?t=1704955938305') format('truetype');
+  src: url('iconfont.woff2?t=1705082121205') format('woff2'),
+       url('iconfont.woff?t=1705082121205') format('woff'),
+       url('iconfont.ttf?t=1705082121205') format('truetype');
 }
 
 .iconfont {
@@ -11,6 +11,46 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.mr-xuniVR-A:before {
+  content: "\e64b";
+}
+
+.mr-vr-glasses:before {
+  content: "\e690";
+}
+
+.mr-VR:before {
+  content: "\e64c";
+}
+
+.mr-VR1:before {
+  content: "\e792";
+}
+
+.mr-VR2:before {
+  content: "\e7bd";
+}
+
+.mr-VR3:before {
+  content: "\e7e1";
+}
+
+.mr-favro:before {
+  content: "\eb8d";
+}
+
+.mr-vr:before {
+  content: "\e70a";
+}
+
+.mr-remen:before {
+  content: "\e628";
+}
+
+.mr-redu:before {
+  content: "\e67e";
 }
 
 .mr-zhankaimulu:before {
@@ -51,22 +91,6 @@
 
 .mr-zan:before {
   content: "\e63f";
-}
-
-.mr-dianzan2-mianxing:before {
-  content: "\e699";
-}
-
-.mr-dianzan2-xianxing:before {
-  content: "\e69a";
-}
-
-.mr-dianzan4-xianxing:before {
-  content: "\e69b";
-}
-
-.mr-dianzan4-mianxing:before {
-  content: "\e69c";
 }
 
 .mr-chat:before {

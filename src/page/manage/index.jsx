@@ -147,12 +147,18 @@ function Manage() {
       <main>
         <header>
           <div className="manage-header-item-box font-family-dingding">
-            <div className="manage-header-item flx-center">
-              <i className="iconfont mr-rocket-full"></i>
-              <span>{manageMenuName}</span>
+            <div className="manage-header-greeting-box flx-align-center ">
+              <div className="manage-header-item flx-center">
+                <i className="iconfont mr-bookmark-full"></i>
+                <span>{manageMenuName}</span>
+              </div>
+              <div className="manage-header-greeting">下午好！</div>
             </div>
-            <div className="manage-header-title">下午好！</div>
-            <div className="manage-header-title">通知通知XXXXXX</div>
+
+            <div className="space-line"></div>
+            <div className="manage-header-title single-omit">
+              百宝袋开始内测了啦！当前时间2024-01-12
+            </div>
           </div>
         </header>
         {/* 渲染子路由 */}

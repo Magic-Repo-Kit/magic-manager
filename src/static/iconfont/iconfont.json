@@ -6,6 +6,76 @@
   "description": "百宝袋",
   "glyphs": [
     {
+      "icon_id": "5261354",
+      "name": "虚拟VR-A",
+      "font_class": "xuniVR-A",
+      "unicode": "e64b",
+      "unicode_decimal": 58955
+    },
+    {
+      "icon_id": "5832625",
+      "name": "vr-glasses",
+      "font_class": "vr-glasses",
+      "unicode": "e690",
+      "unicode_decimal": 59024
+    },
+    {
+      "icon_id": "6528440",
+      "name": "VR",
+      "font_class": "VR",
+      "unicode": "e64c",
+      "unicode_decimal": 58956
+    },
+    {
+      "icon_id": "11231702",
+      "name": "VR",
+      "font_class": "VR1",
+      "unicode": "e792",
+      "unicode_decimal": 59282
+    },
+    {
+      "icon_id": "11232010",
+      "name": "VR",
+      "font_class": "VR2",
+      "unicode": "e7bd",
+      "unicode_decimal": 59325
+    },
+    {
+      "icon_id": "11232195",
+      "name": "VR",
+      "font_class": "VR3",
+      "unicode": "e7e1",
+      "unicode_decimal": 59361
+    },
+    {
+      "icon_id": "15378343",
+      "name": "favro",
+      "font_class": "favro",
+      "unicode": "eb8d",
+      "unicode_decimal": 60301
+    },
+    {
+      "icon_id": "22273778",
+      "name": "vr",
+      "font_class": "vr",
+      "unicode": "e70a",
+      "unicode_decimal": 59146
+    },
+    {
+      "icon_id": "18405409",
+      "name": "热门",
+      "font_class": "remen",
+      "unicode": "e628",
+      "unicode_decimal": 58920
+    },
+    {
+      "icon_id": "19824883",
+      "name": "热度",
+      "font_class": "redu",
+      "unicode": "e67e",
+      "unicode_decimal": 59006
+    },
+    {
       "icon_id": "22960793",
       "name": "展开目录",
       "font_class": "zhankaimulu",
@@ -74,34 +144,6 @@
       "font_class": "zan",
       "unicode": "e63f",
       "unicode_decimal": 58943
-    },
-    {
-      "icon_id": "24267425",
-      "name": "点赞2-面型",
-      "font_class": "dianzan2-mianxing",
-      "unicode": "e699",
-      "unicode_decimal": 59033
-    },
-    {
-      "icon_id": "24267429",
-      "name": "点赞2-线型",
-      "font_class": "dianzan2-xianxing",
-      "unicode": "e69a",
-      "unicode_decimal": 59034
-    },
-    {
-      "icon_id": "24267430",
-      "name": "点赞4-线型",
-      "font_class": "dianzan4-xianxing",
-      "unicode": "e69b",
-      "unicode_decimal": 59035
-    },
-    {
-      "icon_id": "24267432",
-      "name": "点赞4-面型",
-      "font_class": "dianzan4-mianxing",
-      "unicode": "e69c",
-      "unicode_decimal": 59036
     },
     {
       "icon_id": "11891790",

@@ -17,31 +17,173 @@
       }
     }
     .work-platform-main-card-header {
-      > div {
-        flex: 1;
-      }
-      .work-platform-main-visitor {
+      .work-platform-main-header-left {
+        width: 380px;
         position: relative;
         .work-platform-visitor-update {
-          position: absolute;
-          top: 10px;
-          right: 12px;
+          margin-bottom: 20px;
+          padding: 0 5px;
+          font-size: 14px;
+          letter-spacing: 2px;
+          > i {
+            font-size: 16px;
+            cursor: pointer;
+          }
+          .visitor-fire {
+            font-size: 16px;
+            margin-left: 2px;
+            background-color: #ff0080;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+          }
+        }
+      }
+      .work-platform-main-header-right {
+        flex: 1;
+        .work-platform-title {
+          font-size: 14px;
+          margin-bottom: 20px;
+          letter-spacing: 2px;
+          > i {
+            font-size: 16px;
+            margin-left: 4px;
+            background-image: linear-gradient(40deg, #ff0080, #ff8c00 70%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+          }
+        }
+        .work-platform-apps {
+          display: flex;
+          gap: 20px;
+          .work-platform-item {
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            > div {
+              width: 60px;
+              height: 60px;
+              background-color: $bg-100;
+              border-radius: 10px;
+              padding: 10px;
+              box-sizing: border-box;
+              margin-bottom: 5px;
+              box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05),
+                0 2px 1px 1px rgba(0, 0, 0, 0.05),
+                0 1px 1px 2px rgba(0, 0, 0, 0.05);
+
+              > i {
+                font-size: 35px;
+              }
+              .work-platform-item-ai {
+                background-image: linear-gradient(
+                  43deg,
+                  #03ffd0 0%,
+                  #c850c0 46%,
+                  #ffcc70 100%
+                );
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+              }
+            }
+            > span {
+              font-size: 12px;
+            }
+            .work-platform-item-painting {
+              background-image: url(../../../../assets/images/work-platform-painting.png);
+              background-repeat: no-repeat;
+              background-size: contain;
+              position: relative;
+              &::before {
+                content: '';
+                border-radius: 10px;
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(
+                  0,
+                  0,
+                  0,
+                  0.1
+                ); /* 添加半透明的黑色遮罩层 */
+              }
+              > i {
+                position: relative;
+                box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+                background-image: linear-gradient(
+                  43deg,
+                  #0086dc 0%,
+                  #ffcc70 46%,
+                  #fd4a9e 100%
+                );
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+              }
+            }
+          }
         }
       }
     }
     .work-platform-main-middle {
-      > :first-child {
-        height: 450px;
+      .work-platform-middle-box {
         flex: 1;
+        display: flex;
+        // justify-content: space-between;
+        align-items: center;
+        > :first-child {
+          flex: 1;
+        }
       }
-      > :last-child {
-        width: 450px;
-        background-image: url(../../../../assets/images/work-platform-section-bg.png);
-        background-repeat: no-repeat;
-        background-size: contain;
-        background-position: 100%;
-        // filter: grayscale(100%); //灰度
-        backdrop-filter: blur(20px);
+    }
+    .work-platform-main-bottom {
+      > div {
+        flex: 1;
+        // height: 400px;
+        &:first-child {
+          background-image: url(../../../../assets/images/work-platform-3d.png);
+          background-repeat: no-repeat;
+          background-size: contain;
+          background-position: 100% 90%;
+        }
+      }
+      .work-platform-bottom-github {
+        min-height: 400px;
+        flex-direction: column;
+        background-image: -webkit-linear-gradient(
+          144deg,
+          #9500ff,
+          $primary-500 80%,
+          #00ddeb
+        );
+        .icon-github {
+          font-size: 35px;
+        }
+        .work-platform-bottom-title {
+          font-size: 18px;
+          font-weight: 600;
+        }
+        .work-platform-bottom-btn {
+          cursor: pointer;
+          background-color: $text-200;
+          padding: 8px 10px;
+          border-radius: 8px;
+          width: 70%;
+          box-sizing: border-box;
+          text-align: center;
+          margin-top: 40px;
+          margin-bottom: 5px;
+          > i {
+            font-size: 14px;
+            color: $accent-400;
+            margin-right: 6%;
+          }
+          &:hover {
+            background-color: $text-400;
+          }
+        }
       }
     }
   }
@@ -53,7 +195,34 @@
     > section {
       > div {
         background-color: $text-600;
-        // border: 1px solid $border-color-100;
+      }
+    }
+    .work-platform-main-card-header {
+      .work-platform-main-header-left {
+        .work-platform-visitor-update {
+          .visitor-fire {
+            background-image: linear-gradient(40deg, #ff0080, #ff8c00 70%);
+          }
+        }
+      }
+      .work-platform-main-header-right {
+        .work-platform-apps {
+          .work-platform-item {
+            > div {
+              background-color: $text-400;
+            }
+            .work-platform-item-painting {
+              &::before {
+                background-color: rgba(
+                  0,
+                  0,
+                  0,
+                  0.2
+                ); /* 添加半透明的黑色遮罩层 */
+              }
+            }
+          }
+        }
       }
     }
   }

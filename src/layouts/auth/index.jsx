@@ -22,8 +22,8 @@ import mrkLogo from '@/assets/images/logo-mrk.png';
 import mrkLight from '@/assets/images/mrk-title-light.png';
 import mrkDark from '@/assets/images/mrk-title-dark.png';
 import loginMain from '@/assets/images/login-main.png';
-import loginComputer from '@/assets/images/login-computer.png';
-import loginHeadset from '@/assets/images/login-headset.png';
+// import loginComputer from '@/assets/images/login-computer.png';
+// import loginHeadset from '@/assets/images/login-headset.png';
 
 // antd组件
 import { Modal, message } from 'antd';
@@ -179,7 +179,7 @@ function Auth() {
         <div className="rocket-introduce user-select">
           <Introduce />
         </div>
-        <div className="login-magicrepokit">
+        {/* <div className="login-magicrepokit">
           <img
             style={{ width: '300px' }}
             src={loginComputer}
@@ -192,7 +192,7 @@ function Auth() {
             style={{ width: '300px' }}
             className="float-up-down"
           />
-        </div>
+        </div> */}
         {/* <div>
           <Rocket />
         </div> */}
