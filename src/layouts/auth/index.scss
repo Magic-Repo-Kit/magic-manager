@@ -86,7 +86,7 @@
       }
       .rocket-container {
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
         transform: translateZ(0); //触发 GPU 硬件加速
         -webkit-transform: translateZ(0);
         -moz-transform: translateZ(0);
@@ -97,7 +97,7 @@
         backdrop-filter: blur(20px);
 
         section {
-          width: 50%;
+          width: 40%;
           img {
             max-width: 80%;
             height: 100%;
@@ -229,12 +229,14 @@
             }
           }
           .login-main {
-            width: 100%;
+            margin: 0 auto;
+            width: 65%;
             text-align: center;
             position: relative;
             min-width: 300px;
             box-sizing: border-box;
             > img {
+              // height: 500px;
               -webkit-touch-callout: none; /* 禁止长按弹出默认菜单 */
               user-select: none; /* 禁用选择文本 */
               filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5));
@@ -255,7 +257,7 @@
             width: 100%;
             .login-main {
               height: 400px;
-              padding-left: 10px;
+              // padding-left: 10px;
             }
             .login-main-explain {
               padding: 20px;

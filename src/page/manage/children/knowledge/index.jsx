@@ -8,9 +8,7 @@ import knowledgeFile from '@/assets/images/file.png';
 function Knowledge() {
   return (
     <div className="knowledge-container">
-      <div className="knowledge-title">
-        <span>知识库</span>
-      </div>
+      <div className="knowledge-title">{/* <span>知识库</span> */}</div>
       <main className="knowledge-content">
         <div className="knowledge-content-item">
           <div className="knowledge-item-header">
