@@ -297,7 +297,12 @@ function DropdownUser({ setUserOpen }) {
           </div>
         </div>
       </main>
-      <footer onClick={() => window.location.replace('/auth')}>
+      <footer
+        onClick={() => {
+          window.location.replace('/auth');
+          sessionStorage.clear();
+        }}
+      >
         <div className="space-line"></div>
         <div className="login-out-box user-select">
           <i className="iconfont mr-tuichu2 login-out"></i>

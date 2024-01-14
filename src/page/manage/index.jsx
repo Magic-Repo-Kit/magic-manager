@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import './index.scss';
-import { Outlet, useNavigate, useLocation } from 'react-router-dom'; //渲染子路由
+import { Outlet, useNavigate } from 'react-router-dom'; //渲染子路由
 import { DarkModeContext } from '@/components/DarkModeProvider'; //夜间模式
 // 图片
 import mrkLogo from '@/assets/images/logo-mrk.png';
@@ -12,7 +12,6 @@ function Manage() {
   // 共享参数
   const { darkMode } = useContext(DarkModeContext);
   const navigate = useNavigate(); //路由
-  const location = useLocation();
 
   const [manageMenuUrl, setManageMenuUrl] = useState('');
   const [manageMenuName, setManageMenuName] = useState('工作台');
@@ -20,12 +19,15 @@ function Manage() {
   const handleAppClick = (url, name) => {
     setManageMenuUrl(url);
     navigate(`${url}`);
-    localStorage.setItem('manageMenuUrl', url);
+    sessionStorage.setItem('manageMenuUrl', url);
+    sessionStorage.setItem('manageMenuName', name);
     setManageMenuName(name);
   };
   useEffect(() => {
-    const storedManageMenuUrl = localStorage.getItem('manageMenuUrl');
+    const storedManageMenuUrl = sessionStorage.getItem('manageMenuUrl');
     setManageMenuUrl(storedManageMenuUrl || 'work-platform');
+    const storedManageMenuName = sessionStorage.getItem('manageMenuName');
+    setManageMenuName(storedManageMenuName || '工作台');
   }, []);
   return (
     <div className={`manage-container ${darkMode ? 'dark-mode' : ''}`}>
@@ -148,23 +150,10 @@ function Manage() {
       <main>
         <header>
           <div className="manage-header-item-box font-family-dingding">
-            <div className="manage-header-greeting-box flx-align-center ">
-              <div className="manage-header-item flx-center">
-                <i className="iconfont mr-bookmark-full"></i>
-                <span>{manageMenuName}</span>
-              </div>
-              <div className="manage-header-greeting">下午好！</div>
+            <div className="manage-header-item flx-center">
+              <i className="iconfont mr-bookmark-full"></i>
+              <span>{manageMenuName}</span>
             </div>
-            <>
-              {location.pathname.includes('work-platform') && (
-                <>
-                  <div className="space-line"></div>
-                  <div className="manage-header-title single-omit">
-                    百宝袋开始内测了啦！当前时间2024-01-12
-                  </div>
-                </>
-              )}
-            </>
           </div>
         </header>
         {/* 渲染子路由 */}

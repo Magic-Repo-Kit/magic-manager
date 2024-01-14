@@ -1,47 +1,105 @@
 @import '@/styles/theme';
 .knowledge-container {
+  border-top: 1px solid rgba($border-color-100, 0.5);
+  padding: 15px;
+
   .knowledge-title {
-    margin-bottom: 10px;
+    margin-bottom: 20px;
   }
   .knowledge-content {
     display: flex;
+    flex-wrap: wrap;
     gap: 20px;
     width: 100%;
-    margin-top: 10px;
     .knowledge-content-item {
-      width: 25%;
-      height: 110px;
+      width: calc(100% / 3 - 14px);
+      height: 120px;
       box-sizing: border-box;
       padding: 10px 12px;
-      border: 1px solid $bg-300;
+      border: 1px solid $border-color-100;
       border-radius: 8px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      // 媒体查询 <1000px
+      @media screen and (max-width: 1000px) {
+        width: calc(100% / 2 - 10px);
+      }
+      @media screen and (max-width: 768px) {
+        width: 100%;
+      }
       .knowledge-item-header {
         display: flex;
         justify-content: space-between;
         align-items: center;
         font-size: 14px;
+
         img {
-          height: 20px;
+          height: 24px;
           margin-right: 8px;
+        }
+        > :first-child {
+          font-weight: 600;
+          letter-spacing: 1px;
         }
         > :last-child {
           cursor: pointer;
         }
       }
       .knowledge-item-content {
+        font-size: 14px;
+        padding-left: 3px;
+        padding-right: 50px;
       }
       .knowledge-item-footer {
         display: flex;
         justify-content: space-between;
         align-items: center;
         font-size: 14px;
+        opacity: 0.5;
         i {
           margin-right: 3px;
         }
       }
+    }
+    // 空
+    .knowledge-content-empty {
+      height: calc(100vh - 350px);
+      display: flex;
+      align-items: center;
+      margin: 0 auto;
+    }
+  }
+  .knowledge-footer {
+    margin-top: 30px;
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+
+// 新建下拉
+.dropdown-box {
+  background-color: #ffffff;
+  box-shadow: 0 6px 10px 0 rgba(33, 33, 33, 0.1);
+  padding: 5px 5px;
+  margin-top: 5px;
+  border-radius: 8px;
+  > div {
+    padding: 2px 0;
+    box-sizing: border-box;
+  }
+  > :not(:last-child) {
+    border-bottom: 1px solid rgba($border-color-100, 0.5);
+  }
+  .title-dropdown-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .ant-btn-icon {
+      margin-inline-end: 5px;
+    }
+    img {
+      height: 24px;
     }
   }
 }

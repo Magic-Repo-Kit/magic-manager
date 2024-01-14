@@ -3,7 +3,7 @@
   box-sizing: border-box;
   transition: color 0.5s, background-color 0.5s;
   color: $text-200;
-  background-color: $bg-100;
+  background-color: $bg-900;
   position: relative;
   width: 100%;
   min-height: 100%;
@@ -67,7 +67,7 @@
           margin: 0 10px;
           width: 1px;
           height: 15px;
-          background-color: #e8e8e8;
+          background-color: $border-color-100;
         }
         .admin-switch {
           cursor: pointer;
@@ -78,7 +78,7 @@
           }
         }
         .admin-user-container {
-          // border: 2px solid #e8e8e8;
+          // border: 2px solid $border-color-100;
           border-radius: 50%;
           padding: 0;
           height: 45px;

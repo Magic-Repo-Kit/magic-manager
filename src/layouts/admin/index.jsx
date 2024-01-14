@@ -25,10 +25,10 @@ function Admin() {
   const [dropdownOpen, setDropdownOpen] = useState(false); //下拉
 
   useEffect(() => {
-    const storedAppName = localStorage.getItem('selectedAppName');
+    const storedAppName = sessionStorage.getItem('selectedAppName');
     setSelectedAppName(storedAppName || '工作台'); // 如果本地存储中没有值，默认选择 '工作台'
     // 此处放开有bug，路由跳转冲突
-    // const storedApp = localStorage.getItem('selectedApp');
+    // const storedApp = sessionStorage.getItem('selectedApp');
     // storedApp ? navigate(`${storedApp}`) : navigate('manage');
     setDropdownOpen(false); // 关闭下拉菜单
   }, [navigate]);

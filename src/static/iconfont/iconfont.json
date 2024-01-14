@@ -6,6 +6,34 @@
   "description": "百宝袋",
   "glyphs": [
     {
+      "icon_id": "2471402",
+      "name": "移动选择",
+      "font_class": "yidongxuanze",
+      "unicode": "e67f",
+      "unicode_decimal": 59007
+    },
+    {
+      "icon_id": "8791336",
+      "name": "移动",
+      "font_class": "yidong",
+      "unicode": "e72a",
+      "unicode_decimal": 59178
+    },
+    {
+      "icon_id": "2470690",
+      "name": "文件夹",
+      "font_class": "wenjianjia",
+      "unicode": "e651",
+      "unicode_decimal": 58961
+    },
+    {
+      "icon_id": "36936409",
+      "name": "知识点",
+      "font_class": "zhishidian-01-01",
+      "unicode": "e65e",
+      "unicode_decimal": 58974
+    },
+    {
       "icon_id": "659142",
       "name": "ic_locked",
       "font_class": "iclocked",
@@ -53,13 +81,6 @@
       "font_class": "wenben",
       "unicode": "e650",
       "unicode_decimal": 58960
-    },
-    {
-      "icon_id": "16050284",
-      "name": "文件桶",
-      "font_class": "wenjiantong",
-      "unicode": "e651",
-      "unicode_decimal": 58961
     },
     {
       "icon_id": "5261354",

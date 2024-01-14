@@ -31,7 +31,7 @@
       justify-content: space-between;
       align-items: center;
       .mrk-logo {
-        height: 28px;
+        height: 26px;
         display: flex;
         align-items: center;
         img {
@@ -51,7 +51,7 @@
           margin: 0 15px;
           width: 1px;
           height: 15px;
-          background-color: #e8e8e8;
+          background-color: $border-color-100;
         }
       }
     }
@@ -146,7 +146,7 @@
                 margin: 0 15px;
                 width: 2px;
                 height: 16px;
-                background-color: #e8e8e8;
+                background-color: $border-color-100;
               }
             }
             .ai-explain {

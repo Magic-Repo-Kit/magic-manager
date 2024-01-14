@@ -13,8 +13,8 @@ function DropdownApps({ selectedAppName, setSelectedAppName }) {
 
   const handleAppClick = (name, app) => {
     setSelectedAppName(name);
-    localStorage.setItem('selectedAppName', name);
-    localStorage.setItem('selectedApp', app);
+    sessionStorage.setItem('selectedAppName', name);
+    sessionStorage.setItem('selectedApp', app);
     navigate(`${app}`);
   };
 
