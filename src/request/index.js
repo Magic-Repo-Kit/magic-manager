@@ -19,8 +19,11 @@ const instance = axios.create({
   },
 });
 
+let reqPool = [] // 请求池,用于去掉重复的请求
+
 // 请求拦截器
 instance.interceptors.request.use((config) => {
+
   const access_token = getAccessToken();
   // 鉴权，判断本地有没有accessToken
   if (access_token) {
@@ -28,6 +31,14 @@ instance.interceptors.request.use((config) => {
       Authorization: `Bearer ${access_token}`
     }, config.headers);
   }
+
+  // 保存第一次 post请求，剔除重复的 post 请求，防止重复数据提交
+  if (/post/i.test(config.method)) {
+    var url = config.baseURL + config.url
+    if (reqPool.includes(url)) return Promise.reject(new Error('数据正在处理中...'))
+    reqPool.push(url)
+  }
+
   // NProgress.start();  //启动loading
   return config;
 }, (error) => {
@@ -37,17 +48,30 @@ instance.interceptors.request.use((config) => {
 
 // 响应拦截器
 instance.interceptors.response.use((response) => {
+
+  // 剔除已完成的 post 请求
+  let config = response.config
+  if (/post/i.test(config.method)) {
+    reqPool = reqPool.filter(url => url !== config.url)
+  }
+
+
   // NProgress.done(); // 关闭loading
   return response;
 }, async res => {
+  console.log("🚀 ~ instance.interceptors.response.use ~ res:", res)
+  // 剔除已完成的 post 请求
+  let config = res.config
+  if (/post/i.test(config.method)) {
+    reqPool = reqPool.filter(url => url !== config.url)
+  }
+
   const originalRequest = res.config;
   // 如果token过期，此时401 
   if (res.response.status === 401 && !originalRequest._retry) {
     originalRequest._retry = true;
-
     try {
       const refreshToken = getRefreshToken();
-      // try {
       const response = await instance.post(`/system/auth/refresh-token?refreshToken=${refreshToken}`);
 
       if (response.data.code === 200) {
@@ -68,7 +92,7 @@ instance.interceptors.response.use((response) => {
     } catch (error) {
       console.log('error', error);
       message.error('身份认证过期，请重新登录');
-      // 刷新失败，清除令牌并重定向到登录页面【清除token，清除本地缓存帐号信息user-detail】
+      // 刷新失败，清除token 重新登录【清除本地缓存帐号信息user-detail】
       removeAccessToken('access_token');
       removeRefreshToken('refresh_token');
       setTimeout(() => {
@@ -78,6 +102,7 @@ instance.interceptors.response.use((response) => {
   }
   return Promise.reject(res);
 });
+
 
 // 将各种请求方法封装在 ajax 对象中，并且解构
 const ajax = {
