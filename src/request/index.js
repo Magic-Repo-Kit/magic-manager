@@ -19,7 +19,7 @@ const instance = axios.create({
   },
 });
 
-let reqPool = [] // 请求池,用于去掉重复的请求
+// let reqPool = [] // 请求池,用于去掉重复的请求
 
 // 请求拦截器
 instance.interceptors.request.use((config) => {
@@ -33,11 +33,11 @@ instance.interceptors.request.use((config) => {
   }
 
   // 保存第一次 post请求，剔除重复的 post 请求，防止重复数据提交
-  if (/post/i.test(config.method)) {
-    var url = config.baseURL + config.url
-    if (reqPool.includes(url)) return Promise.reject(new Error('数据正在处理中...'))
-    reqPool.push(url)
-  }
+  // if (/post/i.test(config.method)) {
+  //   var url = config.baseURL + config.url
+  //   if (reqPool.includes(url)) return Promise.reject(new Error('数据正在处理中...'))
+  //   reqPool.push(url)
+  // }
 
   // NProgress.start();  //启动loading
   return config;
@@ -50,10 +50,10 @@ instance.interceptors.request.use((config) => {
 instance.interceptors.response.use((response) => {
 
   // 剔除已完成的 post 请求
-  let config = response.config
-  if (/post/i.test(config.method)) {
-    reqPool = reqPool.filter(url => url !== config.url)
-  }
+  // let config = response.config
+  // if (/post/i.test(config.method)) {
+  //   reqPool = reqPool.filter(url => url !== config.url)
+  // }
 
 
   // NProgress.done(); // 关闭loading
@@ -61,10 +61,10 @@ instance.interceptors.response.use((response) => {
 }, async res => {
   console.log("🚀 ~ instance.interceptors.response.use ~ res:", res)
   // 剔除已完成的 post 请求
-  let config = res.config
-  if (/post/i.test(config.method)) {
-    reqPool = reqPool.filter(url => url !== config.url)
-  }
+  // let config = res.config
+  // if (/post/i.test(config.method)) {
+  //   reqPool = reqPool.filter(url => url !== config.url)
+  // }
 
   const originalRequest = res.config;
   // 如果token过期，此时401 
@@ -93,11 +93,10 @@ instance.interceptors.response.use((response) => {
       console.log('error', error);
       message.error('身份认证过期，请重新登录');
       // 刷新失败，清除token 重新登录【清除本地缓存帐号信息user-detail】
-      removeAccessToken('access_token');
-      removeRefreshToken('refresh_token');
-      setTimeout(() => {
-        window.location.replace('/auth');
-      }, 1000); // 设置延迟时间为1秒（1000毫秒）
+      removeAccessToken();
+      removeRefreshToken();
+      window.location.replace('/auth');
+      sessionStorage.clear();
     }
   }
   return Promise.reject(res);

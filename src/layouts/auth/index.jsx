@@ -64,18 +64,12 @@ function Auth() {
             navigate('/admin');
             message.success('登录成功');
           } else {
-            setIsLoading(false);
-            message.error(res.msg || '登录失败');
-            // 如果跳转失败，删除多余参数，并替换路径
-            urlParams.delete('code');
-            urlParams.delete('state');
-            const newUrl = `${locationObj.pathname}`;
-            window.history.replaceState({}, '', newUrl);
+            throw new Error(res.msg || '登录失败');
           }
         } catch (error) {
-          setIsLoading(false);
           message.error(error.msg || '登录失败');
-          // 如果跳转失败，删除多余参数，并替换路径
+
+          // 如果跳转失败，清理URL参数，并替换路径
           urlParams.delete('code');
           urlParams.delete('state');
           const newUrl = `${locationObj.pathname}`;
@@ -88,7 +82,7 @@ function Auth() {
       }
     };
     fetchData();
-  }, [locationObj.search, locationObj.pathname, navigate, setIsLoading]);
+  }, [locationObj.search, locationObj.pathname]);
 
   return (
     <div className={`login-container ${darkMode ? 'dark-mode' : ''}`}>
