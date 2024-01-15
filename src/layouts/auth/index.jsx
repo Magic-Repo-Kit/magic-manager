@@ -53,7 +53,7 @@ function Auth() {
         setIsLoading(true);
         try {
           const res = await platformLoginAPI({
-            type: sessionStorage.getItem('platformType'),
+            type: localStorage.getItem('platformType'),
             code,
             state,
           });
@@ -83,6 +83,10 @@ function Auth() {
     };
     fetchData();
   }, [locationObj.search, locationObj.pathname]);
+
+  useEffect(() => {
+    sessionStorage.clear();
+  }, []);
 
   return (
     <div className={`login-container ${darkMode ? 'dark-mode' : ''}`}>

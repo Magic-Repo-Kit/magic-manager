@@ -94,7 +94,7 @@ function Register() {
     // 10-github 20-google 30-gitee
     const type =
       platformName === 'github' ? 10 : platformName === 'google' ? 20 : 30;
-    sessionStorage.setItem('platformType', type);
+    localStorage.setItem('platformType', type);
     const redirectUri = window.location.href;
     // const redirectUri = 'https://mrk.auroralpixel.world/auth';
 

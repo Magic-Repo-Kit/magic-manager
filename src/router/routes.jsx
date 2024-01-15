@@ -60,7 +60,12 @@ const routes = [
         children: [
           {
             path: '',
-            element: <Navigate to="work-platform" replace />, //默认工作台首页
+            element: (
+              <Navigate
+                to={sessionStorage.getItem('manageMenuUrl') || 'work-platform'}
+                replace
+              />
+            ), //默认工作台首页
           },
           {
             path: 'work-platform',
