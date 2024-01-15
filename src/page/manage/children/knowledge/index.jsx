@@ -11,7 +11,7 @@ import knowledgeFile from '@/assets/images/file.png';
 import knowledgeIcon from '@/assets/images/knowledge-icon.png';
 
 // antd组件
-import { Button, Dropdown, Empty } from 'antd';
+import { message, Button, Dropdown, Empty } from 'antd';
 
 // 单个文件夹
 const KnowledgeItem = ({ file }) => {
@@ -141,7 +141,7 @@ function Knowledge() {
           setTotal(res.data.total);
         }
       } catch (error) {
-        message.error(error.msg || '获取数据失败');
+        message.error(error.message || '获取数据失败');
       }
     };
     getFileList();
