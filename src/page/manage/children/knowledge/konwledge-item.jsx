@@ -34,7 +34,10 @@ function KnowledgeItem({ file, onEdit, onMove, onDelete }) {
                     }
                     type="text"
                     className="title-dropdown-btn"
-                    onClick={onEdit}
+                    onClick={() => {
+                      setDropdownEditOpen(false);
+                      onEdit();
+                    }}
                   >
                     编 辑
                   </Button>
@@ -48,7 +51,10 @@ function KnowledgeItem({ file, onEdit, onMove, onDelete }) {
                     }
                     type="text"
                     className="title-dropdown-btn"
-                    onClick={onMove}
+                    onClick={() => {
+                      setDropdownEditOpen(false);
+                      onMove();
+                    }}
                   >
                     移 动
                   </Button>
@@ -62,7 +68,10 @@ function KnowledgeItem({ file, onEdit, onMove, onDelete }) {
                     }
                     type="text"
                     className="title-dropdown-btn"
-                    onClick={onDelete}
+                    onClick={() => {
+                      setDropdownEditOpen(false);
+                      onDelete();
+                    }}
                   >
                     删 除
                   </Button>
