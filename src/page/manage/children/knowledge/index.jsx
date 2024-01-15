@@ -18,46 +18,96 @@ function Knowledge() {
   // 共享参数
   const { darkMode } = useContext(DarkModeContext);
 
-  const [dropdownAddOpen, setDropdownAddOpen] = useState(false); //新建下拉
+  const [dropdownAddOpen, setDropdownAddOpen] = useState(false); //新建下拉状态
   const [fileList, setFileList] = useState([]);
 
   const [pageNo, setPageNo] = useState(1);
   const [pageSize, setPageSize] = useState(15);
   const [total, setTotal] = useState(0);
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false); //弹框状态
 
   const inputFolderNameRef = useRef(null);
   const [folderName, setFolderName] = useState(''); //名称
   const [folderDescription, setFolderDescription] = useState(''); //描述介绍
   const [folderType, setFolderType] = useState(1); //类型
+  const [folderItemId, setFolderItemId] = useState(''); //名称
 
-  // 触发弹框
-  const handleModal = (type) => {
+  // 新增 / 编辑弹框
+  const handleModal = (file, type) => {
     setIsOpen(true);
-    setDropdownAddOpen(false);
     setTimeout(() => {
-      inputFolderNameRef.current.focus(); //光标选中
+      inputFolderNameRef.current.focus(); //name光标选中
     }, 200);
-    setFolderType(type); // type：1-文件夹 2-知识库
-  };
-  // 编辑文件
-  const handleEdit = () => {
-    setIsOpen(true);
+    console.log('🚀 ~ handleModal ~ file:', file);
+    console.log('🚀 ~ handleModal ~ type:', type);
+    //file.id - 编辑
+    if (file.id) {
+      // 参数带进来
+      setFolderName(file.name);
+      setFolderDescription(file.description);
+      setFolderType(file.type);
+      setFolderItemId(file.id);
+    } else {
+      setFolderType(type); // type：1-文件夹 2-知识库
+    }
   };
 
-  // 弹框取消
-  const handleCancel = () => {
-    setIsOpen(false);
-    setFolderName('');
-    setFolderDescription('');
-  };
-  // 弹框确认
+  // 弹框 - 确定
   const handleOk = () => {
     if (!folderName) {
       message.warning(`请输入${folderType === 1 ? '文件夹' : '知识库'}名称`);
       return;
     }
-    submitFile(folderName, folderDescription, folderType);
+    let params = {
+      name: folderName,
+      description: folderDescription,
+      type: folderType,
+    };
+    submitFile(params);
+  };
+
+  // 弹框 - 取消
+  const handleCancel = () => {
+    setIsOpen(false);
+    setFolderName('');
+    setFolderDescription('');
+  };
+
+  // 提交(新增/编辑)
+  const submitFile = async (params) => {
+    if (folderItemId) {
+      // 编辑
+      try {
+        const res = await ajax.post(
+          `/chat/knowledge/update?id=${folderItemId}`,
+          params
+        );
+        if (res.code === 200) {
+          message.success('编辑成功');
+          setIsOpen(false);
+          setFolderItemId('');
+          setFolderName('');
+          setFolderDescription('');
+          getFileList(pageNo, pageSize, '', '');
+        }
+      } catch (error) {
+        message.error(error.message || '编辑失败');
+      }
+    } else {
+      // 新增
+      try {
+        const res = await ajax.post('/chat/knowledge/create', params);
+        if (res.code === 200) {
+          message.success('创建成功');
+          setIsOpen(false);
+          setFolderName('');
+          setFolderDescription('');
+          getFileList(pageNo, pageSize, '', '');
+        }
+      } catch (error) {
+        message.error(error.message || '创建失败');
+      }
+    }
   };
 
   // 获取文件列表分页
@@ -78,74 +128,42 @@ function Knowledge() {
       message.error(error.message || '获取数据失败');
     }
   };
-  // 创建/提交文件
-  const submitFile = async (
-    name,
-    description,
-    type,
-    parentId,
-    indexName,
-    imageUrl
-  ) => {
-    const params = {
-      name,
-      description,
-      type,
-      parentId,
-      indexName,
-      imageUrl,
-    };
-    try {
-      const res = await ajax.post('/chat/knowledge/create', params);
-      if (res.code === 200) {
-        message.success('创建成功');
-        setIsOpen(false);
-        setFolderName('');
-        setFolderDescription('');
-        getFileList(pageNo, pageSize, '', parentId);
-      }
-    } catch (error) {
-      message.error(error.message || '创建失败');
-    }
-  };
-  // 编辑
-  const updateFile = async (
-    name,
-    description,
-    type,
-    parentId,
-    indexName,
-    imageUrl
-  ) => {
-    const params = {
-      name,
-      description,
-      type,
-      parentId,
-      indexName,
-      imageUrl,
-    };
-    try {
-      const res = await ajax.post('/chat/knowledge/update', params);
-      if (res.code === 200) {
-        message.success('编辑成功');
-        setIsOpen(false);
-        setFolderName('');
-        setFolderDescription('');
-        getFileList(pageNo, pageSize, '', parentId);
-      }
-    } catch (error) {
-      message.error(error.message || '编辑失败');
-    }
-  };
 
   // 移动
-  const handleMove = async () => {
-    // 调用删除函数
+  const handleMove = async (file) => {
+    console.log('🚀 ~ handleMove ~ file:', file);
+    try {
+      const res = await ajax.post('/chat/knowledge/move', {
+        id: file.id,
+        parentId: file.parentId,
+      });
+      if (res.code === 200) {
+        message.success('移动成功');
+        setIsOpen(false);
+        getFileList(pageNo, pageSize, '', '');
+      }
+    } catch (error) {
+      message.error(error.message || '移动失败');
+    }
   };
 
   // 删除
-  const handleDelete = async () => {};
+  const handleDelete = async (file) => {
+    try {
+      const res = await ajax.delete(
+        `/chat/knowledge/delete?knowledgeIds=${file.id}`
+      );
+      if (res.code === 200) {
+        message.success('删除成功');
+        setIsOpen(false);
+        getFileList(pageNo, pageSize, '', '');
+      }
+    } catch (error) {
+      message.error(error.message || '删除失败');
+    }
+  };
+
+  // 导出
 
   useEffect(() => {
     getFileList(pageNo, pageSize);
@@ -168,7 +186,10 @@ function Knowledge() {
                   }
                   type="text"
                   className="title-dropdown-btn"
-                  onClick={() => handleModal(1)}
+                  onClick={() => {
+                    setDropdownAddOpen(false);
+                    handleModal({}, 1);
+                  }}
                 >
                   文件夹
                 </Button>
@@ -183,7 +204,10 @@ function Knowledge() {
                   }
                   type="text"
                   className="title-dropdown-btn"
-                  onClick={() => handleModal(2)}
+                  onClick={() => {
+                    setDropdownAddOpen(false);
+                    handleModal({}, 2);
+                  }}
                 >
                   知识库
                 </Button>
@@ -207,7 +231,7 @@ function Knowledge() {
             <KnowledgeItem
               key={file.id}
               file={file}
-              onEdit={handleEdit}
+              onEdit={(file) => handleModal(file)}
               onMove={handleMove}
               onDelete={handleDelete}
             />
@@ -229,7 +253,7 @@ function Knowledge() {
           // showTotal={(total, range) =>
           //   `当前${range[0]}-${range[1]} / 共${total}页`
           // }
-          showTotal={(total) => `共${total}页`}
+          showTotal={(total) => `共${total}条`}
           defaultPageSize={pageSize}
           defaultCurrent={1}
           pageNo={pageNo}

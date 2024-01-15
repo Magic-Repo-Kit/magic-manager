@@ -36,7 +36,7 @@ function KnowledgeItem({ file, onEdit, onMove, onDelete }) {
                     className="title-dropdown-btn"
                     onClick={() => {
                       setDropdownEditOpen(false);
-                      onEdit();
+                      onEdit(file);
                     }}
                   >
                     编 辑
@@ -53,10 +53,27 @@ function KnowledgeItem({ file, onEdit, onMove, onDelete }) {
                     className="title-dropdown-btn"
                     onClick={() => {
                       setDropdownEditOpen(false);
-                      onMove();
+                      onMove(file);
                     }}
                   >
                     移 动
+                  </Button>
+                </div>
+                <div>
+                  <Button
+                    icon={
+                      <>
+                        <i className="iconfont mr-daochu"></i>
+                      </>
+                    }
+                    type="text"
+                    className="title-dropdown-btn"
+                    onClick={() => {
+                      setDropdownEditOpen(false);
+                      // onDelete(file);
+                    }}
+                  >
+                    导 出
                   </Button>
                 </div>
                 <div>
@@ -70,7 +87,7 @@ function KnowledgeItem({ file, onEdit, onMove, onDelete }) {
                     className="title-dropdown-btn"
                     onClick={() => {
                       setDropdownEditOpen(false);
-                      onDelete();
+                      onDelete(file);
                     }}
                   >
                     删 除
@@ -96,11 +113,11 @@ function KnowledgeItem({ file, onEdit, onMove, onDelete }) {
       <div className="knowledge-item-footer">
         <div></div>
         <div className="flx-center">
-          <i
+          {/* <i
             className={`iconfont ${
               file.type === 1 ? 'mr-wenjianjia' : 'mr-zhishidian-01-01'
             }`}
-          ></i>
+          ></i> */}
           <span>{file.type === 1 ? '文件夹' : '知识库'}</span>
         </div>
       </div>
