@@ -1,13 +1,22 @@
-import React, { useState } from 'react';
-import { Button, Modal } from 'antd';
+import React from 'react';
+import { Modal } from 'antd';
+import './index.scss';
 
-const MrModal = ({ title, content, open, onOk, onCancel }) => {
+const MrModal = ({ title, content, open, onOk, onCancel, width }) => {
   return (
-    <>
-      <Modal title={title} open={open} onOk={onOk} onCancel={onCancel}>
+    <div className="modal-container-custom">
+      <Modal
+        title={title}
+        open={open}
+        onOk={onOk}
+        onCancel={onCancel}
+        okText={'确定'}
+        cancelText={'取消'}
+        width={width}
+      >
         {content}
       </Modal>
-    </>
+    </div>
   );
 };
 

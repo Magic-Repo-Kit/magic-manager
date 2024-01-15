@@ -11,9 +11,9 @@ const MrPagination = ({
   onChange,
 }) => {
   // 当第一页小于10，分页隐藏
-  // if (pageNo <= 1 && total <= pageSize * (defaultCurrent - 1) + 10) {
-  //   return null;
-  // }
+  if (pageNo <= 1 && total <= pageSize * (defaultCurrent - 1) + 10) {
+    return null;
+  }
 
   return (
     <Pagination

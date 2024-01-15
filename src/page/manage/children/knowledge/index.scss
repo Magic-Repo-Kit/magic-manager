@@ -103,3 +103,13 @@
     }
   }
 }
+
+// 弹框
+.mr-modal-title-box {
+  display: flex;
+  align-items: center;
+  > img {
+    height: 26px;
+    margin-right: 5px;
+  }
+}

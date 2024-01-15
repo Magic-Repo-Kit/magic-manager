@@ -6,6 +6,13 @@
   "description": "百宝袋",
   "glyphs": [
     {
+      "icon_id": "6048",
+      "name": "输入",
+      "font_class": "shuru",
+      "unicode": "e660",
+      "unicode_decimal": 58976
+    },
+    {
       "icon_id": "2471402",
       "name": "移动选择",
       "font_class": "yidongxuanze",

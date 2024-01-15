@@ -1,103 +1,18 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect, useRef } from 'react';
 import './index.scss';
 import { DarkModeContext } from '@/components/DarkModeProvider'; //夜间模式
 import ajax from '@/request';
 
 import MrPagination from '@/components/mr-pagination';
 import MrModal from '@/components/mr-modal';
+import KnowledgeItem from './konwledge-item';
 
 // 图片
 import knowledgeFile from '@/assets/images/file.png';
 import knowledgeIcon from '@/assets/images/knowledge-icon.png';
 
 // antd组件
-import { message, Button, Dropdown, Empty } from 'antd';
-
-// 单个文件夹
-const KnowledgeItem = ({ file }) => {
-  const [dropdownEditOpen, setDropdownEditOpen] = useState(false);
-  return (
-    <div key={file.id} className="knowledge-content-item">
-      <div className="knowledge-item-header">
-        <div className="flx-center">
-          <img
-            src={file.type === 1 ? knowledgeFile : file.image || knowledgeIcon}
-          />
-          <span>{file.name}</span>
-        </div>
-        <div>
-          <Dropdown
-            dropdownRender={() => (
-              <div className="dropdown-box">
-                <div>
-                  <Button
-                    icon={
-                      <>
-                        <i className="iconfont mr-change-1"></i>
-                      </>
-                    }
-                    type="text"
-                    className="title-dropdown-btn"
-                  >
-                    重命名
-                  </Button>
-                </div>
-                <div>
-                  <Button
-                    icon={
-                      <>
-                        <i className="iconfont mr-yidongxuanze"></i>
-                      </>
-                    }
-                    type="text"
-                    className="title-dropdown-btn"
-                  >
-                    移 动
-                  </Button>
-                </div>
-                <div>
-                  <Button
-                    icon={
-                      <>
-                        <i className="iconfont mr-del-1"></i>
-                      </>
-                    }
-                    type="text"
-                    className="title-dropdown-btn"
-                  >
-                    删 除
-                  </Button>
-                </div>
-              </div>
-            )}
-            placement="bottomRight"
-            trigger={['click']}
-            open={dropdownEditOpen}
-            onOpenChange={(dropdownEditOpen) =>
-              setDropdownEditOpen(dropdownEditOpen)
-            }
-          >
-            <i className="iconfont mr-more-2"></i>
-          </Dropdown>
-        </div>
-      </div>
-      <div className="knowledge-item-content single-omit">
-        {file.description}
-      </div>
-      <div className="knowledge-item-footer">
-        <div></div>
-        <div className="flx-center">
-          <i
-            className={`iconfont ${
-              file.type === 1 ? 'mr-wenjianjia' : 'mr-zhishidian-01-01'
-            }`}
-          ></i>
-          <span>{file.type === 1 ? '文件夹' : '知识库'}</span>
-        </div>
-      </div>
-    </div>
-  );
-};
+import { message, Button, Dropdown, Empty, Input } from 'antd';
 
 function Knowledge() {
   // 共享参数
@@ -107,44 +22,133 @@ function Knowledge() {
   const [fileList, setFileList] = useState([]);
 
   const [pageNo, setPageNo] = useState(1);
-  const [pageSize, setPageSize] = useState(10);
+  const [pageSize, setPageSize] = useState(15);
   const [total, setTotal] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
 
-  // 弹框确认
-  const handleOk = () => {
-    setIsOpen(false);
+  const inputFolderNameRef = useRef(null);
+  const [folderName, setFolderName] = useState(''); //名称
+  const [folderDescription, setFolderDescription] = useState(''); //描述介绍
+  const [folderType, setFolderType] = useState(1); //类型
+
+  // 触发弹框
+  const handleModal = (type) => {
+    setIsOpen(true);
+    setDropdownAddOpen(false);
+    setTimeout(() => {
+      inputFolderNameRef.current.focus(); //光标选中
+    }, 200);
+    setFolderType(type); // type：1-文件夹 2-知识库
   };
+  // 编辑文件
+  const handleEdit = () => {
+    setIsOpen(true);
+  };
+
   // 弹框取消
   const handleCancel = () => {
     setIsOpen(false);
+    setFolderName('');
+    setFolderDescription('');
   };
-  // 添加文件夹
-  const handleAddFile = () => {
-    setIsOpen(true);
+  // 弹框确认
+  const handleOk = () => {
+    if (!folderName) {
+      message.warning(`请输入${folderType === 1 ? '文件夹' : '知识库'}名称`);
+      return;
+    }
+    submitFile(folderName, folderDescription, folderType);
   };
-  // 添加知识库
 
-  useEffect(() => {
-    // 获取文件夹列表分页
+  // 获取文件列表分页
+  const getFileList = async (pageNo, pageSize, keywords, parentId) => {
     const params = {
       pageNo,
       pageSize,
-      // keywords: '史', //搜索框
-      // parentId:'',
+      keywords,
+      parentId,
     };
-    const getFileList = async () => {
-      try {
-        const res = await ajax.get('/chat/knowledge/list-page', params);
-        if (res.code === 200) {
-          setFileList(res.data.list);
-          setTotal(res.data.total);
-        }
-      } catch (error) {
-        message.error(error.message || '获取数据失败');
+    try {
+      const res = await ajax.get('/chat/knowledge/list-page', params);
+      if (res.code === 200) {
+        setFileList(res.data.list);
+        setTotal(res.data.total);
       }
+    } catch (error) {
+      message.error(error.message || '获取数据失败');
+    }
+  };
+  // 创建/提交文件
+  const submitFile = async (
+    name,
+    description,
+    type,
+    parentId,
+    indexName,
+    imageUrl
+  ) => {
+    const params = {
+      name,
+      description,
+      type,
+      parentId,
+      indexName,
+      imageUrl,
     };
-    getFileList();
+    try {
+      const res = await ajax.post('/chat/knowledge/create', params);
+      if (res.code === 200) {
+        message.success('创建成功');
+        setIsOpen(false);
+        setFolderName('');
+        setFolderDescription('');
+        getFileList(pageNo, pageSize, '', parentId);
+      }
+    } catch (error) {
+      message.error(error.message || '创建失败');
+    }
+  };
+  // 编辑
+  const updateFile = async (
+    name,
+    description,
+    type,
+    parentId,
+    indexName,
+    imageUrl
+  ) => {
+    const params = {
+      name,
+      description,
+      type,
+      parentId,
+      indexName,
+      imageUrl,
+    };
+    try {
+      const res = await ajax.post('/chat/knowledge/update', params);
+      if (res.code === 200) {
+        message.success('编辑成功');
+        setIsOpen(false);
+        setFolderName('');
+        setFolderDescription('');
+        getFileList(pageNo, pageSize, '', parentId);
+      }
+    } catch (error) {
+      message.error(error.message || '编辑失败');
+    }
+  };
+
+  // 移动
+  const handleMove = async () => {
+    // 调用删除函数
+  };
+
+  // 删除
+  const handleDelete = async () => {};
+
+  useEffect(() => {
+    getFileList(pageNo, pageSize);
   }, [pageNo, pageSize]); //监听 pageNo 和 pageSize 的变化，如果是[]，则只在首次执行
 
   return (
@@ -164,7 +168,7 @@ function Knowledge() {
                   }
                   type="text"
                   className="title-dropdown-btn"
-                  onClick={handleAddFile}
+                  onClick={() => handleModal(1)}
                 >
                   文件夹
                 </Button>
@@ -179,6 +183,7 @@ function Knowledge() {
                   }
                   type="text"
                   className="title-dropdown-btn"
+                  onClick={() => handleModal(2)}
                 >
                   知识库
                 </Button>
@@ -198,7 +203,15 @@ function Knowledge() {
       <main className="knowledge-content">
         {/* 文件 */}
         {fileList && fileList.length > 0 ? (
-          fileList.map((file) => <KnowledgeItem key={file.id} file={file} />)
+          fileList.map((file) => (
+            <KnowledgeItem
+              key={file.id}
+              file={file}
+              onEdit={handleEdit}
+              onMove={handleMove}
+              onDelete={handleDelete}
+            />
+          ))
         ) : (
           /* 空 */
           <div className="knowledge-content-empty">
@@ -213,9 +226,10 @@ function Knowledge() {
       <footer className="knowledge-footer">
         <MrPagination
           total={total}
-          showTotal={(total, range) =>
-            `当前${range[0]}-${range[1]} / 共${total}页`
-          }
+          // showTotal={(total, range) =>
+          //   `当前${range[0]}-${range[1]} / 共${total}页`
+          // }
+          showTotal={(total) => `共${total}页`}
           defaultPageSize={pageSize}
           defaultCurrent={1}
           pageNo={pageNo}
@@ -225,15 +239,38 @@ function Knowledge() {
       </footer>
       {/* 弹框 -  */}
       <MrModal
-        title="添加文件夹"
+        title={
+          <div className="mr-modal-title-box">
+            <img src={folderType === 1 ? knowledgeFile : knowledgeIcon} />
+            <span>{`新建${folderType === 1 ? '文件夹' : '知识库'}`}</span>
+          </div>
+        }
         content={
-          <>
-            <p>Some contents...</p>
-          </>
+          <div style={{ margin: '20px 0 25px 0' }}>
+            <Input
+              ref={inputFolderNameRef}
+              placeholder={`${folderType === 1 ? '文件夹' : '知识库'}名称`}
+              prefix={<span style={{ color: '#f64d28' }}>*</span>}
+              suffix={<i className="iconfont mr-shuru" />}
+              value={folderName}
+              onChange={(e) => setFolderName(e.target.value)}
+            />
+            <div style={{ height: 15 }}></div>
+            <Input
+              placeholder={`这个${
+                folderType === 1 ? '文件夹' : '知识库'
+              }还没有介绍~`}
+              suffix={<i className="iconfont mr-jishiben" />}
+              allowClear
+              value={folderDescription}
+              onChange={(e) => setFolderDescription(e.target.value)}
+            />
+          </div>
         }
         open={isOpen}
         onOk={handleOk}
         onCancel={handleCancel}
+        width={450}
       />
     </div>
   );
