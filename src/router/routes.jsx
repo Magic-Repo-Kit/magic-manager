@@ -22,15 +22,22 @@ const lazyLoad = (component) => {
 };
 
 // 结构路由(懒加载)
-import AdminLayout from '@/layouts/admin';
-// const AdminLayout = lazy(() => import('@/layouts/admin'));
+// import AdminLayout from '@/layouts/admin';
+const AdminLayout = lazy(() => import('@/layouts/admin'));
 const AuthLayout = lazy(() => import('@/layouts/auth'));
 const FailLayout = lazy(() => import('@/layouts/fail'));
 
 // 工作台
 const Manage = lazy(() => import('@/page/manage'));
 const WorkPlatform = lazy(() => import('@/page/manage/children/work-platform'));
+// 知识库
 const Knowledge = lazy(() => import('@/page/manage/children/knowledge'));
+const KnowledgeList = lazy(() =>
+  import('@/page/manage/children/knowledge/children/list')
+);
+const KnowledgeDetail = lazy(() =>
+  import('@/page/manage/children/knowledge/children/detail')
+);
 const UserManage = lazy(() => import('@/page/manage/children/user-manage'));
 const RolesManage = lazy(() => import('@/page/manage/children/roles-manage'));
 const ContactUs = lazy(() => import('@/page/manage/children/contact-us'));
@@ -42,6 +49,7 @@ const Chat = lazy(() => import('@/page/chat'));
 const GPT = lazy(() => import('@/page/gpt'));
 const AiHelper = lazy(() => import('@/page/ai-helper'));
 
+// 路由
 const routes = [
   // 通过权限页面
   {
@@ -75,6 +83,20 @@ const routes = [
           {
             path: 'knowledge',
             element: lazyLoad(<Knowledge />),
+            children: [
+              {
+                path: '',
+                element: <Navigate to={'list'} replace />, //默认list
+              },
+              {
+                path: 'list',
+                element: lazyLoad(<KnowledgeList />),
+              },
+              {
+                path: 'detail',
+                element: lazyLoad(<KnowledgeDetail />),
+              },
+            ],
           },
           // 账号管理
           {

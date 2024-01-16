@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import './index.scss';
+import '../index.scss';
+import { useNavigate } from 'react-router-dom';
 
 // 图片
 import knowledgeFile from '@/assets/images/file.png';
@@ -9,14 +10,20 @@ import knowledgeIcon from '@/assets/images/knowledge-icon.png';
 import { Button, Dropdown } from 'antd';
 
 // item内容
-function KnowledgeItem({ file, onEdit, onMove, onDelete, onView }) {
+function FileItem({ file, onEdit, onMove, onDelete }) {
   const [dropdownEditOpen, setDropdownEditOpen] = useState(false);
+  // const navigate = useNavigate();
 
+  const handleView = () => {
+    // navigate(`parentId=${file.id}`);
+    // window.history.pushState({}, '', `?parentId=${file.id}`);
+    // window.dispatchEvent(new PopStateEvent('popstate')); // 追加一个PopStateEvent事件
+  };
   return (
     <div
       key={file.id}
       className="knowledge-content-item user-select"
-      onClick={() => onView(file)}
+      onClick={handleView}
     >
       <div className="knowledge-item-header">
         <div className="flx-center">
@@ -134,4 +141,4 @@ function KnowledgeItem({ file, onEdit, onMove, onDelete, onView }) {
   );
 }
 
-export default KnowledgeItem;
+export default FileItem;

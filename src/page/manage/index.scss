@@ -127,13 +127,15 @@
     margin: 0 auto;
 
     > header {
-      padding: 12px 0px;
+      padding: 12px 12px 0 0;
       .manage-header-item-box {
         width: 100%;
         display: flex;
         // justify-content: space-between;
         align-items: center;
         font-size: 18px;
+        border-bottom: 1px solid rgba($border-color-100, 0.5);
+        padding-bottom: 10px;
         .manage-header-item {
           > i {
             font-size: 20px;
