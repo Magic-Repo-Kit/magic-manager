@@ -70,9 +70,7 @@ function List() {
   // 弹框 - 确定
   const handleOk = () => {
     if (!folderForm.name) {
-      message.warning(
-        `请输入${folderForm.type === 1 ? '文件夹' : '知识库'}名称`
-      );
+      message.info(`请输入${folderForm.type === 1 ? '文件夹' : '知识库'}名称`);
       return;
     }
     console.log(folderForm);
@@ -181,21 +179,21 @@ function List() {
   // 移动
   const handleMove = async (file) => {
     console.log('🚀 ~ handleMove ~ file:', file);
-    try {
-      const res = await ajax.post('/chat/knowledge/move', {
-        id: file.id,
-        parentId: file.parentId,
-      });
-      if (res.code === 200) {
-        message.success('移动成功');
-        setIsOpen(false);
-        getFileList();
-      }
-    } catch (error) {
-      message.error(error.message || '移动失败');
-    } finally {
-      setIsOpen(false);
-    }
+    // try {
+    //   const res = await ajax.post('/chat/knowledge/move', {
+    //     id: file.id,
+    //     parentId: file.parentId,
+    //   });
+    //   if (res.code === 200) {
+    //     message.success('移动成功');
+    //     setIsOpen(false);
+    //     getFileList();
+    //   }
+    // } catch (error) {
+    //   message.error(error.message || '移动失败');
+    // } finally {
+    //   setIsOpen(false);
+    // }
   };
 
   // 删除
@@ -204,13 +202,16 @@ function List() {
       const res = await ajax.delete(
         `/chat/knowledge/delete?knowledgeIds=${file.id}`
       );
+      if (res.msg === 'HAS_CHILD') {
+        message.info('该文件夹下存在子文件，请先删除子文件');
+        return;
+      }
       if (res.code === 200) {
         message.success('删除成功');
-
         getFileList();
       }
     } catch (error) {
-      message.error(error.message || '删除失败');
+      message.error(error.msg || '删除失败');
     } finally {
       console.log('删除操作');
     }
@@ -244,7 +245,6 @@ function List() {
   return (
     <div className="knowledge-list">
       <div className="knowledge-list-title">
-        {/* <div>根目录</div> */}
         <Dropdown
           dropdownRender={() => (
             <div className="knowledge-list-dropdown-box">
