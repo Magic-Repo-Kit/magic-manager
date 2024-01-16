@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect, useRef } from 'react';
 import '../index.scss';
 import ajax from '@/request';
-import { useNavigate, useLocation, useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 import MrPagination from '@/components/mr-pagination';
 import MrModal from '@/components/mr-modal';
@@ -23,7 +23,7 @@ function List() {
   const [fileList, setFileList] = useState([]); //文件列表
 
   const [total, setTotal] = useState(0); //总条数
-  const [parentId, setParentId] = useState('');
+  const [parentId, setParentId] = useState(''); //存储地址栏parentId
   // 列表筛选
   const [params, setParams] = useState({
     pageNo: 1,
@@ -115,6 +115,17 @@ function List() {
         }
       } catch (error) {
         message.error(error.message || '编辑失败');
+      } finally {
+        setIsOpen(false);
+        setFolderId('');
+        // 恢复原值
+        setFolderForm({
+          name: '',
+          description: '',
+          type: 1,
+          imageUrl: '',
+          parentId,
+        });
       }
     } else {
       // 新增
@@ -134,10 +145,17 @@ function List() {
           getFileList();
         }
       } catch (error) {
-        console.log('🚀 ~ submitFile ~ error:', error);
         message.error(error.msg || '创建失败');
       } finally {
-        // setIsOpen(false);
+        setIsOpen(false);
+        // 恢复原值
+        setFolderForm({
+          name: '',
+          description: '',
+          type: 1,
+          imageUrl: '',
+          parentId,
+        });
       }
     }
   };
@@ -151,7 +169,7 @@ function List() {
         setTotal(res.data.total);
       }
     } catch (error) {
-      message.error(error.message || '获取数据失败');
+      console.log('🚀 ~ getFileList ~ error:', error || '获取文件列表分页失败');
     }
   };
   // 查看子元素
@@ -175,6 +193,8 @@ function List() {
       }
     } catch (error) {
       message.error(error.message || '移动失败');
+    } finally {
+      setIsOpen(false);
     }
   };
 
@@ -186,11 +206,13 @@ function List() {
       );
       if (res.code === 200) {
         message.success('删除成功');
-        setIsOpen(false);
+
         getFileList();
       }
     } catch (error) {
       message.error(error.message || '删除失败');
+    } finally {
+      console.log('删除操作');
     }
   };
 
@@ -221,8 +243,8 @@ function List() {
 
   return (
     <div className="knowledge-list">
-      <div className="knowledge-list-title flx-justify-between">
-        <div>根目录</div>
+      <div className="knowledge-list-title">
+        {/* <div>根目录</div> */}
         <Dropdown
           dropdownRender={() => (
             <div className="knowledge-list-dropdown-box">
