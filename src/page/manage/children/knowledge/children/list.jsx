@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect, useRef } from 'react';
 import '../index.scss';
-import { DarkModeContext } from '@/components/DarkModeProvider'; //夜间模式
 import ajax from '@/request';
+import { useNavigate, useLocation, useParams } from 'react-router-dom';
 
 import MrPagination from '@/components/mr-pagination';
 import MrModal from '@/components/mr-modal';
@@ -15,29 +15,29 @@ import knowledgeIcon from '@/assets/images/knowledge-icon.png';
 import { message, Button, Dropdown, Empty, Input } from 'antd';
 
 function List() {
-  // 共享参数
-  const { darkMode } = useContext(DarkModeContext);
+  const location = useLocation();
 
   const inputFolderNameRef = useRef(null); //inputRef 自动聚焦
   const [dropdownAddOpen, setDropdownAddOpen] = useState(false); //新建下拉状态
   const [isOpen, setIsOpen] = useState(false); //弹框状态
   const [fileList, setFileList] = useState([]); //文件列表
+
+  const [total, setTotal] = useState(0); //总条数
+  const [parentId, setParentId] = useState('');
   // 列表筛选
   const [params, setParams] = useState({
     pageNo: 1,
     pageSize: 10,
     keywords: '',
-    parentId: '', //空-目录
+    parentId, //空-目录
   });
-  const [total, setTotal] = useState(0); //总条数
-
   // 提交表单
   const [folderForm, setFolderForm] = useState({
     name: '', // 名称
     description: '', //描述介绍
     type: 1, // 1-文件夹 2-知识库
-    parentId: '',
     imageUrl: '', // 头像-只有type===2才有头像
+    parentId,
   });
 
   const [folderId, setFolderId] = useState(''); //编辑-子元素id
@@ -48,21 +48,22 @@ function List() {
     setTimeout(() => {
       inputFolderNameRef.current.focus(); //name光标选中
     }, 200);
-    //file.id - 编辑
-    if (file.id) {
-      // 参数带进来
-      setFolderForm({
-        ...folderForm,
-        ...file,
-        id: file.id,
-      });
-      setFolderId(file.id);
-    } else {
-      setFolderForm(type); // type：1-文件夹 2-知识库
+
+    // 新增
+    if (!file.id) {
+      // type：1-文件夹 2-知识库
       setFolderForm((prevForm) => ({
         ...prevForm,
         type,
       }));
+      console.log(folderForm);
+    } else {
+      // 编辑
+      setFolderForm({
+        ...file,
+      });
+      setFolderId(file.id);
+      console.log(folderForm);
     }
   };
 
@@ -74,6 +75,7 @@ function List() {
       );
       return;
     }
+    console.log(folderForm);
     submitFile();
   };
 
@@ -85,8 +87,8 @@ function List() {
       name: '',
       description: '',
       type: 1,
-      parentId: '',
       imageUrl: '',
+      parentId,
     });
   };
 
@@ -105,8 +107,8 @@ function List() {
             name: '',
             description: '',
             type: 1,
-            parentId: '',
             imageUrl: '',
+            parentId,
           });
 
           getFileList();
@@ -126,13 +128,16 @@ function List() {
             name: '',
             description: '',
             type: 1,
-            parentId: '',
             imageUrl: '',
+            parentId,
           });
           getFileList();
         }
       } catch (error) {
-        message.error(error.message || '创建失败');
+        console.log('🚀 ~ submitFile ~ error:', error);
+        message.error(error.msg || '创建失败');
+      } finally {
+        // setIsOpen(false);
       }
     }
   };
@@ -195,7 +200,24 @@ function List() {
     getFileList();
   }, [params]); //监听params的变化，如果是[]，则只在首次执行
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    // 从URL中获取parentId参数
+    const queryParams = new URLSearchParams(location.search);
+    const parentId = queryParams.get('parentId');
+
+    // 修改params值，触发监听
+    setParams((prevParams) => ({
+      ...prevParams,
+      parentId,
+    }));
+    // 修改folderForm值，提交对应parentId
+    setFolderForm((prevForm) => ({
+      ...prevForm,
+      parentId,
+    }));
+    // 存储新的parentId
+    setParentId(parentId);
+  }, [location]);
 
   return (
     <div className="knowledge-list">

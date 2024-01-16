@@ -12,18 +12,17 @@ import { Button, Dropdown } from 'antd';
 // item内容
 function FileItem({ file, onEdit, onMove, onDelete }) {
   const [dropdownEditOpen, setDropdownEditOpen] = useState(false);
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
-  const handleView = () => {
-    // navigate(`parentId=${file.id}`);
-    // window.history.pushState({}, '', `?parentId=${file.id}`);
-    // window.dispatchEvent(new PopStateEvent('popstate')); // 追加一个PopStateEvent事件
+  const handleClick = () => {
+    // 在当前URL基础上添加或替换parentId参数
+    navigate(`?parentId=${file.id || ''}`);
   };
   return (
     <div
       key={file.id}
       className="knowledge-content-item user-select"
-      onClick={handleView}
+      onClick={handleClick}
     >
       <div className="knowledge-item-header">
         <div className="flx-center">
@@ -40,7 +39,7 @@ function FileItem({ file, onEdit, onMove, onDelete }) {
         >
           <Dropdown
             dropdownRender={() => (
-              <div className="dropdown-box">
+              <div className="knowledge-list-dropdown-box">
                 <div>
                   <Button
                     icon={
