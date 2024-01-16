@@ -9,19 +9,28 @@ import knowledgeIcon from '@/assets/images/knowledge-icon.png';
 import { Button, Dropdown } from 'antd';
 
 // item内容
-function KnowledgeItem({ file, onEdit, onMove, onDelete }) {
+function KnowledgeItem({ file, onEdit, onMove, onDelete, onView }) {
   const [dropdownEditOpen, setDropdownEditOpen] = useState(false);
 
   return (
-    <div key={file.id} className="knowledge-content-item">
+    <div
+      key={file.id}
+      className="knowledge-content-item user-select"
+      onClick={() => onView(file)}
+    >
       <div className="knowledge-item-header">
         <div className="flx-center">
           <img
             src={file.type === 1 ? knowledgeFile : file.image || knowledgeIcon}
           />
-          <span>{file.name}</span>
+          <span className="single-omit">{file.name}</span>
         </div>
-        <div>
+        <div
+          className="knowledge-item-header-edit"
+          onClick={(event) => {
+            event.stopPropagation();
+          }}
+        >
           <Dropdown
             dropdownRender={() => (
               <div className="dropdown-box">

@@ -18,19 +18,29 @@ function Knowledge() {
   // 共享参数
   const { darkMode } = useContext(DarkModeContext);
 
+  const inputFolderNameRef = useRef(null); //inputRef 自动聚焦
   const [dropdownAddOpen, setDropdownAddOpen] = useState(false); //新建下拉状态
-  const [fileList, setFileList] = useState([]);
-
-  const [pageNo, setPageNo] = useState(1);
-  const [pageSize, setPageSize] = useState(15);
-  const [total, setTotal] = useState(0);
   const [isOpen, setIsOpen] = useState(false); //弹框状态
+  const [fileList, setFileList] = useState([]); //文件列表
+  // 列表筛选
+  const [params, setParams] = useState({
+    pageNo: 1,
+    pageSize: 10,
+    keywords: '',
+    parentId: '', //空-目录
+  });
+  const [total, setTotal] = useState(0); //总条数
 
-  const inputFolderNameRef = useRef(null);
-  const [folderName, setFolderName] = useState(''); //名称
-  const [folderDescription, setFolderDescription] = useState(''); //描述介绍
-  const [folderType, setFolderType] = useState(1); //类型
-  const [folderItemId, setFolderItemId] = useState(''); //名称
+  // 提交表单
+  const [folderForm, setFolderForm] = useState({
+    name: '', // 名称
+    description: '', //描述介绍
+    type: 1, // 1-文件夹 2-知识库
+    parentId: '',
+    imageUrl: '', // 头像-只有type===2才有头像
+  });
+
+  const [folderId, setFolderId] = useState(''); //编辑-子元素id
 
   // 新增 / 编辑弹框
   const handleModal = (file, type) => {
@@ -38,57 +48,70 @@ function Knowledge() {
     setTimeout(() => {
       inputFolderNameRef.current.focus(); //name光标选中
     }, 200);
-    console.log('🚀 ~ handleModal ~ file:', file);
-    console.log('🚀 ~ handleModal ~ type:', type);
     //file.id - 编辑
     if (file.id) {
       // 参数带进来
-      setFolderName(file.name);
-      setFolderDescription(file.description);
-      setFolderType(file.type);
-      setFolderItemId(file.id);
+      setFolderForm({
+        ...folderForm,
+        ...file,
+      });
+      setFolderId(file.id);
     } else {
-      setFolderType(type); // type：1-文件夹 2-知识库
+      setFolderForm(type); // type：1-文件夹 2-知识库
+      setFolderForm((prevForm) => ({
+        ...prevForm,
+        type,
+      }));
     }
   };
 
   // 弹框 - 确定
   const handleOk = () => {
-    if (!folderName) {
-      message.warning(`请输入${folderType === 1 ? '文件夹' : '知识库'}名称`);
+    if (!folderForm.name) {
+      message.warning(
+        `请输入${folderForm.type === 1 ? '文件夹' : '知识库'}名称`
+      );
       return;
     }
-    let params = {
-      name: folderName,
-      description: folderDescription,
-      type: folderType,
-    };
-    submitFile(params);
+    submitFile();
   };
 
   // 弹框 - 取消
   const handleCancel = () => {
     setIsOpen(false);
-    setFolderName('');
-    setFolderDescription('');
+    // 恢复原值
+    setFolderForm({
+      name: '',
+      description: '',
+      type: 1,
+      parentId: '',
+      imageUrl: '',
+    });
   };
 
   // 提交(新增/编辑)
-  const submitFile = async (params) => {
-    if (folderItemId) {
+  const submitFile = async () => {
+    if (folderId) {
       // 编辑
       try {
         const res = await ajax.post(
-          `/chat/knowledge/update?id=${folderItemId}`,
-          params
+          `/chat/knowledge/update?id=${folderId}`,
+          folderForm
         );
         if (res.code === 200) {
           message.success('编辑成功');
           setIsOpen(false);
-          setFolderItemId('');
-          setFolderName('');
-          setFolderDescription('');
-          getFileList(pageNo, pageSize, '', '');
+          setFolderId('');
+          // 恢复原值
+          setFolderForm({
+            name: '',
+            description: '',
+            type: 1,
+            parentId: '',
+            imageUrl: '',
+          });
+
+          getFileList();
         }
       } catch (error) {
         message.error(error.message || '编辑失败');
@@ -96,13 +119,19 @@ function Knowledge() {
     } else {
       // 新增
       try {
-        const res = await ajax.post('/chat/knowledge/create', params);
+        const res = await ajax.post('/chat/knowledge/create', folderForm);
         if (res.code === 200) {
           message.success('创建成功');
           setIsOpen(false);
-          setFolderName('');
-          setFolderDescription('');
-          getFileList(pageNo, pageSize, '', '');
+          // 恢复原值
+          setFolderForm({
+            name: '',
+            description: '',
+            type: 1,
+            parentId: '',
+            imageUrl: '',
+          });
+          getFileList();
         }
       } catch (error) {
         message.error(error.message || '创建失败');
@@ -111,13 +140,7 @@ function Knowledge() {
   };
 
   // 获取文件列表分页
-  const getFileList = async (pageNo, pageSize, keywords, parentId) => {
-    const params = {
-      pageNo,
-      pageSize,
-      keywords,
-      parentId,
-    };
+  const getFileList = async () => {
     try {
       const res = await ajax.get('/chat/knowledge/list-page', params);
       if (res.code === 200) {
@@ -127,6 +150,10 @@ function Knowledge() {
     } catch (error) {
       message.error(error.message || '获取数据失败');
     }
+  };
+  // 查看子元素
+  const handleView = async (file) => {
+    console.log('🚀 ~ handleView ~ file:', file);
   };
 
   // 移动
@@ -140,7 +167,7 @@ function Knowledge() {
       if (res.code === 200) {
         message.success('移动成功');
         setIsOpen(false);
-        getFileList(pageNo, pageSize, '', '');
+        getFileList();
       }
     } catch (error) {
       message.error(error.message || '移动失败');
@@ -156,7 +183,7 @@ function Knowledge() {
       if (res.code === 200) {
         message.success('删除成功');
         setIsOpen(false);
-        getFileList(pageNo, pageSize, '', '');
+        getFileList();
       }
     } catch (error) {
       message.error(error.message || '删除失败');
@@ -166,8 +193,8 @@ function Knowledge() {
   // 导出
 
   useEffect(() => {
-    getFileList(pageNo, pageSize);
-  }, [pageNo, pageSize]); //监听 pageNo 和 pageSize 的变化，如果是[]，则只在首次执行
+    getFileList();
+  }, [params]); //监听params的变化，如果是[]，则只在首次执行
 
   return (
     <div className={`knowledge-container ${darkMode ? 'dark-mode' : ''}`}>
@@ -234,6 +261,7 @@ function Knowledge() {
               onEdit={(file) => handleModal(file)}
               onMove={handleMove}
               onDelete={handleDelete}
+              onView={handleView}
             />
           ))
         ) : (
@@ -254,40 +282,55 @@ function Knowledge() {
           //   `当前${range[0]}-${range[1]} / 共${total}页`
           // }
           showTotal={(total) => `共${total}条`}
-          defaultPageSize={pageSize}
+          defaultPageSize={params.pageSize}
           defaultCurrent={1}
-          pageNo={pageNo}
-          pageSize={pageSize}
-          onChange={(pageNo) => setPageNo(pageNo)}
+          pageNo={params.pageNo}
+          pageSize={params.pageSize}
+          onChange={(newPageNo) =>
+            setParams((prevParams) => ({
+              ...prevParams,
+              pageNo: newPageNo,
+            }))
+          }
         />
       </footer>
       {/* 弹框 -  */}
       <MrModal
         title={
           <div className="mr-modal-title-box">
-            <img src={folderType === 1 ? knowledgeFile : knowledgeIcon} />
-            <span>{`新建${folderType === 1 ? '文件夹' : '知识库'}`}</span>
+            <img src={folderForm.type === 1 ? knowledgeFile : knowledgeIcon} />
+            <span>{`新建${folderForm.type === 1 ? '文件夹' : '知识库'}`}</span>
           </div>
         }
         content={
           <div style={{ margin: '20px 0 25px 0' }}>
             <Input
               ref={inputFolderNameRef}
-              placeholder={`${folderType === 1 ? '文件夹' : '知识库'}名称`}
+              placeholder={`${folderForm.type === 1 ? '文件夹' : '知识库'}名称`}
               prefix={<span style={{ color: '#f64d28' }}>*</span>}
               suffix={<i className="iconfont mr-shuru" />}
-              value={folderName}
-              onChange={(e) => setFolderName(e.target.value)}
+              value={folderForm.name}
+              onChange={(e) =>
+                setFolderForm((prevForm) => ({
+                  ...prevForm,
+                  name: e.target.value,
+                }))
+              }
             />
             <div style={{ height: 15 }}></div>
             <Input
               placeholder={`这个${
-                folderType === 1 ? '文件夹' : '知识库'
+                folderForm.type === 1 ? '文件夹' : '知识库'
               }还没有介绍~`}
               suffix={<i className="iconfont mr-jishiben" />}
               allowClear
-              value={folderDescription}
-              onChange={(e) => setFolderDescription(e.target.value)}
+              value={folderForm.description}
+              onChange={(e) =>
+                setFolderForm((prevForm) => ({
+                  ...prevForm,
+                  description: e.target.value,
+                }))
+              }
             />
           </div>
         }
