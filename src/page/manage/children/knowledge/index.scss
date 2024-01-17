@@ -144,7 +144,7 @@
   }
 }
 
-// 弹框-移动-list
+// 弹框-移动 move-list
 .knowledge-move-list {
   max-height: 50vh;
   overflow: auto;
@@ -180,6 +180,9 @@
         margin-left: 10px;
       }
     }
+  }
+  .knowledge-move-empty {
+    margin: 0 auto;
   }
 }
 .knowledge-list-modal-footer {

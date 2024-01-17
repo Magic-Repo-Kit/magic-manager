@@ -26,7 +26,9 @@ function List() {
   const [fileList, setFileList] = useState([]); //文件列表
 
   const [total, setTotal] = useState(0); //总条数
-  const [parentId, setParentId] = useState(''); //存储地址栏parentId
+  const [parentId, setParentId] = useState(''); //存储地址栏，用来刷新列表
+
+  const [moveTargetId, setMoveTargetId] = useState(''); //要移动的id
   // 列表筛选
   const [params, setParams] = useState({
     pageNo: 1,
@@ -173,15 +175,10 @@ function List() {
       console.log('🚀 ~ getFileList ~ error:', error || '获取文件列表分页失败');
     }
   };
-  // 查看子元素
-  const handleView = async (file) => {
-    console.log('🚀 ~ handleView ~ file:', file);
-    // getFileList(file.id);
-  };
 
-  // 移动
-  const handleMove = async (file) => {
-    console.log('🚀 ~ handleMove ~ file:', file);
+  // 点击要移动的对象
+  const handleMoveTarget = async (file) => {
+    setMoveTargetId(file.id); //要移动的id
     setIsMoveOpen(true);
     // try {
     //   const res = await ajax.post('/chat/knowledge/move', {
@@ -198,6 +195,25 @@ function List() {
     // } finally {
     //   setIsOpen(false);
     // }
+  };
+  // 确认移动
+  const handleMoveConfirm = async () => {
+    console.log('🚀 ~ handleMoveConfirm ~ 要移动的子元素:', moveTargetId);
+    // 父元素【从缓存拿】,否则默认为''，根目录
+
+    // type===2的 和 自己不能点
+
+    // 如果要移动的id和 自己 file.id相同，则不能移动
+
+    // 刷新列表
+
+    setIsOpen(false);
+    // 清缓存
+  };
+  const handleMoveCancel = async () => {
+    setIsMoveOpen(false);
+    setMoveTargetId('');
+    // 【取消的时候也要清缓存】
   };
 
   // 删除
@@ -308,9 +324,8 @@ function List() {
               key={file.id}
               file={file}
               onEdit={(file) => handleModal(file)}
-              onMove={handleMove}
+              onMove={handleMoveTarget}
               onDelete={handleDelete}
-              onView={handleView}
             />
           ))
         ) : (
@@ -388,7 +403,7 @@ function List() {
         onCancel={handleCancel}
         width={450}
       />
-      {/* 弹框 - 移动 */}
+      {/* 弹框 - 移动元素 */}
       <Modal
         title={
           <div className="knowledge-list-modal-title">
@@ -397,14 +412,14 @@ function List() {
           </div>
         }
         open={isMoveOpen}
-        onOk={handleOk}
-        onCancel={() => setIsMoveOpen(false)}
+        onCancel={handleMoveCancel}
         footer={
           <div className="knowledge-list-modal-footer">
             <Button
               key="save"
               type="primary"
               className="knowledge-list-modal-btn"
+              onClick={handleMoveConfirm}
             >
               保存
             </Button>
@@ -413,7 +428,7 @@ function List() {
         width={600}
         maskClosable={false}
       >
-        <MoveItem fileList={fileList} />
+        <MoveItem />
       </Modal>
     </div>
   );

@@ -37,6 +37,13 @@ function MoveItem() {
       console.log('🚀 ~ getFileList ~ error:', error || '获取文件列表分页失败');
     }
   };
+
+  // 点击子元素
+  const handleClick = (file) => {
+    // 存储父级id，到缓存
+    console.log('🚀 ~ 移动到该父元素 ~ file.id:', file.id);
+  };
+
   useEffect(() => {
     getFileList();
   }, [params]);
@@ -82,6 +89,7 @@ function MoveItem() {
             className={`knowledge-move-item-content flx-center ${
               file.type === 1 ? 'cursor-point' : ''
             }`}
+            onClick={() => handleClick(file)}
           >
             <img
               src={
@@ -96,7 +104,7 @@ function MoveItem() {
         ))
       ) : (
         /* 无子集目录 */
-        <div className="knowledge-content-empty">
+        <div className="knowledge-move-empty">
           <Empty
             image={Empty.PRESENTED_IMAGE_SIMPLE}
             description={<span>没有子目录了，就放这里吧！</span>}
