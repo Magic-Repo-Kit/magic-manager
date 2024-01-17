@@ -14,6 +14,7 @@ function Router() {
     }
     if (pathname !== '/auth' && !access_token) {
       //已授权页面，无token
+      sessionStorage.clear();
       return <Navigate to="/auth" replace={true} />;
     } else {
       // 去登陆页面，清除信息

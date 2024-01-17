@@ -22,6 +22,7 @@ import mrkLogo from '@/assets/images/logo-mrk.png';
 import mrkLight from '@/assets/images/mrk-title-light.png';
 import mrkDark from '@/assets/images/mrk-title-dark.png';
 import loginMain from '@/assets/images/login-main.png';
+// import headerJS from '@/assets/images/header-js.png';
 // import loginComputer from '@/assets/images/login-computer.png';
 // import loginHeadset from '@/assets/images/login-headset.png';
 
@@ -103,7 +104,8 @@ function Auth() {
             <DarkModeToggle size="20px" />
             <div className="space-line"></div>
             <div onClick={() => setIsModalVisible(true)}>
-              <BtnLogin iconName="mr-login-full" content="Login" />
+              {/* <BtnLogin iconName="mr-login-full" content="Login" /> */}
+              <BtnLogin iconName="mr-login-full" content="登录" />
             </div>
           </div>
         </div>
@@ -177,6 +179,9 @@ function Auth() {
         <div className="rocket-introduce user-select">
           <Introduce />
         </div>
+        {/* <div className="login-magicrepokit">
+          <img style={{ width: '100%' }} src={headerJS} />
+        </div> */}
         {/* <div className="login-magicrepokit">
           <img
             style={{ width: '300px' }}
