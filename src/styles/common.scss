@@ -455,3 +455,9 @@ a.no-style {
   opacity: 0.7;
   transition: 100ms;
 }
+
+// 透明背景阴影
+.filter-drop-shadow {
+  user-select: none;
+  filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.1));
+}

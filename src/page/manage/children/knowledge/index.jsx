@@ -25,7 +25,11 @@ function Knowledge() {
         if (res.data && res.data.length > 0) {
           const tempDatas = res.data.map((item, index) => {
             const tempData = {
-              title: item.parentName,
+              title: (
+                <div className="single-omit" style={{ maxWidth: '100px' }}>
+                  {item.parentName}
+                </div>
+              ),
               href: `?parentId=${item.parentId}`, // 设置链接属性
             };
             if (index === res.data.length - 1) {

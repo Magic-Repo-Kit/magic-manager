@@ -6,6 +6,27 @@
   "description": "百宝袋",
   "glyphs": [
     {
+      "icon_id": "1599891",
+      "name": "网商银行无线端_错误",
+      "font_class": "group43",
+      "unicode": "e661",
+      "unicode_decimal": 58977
+    },
+    {
+      "icon_id": "10721517",
+      "name": "移动到",
+      "font_class": "yidongdao",
+      "unicode": "e6a3",
+      "unicode_decimal": 59043
+    },
+    {
+      "icon_id": "34984983",
+      "name": "文字描述",
+      "font_class": "wenzimiaoshu",
+      "unicode": "e719",
+      "unicode_decimal": 59161
+    },
+    {
       "icon_id": "6048",
       "name": "输入",
       "font_class": "shuru",
@@ -97,32 +118,11 @@
       "unicode_decimal": 58955
     },
     {
-      "icon_id": "5832625",
-      "name": "vr-glasses",
-      "font_class": "vr-glasses",
-      "unicode": "e690",
-      "unicode_decimal": 59024
-    },
-    {
       "icon_id": "6528440",
       "name": "VR",
       "font_class": "VR",
       "unicode": "e64c",
       "unicode_decimal": 58956
-    },
-    {
-      "icon_id": "11231702",
-      "name": "VR",
-      "font_class": "VR1",
-      "unicode": "e792",
-      "unicode_decimal": 59282
-    },
-    {
-      "icon_id": "11232010",
-      "name": "VR",
-      "font_class": "VR2",
-      "unicode": "e7bd",
-      "unicode_decimal": 59325
     },
     {
       "icon_id": "11232195",
@@ -137,13 +137,6 @@
       "font_class": "favro",
       "unicode": "eb8d",
       "unicode_decimal": 60301
-    },
-    {
-      "icon_id": "22273778",
-      "name": "vr",
-      "font_class": "vr",
-      "unicode": "e70a",
-      "unicode_decimal": 59146
     },
     {
       "icon_id": "18405409",

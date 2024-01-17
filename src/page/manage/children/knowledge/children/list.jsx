@@ -5,21 +5,24 @@ import { useLocation } from 'react-router-dom';
 
 import MrPagination from '@/components/mr-pagination';
 import MrModal from '@/components/mr-modal';
-import FileItem from './list-file';
+import FileItem from './file-list';
+import MoveItem from './move-list';
 
 // 图片
 import knowledgeFile from '@/assets/images/file.png';
 import knowledgeIcon from '@/assets/images/knowledge-icon.png';
+import moveTo from '@/assets/images/move-to.png';
 
 // antd组件
-import { message, Button, Dropdown, Empty, Input } from 'antd';
+import { message, Button, Dropdown, Empty, Input, Modal } from 'antd';
 
 function List() {
   const location = useLocation();
 
   const inputFolderNameRef = useRef(null); //inputRef 自动聚焦
   const [dropdownAddOpen, setDropdownAddOpen] = useState(false); //新建下拉状态
-  const [isOpen, setIsOpen] = useState(false); //弹框状态
+  const [isOpen, setIsOpen] = useState(false); //弹框状态 - 新增/编辑
+  const [isMoveOpen, setIsMoveOpen] = useState(false); //弹框状态 - 新增/编辑
   const [fileList, setFileList] = useState([]); //文件列表
 
   const [total, setTotal] = useState(0); //总条数
@@ -27,7 +30,7 @@ function List() {
   // 列表筛选
   const [params, setParams] = useState({
     pageNo: 1,
-    pageSize: 10,
+    pageSize: 20,
     keywords: '',
     parentId, //空-目录
   });
@@ -67,7 +70,7 @@ function List() {
     }
   };
 
-  // 弹框 - 确定
+  // 弹框 - 确定(新增/编辑)
   const handleOk = () => {
     if (!folderForm.name) {
       message.info(`请输入${folderForm.type === 1 ? '文件夹' : '知识库'}名称`);
@@ -77,7 +80,7 @@ function List() {
     submitFile();
   };
 
-  // 弹框 - 取消
+  // 弹框 - 取消(新增/编辑)
   const handleCancel = () => {
     setIsOpen(false);
     // 恢复原值
@@ -179,6 +182,7 @@ function List() {
   // 移动
   const handleMove = async (file) => {
     console.log('🚀 ~ handleMove ~ file:', file);
+    setIsMoveOpen(true);
     // try {
     //   const res = await ajax.post('/chat/knowledge/move', {
     //     id: file.id,
@@ -339,7 +343,7 @@ function List() {
           }
         />
       </footer>
-      {/* 弹框 -  */}
+      {/* 弹框 - 新增编辑 */}
       <MrModal
         title={
           <div className="knowledge-list-modal-title">
@@ -384,6 +388,33 @@ function List() {
         onCancel={handleCancel}
         width={450}
       />
+      {/* 弹框 - 移动 */}
+      <Modal
+        title={
+          <div className="knowledge-list-modal-title">
+            <img src={moveTo} />
+            <span>{`移动到此处`}</span>
+          </div>
+        }
+        open={isMoveOpen}
+        onOk={handleOk}
+        onCancel={() => setIsMoveOpen(false)}
+        footer={
+          <div className="knowledge-list-modal-footer">
+            <Button
+              key="save"
+              type="primary"
+              className="knowledge-list-modal-btn"
+            >
+              保存
+            </Button>
+          </div>
+        }
+        width={600}
+        maskClosable={false}
+      >
+        <MoveItem fileList={fileList} />
+      </Modal>
     </div>
   );
 }

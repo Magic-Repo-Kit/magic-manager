@@ -7,7 +7,7 @@ import knowledgeFile from '@/assets/images/file.png';
 import knowledgeIcon from '@/assets/images/knowledge-icon.png';
 
 // antd组件
-import { Button, Dropdown } from 'antd';
+import { Button, Dropdown, Popconfirm } from 'antd';
 
 // item内容
 function FileItem({ file, onEdit, onMove, onDelete }) {
@@ -99,21 +99,42 @@ function FileItem({ file, onEdit, onMove, onDelete }) {
                   </Button>
                 </div>
                 <div>
-                  <Button
-                    icon={
-                      <>
-                        <i className="iconfont mr-del-1"></i>
-                      </>
-                    }
-                    type="text"
-                    className="title-dropdown-btn"
-                    onClick={() => {
+                  <Popconfirm
+                    title="提示"
+                    description="确认删除?"
+                    okText="确认"
+                    cancelText="取消"
+                    placement="right"
+                    onConfirm={() => {
                       setDropdownEditOpen(false);
                       onDelete(file);
                     }}
+                    onCancel={() => setDropdownEditOpen(false)}
+                    icon={
+                      <i
+                        className="iconfont mr-group43"
+                        style={{
+                          color: '#fb6547',
+                          position: 'relative',
+                          top: '-2px',
+                          left: '-3px',
+                          marginRight: '2px',
+                        }}
+                      ></i>
+                    }
                   >
-                    删 除
-                  </Button>
+                    <Button
+                      icon={
+                        <>
+                          <i className="iconfont mr-del-1"></i>
+                        </>
+                      }
+                      type="text"
+                      className="title-dropdown-btn"
+                    >
+                      删 除
+                    </Button>
+                  </Popconfirm>
                 </div>
               </div>
             )}
@@ -135,11 +156,6 @@ function FileItem({ file, onEdit, onMove, onDelete }) {
       <div className="knowledge-item-footer">
         <div></div>
         <div className="flx-center">
-          {/* <i
-            className={`iconfont ${
-              file.type === 1 ? 'mr-wenjianjia' : 'mr-zhishidian-01-01'
-            }`}
-          ></i> */}
           <span>{file.type === 1 ? '文件夹' : '知识库'}</span>
         </div>
       </div>

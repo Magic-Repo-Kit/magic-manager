@@ -112,7 +112,15 @@ function DropdownApps({ selectedAppName, setSelectedAppName }) {
           MagicRepoKit
         </div>
         <div>愿我有所发现，有所创造。</div>
-        <div className="dropdown-right-btn font-family-dingding user-select">
+        <div
+          className="dropdown-right-btn font-family-dingding user-select"
+          onClick={() => {
+            window.open(
+              'https://github.com/Magic-Repo-Kit/magic-manager',
+              '_blank'
+            );
+          }}
+        >
           <i className="iconfont mr-star01"></i>
           <span>Star on GitHub</span>
         </div>

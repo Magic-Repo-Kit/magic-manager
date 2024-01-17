@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 4291850 */
-  src: url('iconfont.woff2?t=1705312354300') format('woff2'),
-       url('iconfont.woff?t=1705312354300') format('woff'),
-       url('iconfont.ttf?t=1705312354300') format('truetype');
+  src: url('iconfont.woff2?t=1705485155779') format('woff2'),
+       url('iconfont.woff?t=1705485155779') format('woff'),
+       url('iconfont.ttf?t=1705485155779') format('truetype');
 }
 
 .iconfont {
@@ -11,6 +11,18 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.mr-group43:before {
+  content: "\e661";
+}
+
+.mr-yidongdao:before {
+  content: "\e6a3";
+}
+
+.mr-wenzimiaoshu:before {
+  content: "\e719";
 }
 
 .mr-shuru:before {
@@ -65,20 +77,8 @@
   content: "\e64b";
 }
 
-.mr-vr-glasses:before {
-  content: "\e690";
-}
-
 .mr-VR:before {
   content: "\e64c";
-}
-
-.mr-VR1:before {
-  content: "\e792";
-}
-
-.mr-VR2:before {
-  content: "\e7bd";
 }
 
 .mr-VR3:before {
@@ -87,10 +87,6 @@
 
 .mr-favro:before {
   content: "\eb8d";
-}
-
-.mr-vr:before {
-  content: "\e70a";
 }
 
 .mr-remen:before {

@@ -1,16 +1,20 @@
 @import '@/styles/theme';
 .knowledge-container {
   padding: 15px;
+  padding-top: 0;
   position: relative;
   .knowledge-title-bread {
-    position: absolute;
-    top: 20px;
+    padding: 0px 5px;
+    padding-bottom: 10px;
   }
   .knowledge-list {
     .knowledge-list-title {
       margin-bottom: 20px;
       display: flex;
       justify-content: flex-end;
+      position: absolute;
+      top: -49px;
+      right: 15px;
     }
     .knowledge-list-content {
       display: flex;
@@ -23,6 +27,7 @@
         box-sizing: border-box;
         padding: 10px 12px;
         border: 1px solid $border-color-100;
+
         border-radius: 8px;
         display: flex;
         flex-direction: column;
@@ -136,5 +141,53 @@
   > img {
     height: 26px;
     margin-right: 5px;
+  }
+}
+
+// 弹框-移动-list
+.knowledge-move-list {
+  max-height: 50vh;
+  overflow: auto;
+  padding: 10px 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  .knowledge-move-item-content {
+    width: calc((100% - 30px) / 4);
+    flex-direction: column;
+    transition: background-color 0.1s;
+    &:hover {
+      background-color: #e5f3ff;
+    }
+    &:active {
+      background-color: transparent;
+    }
+    img {
+      width: 60%;
+    }
+    .knowledge-move-item-name {
+      max-width: 80%;
+    }
+    @media screen and (max-width: 768px) {
+      width: 100%;
+      flex-direction: row;
+      justify-content: flex-start;
+      img {
+        width: 18%;
+      }
+      .knowledge-move-item-name {
+        max-width: 60%;
+        margin-left: 10px;
+      }
+    }
+  }
+}
+.knowledge-list-modal-footer {
+  margin-top: 10px;
+  @media screen and (max-width: 768px) {
+    text-align: center;
+    .knowledge-list-modal-btn {
+      width: 100%;
+    }
   }
 }
