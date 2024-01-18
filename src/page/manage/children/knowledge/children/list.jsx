@@ -6,7 +6,7 @@ import { useLocation } from 'react-router-dom';
 import MrPagination from '@/components/mr-pagination';
 import MrModal from '@/components/mr-modal';
 import FileItem from './file-list';
-import MoveItem from './move-list';
+import MoveList from './move-list';
 
 // 图片
 import knowledgeFile from '@/assets/images/file.png';
@@ -14,7 +14,15 @@ import knowledgeIcon from '@/assets/images/knowledge-icon.png';
 import moveTo from '@/assets/images/move-to.png';
 
 // antd组件
-import { message, Button, Dropdown, Empty, Input, Modal } from 'antd';
+import {
+  message,
+  Button,
+  Dropdown,
+  Empty,
+  Input,
+  Modal,
+  Breadcrumb,
+} from 'antd';
 
 function List() {
   const location = useLocation();
@@ -28,7 +36,8 @@ function List() {
   const [total, setTotal] = useState(0); //总条数
   const [parentId, setParentId] = useState(''); //存储地址栏，用来刷新列表
 
-  const [moveTargetId, setMoveTargetId] = useState(''); //要移动的id
+  const [moveTargetId, setMoveTargetId] = useState(''); //要移动的子id
+  const [moveTargetParentId, setMoveTargetParentId] = useState(''); //移动到哪个父id
   // 列表筛选
   const [params, setParams] = useState({
     pageNo: 1,
@@ -44,9 +53,19 @@ function List() {
     imageUrl: '', // 头像-只有type===2才有头像
     parentId,
   });
-
   const [folderId, setFolderId] = useState(''); //编辑-子元素id
 
+  // 移动- list参数
+  const [moveParams, setMoveParams] = useState({
+    pageNo: 1,
+    pageSize: 100,
+    keywords: '',
+    parentId: '', //空-目录
+  });
+  // 移动-面包屑导航
+  const [moveBreadList, setMoveBreadList] = useState([]);
+
+  // 🚀方法🚀
   // 新增 / 编辑弹框
   const handleModal = (file, type) => {
     setIsOpen(true);
@@ -176,44 +195,54 @@ function List() {
     }
   };
 
-  // 点击要移动的对象
+  // 点击移动
   const handleMoveTarget = async (file) => {
     setMoveTargetId(file.id); //要移动的id
     setIsMoveOpen(true);
-    // try {
-    //   const res = await ajax.post('/chat/knowledge/move', {
-    //     id: file.id,
-    //     parentId: file.parentId,
-    //   });
-    //   if (res.code === 200) {
-    //     message.success('移动成功');
-    //     setIsOpen(false);
-    //     getFileList();
-    //   }
-    // } catch (error) {
-    //   message.error(error.message || '移动失败');
-    // } finally {
-    //   setIsOpen(false);
-    // }
   };
   // 确认移动
   const handleMoveConfirm = async () => {
     console.log('🚀 ~ handleMoveConfirm ~ 要移动的子元素:', moveTargetId);
-    // 父元素【从缓存拿】,否则默认为''，根目录
+    console.log('🚀 ~ handleMoveConfirm ~ 移动到的父元素:', moveTargetParentId);
+    let params = {
+      id: moveTargetId,
+      parentId: moveTargetParentId || '0',
+    };
+    console.log('🚀 ~ handleMoveConfirm ~ params:', params);
+    try {
+      const res = await ajax.post('/chat/knowledge/move', params);
+      if (res.code === 200) {
+        message.success('移动成功');
 
-    // type===2的 和 自己不能点
-
-    // 如果要移动的id和 自己 file.id相同，则不能移动
-
-    // 刷新列表
-
-    setIsOpen(false);
-    // 清缓存
+        setMoveTargetId('');
+        setMoveTargetParentId('');
+        getFileList();
+      }
+    } catch (error) {
+      message.error(error.message || '移动失败');
+    } finally {
+      setIsMoveOpen(false);
+      setMoveParams({
+        pageNo: 1,
+        pageSize: 100,
+        keywords: '',
+        parentId: '',
+      });
+      setMoveBreadList([]); // 关闭的时候，移动的面包屑置为空
+    }
   };
+  // 取消移动
   const handleMoveCancel = async () => {
     setIsMoveOpen(false);
     setMoveTargetId('');
-    // 【取消的时候也要清缓存】
+    setMoveTargetParentId('');
+    setMoveParams({
+      pageNo: 1,
+      pageSize: 100,
+      keywords: '',
+      parentId: '',
+    });
+    setMoveBreadList([]); // 关闭的时候，移动的面包屑置为空
   };
 
   // 删除
@@ -428,7 +457,23 @@ function List() {
         width={600}
         maskClosable={false}
       >
-        <MoveItem />
+        <div className="knowledge-move-bread">
+          <Breadcrumb
+            items={[
+              {
+                title: '根目录',
+              },
+              ...moveBreadList,
+            ]}
+          />
+        </div>
+        <MoveList
+          moveTargetId={moveTargetId}
+          setMoveTargetParentId={setMoveTargetParentId}
+          params={moveParams}
+          setParams={setMoveParams}
+          setMoveBreadList={setMoveBreadList}
+        />
       </Modal>
     </div>
   );

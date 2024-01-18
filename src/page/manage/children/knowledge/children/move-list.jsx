@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import '../index.scss';
+import './move-list.scss';
 import { useNavigate } from 'react-router-dom';
 import ajax from '@/request';
 
@@ -9,22 +9,51 @@ import knowledgeFile from '@/assets/images/file.png';
 import knowledgeIcon from '@/assets/images/knowledge-icon.png';
 
 // antd组件
-import { Empty, List, Divider, Skeleton, Avatar } from 'antd';
+import { Empty, message, List, Divider, Skeleton, Avatar } from 'antd';
 
 // item内容
-function MoveItem() {
+function MoveItem({
+  moveTargetId,
+  setMoveTargetParentId,
+  params,
+  setParams,
+  setMoveBreadList,
+}) {
   const [loading, setLoading] = useState(false);
 
   const [fileList, setFileList] = useState([]); //文件列表
-  const [parentId, setParentId] = useState(''); //全局parentId，方便操作
 
-  // 列表筛选
-  const [params, setParams] = useState({
-    pageNo: 1,
-    pageSize: 100,
-    keywords: '',
-    parentId, //空-目录
-  });
+  // 获取面包屑导航
+  const getBreadList = async (parentId) => {
+    console.log('🚀 ~ getBreadList ~ parentId:', parentId);
+    try {
+      const res = await ajax.get('/chat/knowledge/list-path-by-parent-id', {
+        parentId: parentId || '',
+      });
+      if (res.code === 200) {
+        if (res.data && res.data.length > 0) {
+          const tempDatas = res.data.map((item, index) => {
+            const tempData = {
+              title: (
+                <div className="single-omit" style={{ maxWidth: '100px' }}>
+                  {item.parentName}
+                </div>
+              ),
+              href: `?parentId=${item.parentId}`, // 设置链接属性
+            };
+            if (index === res.data.length - 1) {
+              delete tempData.href; // 删除最后一个面包屑项的href属性
+            }
+
+            return tempData;
+          });
+          setMoveBreadList(tempDatas);
+        }
+      }
+    } catch (error) {
+      console.log('🚀 ~ getFileList ~ error:', error || '获取文件列表分页失败');
+    }
+  };
 
   // 获取文件列表分页
   const getFileList = async () => {
@@ -40,11 +69,27 @@ function MoveItem() {
 
   // 点击子元素
   const handleClick = (file) => {
-    // 存储父级id，到缓存
-    console.log('🚀 ~ 移动到该父元素 ~ file.id:', file.id);
+    console.log('🚀 ~ handleClick ~ file:', file);
+    // type===2的 和 自己不能点击
+    if (file.id === moveTargetId) {
+      message.info('别选择自己，换个文件吧！');
+      return;
+    }
+    if (file.type === 2) {
+      return;
+    }
+    // 存储父级id
+    setMoveTargetParentId(file.id);
+    // 修改params，触发刷新列表
+    setParams((prevParams) => ({
+      ...prevParams,
+      parentId: file.id,
+    }));
+    getBreadList(file.id);
   };
 
   useEffect(() => {
+    getBreadList();
     getFileList();
   }, [params]);
 
@@ -80,7 +125,6 @@ function MoveItem() {
           )}
         />
       </InfiniteScroll> */}
-
       {/* 子元素item-file */}
       {fileList && fileList.length > 0 ? (
         fileList.map((file) => (
