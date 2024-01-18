@@ -78,14 +78,16 @@ function MoveItem({
     if (file.type === 2) {
       return;
     }
-    // 存储父级id
-    setMoveTargetParentId(file.id);
-    // 修改params，触发刷新列表
-    setParams((prevParams) => ({
-      ...prevParams,
-      parentId: file.id,
-    }));
-    getBreadList(file.id);
+    if (file.type === 1) {
+      // 存储父级id
+      setMoveTargetParentId(file.id);
+      // 修改params，触发刷新列表
+      setParams((prevParams) => ({
+        ...prevParams,
+        parentId: file.id,
+      }));
+      getBreadList(file.id);
+    }
   };
 
   useEffect(() => {

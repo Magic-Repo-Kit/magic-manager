@@ -244,7 +244,6 @@ function List() {
     });
     setMoveBreadList([]); // 关闭的时候，移动的面包屑置为空
   };
-
   // 删除
   const handleDelete = async (file) => {
     try {
@@ -267,7 +266,6 @@ function List() {
   };
 
   // 导出
-
   useEffect(() => {
     getFileList();
   }, [params]); //监听params的变化，如果是[]，则只在首次执行
@@ -462,6 +460,7 @@ function List() {
             items={[
               {
                 title: '根目录',
+                href: '#',
               },
               ...moveBreadList,
             ]}

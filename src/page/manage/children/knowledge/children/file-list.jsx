@@ -15,7 +15,6 @@ function FileItem({ file, onEdit, onMove, onDelete }) {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    console.log(file.type);
     // type 1-文件 2-知识库
     if (file.type === 1) {
       // 在当前URL基础上添加或替换parentId参数
