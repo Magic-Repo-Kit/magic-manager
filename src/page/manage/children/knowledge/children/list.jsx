@@ -244,6 +244,19 @@ function List() {
     });
     setMoveBreadList([]); // 关闭的时候，移动的面包屑置为空
   };
+  // 面包屑-点击移动的根目录
+  const handleMoveHomeClick = async (e) => {
+    e.preventDefault(); // 阻止默认的链接行为
+    // 刷新moveParams的parentId，触发列表刷新
+    if (moveParams.parentId) {
+      setMoveParams((prevParams) => ({
+        ...prevParams,
+        parentId: '',
+      }));
+    }
+    setMoveBreadList([]); // 将面包屑列表重置为空数组
+  };
+
   // 删除
   const handleDelete = async (file) => {
     try {
@@ -265,7 +278,6 @@ function List() {
     }
   };
 
-  // 导出
   useEffect(() => {
     getFileList();
   }, [params]); //监听params的变化，如果是[]，则只在首次执行
@@ -455,12 +467,13 @@ function List() {
         width={600}
         maskClosable={false}
       >
-        <div className="knowledge-move-bread">
+        <div className="knowledge-move-bread user-select">
           <Breadcrumb
             items={[
               {
                 title: '根目录',
-                href: '#',
+                href: '',
+                onClick: handleMoveHomeClick,
               },
               ...moveBreadList,
             ]}

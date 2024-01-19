@@ -148,7 +148,7 @@ function Auth() {
                 </div>
 
                 <div className="explain-btn user-select">
-                  <div>快速体验</div>
+                  <div onClick={() => setIsModalVisible(true)}>快速体验</div>
                   <div
                     onClick={() => {
                       window.location.assign(

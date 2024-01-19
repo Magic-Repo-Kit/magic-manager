@@ -39,7 +39,13 @@ function MoveItem({
                   {item.parentName}
                 </div>
               ),
-              href: `?parentId=${item.parentId}`, // 设置链接属性
+              href: '',
+              onClick: (e) => {
+                e.preventDefault();
+                if (index !== res.data.length - 1) {
+                  handleMoveItemClick(item.parentId);
+                }
+              },
             };
             if (index === res.data.length - 1) {
               delete tempData.href; // 删除最后一个面包屑项的href属性
@@ -70,7 +76,7 @@ function MoveItem({
   // 点击子元素
   const handleClick = (file) => {
     console.log('🚀 ~ handleClick ~ file:', file);
-    // type===2的 和 自己不能点击
+    // 自己 和 知识库不能点击
     if (file.id === moveTargetId) {
       message.info('别选择自己，换个文件吧！');
       return;
@@ -89,9 +95,18 @@ function MoveItem({
       getBreadList(file.id);
     }
   };
+  // 面包屑 - 点击对应item
+  const handleMoveItemClick = (parentId) => {
+    // 修改params，触发刷新列表
+    setParams((prevParams) => ({
+      ...prevParams,
+      parentId,
+    }));
+    getBreadList(parentId);
+  };
 
   useEffect(() => {
-    getBreadList();
+    // getBreadList();
     getFileList();
   }, [params]);
 

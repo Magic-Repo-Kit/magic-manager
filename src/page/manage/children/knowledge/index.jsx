@@ -16,6 +16,7 @@ function Knowledge() {
 
   const [titleList, setTitleList] = useState([]);
   const [parentId, setParentId] = useState(''); //存储地址栏parentId
+
   // 获取面包屑导航
   const getBreadTitle = async (parentId) => {
     try {
@@ -31,10 +32,12 @@ function Knowledge() {
                   {item.parentName}
                 </div>
               ),
-              href: '', // 设置链接属性
+              href: '',
               onClick: (e) => {
                 e.preventDefault();
-                handleBreadItemClick(item.parentId);
+                if (index !== res.data.length - 1) {
+                  handleBreadItemClick(item.parentId);
+                }
               },
             };
             if (index === res.data.length - 1) {
@@ -60,31 +63,47 @@ function Knowledge() {
     // 使用URLSearchParams来修改URL
     const searchParams = new URLSearchParams(location.search);
     searchParams.delete(parentId); // 删除parentId参数
+
+    // 如果跳到详情页，替换/detail
+    let newPathname = location.pathname;
+    if (newPathname.includes('/detail')) {
+      newPathname = newPathname.replace('/detail', '/list');
+    }
+
     // 更新地址栏，不刷新页面
     navigate(
       {
-        pathname: location.pathname,
+        pathname: newPathname,
         search: searchParams.toString(),
       },
       { replace: true }
     );
   };
 
-  // 面包屑 - 点击首页
+  // 面包屑 - 点击根目录
   const handleBreadHomeClick = (e) => {
     e.preventDefault(); // 阻止默认的链接行为
-
-    removeParams('parentId');
+    if (parentId) {
+      // 如果parentId存在，则删除该参数并跳转
+      removeParams('parentId');
+    }
+    setTitleList([]);
   };
   // 面包屑 - 点击对应item跳转
   const handleBreadItemClick = (parentId) => {
-    console.log('🚀 ~ handleBreadItemClick ~ parentId:', parentId);
     const searchParams = new URLSearchParams(location.search);
     searchParams.set('parentId', parentId); //设置新的parentId
+
+    // 如果跳到详情页，替换/detail
+    let newPathname = location.pathname;
+    if (newPathname.includes('/detail')) {
+      newPathname = newPathname.replace('/detail', '/list');
+    }
+
     // 更新地址栏，不刷新页面
     navigate(
       {
-        pathname: location.pathname,
+        pathname: newPathname,
         search: searchParams.toString(),
       },
       { replace: true }
@@ -95,13 +114,15 @@ function Knowledge() {
     // 从URL中获取parentId参数
     const queryParams = new URLSearchParams(location.search);
     const parentId = queryParams.get('parentId');
+
     getBreadTitle(parentId);
     setParentId(parentId);
   }, [location]);
+
   return (
     <div className={`knowledge-container ${darkMode ? 'dark-mode' : ''}`}>
       {/* 渲染子路由 */}
-      <div className="knowledge-title-bread">
+      <div className="knowledge-title-bread user-select">
         <Breadcrumb
           items={[
             {

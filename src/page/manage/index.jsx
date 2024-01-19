@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import './index.scss';
-import { Outlet, useNavigate } from 'react-router-dom'; //渲染子路由
+import { Outlet, useNavigate, useLocation } from 'react-router-dom'; //渲染子路由
 import { DarkModeContext } from '@/components/DarkModeProvider'; //夜间模式
 // 图片
 import mrkLogo from '@/assets/images/logo-mrk.png';
@@ -12,13 +12,18 @@ function Manage() {
   // 共享参数
   const { darkMode } = useContext(DarkModeContext);
   const navigate = useNavigate(); //路由
+  const location = useLocation();
 
   const [manageMenuUrl, setManageMenuUrl] = useState('');
   const [manageMenuName, setManageMenuName] = useState('工作台');
 
   const handleAppClick = (url, name) => {
+    // 不能从当前页 进 当前页
+    if (location.pathname.includes(url)) {
+      return;
+    }
     setManageMenuUrl(url);
-    navigate(`${url}`);
+    navigate(url);
     sessionStorage.setItem('manageMenuUrl', url);
     sessionStorage.setItem('manageMenuName', name);
     setManageMenuName(name);
