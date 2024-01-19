@@ -183,9 +183,12 @@ function List() {
   };
 
   // 获取文件列表分页
-  const getFileList = async () => {
+  const getFileList = async (parentId) => {
     try {
-      const res = await ajax.get('/chat/knowledge/list-page', params);
+      const res = await ajax.get('/chat/knowledge/list-page', {
+        ...params,
+        parentId,
+      });
       if (res.code === 200) {
         setFileList(res.data.list);
         setTotal(res.data.total);
@@ -278,20 +281,23 @@ function List() {
     }
   };
 
-  useEffect(() => {
-    getFileList();
-  }, [params]); //监听params的变化，如果是[]，则只在首次执行
+  // useEffect(() => {
+  //   // getFileList();
+  // }, []); //监听params的变化，如果是[]，则只在首次执行
 
   useEffect(() => {
     // 从URL中获取parentId参数
     const queryParams = new URLSearchParams(location.search);
     const parentId = queryParams.get('parentId');
 
+    getFileList(parentId);
+
     // 修改params值，触发监听
-    setParams((prevParams) => ({
-      ...prevParams,
-      parentId,
-    }));
+    // setParams((prevParams) => ({
+    //   ...prevParams,
+    //   parentId,
+    // }));
+
     // 修改folderForm值，提交对应parentId
     setFolderForm((prevForm) => ({
       ...prevForm,
