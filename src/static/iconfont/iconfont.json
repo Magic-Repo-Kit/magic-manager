@@ -6,6 +6,34 @@
   "description": "百宝袋",
   "glyphs": [
     {
+      "icon_id": "1026564",
+      "name": "选择",
+      "font_class": "xuanze",
+      "unicode": "e696",
+      "unicode_decimal": 59030
+    },
+    {
+      "icon_id": "5774385",
+      "name": "icon_choice",
+      "font_class": "icon-",
+      "unicode": "e72c",
+      "unicode_decimal": 59180
+    },
+    {
+      "icon_id": "17291900",
+      "name": "表格-选择",
+      "font_class": "xuanze1",
+      "unicode": "e662",
+      "unicode_decimal": 58978
+    },
+    {
+      "icon_id": "22971715",
+      "name": "选择2",
+      "font_class": "xuanze2",
+      "unicode": "e887",
+      "unicode_decimal": 59527
+    },
+    {
       "icon_id": "1599891",
       "name": "网商银行无线端_错误",
       "font_class": "group43",

@@ -104,6 +104,9 @@
       margin-bottom: 20px;
       display: flex;
       justify-content: flex-end;
+      position: absolute;
+      top: -49px;
+      right: 15px;
     }
   }
 }
@@ -141,5 +144,29 @@
   > img {
     height: 26px;
     margin-right: 5px;
+  }
+}
+
+// detail - 弹框
+.knowledge-detail-radio-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px 0;
+
+  .knowledge-detail-radio-item {
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    background-color: #f7f8fa;
+    border: 1px solid rgb(232, 235, 240);
+    box-sizing: border-box;
+    border-radius: 8px;
+    @media screen and (max-width: 768px) {
+      padding: 15px;
+    }
+    .knowledge-detail-radio-content {
+      width: 100%;
+    }
   }
 }
