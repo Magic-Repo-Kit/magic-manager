@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import '../index.scss';
+import './index.scss';
 import ajax from '@/request';
 import MrModal from '@/components/mr-modal';
 import MrPagination from '@/components/mr-pagination';
@@ -8,17 +8,10 @@ import knowledgeChoose from '@/assets/images/choose.png';
 
 // antd组件
 import { Button, Radio, Empty, Table, Dropdown, Popconfirm, Tag } from 'antd';
-import {
-  CheckCircleOutlined,
-  ClockCircleOutlined,
-  CloseCircleOutlined,
-  ExclamationCircleOutlined,
-  MinusCircleOutlined,
-  SyncOutlined,
-} from '@ant-design/icons';
+import { CheckCircleOutlined, MinusCircleOutlined } from '@ant-design/icons';
 
-function Detail() {
-  const [isActive, setIsActive] = useState(1);
+function DetailList({ toImport, importWay, setImportWay }) {
+  // const [importWay, setImportWay] = useState('localFile');
   const [isOpen, setIsOpen] = useState(false); //弹框状态
   const [tableData, setTableData] = useState([
     {
@@ -50,7 +43,8 @@ function Detail() {
 
   // 导入 弹框确认
   const handleOk = () => {
-    console.log(11121);
+    toImport();
+    setIsOpen(false);
   };
   // 导入 弹框确认
   const handleCancel = () => {
@@ -58,7 +52,7 @@ function Detail() {
   };
   const onChange = (e) => {
     console.log('radio checked', e.target.value);
-    setIsActive(e.target.value);
+    setImportWay(e.target.value);
   };
 
   //获取列表
@@ -211,7 +205,7 @@ function Detail() {
   };
 
   return (
-    <div className="knowledge-detail">
+    <div className="knowledge-detail-list">
       <div className="knowledge-detail-title">
         <Button
           type="primary"
@@ -247,7 +241,7 @@ function Detail() {
           <div className="knowledge-list-modal-title">
             <img
               src={knowledgeChoose}
-              style={{ height: '22px', marginRight: '7px' }}
+              style={{ height: '16px', marginRight: '7px' }}
             />
             <span>选择来源</span>
           </div>
@@ -256,30 +250,33 @@ function Detail() {
           <div style={{ margin: '20px 0 25px 0' }}>
             <Radio.Group
               onChange={onChange}
-              value={isActive}
+              value={importWay}
               style={{ width: '100%' }}
             >
               <div className="knowledge-detail-radio-box user-select">
-                <Radio className="knowledge-detail-radio-item" value={1}>
+                <Radio
+                  className="knowledge-detail-radio-item"
+                  value="localFile"
+                >
                   <div className="knowledge-detail-radio-content">
                     <div>本地文件</div>
-                    <div>上传PDF，TXT，DOCX等格式的文件</div>
+                    <div>上传TXT，PDF格式文件</div>
                   </div>
                 </Radio>
 
-                <Radio className="knowledge-detail-radio-item" value={2}>
+                <Radio className="knowledge-detail-radio-item" value="webLink">
                   <div className="knowledge-detail-radio-content">
                     <div>网页链接</div>
                     <div>读取静态网页内容作为数据集</div>
                   </div>
                 </Radio>
 
-                <Radio className="knowledge-detail-radio-item" value={3}>
+                {/* <Radio className="knowledge-detail-radio-item" value={3}>
                   <div className="knowledge-detail-radio-content">
                     <div>自定义文本</div>
                     <div>手动输入一段文本作为数据集</div>
                   </div>
-                </Radio>
+                </Radio> */}
               </div>
             </Radio.Group>
           </div>
@@ -293,4 +290,4 @@ function Detail() {
   );
 }
 
-export default Detail;
+export default DetailList;

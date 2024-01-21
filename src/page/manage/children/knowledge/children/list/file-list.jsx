@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../index.scss';
+import '../../index.scss';
 import { useNavigate } from 'react-router-dom';
 
 // 图片

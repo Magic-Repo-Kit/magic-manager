@@ -5,8 +5,6 @@ import { DarkModeContext } from '@/components/DarkModeProvider'; //夜间模式
 
 import ajax from '@/request';
 
-import knowledgeFile from '@/assets/images/file.png';
-import knowledgeIcon from '@/assets/images/knowledge-icon.png';
 // antd组件
 import { Breadcrumb } from 'antd';
 
@@ -37,10 +35,6 @@ function Knowledge() {
                     alignItems: 'center',
                   }}
                 >
-                  <img
-                    src={item.type === 1 ? knowledgeFile : knowledgeIcon}
-                    style={{ height: 20, marginRight: 3 }}
-                  />
                   <div className="single-omit">{item.parentName}</div>
                 </div>
               ),

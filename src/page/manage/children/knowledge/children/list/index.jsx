@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect, useRef } from 'react';
-import '../index.scss';
+import '../../index.scss';
 import ajax from '@/request';
 import { useLocation } from 'react-router-dom';
 
