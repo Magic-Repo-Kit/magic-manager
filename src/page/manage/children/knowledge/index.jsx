@@ -5,6 +5,8 @@ import { DarkModeContext } from '@/components/DarkModeProvider'; //夜间模式
 
 import ajax from '@/request';
 
+import knowledgeFile from '@/assets/images/file.png';
+import knowledgeIcon from '@/assets/images/knowledge-icon.png';
 // antd组件
 import { Breadcrumb } from 'antd';
 
@@ -28,8 +30,18 @@ function Knowledge() {
           const tempDatas = res.data.map((item, index) => {
             const tempData = {
               title: (
-                <div className="single-omit" style={{ maxWidth: '100px' }}>
-                  {item.parentName}
+                <div
+                  style={{
+                    maxWidth: '100px',
+                    display: 'flex',
+                    alignItems: 'center',
+                  }}
+                >
+                  <img
+                    src={item.type === 1 ? knowledgeFile : knowledgeIcon}
+                    style={{ height: 20, marginRight: 3 }}
+                  />
+                  <div className="single-omit">{item.parentName}</div>
                 </div>
               ),
               href: '',
@@ -121,19 +133,22 @@ function Knowledge() {
 
   return (
     <div className={`knowledge-container ${darkMode ? 'dark-mode' : ''}`}>
-      {/* 渲染子路由 */}
-      <div className="knowledge-title-bread user-select">
-        <Breadcrumb
-          items={[
-            {
-              title: '根目录',
-              href: '',
-              onClick: handleBreadHomeClick,
-            },
-            ...titleList,
-          ]}
-        />
+      <div className="knowledge-title-screen">
+        <div className="knowledge-title-bread user-select">
+          <Breadcrumb
+            items={[
+              {
+                title: '根目录',
+                href: '',
+                onClick: handleBreadHomeClick,
+              },
+              ...titleList,
+            ]}
+          />
+        </div>
       </div>
+
+      {/* 渲染子路由 */}
       <Outlet />
     </div>
   );

@@ -190,8 +190,10 @@ function List() {
         parentId,
       });
       if (res.code === 200) {
-        setFileList(res.data.list);
-        setTotal(res.data.total);
+        if (res.data) {
+          setFileList(res.data.list);
+          setTotal(res.data.total);
+        }
       }
     } catch (error) {
       console.log('🚀 ~ getFileList ~ error:', error || '获取文件列表分页失败');
