@@ -1,0 +1,12 @@
+@import '@/styles/theme';
+.create-preview-container {
+  padding: 15px;
+  padding-top: 0;
+  position: relative;
+  display: flex;
+  .create-preview-item {
+    width: 50%;
+  }
+  .create-container {
+  }
+}

@@ -30,6 +30,7 @@ const FailLayout = lazy(() => import('@/layouts/fail'));
 // 工作台
 const Manage = lazy(() => import('@/page/manage'));
 const WorkPlatform = lazy(() => import('@/page/manage/children/work-platform'));
+
 // 知识库
 const Knowledge = lazy(() => import('@/page/manage/children/knowledge'));
 const KnowledgeList = lazy(() =>
@@ -38,6 +39,22 @@ const KnowledgeList = lazy(() =>
 const KnowledgeDetail = lazy(() =>
   import('@/page/manage/children/knowledge/children/detail')
 );
+
+// 创建角色预览
+const CreatePreview = lazy(() =>
+  import('@/page/manage/children/create-preview')
+);
+const CreateRoles = lazy(() =>
+  import('@/page/manage/children/create-preview/children/create')
+);
+const PreviewRoles = lazy(() =>
+  import('@/page/manage/children/create-preview/children/preview')
+);
+// 对话
+const Chat = lazy(() => import('@/page/manage/chat'));
+
+// 角色列表
+
 const UserManage = lazy(() => import('@/page/manage/children/user-manage'));
 const RolesManage = lazy(() => import('@/page/manage/children/roles-manage'));
 const ContactUs = lazy(() => import('@/page/manage/children/contact-us'));
@@ -45,7 +62,7 @@ const SettingManage = lazy(() =>
   import('@/page/manage/children/setting-manage')
 );
 
-const Chat = lazy(() => import('@/page/chat'));
+const ChatMenu = lazy(() => import('@/page/chat'));
 const GPT = lazy(() => import('@/page/gpt'));
 const AiHelper = lazy(() => import('@/page/ai-helper'));
 
@@ -98,6 +115,30 @@ const routes = [
               },
             ],
           },
+          // 创建角色预览
+          {
+            path: 'create-preview',
+            element: lazyLoad(<CreatePreview />),
+            children: [
+              {
+                path: '',
+                element: <Navigate to={'create'} replace />, //默认create
+              },
+              {
+                path: 'create',
+                element: lazyLoad(<CreateRoles />),
+              },
+              {
+                path: 'preview',
+                element: lazyLoad(<PreviewRoles />),
+              },
+            ],
+          },
+          // 聊天
+          {
+            path: 'chat',
+            element: lazyLoad(<Chat />),
+          },
           // 账号管理
           {
             path: 'user-manage',
@@ -123,7 +164,7 @@ const routes = [
       // 闪聊
       {
         path: 'chat',
-        element: lazyLoad(<Chat />),
+        element: lazyLoad(<ChatMenu />),
         children: [],
       },
       // 一问一答

@@ -6,6 +6,48 @@
   "description": "百宝袋",
   "glyphs": [
     {
+      "icon_id": "1471834",
+      "name": "data",
+      "font_class": "data",
+      "unicode": "e664",
+      "unicode_decimal": 58980
+    },
+    {
+      "icon_id": "1471835",
+      "name": "add",
+      "font_class": "add",
+      "unicode": "e665",
+      "unicode_decimal": 58981
+    },
+    {
+      "icon_id": "1471836",
+      "name": "examine",
+      "font_class": "examine",
+      "unicode": "e666",
+      "unicode_decimal": 58982
+    },
+    {
+      "icon_id": "1471838",
+      "name": "delete",
+      "font_class": "delete",
+      "unicode": "e667",
+      "unicode_decimal": 58983
+    },
+    {
+      "icon_id": "1484891",
+      "name": "qrcode",
+      "font_class": "qrcode",
+      "unicode": "e668",
+      "unicode_decimal": 58984
+    },
+    {
+      "icon_id": "1484895",
+      "name": "validate",
+      "font_class": "validate",
+      "unicode": "e669",
+      "unicode_decimal": 58985
+    },
+    {
       "icon_id": "37511239",
       "name": "序号-F",
       "font_class": "xuhao-F",

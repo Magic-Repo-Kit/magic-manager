@@ -71,20 +71,20 @@ function Manage() {
               <i className="iconfont mr-inbox"></i>
             </div>
           </Tooltip>
-          {/* 账号管理 */}
+          {/* 创建角色预览 */}
           <Tooltip
-            title="账号管理"
+            title="创建预览"
             arrow={false}
             color={'rgba(25, 25, 25, 0.8)'}
             placement="right"
           >
             <div
               className={`aside-item-active ${
-                manageMenuUrl === 'user-manage' ? 'active' : ''
+                manageMenuUrl === 'create-preview' ? 'active' : ''
               }`}
-              onClick={() => handleAppClick('user-manage', '账号管理')}
+              onClick={() => handleAppClick('create-preview', '创建预览')}
             >
-              <i className="iconfont mr-user-admin"></i>
+              <i className="iconfont mr-VR" style={{ fontSize: 22 }}></i>
             </div>
           </Tooltip>
 
@@ -118,6 +118,22 @@ function Manage() {
               onClick={() => handleAppClick('contact-us', '联系我们')}
             >
               <i className="iconfont mr-lightning"></i>
+            </div>
+          </Tooltip>
+          {/* 账号管理 */}
+          <Tooltip
+            title="账号管理"
+            arrow={false}
+            color={'rgba(25, 25, 25, 0.8)'}
+            placement="right"
+          >
+            <div
+              className={`aside-item-active ${
+                manageMenuUrl === 'user-manage' ? 'active' : ''
+              }`}
+              onClick={() => handleAppClick('user-manage', '账号管理')}
+            >
+              <i className="iconfont mr-user-admin"></i>
             </div>
           </Tooltip>
           <div className="aside-last">
