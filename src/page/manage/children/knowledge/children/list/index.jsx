@@ -410,7 +410,7 @@ function List() {
         title={
           <div className="knowledge-list-modal-title">
             <img src={folderForm.type === 1 ? knowledgeFile : knowledgeIcon} />
-            <span>{`新建${folderForm.type === 1 ? '文件夹' : '知识库'}`}</span>
+            <span>{`${folderForm.type === 1 ? '文件夹' : '知识库'}`}</span>
           </div>
         }
         content={
