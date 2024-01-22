@@ -73,7 +73,7 @@ function Manage() {
           </Tooltip>
           {/* 创建角色预览 */}
           <Tooltip
-            title="创建预览"
+            title="创建角色"
             arrow={false}
             color={'rgba(25, 25, 25, 0.8)'}
             placement="right"
@@ -82,9 +82,12 @@ function Manage() {
               className={`aside-item-active ${
                 manageMenuUrl === 'create-preview' ? 'active' : ''
               }`}
-              onClick={() => handleAppClick('create-preview', '创建预览')}
+              onClick={() => handleAppClick('create-preview', '创建角色')}
             >
-              <i className="iconfont mr-VR" style={{ fontSize: 22 }}></i>
+              <i
+                className="iconfont mr-a-xingzhuang1858kaobei"
+                style={{ fontSize: 20 }}
+              ></i>
             </div>
           </Tooltip>
 

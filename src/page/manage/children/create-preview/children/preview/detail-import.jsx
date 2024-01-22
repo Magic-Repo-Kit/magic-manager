@@ -19,12 +19,12 @@ function DetailImport({ toList, importWay, setImportWay }) {
 
     console.log('🚀 ~ files ~ files:', files);
     if (files.length === 0) {
-      message('请先上传文件');
+      message.info('请先上传文件');
       return;
     }
     const id = new URLSearchParams(location.search).get('parentId');
     if (!id) {
-      message('知识库不存在');
+      message.info('知识库不存在');
       return;
     }
     // 新增

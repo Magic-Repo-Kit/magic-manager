@@ -6,6 +6,90 @@
   "description": "百宝袋",
   "glyphs": [
     {
+      "icon_id": "1817726",
+      "name": "创建v",
+      "font_class": "chuangjianv",
+      "unicode": "e66b",
+      "unicode_decimal": 58987
+    },
+    {
+      "icon_id": "9203480",
+      "name": "air_element",
+      "font_class": "icons-air_element",
+      "unicode": "e66c",
+      "unicode_decimal": 58988
+    },
+    {
+      "icon_id": "11348866",
+      "name": "airdesign",
+      "font_class": "airdesign",
+      "unicode": "e66e",
+      "unicode_decimal": 58990
+    },
+    {
+      "icon_id": "12097339",
+      "name": "创建",
+      "font_class": "chuangjian",
+      "unicode": "e888",
+      "unicode_decimal": 59528
+    },
+    {
+      "icon_id": "15378115",
+      "name": "aiqfome",
+      "font_class": "aiqfome",
+      "unicode": "eb37",
+      "unicode_decimal": 60215
+    },
+    {
+      "icon_id": "22424000",
+      "name": "创建模型",
+      "font_class": "chuangjianmoxing",
+      "unicode": "e6c3",
+      "unicode_decimal": 59075
+    },
+    {
+      "icon_id": "22502472",
+      "name": "创建",
+      "font_class": "a-xingzhuang1858kaobei",
+      "unicode": "e66f",
+      "unicode_decimal": 58991
+    },
+    {
+      "icon_id": "36989972",
+      "name": "魔法棒",
+      "font_class": "mofabang",
+      "unicode": "e670",
+      "unicode_decimal": 58992
+    },
+    {
+      "icon_id": "1305476",
+      "name": "链接",
+      "font_class": "lianjie",
+      "unicode": "e663",
+      "unicode_decimal": 58979
+    },
+    {
+      "icon_id": "6337456",
+      "name": "插入链接",
+      "font_class": "charulianjie",
+      "unicode": "ec7f",
+      "unicode_decimal": 60543
+    },
+    {
+      "icon_id": "34961604",
+      "name": "思考,想法,联想,处理",
+      "font_class": "a-sikaoxiangfalianxiangchuli",
+      "unicode": "e66a",
+      "unicode_decimal": 58986
+    },
+    {
+      "icon_id": "38544718",
+      "name": "提示词优化",
+      "font_class": "tishiciyouhua",
+      "unicode": "e721",
+      "unicode_decimal": 59169
+    },
+    {
       "icon_id": "1471834",
       "name": "data",
       "font_class": "data",
@@ -46,13 +130,6 @@
       "font_class": "validate",
       "unicode": "e669",
       "unicode_decimal": 58985
-    },
-    {
-      "icon_id": "37511239",
-      "name": "序号-F",
-      "font_class": "xuhao-F",
-      "unicode": "e663",
-      "unicode_decimal": 58979
     },
     {
       "icon_id": "1026564",

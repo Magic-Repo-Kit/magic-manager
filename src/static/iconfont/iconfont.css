@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 4291850 */
-  src: url('iconfont.woff2?t=1705920568543') format('woff2'),
-       url('iconfont.woff?t=1705920568543') format('woff'),
-       url('iconfont.ttf?t=1705920568543') format('truetype');
+  src: url('iconfont.woff2?t=1705933074833') format('woff2'),
+       url('iconfont.woff?t=1705933074833') format('woff'),
+       url('iconfont.ttf?t=1705933074833') format('truetype');
 }
 
 .iconfont {
@@ -11,6 +11,54 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.mr-chuangjianv:before {
+  content: "\e66b";
+}
+
+.mr-icons-air_element:before {
+  content: "\e66c";
+}
+
+.mr-airdesign:before {
+  content: "\e66e";
+}
+
+.mr-chuangjian:before {
+  content: "\e888";
+}
+
+.mr-aiqfome:before {
+  content: "\eb37";
+}
+
+.mr-chuangjianmoxing:before {
+  content: "\e6c3";
+}
+
+.mr-a-xingzhuang1858kaobei:before {
+  content: "\e66f";
+}
+
+.mr-mofabang:before {
+  content: "\e670";
+}
+
+.mr-lianjie:before {
+  content: "\e663";
+}
+
+.mr-charulianjie:before {
+  content: "\ec7f";
+}
+
+.mr-a-sikaoxiangfalianxiangchuli:before {
+  content: "\e66a";
+}
+
+.mr-tishiciyouhua:before {
+  content: "\e721";
 }
 
 .mr-data:before {
@@ -35,10 +83,6 @@
 
 .mr-validate:before {
   content: "\e669";
-}
-
-.mr-xuhao-F:before {
-  content: "\e663";
 }
 
 .mr-xuanze:before {
