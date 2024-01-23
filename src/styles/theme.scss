@@ -26,7 +26,7 @@ $primary-600: #94cdf8;
 $primary-700: #94cdf8;
 $primary-800: #0093e9; //立方体颜色
 $primary-900: #94b5ff;
-$primary-900: #e5f3ff; //立方体颜色
+$primary-1000: #e5f3ff;
 
 $accent-100: #f64d28; //强调颜色
 $accent-200: #006fff;
@@ -40,3 +40,8 @@ $accent-900: #10b981;
 $accent-1000: #fb6547;
 
 $border-color-100: #e8e8e8;
+$border-color-200: #e5e7eb;
+
+// 阴影
+$shadow-200: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+  0 2px 4px -1px rgba(0, 0, 0, 0.06);

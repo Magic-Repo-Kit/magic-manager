@@ -79,13 +79,12 @@ function UploadImage({ maxCount, maxNums, acceptedFileTypes, maxSize }) {
       <div className={`upload-container ${darkMode ? 'dark-mode' : ''}`}>
         <Upload
           action="https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188"
-          listType="picture-circle"
+          listType="picture-card"
           fileList={fileList}
           onPreview={handlePreview}
           onChange={handleChange}
           maxCount={maxCount}
           beforeUpload={beforeUpload}
-          style={{ display: 'none' }}
         >
           {fileList.length >= maxNums ? null : uploadButton}
         </Upload>

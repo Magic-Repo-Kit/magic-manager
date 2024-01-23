@@ -6,6 +6,111 @@
   "description": "百宝袋",
   "glyphs": [
     {
+      "icon_id": "10388773",
+      "name": "拍摄",
+      "font_class": "paishe",
+      "unicode": "e67d",
+      "unicode_decimal": 59005
+    },
+    {
+      "icon_id": "1126",
+      "name": "文件夹",
+      "font_class": "wenjianjia1",
+      "unicode": "e679",
+      "unicode_decimal": 59001
+    },
+    {
+      "icon_id": "6972182",
+      "name": "语音输入",
+      "font_class": "yuyinshuru",
+      "unicode": "e6b0",
+      "unicode_decimal": 59056
+    },
+    {
+      "icon_id": "12103029",
+      "name": "图片",
+      "font_class": "tupian1",
+      "unicode": "e67a",
+      "unicode_decimal": 59002
+    },
+    {
+      "icon_id": "33870249",
+      "name": "语音输入",
+      "font_class": "yuyinshuru1",
+      "unicode": "e67c",
+      "unicode_decimal": 59004
+    },
+    {
+      "icon_id": "1269",
+      "name": "加",
+      "font_class": "jia",
+      "unicode": "e678",
+      "unicode_decimal": 59000
+    },
+    {
+      "icon_id": "1727449",
+      "name": "214声波、语音消息",
+      "font_class": "shengboyuyinxiaoxi",
+      "unicode": "e8c4",
+      "unicode_decimal": 59588
+    },
+    {
+      "icon_id": "3550910",
+      "name": "预览",
+      "font_class": "yulan",
+      "unicode": "e671",
+      "unicode_decimal": 58993
+    },
+    {
+      "icon_id": "4080836",
+      "name": "预览",
+      "font_class": "yulan1",
+      "unicode": "eb31",
+      "unicode_decimal": 60209
+    },
+    {
+      "icon_id": "5770354",
+      "name": "工作-箭头（发送按钮）",
+      "font_class": "gongzuo-jiantoufasonganniu",
+      "unicode": "e680",
+      "unicode_decimal": 59008
+    },
+    {
+      "icon_id": "7310487",
+      "name": "icon-withdraw",
+      "font_class": "icon-withdraw",
+      "unicode": "e672",
+      "unicode_decimal": 58994
+    },
+    {
+      "icon_id": "9590012",
+      "name": "回复全部",
+      "font_class": "huifuquanbu",
+      "unicode": "e674",
+      "unicode_decimal": 58996
+    },
+    {
+      "icon_id": "12316663",
+      "name": "复制",
+      "font_class": "fuzhi",
+      "unicode": "e675",
+      "unicode_decimal": 58997
+    },
+    {
+      "icon_id": "19148150",
+      "name": "实时预览-01",
+      "font_class": "shishiyulan-01",
+      "unicode": "e6cc",
+      "unicode_decimal": 59084
+    },
+    {
+      "icon_id": "27876638",
+      "name": "语音 音波 ",
+      "font_class": "a-yuyinyinbo",
+      "unicode": "e677",
+      "unicode_decimal": 58999
+    },
+    {
       "icon_id": "1817726",
       "name": "创建v",
       "font_class": "chuangjianv",
@@ -81,13 +186,6 @@
       "font_class": "a-sikaoxiangfalianxiangchuli",
       "unicode": "e66a",
       "unicode_decimal": 58986
-    },
-    {
-      "icon_id": "38544718",
-      "name": "提示词优化",
-      "font_class": "tishiciyouhua",
-      "unicode": "e721",
-      "unicode_decimal": 59169
     },
     {
       "icon_id": "1471834",
@@ -760,13 +858,6 @@
       "font_class": "linghuokuozhan",
       "unicode": "e992",
       "unicode_decimal": 59794
-    },
-    {
-      "icon_id": "20953766",
-      "name": "系统问题",
-      "font_class": "xitongwenti",
-      "unicode": "e6fa",
-      "unicode_decimal": 59130
     },
     {
       "icon_id": "23284517",

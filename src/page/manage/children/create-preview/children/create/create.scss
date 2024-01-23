@@ -1,0 +1,81 @@
+@import '@/styles/theme';
+.create-container {
+  overflow: auto;
+  header {
+    .create-prompt-tips {
+      font-size: 14px;
+      opacity: 0.5;
+      margin: 10px 0;
+    }
+    .create-prompt-box {
+      width: 100%;
+      min-height: 320px;
+      border: 2px solid $primary-200;
+      border-radius: 10px;
+      padding: 38px 15px 40px 15px;
+      box-sizing: border-box;
+      position: relative;
+      .create-promp-box-header {
+        position: absolute;
+        top: 10px;
+
+        i {
+          font-size: 18px;
+          margin-right: 5px;
+          margin-bottom: 3px;
+          background-image: linear-gradient(#af40ff, #5b42f3 50%, #00ddeb);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
+        img {
+          cursor: pointer;
+        }
+      }
+      .create-promp-box-footer {
+        position: absolute;
+        bottom: 10px;
+      }
+    }
+  }
+  main {
+    margin: 50px 0;
+    .create-base-Info {
+      width: 100%;
+      margin-bottom: 30px;
+      border-radius: 10px;
+      padding: 20px;
+      padding-bottom: 25px;
+      box-sizing: border-box;
+      background-color: $bg-200;
+      position: relative;
+      > :first-child {
+        margin-bottom: 25px;
+      }
+      > :not(:last-child) {
+        margin-bottom: 20px;
+      }
+      .create-base-title {
+        white-space: nowrap;
+        font-size: 14px;
+      }
+      .create-base-input {
+        min-width: 50%;
+      }
+    }
+    .create-high-config {
+      > :first-child {
+        margin-bottom: 5px;
+      }
+      .create-high-explain {
+        opacity: 0.5;
+        font-size: 12px;
+      }
+      .create-base-slider {
+        width: 50%;
+      }
+    }
+  }
+  footer {
+    width: 100%;
+  }
+}

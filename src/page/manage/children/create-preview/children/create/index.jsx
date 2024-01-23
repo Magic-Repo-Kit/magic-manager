@@ -1,502 +1,198 @@
-import React, { useContext, useState, useEffect, useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import '../../index.scss';
+import './create.scss';
 import ajax from '@/request';
-import { useLocation } from 'react-router-dom';
 
-import MrPagination from '@/components/mr-pagination';
-import MrModal from '@/components/mr-modal';
-import FileItem from './file-list';
-import MoveList from './move-list';
+import UploadImage from '@/components/upload-image';
 
 // 图片
-import knowledgeFile from '@/assets/images/file.png';
-import knowledgeIcon from '@/assets/images/knowledge-icon.png';
-import moveTo from '@/assets/images/move-to.png';
+import Tips from '@/assets/images/tips.png';
 
 // antd组件
-import {
-  message,
-  Button,
-  Dropdown,
-  Empty,
-  Input,
-  Modal,
-  Breadcrumb,
-} from 'antd';
+import { Slider, Button, Tooltip, Input, Select } from 'antd';
+const { TextArea } = Input;
 
-function List() {
-  const location = useLocation();
-
-  const inputFolderNameRef = useRef(null); //inputRef 自动聚焦
-  const [dropdownAddOpen, setDropdownAddOpen] = useState(false); //新建下拉状态
-  const [isOpen, setIsOpen] = useState(false); //弹框状态 - 新增/编辑
-  const [isMoveOpen, setIsMoveOpen] = useState(false); //弹框状态 - 新增/编辑
-  const [fileList, setFileList] = useState([]); //文件列表
-
-  const [total, setTotal] = useState(0); //总条数
-  const [parentId, setParentId] = useState(''); //存储地址栏，用来刷新列表
-
-  const [moveTargetId, setMoveTargetId] = useState(''); //要移动的子id
-  const [moveTargetParentId, setMoveTargetParentId] = useState(''); //移动到哪个父id
-  // 列表筛选
-  const [params, setParams] = useState({
-    pageNo: 1,
-    pageSize: 20,
-    keywords: '',
-    parentId, //空-目录
-  });
-  // 提交表单
-  const [folderForm, setFolderForm] = useState({
-    name: '', // 名称
-    description: '', //描述介绍
-    type: 1, // 1-文件夹 2-知识库
-    imageUrl: '', // 头像-只有type===2才有头像
-    parentId,
-  });
-  const [folderId, setFolderId] = useState(''); //编辑-子元素id
-
-  // 移动- list参数
-  const [moveParams, setMoveParams] = useState({
-    pageNo: 1,
-    pageSize: 100,
-    keywords: '',
-    parentId: '', //空-目录
-  });
-  // 移动-面包屑导航
-  const [moveBreadList, setMoveBreadList] = useState([]);
-
-  // 🚀方法🚀
-  // 新增 / 编辑弹框
-  const handleModal = (file, type) => {
-    setIsOpen(true);
-    setTimeout(() => {
-      inputFolderNameRef.current.focus(); //name光标选中
-    }, 200);
-
-    // 新增
-    if (!file.id) {
-      // type：1-文件夹 2-知识库
-      setFolderForm((prevForm) => ({
-        ...prevForm,
-        type,
-      }));
-      console.log(folderForm);
-    } else {
-      // 编辑
-      setFolderForm({
-        ...file,
-      });
-      setFolderId(file.id);
-      console.log(folderForm);
-    }
+function Create() {
+  const formatter = (value) => `${value}%`; //发散参数
+  // 模型选择
+  const handleChangeModal = (value) => {
+    console.log(`selected ${value}`);
   };
-
-  // 弹框 - 确定(新增/编辑)
-  const handleOk = () => {
-    if (!folderForm.name) {
-      message.info(`请输入${folderForm.type === 1 ? '文件夹' : '知识库'}名称`);
-      return;
-    }
-    console.log(folderForm);
-    submitFile();
-  };
-
-  // 弹框 - 取消(新增/编辑)
-  const handleCancel = () => {
-    setIsOpen(false);
-    // 恢复原值
-    setFolderForm({
-      name: '',
-      description: '',
-      type: 1,
-      imageUrl: '',
-      parentId,
-    });
-  };
-
-  // 提交(新增/编辑)
-  const submitFile = async () => {
-    if (folderId) {
-      // 编辑
-      try {
-        const res = await ajax.post(`/chat/knowledge/update`, folderForm);
-        if (res.code === 200) {
-          message.success('编辑成功');
-          setIsOpen(false);
-          setFolderId('');
-          // 恢复原值
-          setFolderForm({
-            name: '',
-            description: '',
-            type: 1,
-            imageUrl: '',
-            parentId,
-          });
-
-          getFileList();
-        }
-      } catch (error) {
-        message.error(error.message || '编辑失败');
-      } finally {
-        setIsOpen(false);
-        setFolderId('');
-        // 恢复原值
-        setFolderForm({
-          name: '',
-          description: '',
-          type: 1,
-          imageUrl: '',
-          parentId,
-        });
-      }
-    } else {
-      // 新增
-      try {
-        const res = await ajax.post('/chat/knowledge/create', folderForm);
-        if (res.code === 200) {
-          message.success('创建成功');
-          setIsOpen(false);
-          // 恢复原值
-          setFolderForm({
-            name: '',
-            description: '',
-            type: 1,
-            imageUrl: '',
-            parentId,
-          });
-          getFileList();
-        }
-      } catch (error) {
-        message.error(error.msg || '创建失败');
-      } finally {
-        setIsOpen(false);
-        // 恢复原值
-        setFolderForm({
-          name: '',
-          description: '',
-          type: 1,
-          imageUrl: '',
-          parentId,
-        });
-      }
-    }
-  };
-
-  // 获取文件列表分页
-  const getFileList = async (parentId) => {
-    try {
-      const res = await ajax.get('/chat/knowledge/list-page', {
-        ...params,
-        parentId,
-      });
-      if (res.code === 200) {
-        if (res.data) {
-          setFileList(res.data.list);
-          setTotal(res.data.total);
-        }
-      }
-    } catch (error) {
-      console.log('🚀 ~ getFileList ~ error:', error || '获取文件列表分页失败');
-    }
-  };
-
-  // 点击移动
-  const handleMoveTarget = async (file) => {
-    setMoveTargetId(file.id); //要移动的id
-    setIsMoveOpen(true);
-  };
-  // 确认移动
-  const handleMoveConfirm = async () => {
-    console.log('🚀 ~ handleMoveConfirm ~ 要移动的子元素:', moveTargetId);
-    console.log('🚀 ~ handleMoveConfirm ~ 移动到的父元素:', moveTargetParentId);
-    let params = {
-      id: moveTargetId,
-      parentId: moveTargetParentId || '0',
-    };
-    console.log('🚀 ~ handleMoveConfirm ~ params:', params);
-    try {
-      const res = await ajax.post('/chat/knowledge/move', params);
-      if (res.code === 200) {
-        message.success('移动成功');
-
-        setMoveTargetId('');
-        setMoveTargetParentId('');
-        getFileList();
-      }
-    } catch (error) {
-      message.error(error.message || '移动失败');
-    } finally {
-      setIsMoveOpen(false);
-      setMoveParams({
-        pageNo: 1,
-        pageSize: 100,
-        keywords: '',
-        parentId: '',
-      });
-      setMoveBreadList([]); // 关闭的时候，移动的面包屑置为空
-    }
-  };
-  // 取消移动
-  const handleMoveCancel = async () => {
-    setIsMoveOpen(false);
-    setMoveTargetId('');
-    setMoveTargetParentId('');
-    setMoveParams({
-      pageNo: 1,
-      pageSize: 100,
-      keywords: '',
-      parentId: '',
-    });
-    setMoveBreadList([]); // 关闭的时候，移动的面包屑置为空
-  };
-  // 面包屑-点击移动的根目录
-  const handleMoveHomeClick = async (e) => {
-    e.preventDefault(); // 阻止默认的链接行为
-    // 刷新moveParams的parentId，触发列表刷新
-    if (moveParams.parentId) {
-      setMoveParams((prevParams) => ({
-        ...prevParams,
-        parentId: '',
-      }));
-    }
-    setMoveBreadList([]); // 将面包屑列表重置为空数组
-  };
-
-  // 删除
-  const handleDelete = async (file) => {
-    try {
-      const res = await ajax.delete(
-        `/chat/knowledge/delete?knowledgeIds=${file.id}`
-      );
-      if (res.msg === 'HAS_CHILD') {
-        message.info('该文件夹下存在子文件，请先删除子文件');
-        return;
-      }
-      if (res.code === 200) {
-        message.success('删除成功');
-        getFileList();
-      }
-    } catch (error) {
-      message.error(error.msg || '删除失败');
-    } finally {
-      console.log('删除操作');
-    }
-  };
-
-  // useEffect(() => {
-  //   // getFileList();
-  // }, []); //监听params的变化，如果是[]，则只在首次执行
-
-  useEffect(() => {
-    // 从URL中获取parentId参数
-    const queryParams = new URLSearchParams(location.search);
-    const parentId = queryParams.get('parentId');
-
-    getFileList(parentId);
-
-    // 修改params值，触发监听
-    // setParams((prevParams) => ({
-    //   ...prevParams,
-    //   parentId,
-    // }));
-
-    // 修改folderForm值，提交对应parentId
-    setFolderForm((prevForm) => ({
-      ...prevForm,
-      parentId,
-    }));
-    // 存储新的parentId
-    setParentId(parentId);
-  }, [location]);
 
   return (
-    <div className="knowledge-list">
-      <div className="knowledge-list-title">
-        <Dropdown
-          dropdownRender={() => (
-            <div className="knowledge-list-dropdown-box">
-              {/* 新建文件夹 */}
-              <div>
-                <Button
-                  icon={
-                    <>
-                      <img src={knowledgeFile} />
-                    </>
-                  }
-                  type="text"
-                  className="title-dropdown-btn"
-                  onClick={() => {
-                    setDropdownAddOpen(false);
-                    handleModal({}, 1);
-                  }}
-                >
-                  文件夹
-                </Button>
-              </div>
-              {/* 新建知识库 */}
-              <div>
-                <Button
-                  icon={
-                    <>
-                      <img src={knowledgeIcon} />
-                    </>
-                  }
-                  type="text"
-                  className="title-dropdown-btn"
-                  onClick={() => {
-                    setDropdownAddOpen(false);
-                    handleModal({}, 2);
-                  }}
-                >
-                  知识库
-                </Button>
-              </div>
+    <div className="create-container">
+      <header>
+        <div className="create-prompt-box">
+          <div className="create-promp-box-header">
+            <div className="flx-center">
+              <i className="iconfont mr-mofabang"></i>
+              <div className="font-family-dingding">提示词</div>
+              <Tooltip
+                title="与AI对话时，提供的指导性文本，它能帮助我们更好的进行交互。"
+                arrow={false}
+                color={'rgba(25, 25, 25, 0.8)'}
+                placement="top"
+              >
+                <img src={Tips} style={{ height: 18, marginLeft: 3 }} />
+              </Tooltip>
             </div>
-          )}
-          placement="bottomRight"
-          trigger={['click']}
-          open={dropdownAddOpen}
-          onOpenChange={(dropdownAddOpen) =>
-            setDropdownAddOpen(dropdownAddOpen)
-          }
-        >
-          <Button type="primary">新建</Button>
-        </Dropdown>
-      </div>
-      <main className="knowledge-list-content">
-        {/* 子元素item-file */}
-        {fileList && fileList.length > 0 ? (
-          fileList.map((file) => (
-            <FileItem
-              key={file.id}
-              file={file}
-              onEdit={(file) => handleModal(file)}
-              onMove={handleMoveTarget}
-              onDelete={handleDelete}
-            />
-          ))
-        ) : (
-          /* 空 */
-          <div className="knowledge-content-empty">
-            <Empty
-              image={Empty.PRESENTED_IMAGE_SIMPLE}
-              description={<span>还没有文件，快去创建一个吧！</span>}
+          </div>
+          <div>
+            <TextArea
+              className="remove-default-textarea"
+              maxLength={1000}
+              // onChange={onChange}
+              placeholder="我想让你扮演一个小说家。您将想出富有创意且引人入胜的故事，可以长期吸引读者。你可以选择任何类型，如奇幻、浪漫、历史小说等——但你的目标是写出具有出色情节、引人入胜的人物和意想不到的高潮的作品。我的第一个要求是“我要写一部以未来为背景的科幻小说”。"
+              autoSize={{ maxRows: 10 }}
             />
           </div>
-        )}
-      </main>
-      {/* 分页 */}
-      <footer className="knowledge-list-footer">
-        <MrPagination
-          total={total}
-          // showTotal={(total, range) =>
-          //   `当前${range[0]}-${range[1]} / 共${total}页`
-          // }
-          showTotal={(total) => `共${total}条`}
-          defaultPageSize={params.pageSize}
-          defaultCurrent={1}
-          pageNo={params.pageNo}
-          pageSize={params.pageSize}
-          onChange={(newPageNo) =>
-            setParams((prevParams) => ({
-              ...prevParams,
-              pageNo: newPageNo,
-            }))
-          }
-        />
-      </footer>
-      {/* 弹框 - 新增编辑 */}
-      <MrModal
-        title={
-          <div className="knowledge-list-modal-title">
-            <img src={folderForm.type === 1 ? knowledgeFile : knowledgeIcon} />
-            <span>{`${folderForm.type === 1 ? '文件夹' : '知识库'}`}</span>
-          </div>
-        }
-        content={
-          <div style={{ margin: '20px 0 25px 0' }}>
-            <Input
-              ref={inputFolderNameRef}
-              placeholder={`${folderForm.type === 1 ? '文件夹' : '知识库'}名称`}
-              prefix={<span style={{ color: '#f64d28' }}>*</span>}
-              suffix={<i className="iconfont mr-shuru" />}
-              value={folderForm.name}
-              onChange={(e) =>
-                setFolderForm((prevForm) => ({
-                  ...prevForm,
-                  name: e.target.value,
-                }))
-              }
-            />
-            <div style={{ height: 15 }}></div>
-            <Input
-              placeholder={`这个${
-                folderForm.type === 1 ? '文件夹' : '知识库'
-              }还没有介绍~`}
-              suffix={<i className="iconfont mr-jishiben" />}
-              allowClear
-              value={folderForm.description}
-              onChange={(e) =>
-                setFolderForm((prevForm) => ({
-                  ...prevForm,
-                  description: e.target.value,
-                }))
-              }
-            />
-          </div>
-        }
-        open={isOpen}
-        onOk={handleOk}
-        onCancel={handleCancel}
-        width={450}
-      />
-      {/* 弹框 - 移动元素 */}
-      <Modal
-        title={
-          <div className="knowledge-list-modal-title">
-            <img src={moveTo} />
-            <span>{`移动到此处`}</span>
-          </div>
-        }
-        open={isMoveOpen}
-        onCancel={handleMoveCancel}
-        footer={
-          <div className="knowledge-list-modal-footer">
-            <Button
-              key="save"
-              type="primary"
-              className="knowledge-list-modal-btn"
-              onClick={handleMoveConfirm}
-            >
-              保存
+          <div className="create-promp-box-footer">
+            <Button type="primary" size="small">
+              一键生成
             </Button>
           </div>
-        }
-        width={600}
-        maskClosable={false}
-      >
-        <div className="knowledge-move-bread user-select">
-          <Breadcrumb
-            items={[
-              {
-                title: '根目录',
-                href: '',
-                onClick: handleMoveHomeClick,
-              },
-              ...moveBreadList,
-            ]}
-          />
         </div>
-        <MoveList
-          moveTargetId={moveTargetId}
-          setMoveTargetParentId={setMoveTargetParentId}
-          params={moveParams}
-          setParams={setMoveParams}
-          setMoveBreadList={setMoveBreadList}
-        />
-      </Modal>
+        <div className="create-prompt-tips">
+          在上方提示词框中输入任意内容，即可让AI辅助生成提示词
+        </div>
+      </header>
+      <main>
+        <div className="create-base-Info">
+          <div className="flx-justify-between">
+            <div className="font-family-dingding">基础配置</div>
+            <i
+              className="iconfont mr-user--line"
+              style={{ fontSize: 22, opacity: 0.5 }}
+            ></i>
+          </div>
+          <div className="flx-align-center">
+            <div className="create-base-title">角色头像：</div>
+            <div className="create-base-upload">
+              <UploadImage
+                maxNums={1}
+                acceptedFileTypes={['image/jpeg', 'image/png']}
+              />
+            </div>
+          </div>
+          <div className="flx-align-center">
+            <div className="create-base-title">角色名称：</div>
+            <div className="create-base-input">
+              <Input
+                placeholder={`请输入角色名称`}
+                // value={folderForm.name}
+                // onChange={(e) =>
+                //   setFolderForm((prevForm) => ({
+                //     ...prevForm,
+                //     name: e.target.value,
+                //   }))
+                // }
+              />
+            </div>
+          </div>
+        </div>
+        <div className="create-base-Info create-high-config">
+          <div className="flx-justify-between">
+            <div className="font-family-dingding">高级功能</div>
+            <i
+              className="iconfont mr-ziyuan49"
+              style={{ fontSize: 18, opacity: 0.5 }}
+            ></i>
+          </div>
+          <div className="create-high-explain">
+            通过自定义AI模型，可以创建出更强大的角色。
+          </div>
+          <div className="flx-align-center">
+            <Tooltip
+              title="Divergence参数代表生成文本多样性，数值越大，发散程度越高，越不准确。"
+              arrow={false}
+              color={'rgba(25, 25, 25, 0.8)'}
+              placement="topLeft"
+            >
+              <div className="create-base-title flx-center cursor-point">
+                <img src={Tips} style={{ height: 16, marginRight: 3 }} />
+                <div>发散值：</div>
+              </div>
+            </Tooltip>
+
+            <div className="create-base-slider">
+              <Slider
+                defaultValue={30}
+                tooltip={{
+                  formatter,
+                }}
+              />
+            </div>
+          </div>
+          <div className="flx-align-center">
+            <Tooltip
+              title="不同模型有不同的能力。"
+              arrow={false}
+              color={'rgba(25, 25, 25, 0.8)'}
+              placement="topLeft"
+            >
+              <div className="create-base-title flx-center cursor-point">
+                <img src={Tips} style={{ height: 16, marginRight: 3 }} />
+                <div>模型选择：</div>
+              </div>
+            </Tooltip>
+
+            <div className="create-base-slider">
+              <Select
+                defaultValue="GPT3.5"
+                onChange={handleChangeModal}
+                options={[
+                  {
+                    value: 'GPT3.5',
+                    label: 'GPT3.5',
+                  },
+                  {
+                    value: 'GPT4.0',
+                    label: 'GPT4.0',
+                  },
+                ]}
+              />
+            </div>
+          </div>
+          <div className="flx-align-center">
+            <Tooltip
+              title="提供给AI角色的模型库，AI通过知识库来提高回答的准确性。"
+              arrow={false}
+              color={'rgba(25, 25, 25, 0.8)'}
+              placement="topLeft"
+            >
+              <div className="create-base-title flx-center cursor-point">
+                <img src={Tips} style={{ height: 16, marginRight: 3 }} />
+                <div>知识库：</div>
+              </div>
+            </Tooltip>
+
+            <div className="create-base-slider">
+              <Select
+                defaultValue="知名网文小说家"
+                onChange={handleChangeModal}
+                options={[
+                  {
+                    value: '知名网文小说家',
+                    label: '知名网文小说家',
+                  },
+                  {
+                    value: '程序员',
+                    label: '程序员',
+                  },
+                ]}
+              />
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <footer>
+        <Button type="primary" style={{ width: '100%' }}>
+          创建角色
+        </Button>
+      </footer>
     </div>
   );
 }
 
-export default List;
+export default Create;

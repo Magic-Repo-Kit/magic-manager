@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 4291850 */
-  src: url('iconfont.woff2?t=1705933074833') format('woff2'),
-       url('iconfont.woff?t=1705933074833') format('woff'),
-       url('iconfont.ttf?t=1705933074833') format('truetype');
+  src: url('iconfont.woff2?t=1705998895152') format('woff2'),
+       url('iconfont.woff?t=1705998895152') format('woff'),
+       url('iconfont.ttf?t=1705998895152') format('truetype');
 }
 
 .iconfont {
@@ -11,6 +11,66 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.mr-paishe:before {
+  content: "\e67d";
+}
+
+.mr-wenjianjia1:before {
+  content: "\e679";
+}
+
+.mr-yuyinshuru:before {
+  content: "\e6b0";
+}
+
+.mr-tupian1:before {
+  content: "\e67a";
+}
+
+.mr-yuyinshuru1:before {
+  content: "\e67c";
+}
+
+.mr-jia:before {
+  content: "\e678";
+}
+
+.mr-shengboyuyinxiaoxi:before {
+  content: "\e8c4";
+}
+
+.mr-yulan:before {
+  content: "\e671";
+}
+
+.mr-yulan1:before {
+  content: "\eb31";
+}
+
+.mr-gongzuo-jiantoufasonganniu:before {
+  content: "\e680";
+}
+
+.mr-icon-withdraw:before {
+  content: "\e672";
+}
+
+.mr-huifuquanbu:before {
+  content: "\e674";
+}
+
+.mr-fuzhi:before {
+  content: "\e675";
+}
+
+.mr-shishiyulan-01:before {
+  content: "\e6cc";
+}
+
+.mr-a-yuyinyinbo:before {
+  content: "\e677";
 }
 
 .mr-chuangjianv:before {
@@ -55,10 +115,6 @@
 
 .mr-a-sikaoxiangfalianxiangchuli:before {
   content: "\e66a";
-}
-
-.mr-tishiciyouhua:before {
-  content: "\e721";
 }
 
 .mr-data:before {
@@ -443,10 +499,6 @@
 
 .mr-linghuokuozhan:before {
   content: "\e992";
-}
-
-.mr-xitongwenti:before {
-  content: "\e6fa";
 }
 
 .mr-a-kuozhanicon_huaban1fuben40:before {
