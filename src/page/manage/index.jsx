@@ -17,6 +17,8 @@ function Manage() {
   const [manageMenuUrl, setManageMenuUrl] = useState('');
   const [manageMenuName, setManageMenuName] = useState('工作台');
 
+  const [isHidden, setIsHidden] = useState(false);
+
   const handleAppClick = (url, name) => {
     // 不能从当前页 进 当前页
     if (location.pathname.includes(url)) {
@@ -37,7 +39,14 @@ function Manage() {
   return (
     <div className={`manage-container ${darkMode ? 'dark-mode' : ''}`}>
       <aside>
-        <nav>
+        <div
+          className={`manage-display-aside ${isHidden ? '' : 'hidden'}`}
+          onClick={() => setIsHidden(false)}
+        >
+          <i className="iconfont mr-yincangmulu"></i>
+        </div>
+
+        <nav className={isHidden ? 'hidden' : ''}>
           {/* 工作台 */}
           <Tooltip
             title="工作台"
@@ -88,6 +97,22 @@ function Manage() {
                 className="iconfont mr-a-xingzhuang1858kaobei"
                 style={{ fontSize: 20 }}
               ></i>
+            </div>
+          </Tooltip>
+          {/* 闪聊 */}
+          <Tooltip
+            title="闪聊"
+            arrow={false}
+            color={'rgba(25, 25, 25, 0.8)'}
+            placement="right"
+          >
+            <div
+              className={`aside-item-active ${
+                manageMenuUrl === 'chat' ? 'active' : ''
+              }`}
+              onClick={() => handleAppClick('chat', '闪聊')}
+            >
+              <i className="iconfont mr-ziyuan49" style={{ fontSize: 20 }}></i>
             </div>
           </Tooltip>
 
@@ -164,14 +189,14 @@ function Manage() {
               placement="right"
             >
               {/* 折叠 */}
-              <div>
-                <i className="iconfont mr-yincangmulu"></i>
+              <div onClick={() => setIsHidden(true)}>
+                <i className="iconfont mr-zhankaimulu"></i>
               </div>
             </Tooltip>
           </div>
         </nav>
       </aside>
-      <main>
+      <main className={isHidden ? 'no-padding-left' : ''}>
         <header>
           <div className="manage-header-item-box font-family-dingding">
             <div className="manage-header-item flx-center">

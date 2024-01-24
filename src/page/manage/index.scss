@@ -11,7 +11,25 @@
     position: fixed;
     left: 0;
     top: 65px;
-
+    // 隐藏边框
+    .manage-display-aside {
+      position: absolute;
+      left: 0;
+      bottom: 50%;
+      opacity: 0.3;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      &.hidden {
+        opacity: 0;
+        transform: translateX(-200%);
+      }
+      &:hover {
+        opacity: 0.8;
+      }
+      > i {
+        font-size: 25px;
+      }
+    }
     > nav {
       border-radius: 10px;
       height: 100%;
@@ -24,6 +42,11 @@
       flex-direction: column;
       // justify-content: center;
       align-items: center;
+      transition: transform 0.3s ease;
+      // 隐藏边框
+      &.hidden {
+        transform: translateX(-200%);
+      }
       > div {
         padding: 10px;
         margin-bottom: 18px;
@@ -125,7 +148,11 @@
     max-width: 1250px;
     padding-left: 70px;
     margin: 0 auto;
-
+    transition: all 0.3s ease;
+    // 隐藏边框
+    &.no-padding-left {
+      padding-left: 0;
+    }
     > header {
       padding: 12px;
       .manage-header-item-box {

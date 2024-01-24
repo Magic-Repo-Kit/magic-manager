@@ -51,7 +51,7 @@ const PreviewRoles = lazy(() =>
   import('@/page/manage/children/create-preview/children/preview')
 );
 // 对话
-const Chat = lazy(() => import('@/page/manage/chat'));
+const Chat = lazy(() => import('@/page/manage/children/chat'));
 
 // 角色列表
 
