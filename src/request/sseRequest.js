@@ -6,6 +6,7 @@ import { message } from 'antd';
 function sseRequest(url, params, onMessage) {
   let eventSource = null;
   const ctrl = new AbortController();
+
   const startSse = () => {
     eventSource = fetchEventSource(`/api${url}`, {
       method: "POST",

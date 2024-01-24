@@ -27,22 +27,46 @@
   }
   // 聊天
   main {
+    height: 765px;
+    overflow-y: auto;
+    &::-webkit-scrollbar {
+      display: none;
+    }
     .preview-chat-main {
-      // height: 220px;
-      // overflow-y: auto;
-      .preview-chat-msg-box {
+      font-size: 14px;
+
+      > div {
+        margin: 30px 0;
+        border-radius: 10px;
+        display: flex;
+        > img {
+          height: 30px;
+          border-radius: 50%;
+        }
+        .msg-item {
+          padding: 8px 10px;
+          max-width: 85%;
+          background-color: $primary-1100;
+          border-radius: 4px;
+        }
+      }
+      // 用户消息
+      .user-msg {
+        text-align: right;
+        justify-content: flex-end;
+        > img {
+          margin-left: 5px;
+        }
+      }
+      // 机器人消息
+      .bot-msg {
+        text-align: left;
+        justify-content: flex-start;
         > div {
-          margin: 20px 0;
-          padding: 10px;
-          background-color: $primary-1000;
-          border-radius: 10px;
-          // max-width: 80%;
+          background-color: $bg-200;
         }
-        .user-msg {
-          text-align: right;
-        }
-        .bot-msg {
-          text-align: left;
+        > img {
+          margin-right: 5px;
         }
       }
     }
