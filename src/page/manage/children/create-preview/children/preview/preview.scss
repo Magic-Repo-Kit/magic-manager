@@ -28,8 +28,23 @@
   // 聊天
   main {
     .preview-chat-main {
-      height: 220px;
-      overflow-y: auto;
+      // height: 220px;
+      // overflow-y: auto;
+      .preview-chat-msg-box {
+        > div {
+          margin: 20px 0;
+          padding: 10px;
+          background-color: $primary-1000;
+          border-radius: 10px;
+          // max-width: 80%;
+        }
+        .user-msg {
+          text-align: right;
+        }
+        .bot-msg {
+          text-align: left;
+        }
+      }
     }
   }
   footer {
