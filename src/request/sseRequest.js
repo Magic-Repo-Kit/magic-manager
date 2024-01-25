@@ -7,8 +7,14 @@ function sseRequest(url, params, onMessage) {
   let eventSource = null;
   const ctrl = new AbortController();
 
+  // 开发环境
+  const devUrl = `/api${url}`;
+  // 生产环境
+  const prodUrl = `https://124.222.46.195${url}`;
+  const apiUrl = process.env.NODE_ENV === 'development' ? devUrl : prodUrl;
+
   const startSse = () => {
-    eventSource = fetchEventSource(`/api${url}`, {
+    eventSource = fetchEventSource(apiUrl, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -25,12 +31,19 @@ function sseRequest(url, params, onMessage) {
           console.log('连接成功')
           return
         } else if (response.status === 401) {
+
+
           console.log('登录身份过期')
           message.error('身份认证过期，请重新登录');
+
+
+
           setTimeout(() => {
             window.location.replace('/auth');
             sessionStorage.clear();
           }, 1000);
+
+
 
         } else {
           console.log('连接异常')

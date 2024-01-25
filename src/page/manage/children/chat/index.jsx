@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from 'react-router-dom'; //渲染子路由
 
 import { DarkModeContext } from '@/components/DarkModeProvider'; //夜间模式
 
-import Preview from './children/preview';
+import ChatCtx from './children/chat-ctx';
 
 // antd组件
 import { Button } from 'antd';
@@ -14,8 +14,8 @@ function CreatePreview() {
   const { darkMode } = useContext(DarkModeContext);
 
   return (
-    <div className={`create-preview-container ${darkMode ? 'dark-mode' : ''}`}>
-      <Preview />
+    <div className={`chat-container-box ${darkMode ? 'dark-mode' : ''}`}>
+      <ChatCtx />
     </div>
   );
 }

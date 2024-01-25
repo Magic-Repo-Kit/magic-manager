@@ -16,7 +16,7 @@
     &::-webkit-scrollbar {
       display: none;
     }
-    .preview-prompt-box {
+    .chat-prompt-box {
       font-size: 14px;
       width: 100%;
       min-height: 80px;
@@ -33,12 +33,12 @@
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
       }
-      .preview-prompt-text {
+      .chat-prompt-text {
         margin-top: 5px;
         line-height: 20px;
       }
     }
-    .preview-chat-main {
+    .chat-chat-main {
       font-size: 14px;
 
       > div {
@@ -83,19 +83,19 @@
     position: absolute;
     bottom: 0;
     width: 100%;
-    .preview-text-send-container {
+    .chat-text-send-container {
       width: 100%;
       display: flex;
       align-items: flex-end;
       transition: 2s;
-      .preview-text-area-box {
+      .chat-text-area-box {
         padding: 3px 0;
         flex: 1;
         border: 1px solid $border-color-200;
         border-radius: 20px;
         display: flex;
         align-items: flex-end;
-        .preview-footer-sound {
+        .chat-footer-sound {
           margin-right: 10px;
           top: -2px;
           > i {
@@ -103,7 +103,7 @@
           }
         }
       }
-      .preview-footer-icon {
+      .chat-footer-icon {
         position: relative;
         top: -4px;
         cursor: pointer;
@@ -111,7 +111,7 @@
           font-size: 30px;
         }
       }
-      .preview-footer-send {
+      .chat-footer-send {
         margin-left: 8px;
       }
 
@@ -124,7 +124,7 @@
         transition: transform 0.2s ease;
       }
     }
-    .preview-text-extend-container {
+    .chat-text-extend-container {
       font-size: 12px;
       display: flex;
       flex-wrap: wrap;
@@ -133,7 +133,7 @@
       max-height: 0;
       overflow: hidden;
       // opacity: 0;
-      .preview-text-extend-item {
+      .chat-text-extend-item {
         cursor: pointer;
         flex-direction: column;
         width: calc((100% / 6));
@@ -154,7 +154,7 @@
         }
       }
     }
-    .preview-text-extend-container.isExtended {
+    .chat-text-extend-container.isExtended {
       max-height: 300px;
       padding-top: 20px;
       opacity: 1;
@@ -162,9 +162,9 @@
 
     @media screen and (max-width: 768px) {
       // width: calc(100% - 30px);
-      .preview-text-extend-container {
+      .chat-text-extend-container {
         gap: 10px;
-        .preview-text-extend-item {
+        .chat-text-extend-item {
           width: calc((100% / 4) - 10px);
         }
       }
