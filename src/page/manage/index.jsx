@@ -117,7 +117,7 @@ function Manage() {
           </Tooltip>
 
           {/* 权限管理 */}
-          <Tooltip
+          {/* <Tooltip
             title="权限管理"
             arrow={false}
             color={'rgba(25, 25, 25, 0.8)'}
@@ -131,9 +131,9 @@ function Manage() {
             >
               <i className="iconfont mr-fingerprint"></i>
             </div>
-          </Tooltip>
+          </Tooltip> */}
           {/* 联系我们 */}
-          <Tooltip
+          {/* <Tooltip
             title="联系我们"
             arrow={false}
             color={'rgba(25, 25, 25, 0.8)'}
@@ -147,10 +147,10 @@ function Manage() {
             >
               <i className="iconfont mr-lightning"></i>
             </div>
-          </Tooltip>
-          {/* 账号管理 */}
+          </Tooltip> */}
+          {/* 个人中心 */}
           <Tooltip
-            title="账号管理"
+            title="个人中心"
             arrow={false}
             color={'rgba(25, 25, 25, 0.8)'}
             placement="right"
@@ -159,7 +159,7 @@ function Manage() {
               className={`aside-item-active ${
                 manageMenuUrl === 'user-manage' ? 'active' : ''
               }`}
-              onClick={() => handleAppClick('user-manage', '账号管理')}
+              onClick={() => handleAppClick('user-manage', '个人中心')}
             >
               <i className="iconfont mr-user-admin"></i>
             </div>
@@ -167,7 +167,7 @@ function Manage() {
           <div className="aside-last">
             <div className="space-line"></div>
             {/* 工作台设置 */}
-            <Tooltip
+            {/* <Tooltip
               title="设置"
               arrow={false}
               color={'rgba(25, 25, 25, 0.8)'}
@@ -180,6 +180,22 @@ function Manage() {
                 onClick={() => handleAppClick('setting-manage', '设置')}
               >
                 <i className="iconfont mr-setting-3"></i>
+              </div>
+            </Tooltip> */}
+            {/* 权限管理 */}
+            <Tooltip
+              title="权限管理"
+              arrow={false}
+              color={'rgba(25, 25, 25, 0.8)'}
+              placement="right"
+            >
+              <div
+                className={`aside-item-active ${
+                  manageMenuUrl === 'roles-manage' ? 'active' : ''
+                }`}
+                onClick={() => handleAppClick('roles-manage', '权限管理')}
+              >
+                <i className="iconfont mr-fingerprint"></i>
               </div>
             </Tooltip>
             <Tooltip

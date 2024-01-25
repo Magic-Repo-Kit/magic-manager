@@ -139,7 +139,7 @@ const routes = [
             path: 'chat',
             element: lazyLoad(<Chat />),
           },
-          // 账号管理
+          // 个人中心
           {
             path: 'user-manage',
             element: lazyLoad(<UserManage />),

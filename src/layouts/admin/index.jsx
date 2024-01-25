@@ -42,8 +42,8 @@ function Admin() {
             <img src={mrkLogo} alt="" className="mrkLogo" />
             <img src={darkMode ? mrkDark : mrkLight} className="mrkTitle" />
           </div>
-          {/* apps */}
-          <Dropdown
+          {/* apps - 所有应用*/}
+          {/* <Dropdown
             dropdownRender={() => (
               <DropdownApps
                 selectedAppName={selectedAppName}
@@ -59,7 +59,7 @@ function Admin() {
               <span>{selectedAppName}</span>
               <i className="iconfont mr-menu-4"></i>
             </div>
-          </Dropdown>
+          </Dropdown> */}
 
           {/* 右侧 */}
           <div className="btn-box">

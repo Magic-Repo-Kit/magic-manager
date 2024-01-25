@@ -93,7 +93,7 @@ function DropdownUser({ setUserOpen }) {
         ></i>
       </header>
       <main>
-        <div className="dropdown-main-top">
+        {/* <div className="dropdown-main-top">
           <div className="dropdown-main-top-left">
             <div className="dropdown-main-introduce font-family-dingding">
               <div>Hi，谭智亮！</div>
@@ -114,7 +114,7 @@ function DropdownUser({ setUserOpen }) {
               <i className="iconfont mr-like-full"></i>
             </div>
           </div>
-        </div>
+        </div> */}
 
         <div className="dropdown-main-info">
           <div className="dropdown-main-info-edit">
