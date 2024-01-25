@@ -1,12 +1,16 @@
 import React, { useState, useContext } from 'react';
-import { PlusOutlined } from '@ant-design/icons';
-import { Modal, Upload } from 'antd';
+
 import './index.scss';
 import PropTypes from 'prop-types';
+import { getAccessToken } from '@/utils/tools';
 
 import { DarkModeContext } from '@/components/DarkModeProvider'; //夜间模式
 // antd组件
-import { message } from 'antd';
+import { message, Modal, Upload } from 'antd';
+import { PlusOutlined } from '@ant-design/icons';
+import ImgCrop from 'antd-img-crop';
+
+const access_token = getAccessToken();
 
 const getBase64 = (file) =>
   new Promise((resolve, reject) => {
@@ -16,7 +20,13 @@ const getBase64 = (file) =>
     reader.onerror = (error) => reject(error);
   });
 
-function UploadImage({ maxCount, maxNums, acceptedFileTypes, maxSize }) {
+function UploadImage({
+  maxCount,
+  maxNums,
+  acceptedFileTypes,
+  maxSize,
+  shouldCrop,
+}) {
   // maxCount-最大传几张  maxNums-控制上传按钮
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState('');
@@ -77,17 +87,72 @@ function UploadImage({ maxCount, maxNums, acceptedFileTypes, maxSize }) {
   return (
     <>
       <div className={`upload-container ${darkMode ? 'dark-mode' : ''}`}>
-        <Upload
-          action="https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188"
-          listType="picture-card"
-          fileList={fileList}
-          onPreview={handlePreview}
-          onChange={handleChange}
-          maxCount={maxCount}
-          beforeUpload={beforeUpload}
-        >
-          {fileList.length >= maxNums ? null : uploadButton}
-        </Upload>
+        {shouldCrop ? (
+          <ImgCrop
+            rotationSlider
+            modalTitle="裁剪图片"
+            modalCancel="取消"
+            modalOk="确定"
+          >
+            <Upload
+              action="https://124.222.46.195/system/oss/upload"
+              headers={{
+                'User-Type': 'pc',
+                Authorization: `Bearer ${access_token}`,
+              }}
+              listType="picture-card"
+              fileList={fileList}
+              onPreview={handlePreview}
+              onChange={handleChange}
+              maxCount={maxCount}
+              beforeUpload={beforeUpload}
+              progress={{
+                strokeColor: {
+                  '0%': '#5b42f3 ',
+                  '100%': '#00ddeb',
+                },
+                strokeWidth: 2,
+                format: (percent) =>
+                  percent && `${parseFloat(percent.toFixed(0))}%`,
+              }}
+              locale={{
+                //自定义上传等待
+                uploading: <span></span>,
+              }}
+            >
+              {fileList.length >= maxNums ? null : uploadButton}
+            </Upload>
+          </ImgCrop>
+        ) : (
+          <Upload
+            action="https://124.222.46.195/system/oss/upload"
+            headers={{
+              'User-Type': 'pc',
+              Authorization: `Bearer ${access_token}`,
+            }}
+            listType="picture-card"
+            fileList={fileList}
+            onPreview={handlePreview}
+            onChange={handleChange}
+            maxCount={maxCount}
+            beforeUpload={beforeUpload}
+            progress={{
+              strokeColor: {
+                '0%': '#5b42f3 ',
+                '100%': '#00ddeb',
+              },
+              strokeWidth: 2,
+              format: (percent) =>
+                percent && `${parseFloat(percent.toFixed(0))}%`,
+            }}
+            locale={{
+              //自定义上传等待
+              uploading: <span></span>,
+            }}
+          >
+            {fileList.length >= maxNums ? null : uploadButton}
+          </Upload>
+        )}
       </div>
 
       {/* 预览 */}
@@ -129,5 +194,6 @@ UploadImage.defaultProps = {
     'application/x-tar',
   ],
   maxSize: 5 * 1024 * 1024, // 默认5MB
+  shouldCrop: false, //是否开启裁剪
 };
 export default UploadImage;

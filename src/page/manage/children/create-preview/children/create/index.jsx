@@ -71,6 +71,7 @@ function Create() {
               <UploadImage
                 maxNums={1}
                 acceptedFileTypes={['image/jpeg', 'image/png']}
+                shouldCrop
               />
             </div>
           </div>
