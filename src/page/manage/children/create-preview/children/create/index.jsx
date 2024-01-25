@@ -13,10 +13,20 @@ import { Slider, Button, Tooltip, Input, Select } from 'antd';
 const { TextArea } = Input;
 
 function Create() {
+  const [imageUrl, setImageUrl] = useState(''); //图片地址
+
   const formatter = (value) => `${value}%`; //发散参数
   // 模型选择
   const handleChangeModal = (value) => {
     console.log(`selected ${value}`);
+  };
+
+  // 上传成功后
+  const handleUploadSuccess = (fileList) => {
+    // let name = fileList[0].response.data.name;
+    let url = fileList[0].response.data.link;
+    console.log('🚀 ~ handleUploadSuccess ~ url:', url);
+    setImageUrl(url);
   };
 
   return (
@@ -72,6 +82,7 @@ function Create() {
                 maxNums={1}
                 acceptedFileTypes={['image/jpeg', 'image/png']}
                 shouldCrop
+                onUploadSuccess={handleUploadSuccess}
               />
             </div>
           </div>

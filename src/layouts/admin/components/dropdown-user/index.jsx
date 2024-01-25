@@ -290,6 +290,7 @@ function DropdownUser({ setUserOpen }) {
                 maxNums={1}
                 acceptedFileTypes={['image/jpeg', 'image/png']}
                 shouldCrop
+                // onUploadSuccess={handleUploadSuccess}
               />
             </div>
           </div>

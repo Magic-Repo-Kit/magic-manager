@@ -26,6 +26,7 @@ function UploadImage({
   acceptedFileTypes,
   maxSize,
   shouldCrop,
+  onUploadSuccess,
 }) {
   // maxCount-最大传几张  maxNums-控制上传按钮
   const [previewOpen, setPreviewOpen] = useState(false);
@@ -50,7 +51,28 @@ function UploadImage({
     );
   };
   // 改变
-  const handleChange = ({ fileList }) => {
+  const handleChange = ({ file, fileList }) => {
+    // 检查上传状态
+    if (file.status === 'done') {
+      console.log('图片上传完成');
+      message.success(
+        `${file.name.substring(0, 10)}${
+          file.name.length > 10 ? '...' : ''
+        } 上传成功`
+      );
+
+      // 调用回调函数,回传 fileList 给父组件
+      onUploadSuccess(fileList);
+    } else if (file.status === 'error') {
+      console.log('图片上传失败');
+      message.error(
+        `${file.name.substring(0, 10)}${
+          file.name.length > 10 ? '...' : ''
+        } 上传失败`
+      );
+    }
+
+    // 处理附件列表
     const filteredList = fileList.filter((f) => {
       return acceptedFileTypes.includes(f.type);
     });
@@ -111,7 +133,7 @@ function UploadImage({
                   '0%': '#5b42f3 ',
                   '100%': '#00ddeb',
                 },
-                strokeWidth: 2,
+                // strokeWidth: 2,
                 format: (percent) =>
                   percent && `${parseFloat(percent.toFixed(0))}%`,
               }}
@@ -141,7 +163,7 @@ function UploadImage({
                 '0%': '#5b42f3 ',
                 '100%': '#00ddeb',
               },
-              strokeWidth: 2,
+              // strokeWidth: 2,
               format: (percent) =>
                 percent && `${parseFloat(percent.toFixed(0))}%`,
             }}
