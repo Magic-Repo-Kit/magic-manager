@@ -157,9 +157,9 @@ function Manage() {
           >
             <div
               className={`aside-item-active ${
-                manageMenuUrl === 'user-manage' ? 'active' : ''
+                manageMenuUrl === 'user-center' ? 'active' : ''
               }`}
-              onClick={() => handleAppClick('user-manage', '个人中心')}
+              onClick={() => handleAppClick('user-center', '个人中心')}
             >
               <i className="iconfont mr-user-admin"></i>
             </div>

@@ -55,7 +55,7 @@ const Chat = lazy(() => import('@/page/manage/children/chat'));
 
 // 角色列表
 
-const UserManage = lazy(() => import('@/page/manage/children/user-manage'));
+const UserCenter = lazy(() => import('@/page/manage/children/user-center'));
 const RolesManage = lazy(() => import('@/page/manage/children/roles-manage'));
 const ContactUs = lazy(() => import('@/page/manage/children/contact-us'));
 const SettingManage = lazy(() =>
@@ -141,8 +141,8 @@ const routes = [
           },
           // 个人中心
           {
-            path: 'user-manage',
-            element: lazyLoad(<UserManage />),
+            path: 'user-center',
+            element: lazyLoad(<UserCenter />),
           },
           // 权限管理
           {

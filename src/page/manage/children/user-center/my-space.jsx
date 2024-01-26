@@ -1,36 +1,10 @@
 import React, { useState } from 'react';
 import './index.scss';
-import RoleList from './role-list';
-import MyCreated from './my-created';
-import UserSetting from './user-setting';
-
 import userHead from '@/assets/images/user-head.png';
-import { Menu } from 'antd';
 
-const items = [
-  {
-    label: '角色列表',
-    key: 'roles-list',
-  },
-  {
-    label: '我的创建',
-    key: 'my-created',
-  },
-  {
-    label: '设置',
-    key: 'setting',
-    // icon: <i className="iconfont mr-user--line"></i>,
-  },
-];
-
-function UserManage() {
-  const [current, setCurrent] = useState('roles-list');
-  const onClick = (e) => {
-    console.log('click ', e);
-    setCurrent(e.key);
-  };
+function MyCreated() {
   return (
-    <div className="user-container">
+    <div className="my-space-container">
       <header>
         {/* 个人信息 */}
         <div className="user-info font-family-dingding">
@@ -79,26 +53,10 @@ function UserManage() {
         </div>
       </header>
       <main>
-        <div className="user-main-menu">
-          <Menu
-            onClick={onClick}
-            selectedKeys={[current]}
-            mode="horizontal"
-            items={items}
-          />
-        </div>
-        <div className="user-main-content">
-          {current === 'roles-list' ? (
-            <RoleList />
-          ) : current === 'my-created' ? (
-            <MyCreated />
-          ) : (
-            <UserSetting />
-          )}
-        </div>
+        <div>拥有角色</div>
       </main>
     </div>
   );
 }
 
-export default UserManage;
+export default MyCreated;
