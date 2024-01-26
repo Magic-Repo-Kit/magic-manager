@@ -72,10 +72,47 @@
       }
       .create-base-slider {
         width: 50%;
+        @media screen and (max-width: 780px) {
+          width: 80%;
+        }
+      }
+      .create-hight-select {
+        width: 50%;
       }
     }
   }
   footer {
     width: 100%;
   }
+}
+
+.create-container-modal-box {
+  margin-bottom: 20px;
+
+  .create-modal-chat-list {
+    background-color: $bg-200;
+    height: 150px;
+    border-radius: 10px;
+    padding: 12px;
+  }
+  .create-modal-chat {
+    border: 2px solid $primary-200;
+    border-radius: 10px;
+    padding: 5px;
+    box-sizing: border-box;
+    margin: 20px 0;
+    .create-modal-chat-header {
+      padding: 0 3px 0 10px;
+      i {
+        font-size: 20px;
+        margin-right: 5px;
+      }
+    }
+    .create-modal-chat-body {
+      min-height: 100px;
+    }
+  }
+}
+.create-container-modal-footer {
+  margin-top: 20px;
 }
