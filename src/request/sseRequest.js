@@ -52,9 +52,25 @@ function sseRequest(url, params, onMessage) {
       },
       async onmessage(event) {
         const data = JSON.parse(event.data);
-        if (onMessage) {
-          onMessage(data);
+        console.log("🚀 ~ onmessage ~ data:", data)
+        // if (onMessage) {
+        //   onMessage(data);
+        // }
+        if (Array.isArray(data)) {
+          data.forEach(messageData => {
+            // 处理单条消息
+            if (onMessage) {
+              onMessage(messageData);
+            }
+          });
+        } else {
+          // 处理单条消息
+          if (onMessage) {
+            onMessage(data);
+          }
         }
+
+
       },
 
       async onerror(error) {
