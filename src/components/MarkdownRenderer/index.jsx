@@ -1,7 +1,14 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import {
+  vscDarkPlus,
+  atomDark,
+  tomorrow,
+  coy,
+  solarizedlight,
+} from 'react-syntax-highlighter/dist/esm/styles/prism';
+// coy 、atomDark
 
 const MarkdownRenderer = ({ markdown }) => {
   const components = {
@@ -10,7 +17,7 @@ const MarkdownRenderer = ({ markdown }) => {
       const match = /language-(\w+)/.exec(className || '');
       return !inline && match ? (
         <SyntaxHighlighter
-          style={vscDarkPlus}
+          style={atomDark} //主题
           language={match[1]}
           PreTag="div"
           {...props}
