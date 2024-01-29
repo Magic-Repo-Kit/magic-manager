@@ -3,6 +3,8 @@ import '../../index.scss';
 import './preview.scss';
 import sseRequest from '@/request/sseRequest';
 import TextLoading from '@/components/text-loading';
+import MarkdownRenderer from '@/components/MarkdownRenderer';
+
 // 图片
 import userHead from '@/assets/images/user-head.png';
 import botHead from '@/assets/images/bot-head.png';
@@ -68,7 +70,6 @@ function Preview() {
       prompt: '',
       isOnline: 1,
     };
-    scrollToBottom();
 
     // SSE 成功-回调函数
     const onMessage = (event) => {
@@ -78,52 +79,52 @@ function Preview() {
         setSumStr(''); //清空临时存储
         let newMessage = { message: event.message, type: 2 };
         handleReceiveMessage(newMessage);
-
         return;
       } else {
         if (event.message) {
-          console.log('🚀 ~ onMessage ~ message:', event.message);
+          // console.log('🚀 ~ onMessage ~ message:', event.message);
 
           // 字符串累加
           setSumStr((prevSumStr) => prevSumStr + event.message);
+          // setSumStr拼接的时候也滚动
+          scrollToBottom();
         }
       }
     };
+    const onMyError = (error) => {
+      console.log('请求异常', error);
+      //回复失败
+      let newMessage = {
+        message: '网络有点不好，请试试重新提问',
+        type: 2,
+        isError: true,
+      };
+      handleReceiveMessage(newMessage);
+    };
 
     // 调用SSE函数
-    sseRequest('/chat/gpt/chat-preset', params, onMessage);
+    sseRequest(
+      '/chat/gpt/chat-preset',
+      params,
+      onMessage,
+      setIsLoading,
+      onMyError
+    );
   };
 
   // 处理接收到的消息
   const handleReceiveMessage = (messageDiv) => {
     // 更新消息数组 - bot
     setMessages((prevMessages) => [...prevMessages, messageDiv]);
-    scrollToBottom();
-  };
-
-  // 格式化消息(处理 /n处理换行等等)
-  const getReaderText = (str) => {
-    let matchStr = '';
-    try {
-      let result = str.match(/data:\s*({.*?})\s*\n/g);
-      result.forEach((_) => {
-        const matchStrItem = _.match(/data:\s*({.*?})\s*\n/)[1];
-        const data = JSON.parse(matchStrItem);
-        matchStr += data?.choices[0].delta?.content || '';
-      });
-    } catch (e) {
-      console.log(e);
-    }
-    return matchStr;
   };
 
   // 自动滚动到底部
   const scrollToBottom = () => {
     chatMainRef.current.scrollTop = chatMainRef.current.scrollHeight;
   };
-  // useEffect(() => {
-  //   console.log('🚀 ~ Preview ~ sumStr:', sumStr);
-  // }, [sumStr]);
+  useEffect(() => {
+    scrollToBottom(); //messages数组有变化就滚动
+  }, [messages]);
 
   return (
     <div className="preview-container">
@@ -176,7 +177,9 @@ function Preview() {
                 )}
 
                 {/* 聊天内容 */}
-                <div className="msg-item">{item.message}</div>
+                <div className="msg-item">
+                  <MarkdownRenderer markdown={item.message} />
+                </div>
 
                 {/* 头像-user */}
                 {item.type === 1 ? (
@@ -190,7 +193,9 @@ function Preview() {
           {isLoading && (
             <div className="bot-msg">
               <img className="bot-head" src={botHead} />
-              <div className="msg-item">{sumStr || <TextLoading />}</div>
+              <div className="msg-item">
+                {<MarkdownRenderer markdown={sumStr} /> || <TextLoading />}
+              </div>
             </div>
           )}
         </div>

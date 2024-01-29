@@ -26,6 +26,9 @@ react-spring
 
 @microsoft/fetch-event-source
 
+react-markdown - MD渲染
+react-syntax-highlighter -代码高亮
+
 ```
 
 #
