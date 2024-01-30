@@ -8,7 +8,7 @@ import Create from './children/create';
 import Preview from './children/preview';
 
 // antd组件
-import { Button } from 'antd';
+import { Button, message } from 'antd';
 
 function CreatePreview() {
   // 共享参数
@@ -19,6 +19,18 @@ function CreatePreview() {
     value: 'mrk-3.5-turbo',
     label: 'mrk-3.5-turbo',
   }); //选中的模型
+
+  const [createParams, setCreateParams] = useState({
+    prompt: '', //提示词
+    imageUrl: '', //头像
+    name: '', //角色名称
+    temperature: 0.7, //发散能力(0~2)
+    modelName: 'mrk-3.5-turbo', //使用模型
+    isShowKnowledge: 1, //是否展现知识库[1:关闭(默认) 2:开启]
+    knowledgeId: '', //知识库id
+    messages: [], //聊天记录
+    isOnline: 1, //是否联网[1:关闭(默认) 2:开启]
+  });
 
   // 获取模型列表type[空:全部,1:文本,2:向量,3:图像,4:文本审核]
   const getModelList = async () => {

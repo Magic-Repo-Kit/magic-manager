@@ -34,7 +34,7 @@ function Create({ modelList, onModelChoose }) {
     : [];
 
   const [prompt, setPrompt] = useState(''); //提示词
-  const [imageUrl, setImageUrl] = useState(''); //图片地址
+  const [imageUrl, setImageUrl] = useState(''); //头像
   const [name, setName] = useState(''); //角色名称
 
   const [temperature, setTemperature] = useState(0.7); //发散能力(0~2)
