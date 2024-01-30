@@ -2,8 +2,13 @@
 // 共有样式
 .chat-container-box {
   box-sizing: border-box;
-  padding: 15px;
+  padding: 20px;
   width: 100%;
   padding-top: 0;
   height: calc(100vh - 150px);
+
+  @media screen and (max-width: 768px) {
+    padding: 10px;
+    padding-top: 0;
+  }
 }

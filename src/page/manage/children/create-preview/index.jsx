@@ -15,6 +15,10 @@ function CreatePreview() {
   const { darkMode } = useContext(DarkModeContext);
   const [isChange, setIsChange] = useState(false);
   const [modelList, setModelList] = useState(''); //模型名称
+  const [SelectedModel, setSelectedModel] = useState({
+    value: 'mrk-3.5-turbo',
+    label: 'mrk-3.5-turbo',
+  }); //选中的模型
 
   // 获取模型列表type[空:全部,1:文本,2:向量,3:图像,4:文本审核]
   const getModelList = async () => {
@@ -31,6 +35,11 @@ function CreatePreview() {
     }
   };
 
+  // Create选中的模型
+  const handleModelChoose = (model) => {
+    setSelectedModel(model);
+  };
+
   useEffect(() => {
     getModelList();
   }, []);
@@ -44,10 +53,14 @@ function CreatePreview() {
         }`}
       >
         <div className="create-preview-item">
-          <Create modelList={modelList} getModelList={getModelList} />
+          <Create
+            modelList={modelList}
+            getModelList={getModelList}
+            onModelChoose={handleModelChoose}
+          />
         </div>
         <div className="preview-container-box create-preview-item">
-          <Preview modelList={modelList} />
+          <Preview modelList={modelList} selectedModel={SelectedModel} />
         </div>
       </div>
       {/* 移动端 */}
@@ -68,11 +81,11 @@ function CreatePreview() {
         {/* 创建/预览 */}
         {isChange ? (
           <div className="preview-container-box create-preview-item">
-            <Preview modelList={modelList} />
+            <Preview modelList={modelList} selectedModel={SelectedModel} />
           </div>
         ) : (
           <div className="create-preview-item">
-            <Create modelList={modelList} />
+            <Create modelList={modelList} onModelChoose={handleModelChoose} />
           </div>
         )}
 

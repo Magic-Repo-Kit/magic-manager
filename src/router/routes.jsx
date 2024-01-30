@@ -90,7 +90,7 @@ const routes = [
                 to={sessionStorage.getItem('manageMenuUrl') || 'work-platform'}
                 replace
               />
-            ), //默认工作台首页
+            ), //默认发现
           },
           {
             path: 'work-platform',
@@ -139,7 +139,7 @@ const routes = [
             path: 'chat',
             element: lazyLoad(<Chat />),
           },
-          // 个人中心
+          // 我
           {
             path: 'user-center',
             element: lazyLoad(<UserCenter />),

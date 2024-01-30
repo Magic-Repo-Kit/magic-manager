@@ -3,7 +3,7 @@
   header {
     .preview-prompt-box {
       font-size: 14px;
-      margin: 10px 0;
+      margin-bottom: 10px;
       width: 100%;
       min-height: 115px;
       padding: 12px;
@@ -11,22 +11,29 @@
       border-radius: 10px;
       background-color: $primary-1000;
       box-shadow: $shadow-200;
-      i {
-        font-size: 16px;
-        margin-right: 5px;
-        margin-bottom: 3px;
-        background-image: linear-gradient(#af40ff, #5b42f3 50%, #00ddeb);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
+      .preview-model-name {
+        margin-bottom: 5px;
       }
+      .preview-prompt-icon-title {
+        i {
+          font-size: 16px;
+          margin-right: 5px;
+          margin-bottom: 3px;
+          background-image: linear-gradient(#af40ff, #5b42f3 50%, #00ddeb);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
+      }
+
       .preview-prompt-text {
-        margin-top: 10px;
+        margin-top: 5px;
         line-height: 20px;
       }
     }
   }
   // 聊天
   main {
+    scroll-behavior: smooth; //平滑滚动
     height: 765px;
     overflow-y: auto;
     &::-webkit-scrollbar {
@@ -44,15 +51,18 @@
           border-radius: 50%;
         }
         .msg-item {
-          padding: 8px 10px;
-          max-width: 85%;
+          padding: 8px 12px 0 12px;
+          max-width: calc(100% - 95px);
           background-color: $primary-1100;
           border-radius: 4px;
+          @media screen and (max-width: 768px) {
+            max-width: calc(100% - 72px);
+          }
         }
       }
       // 用户消息
       .user-msg {
-        text-align: right;
+        // text-align: right;
         justify-content: flex-end;
         > img {
           margin-left: 5px;

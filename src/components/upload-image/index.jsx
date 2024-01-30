@@ -2,8 +2,13 @@ import React, { useState, useContext } from 'react';
 
 import './index.scss';
 import PropTypes from 'prop-types';
-import { getAccessToken } from '@/utils/tools';
-
+import {
+  getAccessToken,
+  getRefreshToken,
+  setAccessToken,
+  setRefreshToken,
+} from '@/utils/tools';
+import { getNewToken } from '@/request/auth';
 import { DarkModeContext } from '@/components/DarkModeProvider'; //夜间模式
 // antd组件
 import { message, Modal, Upload } from 'antd';
@@ -51,7 +56,7 @@ function UploadImage({
     );
   };
   // 改变
-  const handleChange = ({ file, fileList }) => {
+  const handleChange = async ({ file, fileList }) => {
     // 检查上传状态
     if (file.status === 'done') {
       console.log('图片上传完成');
@@ -64,12 +69,17 @@ function UploadImage({
       // 调用回调函数,回传 fileList 给父组件
       onUploadSuccess(fileList);
     } else if (file.status === 'error') {
-      console.log('图片上传失败');
-      message.error(
-        `${file.name.substring(0, 10)}${
-          file.name.length > 10 ? '...' : ''
-        } 上传失败`
-      );
+      //  token过期
+      if (file.response.code === 401) {
+        message.info(`服务器开小差了，刷新下试试`);
+      } else {
+        console.log('图片上传失败');
+        message.error(
+          `${file.name.substring(0, 10)}${
+            file.name.length > 10 ? '...' : ''
+          } 上传失败`
+        );
+      }
     }
 
     // 处理附件列表
@@ -88,7 +98,7 @@ function UploadImage({
   );
 
   // 上传前
-  const beforeUpload = (file) => {
+  const beforeUpload = async (file) => {
     // 过滤非允许上传的文件类型
     const isAcceptedFileType = acceptedFileTypes.includes(file.type);
     const isUnderMaxSize = file.size <= maxSize;
@@ -102,6 +112,15 @@ function UploadImage({
       message.error('文件大小不能超过 ' + maxSize / 1024 / 1024 + 'MB');
       return false;
     }
+    // 获取最新的访问令牌
+    const latestAccessToken = await getAccessToken();
+    setTimeout(() => {
+      file.headers = {
+        Authorization: `Bearer ${latestAccessToken}`,
+      };
+    }, 0);
+
+    // 将最新的访问令牌添加到上传请求的头部中
 
     return isAcceptedFileType && isUnderMaxSize;
   };

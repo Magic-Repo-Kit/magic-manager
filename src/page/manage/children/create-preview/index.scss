@@ -2,11 +2,15 @@
 // 共有样式
 .create-preview-container {
   box-sizing: border-box;
-  padding: 15px;
+  padding: 20px;
   padding-top: 0;
   position: relative;
   display: flex;
   gap: 30px;
+  @media screen and (max-width: 768px) {
+    padding: 10px;
+    padding-top: 0;
+  }
   .create-preview-item {
     width: 50%;
     @media screen and (max-width: 768px) {

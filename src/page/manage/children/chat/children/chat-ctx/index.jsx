@@ -1,9 +1,10 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useContext } from 'react';
 import '../../index.scss';
 import './chat.scss';
 import sseRequest from '@/request/sseRequest';
 import TextLoading from '@/components/text-loading';
 import MarkdownRenderer from '@/components/MarkdownRenderer';
+import { DarkModeContext } from '@/components/DarkModeProvider'; //夜间模式
 // import { throttle } from 'lodash'; //lodash 节流函数
 
 // 图片
@@ -14,6 +15,9 @@ import { Input, Select } from 'antd';
 const { TextArea } = Input;
 
 function ChatCtx() {
+  //  共享参数
+  const { darkMode } = useContext(DarkModeContext);
+
   const [msgValue, setMsgValue] = useState(''); //发送消息
   const [isExtended, setIsExtended] = useState(false); // 扩展是否显示
 
@@ -146,7 +150,7 @@ function ChatCtx() {
   }, [messages]);
 
   return (
-    <div className="chat-container">
+    <div className={`chat-container ${darkMode ? 'dark-mode' : ''}`}>
       <div className="chat-select-btn">
         <Select
           defaultValue="GPT3.5"
@@ -167,9 +171,9 @@ function ChatCtx() {
       {/* 聊天 */}
       <main ref={chatMainRef}>
         <div className="chat-prompt-box">
-          <div className="flx-align-center">
+          <div className="flx-align-center chat-prompt-title">
             <i className="iconfont mr-aiqfome"></i>
-            <div className="gradient-text-3 font-family-dingding">通知</div>
+            <div className="font-family-dingding">通知</div>
           </div>
           <div className="chat-prompt-text">MagicRepoKit闪聊开始内测啦！</div>
         </div>
@@ -214,11 +218,17 @@ function ChatCtx() {
             );
           })}
           {isLoading && (
-            <div className="bot-msg">
+            <div className={`bot-msg ${isLoading ? '' : 'hide'}`}>
               <img className="bot-head" src={botHead} />
               {/* <div className="msg-item">{sumStr || <TextLoading />}</div> */}
               <div className="msg-item">
-                {<MarkdownRenderer markdown={sumStr} /> || <TextLoading />}
+                {sumStr ? (
+                  <MarkdownRenderer markdown={sumStr} />
+                ) : (
+                  <div style={{ paddingBottom: 8 }}>
+                    <TextLoading />
+                  </div>
+                )}
               </div>
             </div>
           )}
@@ -230,9 +240,14 @@ function ChatCtx() {
           {/* 输入 */}
           <div className="chat-text-area-box">
             <TextArea
+              style={{
+                color: darkMode ? '#fff' : '',
+              }}
               value={msgValue}
-              className="remove-default-textarea"
-              maxLength={1000}
+              className={`remove-default-textarea ${
+                darkMode ? 'custom-placeholder' : ''
+              }`}
+              maxLength={5000}
               placeholder="Shift + Enter换行"
               onChange={(e) => setMsgValue(e.target.value)}
               autoSize={{ maxRows: 10 }}

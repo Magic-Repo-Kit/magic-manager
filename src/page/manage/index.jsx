@@ -15,7 +15,7 @@ function Manage() {
   const location = useLocation();
 
   const [manageMenuUrl, setManageMenuUrl] = useState('');
-  const [manageMenuName, setManageMenuName] = useState('工作台');
+  const [manageMenuName, setManageMenuName] = useState('发现');
 
   const [isHidden, setIsHidden] = useState(false);
 
@@ -34,7 +34,7 @@ function Manage() {
     const storedManageMenuUrl = sessionStorage.getItem('manageMenuUrl');
     setManageMenuUrl(storedManageMenuUrl || 'work-platform');
     const storedManageMenuName = sessionStorage.getItem('manageMenuName');
-    setManageMenuName(storedManageMenuName || '工作台');
+    setManageMenuName(storedManageMenuName || '发现');
   }, []);
   return (
     <div className={`manage-container ${darkMode ? 'dark-mode' : ''}`}>
@@ -47,9 +47,9 @@ function Manage() {
         </div>
 
         <nav className={isHidden ? 'hidden' : ''}>
-          {/* 工作台 */}
+          {/* 发现 */}
           <Tooltip
-            title="工作台"
+            title="发现"
             arrow={false}
             color={'rgba(25, 25, 25, 0.8)'}
             placement="right"
@@ -58,7 +58,7 @@ function Manage() {
               className={`aside-first ${
                 manageMenuUrl === 'work-platform' ? 'active' : ''
               }`}
-              onClick={() => handleAppClick('work-platform', '工作台')}
+              onClick={() => handleAppClick('work-platform', '发现')}
             >
               <img src={mrkLogo} alt="" className="mrkLogo" />
             </div>
@@ -148,9 +148,9 @@ function Manage() {
               <i className="iconfont mr-lightning"></i>
             </div>
           </Tooltip> */}
-          {/* 个人中心 */}
+          {/* 我 */}
           <Tooltip
-            title="个人中心"
+            title="我"
             arrow={false}
             color={'rgba(25, 25, 25, 0.8)'}
             placement="right"
@@ -159,7 +159,7 @@ function Manage() {
               className={`aside-item-active ${
                 manageMenuUrl === 'user-center' ? 'active' : ''
               }`}
-              onClick={() => handleAppClick('user-center', '个人中心')}
+              onClick={() => handleAppClick('user-center', '我')}
             >
               <i className="iconfont mr-user-admin"></i>
             </div>

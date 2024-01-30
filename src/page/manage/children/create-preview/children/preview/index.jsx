@@ -9,10 +9,10 @@ import MarkdownRenderer from '@/components/MarkdownRenderer';
 import userHead from '@/assets/images/user-head.png';
 import botHead from '@/assets/images/bot-head.png';
 // antd组件
-import { Input, Select } from 'antd';
+import { Input, Badge } from 'antd';
 const { TextArea } = Input;
 
-function Preview() {
+function Preview({ selectedModel }) {
   const [msgValue, setMsgValue] = useState(''); //发送消息
   const [isExtended, setIsExtended] = useState(false); // 扩展是否显示
 
@@ -28,10 +28,6 @@ function Preview() {
       e.preventDefault();
       handleRequestMessage();
     }
-  };
-  // 模型选择
-  const handleChangeModal = (value) => {
-    console.log(`selected ${value}`);
   };
 
   // 处理请求时的消息
@@ -62,7 +58,7 @@ function Preview() {
   // 发送消息接口
   const sendMessage = async () => {
     const params = {
-      modelName: 'mrk-3.5-turbo',
+      modelName: selectedModel.value,
       temperature: '0.7',
       isShowKnowledge: 1,
       knowledgeId: '1746480158702338049',
@@ -129,40 +125,37 @@ function Preview() {
   return (
     <div className="preview-container">
       <header>
-        <div className="flx-justify-between">
-          <div className="font-family-dingding">调试与预览</div>
-          <div>
-            <Select
-              size="small"
-              defaultValue="GPT3.5"
-              onChange={handleChangeModal}
-              options={[
-                {
-                  value: 'GPT3.5',
-                  label: 'GPT3.5',
-                },
-                {
-                  value: 'GPT4.0',
-                  label: 'GPT4.0',
-                },
-              ]}
-            />
+        <Badge.Ribbon text="预览" color="#4f46e5">
+          <div className="preview-prompt-box">
+            <div className="preview-model-name flx-center font-family-dingding">
+              <div className="flx-center">
+                <div>当前模型：{selectedModel.label}</div>
+                <i
+                  className="iconfont mr-icons-air_element"
+                  style={{ marginLeft: 2 }}
+                ></i>
+              </div>
+            </div>
+            <div className="flx-align-center preview-prompt-icon-title">
+              <i className="iconfont mr-mofabang"></i>
+              <div className="gradient-text-3">提示词预览</div>
+            </div>
+            <div className="preview-prompt-text">
+              提示词是与人工智能（AI）对话系统进行交互时提供的指导性文本，它可以帮助我们更好地与AI进行交流。通过编写清晰、明确的提示词，我们能够准确表达自己的意图和问题，从而得到系统更精确的回答。Prompt
+              的好坏直接影响到AI对话的效果和用户体验。
+            </div>
           </div>
-        </div>
-        <div className="preview-prompt-box">
-          <div className="flx-align-center">
-            <i className="iconfont mr-mofabang"></i>
-            <div className="gradient-text-3">提示词预览</div>
-          </div>
-          <div className="preview-prompt-text">
-            提示词是与人工智能（AI）对话系统进行交互时提供的指导性文本，它可以帮助我们更好地与AI进行交流。通过编写清晰、明确的提示词，我们能够准确表达自己的意图和问题，从而得到系统更精确的回答。Prompt
-            的好坏直接影响到AI对话的效果和用户体验。
-          </div>
-        </div>
+        </Badge.Ribbon>
       </header>
       {/* 聊天 */}
       <main ref={chatMainRef}>
         <div className="preview-chat-main">
+          <div className="bot-msg" style={{ marginTop: 15 }}>
+            <img className="bot-head" src={botHead} />
+            <div className="msg-item" style={{ paddingBottom: 8 }}>
+              配置完成后，试试和我聊天吧！
+            </div>
+          </div>
           {messages.map((item, index) => {
             return (
               <div
@@ -194,7 +187,13 @@ function Preview() {
             <div className="bot-msg">
               <img className="bot-head" src={botHead} />
               <div className="msg-item">
-                {<MarkdownRenderer markdown={sumStr} /> || <TextLoading />}
+                {sumStr ? (
+                  <MarkdownRenderer markdown={sumStr} />
+                ) : (
+                  <div style={{ paddingBottom: 8 }}>
+                    <TextLoading />
+                  </div>
+                )}
               </div>
             </div>
           )}
@@ -208,7 +207,7 @@ function Preview() {
             <TextArea
               value={msgValue}
               className="remove-default-textarea"
-              maxLength={1000}
+              maxLength={50000}
               placeholder="Shift + Enter换行"
               onChange={(e) => setMsgValue(e.target.value)}
               autoSize={{ maxRows: 10 }}

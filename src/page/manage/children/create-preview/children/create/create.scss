@@ -78,6 +78,7 @@
       }
       .create-hight-select {
         width: 50%;
+        overflow: hidden;
       }
     }
   }
@@ -115,4 +116,12 @@
 }
 .create-container-modal-footer {
   margin-top: 20px;
+}
+
+// 知识库下拉
+.ant-cascader-dropdown .ant-cascader-menu-item-content {
+  max-width: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }

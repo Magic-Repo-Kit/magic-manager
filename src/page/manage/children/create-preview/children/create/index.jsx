@@ -4,7 +4,8 @@ import './create.scss';
 import ajax from '@/request';
 
 import UploadImage from '@/components/upload-image';
-import MrModal from '@/components/mr-modal';
+import MoveList from '@/page/manage/children/knowledge/children/list/move-list';
+
 // 图片
 import Tips from '@/assets/images/tips.png';
 
@@ -19,10 +20,11 @@ import {
   message,
   Empty,
   Modal,
+  Cascader,
 } from 'antd';
 const { TextArea } = Input;
 
-function Create({ modelList }) {
+function Create({ modelList, onModelChoose }) {
   // 拿到modelList值
   const options = modelList
     ? modelList.map((model) => ({
@@ -35,21 +37,102 @@ function Create({ modelList }) {
   const [imageUrl, setImageUrl] = useState(''); //图片地址
   const [name, setName] = useState(''); //角色名称
 
-  const [temperature, setTemperature] = useState(0.7); //发散参数(0~2)
+  const [temperature, setTemperature] = useState(0.7); //发散能力(0~2)
   const [modelName, setModelName] = useState('mrk-3.5-turbo'); //模型名称
+
   const [isShowKnowledge, setIsShowKnowledge] = useState(1); //是否展现知识库[1:关闭(默认) 2:开启]
   const [knowledgeId, setKnowledgeId] = useState(''); //知识库id
-  const [conversationStarters, setConversationStarters] = useState([]); //预设对话
-  const [isOpen, setIsOpen] = useState(false); //对话弹框
+  const [knowledgeOptions, setKnowledgeOptions] = useState([]); //知识库可选项数据源
 
-  const formatter = (value) => `${value}%`; //发散参数
-  // 模型选择
-  const handleChangeModal = (value) => {
-    setModelName(value);
+  const [conversationStarters, setConversationStarters] = useState([]); //预设对话
+  const [isPresetOpen, setIsPresetOpen] = useState(false); //对话弹框
+
+  const formatter = (value) => `${value}%`; //发散能力
+
+  //知识库文件列表筛选
+  const [params, setParams] = useState({
+    pageNo: 1,
+    pageSize: 20,
+    keywords: '',
+    parentId: '0', //空-目录
+  });
+
+  // 获取根目录知识库列表
+  const getKnowledgeListRoot = async (parentId) => {
+    try {
+      const res = await ajax.get('/chat/knowledge/list-page', {
+        ...params,
+        parentId,
+      });
+      if (res.code === 200) {
+        if (res.data) {
+          const tempOptions = res.data.list.map((item) => ({
+            value: item.id,
+            label: item.name,
+            isLeaf: item.type === 2, // 如果该项有子级选项，isLeaf 为 false
+          }));
+          setKnowledgeOptions(tempOptions);
+        }
+      }
+    } catch (error) {
+      console.log(
+        '🚀 ~ getKnowledgeListRoot ~ error:',
+        error || '获取文件列表失败'
+      );
+    }
+  };
+  // 获取知识库列表
+  const getKnowledgeList = async (parentId) => {
+    try {
+      const res = await ajax.get('/chat/knowledge/list-page', {
+        ...params,
+        parentId,
+      });
+      if (res.code === 200) {
+        if (res.data) {
+          if (res.data.list.length === 0) {
+            return [
+              { value: '', label: '暂无子项', isLeaf: true, disabled: true },
+            ]; // 返回一个空数组表示空元素/禁用
+          }
+          const tempOptions = res.data.list.map((item) => ({
+            value: item.id,
+            label: item.name,
+            isLeaf: item.type === 2, // 如果该项有子级选项，isLeaf 为 false
+          }));
+          return tempOptions;
+        }
+      }
+    } catch (error) {
+      console.log(
+        '🚀 ~ getKnowledgeList ~ error:',
+        error || '获取知识库列表失败'
+      );
+    }
+    return [];
+  };
+  // 知识库-动态加载选项
+  const handleKnowledgeLoadData = (selectedOptions) => {
+    const targetOption = selectedOptions[selectedOptions.length - 1];
+    const parentId = targetOption.value; //点击的option的value
+
+    getKnowledgeList(parentId).then((children) => {
+      targetOption.children = children;
+      setKnowledgeOptions([...knowledgeOptions]);
+    });
   };
   // 知识库选择
-  const handleChangeKnowledge = (value) => {
-    console.log(`selected ${value}`);
+  const handleKnowledgeChange = (value, selectedOptions) => {
+    const selectedValue = selectedOptions[selectedOptions.length - 1].value;
+    const isLeaf = selectedOptions[selectedOptions.length - 1].isLeaf;
+
+    if (!isLeaf) {
+      // 如果选择的不是叶子节点
+      // setKnowledgeOptions([]);
+    } else {
+      // console.log(selectedValue);
+      setKnowledgeId(selectedValue);
+    }
   };
 
   // 图片上传成功后
@@ -58,15 +141,21 @@ function Create({ modelList }) {
     setImageUrl(url);
   };
 
-  // 弹框 - 确定
-  const handleOk = () => {
-    setIsOpen(false);
+  // 模型选择
+  const handleChangeModal = (value, model) => {
+    setModelName(value);
+    onModelChoose(model);
+  };
+
+  // 弹框 - 预设对话 - 确定
+  const handlePresetOk = () => {
+    setIsPresetOpen(false);
     console.log('确定');
   };
 
-  // 弹框 - 取消
-  const handleCancel = () => {
-    setIsOpen(false);
+  // 弹框 - 预设对话 - 取消
+  const handlePresetCancel = () => {
+    setIsPresetOpen(false);
     console.log('取消');
   };
 
@@ -90,34 +179,37 @@ function Create({ modelList }) {
         return;
       }
     }
+
     const params = {
       conversationStarters,
       imageUrl,
       isShowKnowledge,
-      knowledgeId,
+      knowledgeId: isShowKnowledge === 1 ? '' : knowledgeId,
       modelName,
       name,
       prompt,
       temperature,
     };
-    try {
-      const res = await ajax.post(`/chat/role/create`, params);
-      if (res.code === 200) {
-        console.log('🚀 ~ handleCreateRole ~ res:', res);
-        message.success('提交成功');
+    console.log('🚀 ~ handleCreateRole ~ params:', params);
+    // try {
+    //   const res = await ajax.post(`/chat/role/create`, params);
+    //   if (res.code === 200) {
+    //     console.log('🚀 ~ handleCreateRole ~ res:', res);
+    //     message.success('提交成功');
 
-        // 恢复原值
-      }
-    } catch (error) {
-      message.error(error.message || '提交失败');
-    } finally {
-      console.log(11);
-    }
+    //     // 恢复原值
+    //   }
+    // } catch (error) {
+    //   message.error(error.message || '提交失败');
+    // } finally {
+    //   console.log(11);
+    // }
   };
 
   useEffect(() => {
-    console.log(temperature);
-  }, [temperature]);
+    // 获取根目录知识库列表
+    getKnowledgeListRoot();
+  }, []);
 
   return (
     <div className="create-container">
@@ -148,8 +240,8 @@ function Create({ modelList }) {
             />
           </div>
           <div className="create-promp-box-footer">
-            <Button type="primary" size="small">
-              一键生成
+            <Button type="primary" size="small" disabled={prompt.trim() === ''}>
+              AI一键生成
             </Button>
           </div>
         </div>
@@ -207,14 +299,14 @@ function Create({ modelList }) {
           </div>
           <div className="flx-align-center">
             <Tooltip
-              title="发散参数代表AI思维发散能力，数值越小，越准确；数值越大，越模糊。"
+              title="发散能力代表AI思维发散程度，数值越大，生成的文本越多样。"
               arrow={false}
               color={'rgba(25, 25, 25, 0.8)'}
               placement="topLeft"
             >
               <div className="create-base-title flx-center cursor-point">
                 <img src={Tips} style={{ height: 16, marginRight: 3 }} />
-                <div>发散参数：</div>
+                <div>发散能力：</div>
               </div>
             </Tooltip>
 
@@ -230,14 +322,14 @@ function Create({ modelList }) {
           </div>
           <div className="flx-align-center">
             <Tooltip
-              title="不同模型有不同的能力。"
+              title="选中模型后，可在预览窗口进行调试，不同的模型具有不同的能力。"
               arrow={false}
               color={'rgba(25, 25, 25, 0.8)'}
               placement="topLeft"
             >
               <div className="create-base-title flx-center cursor-point">
                 <img src={Tips} style={{ height: 16, marginRight: 3 }} />
-                <div>AI模型：</div>
+                <div>使用模型：</div>
               </div>
             </Tooltip>
 
@@ -260,7 +352,7 @@ function Create({ modelList }) {
             >
               <div className="create-base-title flx-center cursor-point">
                 <img src={Tips} style={{ height: 16, marginRight: 3 }} />
-                <div>是否启用知识库：</div>
+                <div>是否开启知识库训练：</div>
               </div>
             </Tooltip>
 
@@ -276,7 +368,7 @@ function Create({ modelList }) {
           {isShowKnowledge === 2 && (
             <div className="flx-align-center">
               <Tooltip
-                title="提供给AI角色的模型库，AI通过知识库的学习来提高回答的准确性。"
+                title="知识库是AI的辅助大脑，通过知识库的学习，可以提高角色的能力、准确性。"
                 arrow={false}
                 color={'rgba(25, 25, 25, 0.8)'}
                 placement="topLeft"
@@ -288,28 +380,21 @@ function Create({ modelList }) {
               </Tooltip>
               <div className="create-hight-select">
                 {/* 知识库 */}
-                <Select
+                <Cascader
                   style={{ width: '100%' }}
-                  defaultValue=""
-                  onChange={handleChangeKnowledge}
-                  options={[
-                    { value: '', label: '请选择', disabled: true },
-                    {
-                      value: '2',
-                      label: '知识库1知识库1知识库1知识库1知识库1知识库1',
-                    },
-                    {
-                      value: '1',
-                      label: '知识库1',
-                    },
-                  ]}
+                  placeholder="请选择"
+                  options={knowledgeOptions}
+                  loadData={handleKnowledgeLoadData}
+                  onChange={handleKnowledgeChange}
+                  changeOnSelect
+                  allowClear={false}
                 />
               </div>
             </div>
           )}
           <div className="flx-align-center">
             <Tooltip
-              title="通过与AI对话的方式，让AI自我学习，帮助AI完善角色模型，可以训练出更智能、更稳定的专属角色。"
+              title="上传对话记录，并帮助AI修正回复，能够让AI自我反省，从而训练出更智能、更稳定的角色模型。"
               arrow={false}
               color={'rgba(25, 25, 25, 0.8)'}
               placement="topLeft"
@@ -324,7 +409,7 @@ function Create({ modelList }) {
               <Button
                 type="primary"
                 size="small"
-                onClick={() => setIsOpen(true)}
+                onClick={() => setIsPresetOpen(true)}
               >
                 自定义
               </Button>
@@ -341,81 +426,82 @@ function Create({ modelList }) {
         >
           创建角色
         </Button>
-        {/* 预设对话 */}
-        <Modal
-          title={
-            <div className="flx-align-center">
-              <i
-                className="iconfont mr-icon_AI gradient-text-3"
-                style={{ fontSize: 25, marginRight: 8 }}
-              ></i>
-              <span>预设对话</span>
-            </div>
-          }
-          footer={
-            <div className="create-container-modal-footer">
-              <Button key="save" type="primary" style={{ width: '100%' }}>
-                添 加
-              </Button>
-            </div>
-          }
-          open={isOpen}
-          onCancel={handleCancel}
-          width={800}
-        >
-          <div className="create-container-modal-box">
-            <div className="create-modal-chat-list">
-              {/* 无数据 */}
-              <div className="knowledge-move-empty">
-                <Empty
-                  image={Empty.PRESENTED_IMAGE_SIMPLE}
-                  description={<span>没有聊天记录，快去试试吧！</span>}
-                />
-              </div>
-            </div>
+      </footer>
 
-            <div className="create-modal-chat create-modal-user-chat">
-              <div className="create-modal-chat-header font-family-dingding  flx-align-center">
-                <i className="iconfont mr-ic_user1 gradient-text-3"></i>
-                <div>YOU</div>
-              </div>
-              <div className="create-modal-chat-body">
-                <TextArea
-                  className="remove-default-textarea"
-                  maxLength={1000}
-                  value={prompt}
-                  onChange={(e) => setPrompt(e.target.value)}
-                  placeholder="预设 - 输入对话内容"
-                  autoSize={{ maxRows: 5 }}
-                />
-              </div>
-            </div>
-            <div className="create-modal-chat create-modal-bot-chat">
-              <div className="create-modal-chat-header flx-justify-between">
-                <div className="flx-align-center font-family-dingding">
-                  <i className="iconfont mr-aiqfome gradient-text-3"></i>
-                  <div>AI</div>
-                </div>
-                <div>
-                  <Button type="primary" size="small">
-                    一键生成
-                  </Button>
-                </div>
-              </div>
-              <div className="create-modal-chat-body">
-                <TextArea
-                  className="remove-default-textarea"
-                  maxLength={1000}
-                  value={prompt}
-                  onChange={(e) => setPrompt(e.target.value)}
-                  placeholder="预设 - 模拟AI回复"
-                  autoSize={{ maxRows: 5 }}
-                />
-              </div>
+      {/* 弹框 - 预设对话 */}
+      <Modal
+        title={
+          <div className="flx-align-center">
+            <i
+              className="iconfont mr-icon_AI gradient-text-3"
+              style={{ fontSize: 25, marginRight: 8 }}
+            ></i>
+            <span>预设对话</span>
+          </div>
+        }
+        footer={
+          <div className="create-container-modal-footer">
+            <Button key="save" type="primary" style={{ width: '100%' }}>
+              添 加
+            </Button>
+          </div>
+        }
+        open={isPresetOpen}
+        onCancel={handlePresetCancel}
+        width={800}
+      >
+        <div className="create-container-modal-box">
+          <div className="create-modal-chat-list">
+            {/* 无数据 */}
+            <div className="knowledge-move-empty">
+              <Empty
+                image={Empty.PRESENTED_IMAGE_SIMPLE}
+                description={<span>没有聊天记录，快去试试吧！</span>}
+              />
             </div>
           </div>
-        </Modal>
-      </footer>
+
+          <div className="create-modal-chat create-modal-user-chat">
+            <div className="create-modal-chat-header font-family-dingding  flx-align-center">
+              <i className="iconfont mr-ic_user1 gradient-text-3"></i>
+              <div>YOU</div>
+            </div>
+            <div className="create-modal-chat-body">
+              <TextArea
+                className="remove-default-textarea"
+                maxLength={1000}
+                value={prompt}
+                onChange={(e) => setPrompt(e.target.value)}
+                placeholder="预设 - 输入对话内容"
+                autoSize={{ maxRows: 5 }}
+              />
+            </div>
+          </div>
+          <div className="create-modal-chat create-modal-bot-chat">
+            <div className="create-modal-chat-header flx-justify-between">
+              <div className="flx-align-center font-family-dingding">
+                <i className="iconfont mr-aiqfome gradient-text-3"></i>
+                <div>AI</div>
+              </div>
+              <div>
+                <Button type="primary" size="small">
+                  AI一键回复
+                </Button>
+              </div>
+            </div>
+            <div className="create-modal-chat-body">
+              <TextArea
+                className="remove-default-textarea"
+                maxLength={1000}
+                value={prompt}
+                onChange={(e) => setPrompt(e.target.value)}
+                placeholder="预设 - 模拟AI回复"
+                autoSize={{ maxRows: 5 }}
+              />
+            </div>
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 }

@@ -31,6 +31,13 @@ function DropdownUser({ setUserOpen }) {
   const [showPassword, setShowPassword] = useState(false);
 
   const [showPwdForm, setShowPwdForm] = useState(false); //显示修改密码表单
+  const [imageUrl, setImageUrl] = useState(userHead); //头像
+
+  // 图片上传成功后
+  const handleUploadSuccess = (fileList) => {
+    let url = fileList[0].response.data.link;
+    setImageUrl(url);
+  };
 
   // 个人信息修改保存
   const handleSave = () => {
@@ -290,7 +297,7 @@ function DropdownUser({ setUserOpen }) {
                 maxNums={1}
                 acceptedFileTypes={['image/jpeg', 'image/png']}
                 shouldCrop
-                // onUploadSuccess={handleUploadSuccess}
+                onUploadSuccess={handleUploadSuccess}
               />
             </div>
           </div>

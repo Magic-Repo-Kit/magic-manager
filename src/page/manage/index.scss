@@ -203,6 +203,7 @@
   > main {
     > header {
       .manage-header-item-box {
+        border-bottom: 1px solid rgba($border-color-100, 0.2);
         .manage-header-item {
           > i {
             background-image: linear-gradient(40deg, #ff0080, #ff8c00 70%);
