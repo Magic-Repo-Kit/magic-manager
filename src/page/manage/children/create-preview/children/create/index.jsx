@@ -2,12 +2,15 @@ import React, { useRef, useState, useEffect } from 'react';
 import '../../index.scss';
 import './create.scss';
 import ajax from '@/request';
+import { useNavigate } from 'react-router-dom';
 
 import UploadImage from '@/components/upload-image';
-import MoveList from '@/page/manage/children/knowledge/children/list/move-list';
+import MarkdownRenderer from '@/components/MarkdownRenderer';
 
 // 图片
 import Tips from '@/assets/images/tips.png';
+import userHead from '@/assets/images/user-head.png';
+import botHead from '@/assets/images/bot-head.png';
 
 // antd组件
 import {
@@ -22,9 +25,18 @@ import {
   Modal,
   Cascader,
 } from 'antd';
+import { DeleteOutlined } from '@ant-design/icons';
 const { TextArea } = Input;
 
-function Create({ modelList, onModelChoose }) {
+function Create({
+  createParams,
+  setCreateParams,
+  modelList,
+  messages,
+  setMessages,
+}) {
+  const navigate = useNavigate(); //路由
+
   // 拿到modelList值
   const options = modelList
     ? modelList.map((model) => ({
@@ -33,24 +45,20 @@ function Create({ modelList, onModelChoose }) {
       }))
     : [];
 
-  const [prompt, setPrompt] = useState(''); //提示词
-  const [imageUrl, setImageUrl] = useState(''); //头像
-  const [name, setName] = useState(''); //角色名称
-
-  const [temperature, setTemperature] = useState(0.7); //发散能力(0~2)
-  const [modelName, setModelName] = useState('mrk-3.5-turbo'); //模型名称
-
-  const [isShowKnowledge, setIsShowKnowledge] = useState(1); //是否展现知识库[1:关闭(默认) 2:开启]
-  const [knowledgeId, setKnowledgeId] = useState(''); //知识库id
   const [knowledgeOptions, setKnowledgeOptions] = useState([]); //知识库可选项数据源
-
-  const [conversationStarters, setConversationStarters] = useState([]); //预设对话
   const [isPresetOpen, setIsPresetOpen] = useState(false); //对话弹框
 
-  const formatter = (value) => `${value}%`; //发散能力
+  const formatterTemperature = (value) => `${value}%`; //发散能力格式化
+
+  const [msgUser, setMsgUser] = useState(''); //预设 - 输入消息
+  const [msgBot, setMsgBot] = useState(''); //预设 - 输出消息
+  const [isEditedMsg, setIsEditedMsg] = useState(false); //预设 - 是否编辑历史消息
+  const chatMsgRef = useRef(null);
+  const inputUserRef = useRef(null);
+  const inputBotRef = useRef(null);
 
   //知识库文件列表筛选
-  const [params, setParams] = useState({
+  const [listParams, setListParams] = useState({
     pageNo: 1,
     pageSize: 20,
     keywords: '',
@@ -61,7 +69,7 @@ function Create({ modelList, onModelChoose }) {
   const getKnowledgeListRoot = async (parentId) => {
     try {
       const res = await ajax.get('/chat/knowledge/list-page', {
-        ...params,
+        ...listParams,
         parentId,
       });
       if (res.code === 200) {
@@ -85,7 +93,7 @@ function Create({ modelList, onModelChoose }) {
   const getKnowledgeList = async (parentId) => {
     try {
       const res = await ajax.get('/chat/knowledge/list-page', {
-        ...params,
+        ...listParams,
         parentId,
       });
       if (res.code === 200) {
@@ -130,80 +138,145 @@ function Create({ modelList, onModelChoose }) {
       // 如果选择的不是叶子节点
       // setKnowledgeOptions([]);
     } else {
-      // console.log(selectedValue);
-      setKnowledgeId(selectedValue);
+      setCreateParams((prevParams) => ({
+        ...prevParams,
+        knowledgeId: selectedValue,
+      }));
     }
   };
 
   // 图片上传成功后
   const handleUploadSuccess = (fileList) => {
     let url = fileList[0].response.data.link;
-    setImageUrl(url);
+    // setImageUrl(url);
+    setCreateParams((prevParams) => ({
+      ...prevParams,
+      imageUrl: 'http://' + url,
+    }));
   };
 
   // 模型选择
-  const handleChangeModal = (value, model) => {
-    setModelName(value);
-    onModelChoose(model);
+  const handleChangeModal = (value) => {
+    setCreateParams((prevParams) => ({
+      ...prevParams,
+      modelName: value,
+    }));
   };
 
-  // 弹框 - 预设对话 - 确定
-  const handlePresetOk = () => {
-    setIsPresetOpen(false);
-    console.log('确定');
+  // 弹框 - 预设对话 - 添加对话
+  const handleAddChatPreset = () => {
+    if (!msgUser) {
+      message.info('请先输入预设对话内容');
+      return;
+    }
+    if (!msgBot) {
+      message.info('请输入预设对话回复');
+      return;
+    }
+    setMessages((prevMessages) => [
+      ...prevMessages,
+      { message: msgUser, type: 1 },
+      { message: msgBot, type: 2 },
+    ]);
+    setMsgUser('');
+    setMsgBot('');
+    setIsEditedMsg(false);
+    scrollToBottom();
   };
-
   // 弹框 - 预设对话 - 取消
   const handlePresetCancel = () => {
     setIsPresetOpen(false);
-    console.log('取消');
+    setIsEditedMsg(false);
   };
+  // 弹框 - 编辑对话
+  const handleEditItemPreset = (index, newMessage) => {
+    const newMessages = [...messages];
+    newMessages[index].message = newMessage;
+    setMessages(newMessages);
+  };
+  // 删除item
+  const handleDeleteItem = (index) => {
+    // 执行删除操作，更新 messages 数组
+    const updatedMessages = [...messages];
+    updatedMessages.splice(index, 1);
+    setMessages(updatedMessages);
+  };
+  // 触发快捷键
+  const handleUserBotKeyDown = (e, isUser) => {
+    if (e.key === 'Tab') {
+      e.preventDefault();
+      const nextRef = isUser ? inputBotRef : inputUserRef;
+      nextRef.current.focus(); // 自动聚焦到另一个输入框
+    } else if (e.key === 'Enter' && e.shiftKey) {
+      e.preventDefault();
+      handleAddChatPreset(); // 发送消息的逻辑
+      inputUserRef.current.focus(); // 自动聚焦到用户输入框
+    }
+  };
+  // AI 一键回复
+  // const handleSendBot = () => {
+  //   console.log(111);
+  // };
 
   // 提交 - 创建角色
   const handleCreateRole = async () => {
-    if (!prompt) {
+    if (!createParams.prompt) {
       message.info('请输入提示词');
       return;
     }
-    if (!name) {
+    if (!createParams.name) {
       message.info('请输入角色名称');
       return;
     }
-    if (!modelName) {
+    if (!createParams.modelName) {
       message.info('请选择AI模型');
       return;
     }
-    if (isShowKnowledge === 2) {
-      if (!knowledgeId) {
+    if (createParams.isShowKnowledge === 2) {
+      if (!createParams.knowledgeId) {
         message.info('请选择知识库');
         return;
       }
     }
 
     const params = {
-      conversationStarters,
-      imageUrl,
-      isShowKnowledge,
-      knowledgeId: isShowKnowledge === 1 ? '' : knowledgeId,
-      modelName,
-      name,
-      prompt,
-      temperature,
+      ...createParams,
+      knowledgeId:
+        createParams.isShowKnowledge === 1 ? '' : createParams.knowledgeId,
+      conversationStarters: messages
+        .filter((item) => item.type === 1)
+        .map((item) => item.message), //预设对话
     };
     console.log('🚀 ~ handleCreateRole ~ params:', params);
-    // try {
-    //   const res = await ajax.post(`/chat/role/create`, params);
-    //   if (res.code === 200) {
-    //     console.log('🚀 ~ handleCreateRole ~ res:', res);
-    //     message.success('提交成功');
+    try {
+      const res = await ajax.post(`/chat/role/create`, params);
+      if (res.code === 200) {
+        console.log('🚀 ~ handleCreateRole ~ res:', res);
+        message.success('提交成功');
 
-    //     // 恢复原值
-    //   }
-    // } catch (error) {
-    //   message.error(error.message || '提交失败');
-    // } finally {
-    //   console.log(11);
-    // }
+        // 恢复原值
+        setCreateParams({
+          prompt: '', //提示词
+          imageUrl: createParams.imageUrl, //头像
+          name: '', //角色名称
+          temperature: '0.7', //发散能力(0~2)
+          modelName: 'mrk-3.5-turbo', //使用模型
+          isShowKnowledge: 1, //是否展现知识库[1:关闭(默认) 2:开启]
+          knowledgeId: '', //知识库id
+        });
+        setMessages([]);
+      }
+    } catch (error) {
+      message.error(error.message || '提交失败');
+    } finally {
+      // 跳转路由-聊天页面
+      navigate('/admin/manage/chat');
+    }
+  };
+
+  // 自动滚动到底部
+  const scrollToBottom = () => {
+    chatMsgRef.current.scrollTop = chatMsgRef.current.scrollHeight;
   };
 
   useEffect(() => {
@@ -211,6 +284,13 @@ function Create({ modelList, onModelChoose }) {
     getKnowledgeListRoot();
   }, []);
 
+  useEffect(() => {
+    if (isPresetOpen) {
+      setTimeout(() => {
+        inputUserRef.current.focus(); // 自动聚焦到用户输入框
+      }, 0);
+    }
+  }, [isPresetOpen]);
   return (
     <div className="create-container">
       <header>
@@ -232,15 +312,24 @@ function Create({ modelList, onModelChoose }) {
           <div>
             <TextArea
               className="remove-default-textarea"
-              maxLength={1000}
-              value={prompt}
-              onChange={(e) => setPrompt(e.target.value)}
+              maxLength={10000}
+              value={createParams.prompt}
+              onChange={(e) =>
+                setCreateParams((prevParams) => ({
+                  ...prevParams,
+                  prompt: e.target.value,
+                }))
+              }
               placeholder="我想让你扮演一个小说家。您将想出富有创意且引人入胜的故事，可以长期吸引读者。你可以选择任何类型，如奇幻、浪漫、历史小说等——但你的目标是写出具有出色情节、引人入胜的人物和意想不到的高潮的作品。我的第一个要求是“我要写一部以未来为背景的科幻小说”。"
               autoSize={{ maxRows: 10 }}
             />
           </div>
           <div className="create-promp-box-footer">
-            <Button type="primary" size="small" disabled={prompt.trim() === ''}>
+            <Button
+              type="primary"
+              size="small"
+              disabled={createParams.prompt.trim() === ''}
+            >
               AI一键生成
             </Button>
           </div>
@@ -274,14 +363,13 @@ function Create({ modelList, onModelChoose }) {
             <div className="create-base-input">
               <Input
                 placeholder={`请输入角色名称`}
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                // onChange={(e) =>
-                //   setFolderForm((prevForm) => ({
-                //     ...prevForm,
-                //     name: e.target.value,
-                //   }))
-                // }
+                value={createParams.name}
+                onChange={(e) =>
+                  setCreateParams((prevParams) => ({
+                    ...prevParams,
+                    name: e.target.value,
+                  }))
+                }
               />
             </div>
           </div>
@@ -314,9 +402,14 @@ function Create({ modelList, onModelChoose }) {
               <Slider
                 defaultValue={35}
                 tooltip={{
-                  formatter,
+                  formatterTemperature,
                 }}
-                onChange={(value) => setTemperature(value / 50)}
+                onChange={(value) =>
+                  setCreateParams((prevParams) => ({
+                    ...prevParams,
+                    temperature: `${value / 50}`,
+                  }))
+                }
               />
             </div>
           </div>
@@ -358,14 +451,20 @@ function Create({ modelList, onModelChoose }) {
 
             <div className="create-hight-select">
               <Switch
-                checked={isShowKnowledge === 2}
-                onChange={(checked) => setIsShowKnowledge(checked ? 2 : 1)}
+                checked={createParams.isShowKnowledge === 2}
+                onChange={(checked) =>
+                  setCreateParams((prevParams) => ({
+                    ...prevParams,
+                    isShowKnowledge: checked ? 2 : 1,
+                    knowledgeId: checked ? prevParams.knowledgeId : '', // 当开关关闭时，将knowledgeId置空
+                  }))
+                }
                 checkedChildren="开启"
                 unCheckedChildren="关闭"
               />
             </div>
           </div>
-          {isShowKnowledge === 2 && (
+          {createParams.isShowKnowledge === 2 && (
             <div className="flx-align-center">
               <Tooltip
                 title="知识库是AI的辅助大脑，通过知识库的学习，可以提高角色的能力、准确性。"
@@ -436,13 +535,21 @@ function Create({ modelList, onModelChoose }) {
               className="iconfont mr-icon_AI gradient-text-3"
               style={{ fontSize: 25, marginRight: 8 }}
             ></i>
-            <span>预设对话</span>
+            <span>自定义对话</span>
           </div>
         }
         footer={
           <div className="create-container-modal-footer">
-            <Button key="save" type="primary" style={{ width: '100%' }}>
-              添 加
+            <div className="create-container-modal-footer-tips">
+              Tab键可快速切换输入，Shift + Enter可快速添加对话，快来试试！
+            </div>
+            <Button
+              key="save"
+              type="primary"
+              style={{ width: '100%' }}
+              onClick={handleAddChatPreset}
+            >
+              添加对话
             </Button>
           </div>
         }
@@ -451,14 +558,80 @@ function Create({ modelList, onModelChoose }) {
         width={800}
       >
         <div className="create-container-modal-box">
-          <div className="create-modal-chat-list">
-            {/* 无数据 */}
-            <div className="knowledge-move-empty">
-              <Empty
-                image={Empty.PRESENTED_IMAGE_SIMPLE}
-                description={<span>没有聊天记录，快去试试吧！</span>}
-              />
-            </div>
+          <div
+            className={`create-modal-chat-list  ${
+              messages && messages.length > 0 ? '' : 'flx-center'
+            }`}
+          >
+            {messages && messages.length > 0 ? (
+              <div>
+                <div className="create-modal-chat-history-edit bg-filter-transparent shadow-bottom">
+                  {isEditedMsg ? (
+                    <i
+                      className="iconfont mr-queren"
+                      onClick={() => setIsEditedMsg(false)}
+                    ></i>
+                  ) : (
+                    <i
+                      className="iconfont mr-change-1"
+                      onClick={() => setIsEditedMsg(true)}
+                    ></i>
+                  )}
+                </div>
+                <div className="create-modal-chat-history" ref={chatMsgRef}>
+                  {messages.map((item, index) => {
+                    return (
+                      <div
+                        key={index}
+                        className={item.type === 1 ? 'user-msg' : 'bot-msg'}
+                      >
+                        {/* 头像-bot */}
+                        {item.type === 1 ? (
+                          <img className="user-head" src={userHead} />
+                        ) : (
+                          <img
+                            className="bot-head"
+                            src={createParams.imageUrl || botHead}
+                          />
+                        )}
+                        {/* 聊天内容 */}
+                        {isEditedMsg ? (
+                          <div className="msg-item-edit user-select">
+                            <TextArea
+                              maxLength={50000}
+                              value={item.message}
+                              onChange={(e) => {
+                                handleEditItemPreset(index, e.target.value);
+                              }}
+                              placeholder="预设 - 输入对话内容"
+                              autoSize
+                            />
+                            <div
+                              className="msg-item-del"
+                              onClick={() => handleDeleteItem(index)}
+                            >
+                              <DeleteOutlined />
+                            </div>
+                          </div>
+                        ) : (
+                          <div className="msg-item">
+                            <MarkdownRenderer markdown={item.message} />
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            ) : (
+              // 无数据
+              <div className="knowledge-move-empty">
+                <Empty
+                  image={Empty.PRESENTED_IMAGE_SIMPLE}
+                  description={<span>没有聊天记录，快去试试吧！</span>}
+                />
+              </div>
+            )}
           </div>
 
           <div className="create-modal-chat create-modal-user-chat">
@@ -468,12 +641,16 @@ function Create({ modelList, onModelChoose }) {
             </div>
             <div className="create-modal-chat-body">
               <TextArea
+                ref={inputUserRef}
                 className="remove-default-textarea"
-                maxLength={1000}
-                value={prompt}
-                onChange={(e) => setPrompt(e.target.value)}
+                maxLength={50000}
+                value={msgUser}
+                onChange={(e) => {
+                  setMsgUser(e.target.value);
+                }}
                 placeholder="预设 - 输入对话内容"
-                autoSize={{ maxRows: 5 }}
+                autoSize={{ maxRows: 3 }}
+                onKeyDown={(e) => handleUserBotKeyDown(e, true)} // 监听键盘按键
               />
             </div>
           </div>
@@ -484,19 +661,28 @@ function Create({ modelList, onModelChoose }) {
                 <div>AI</div>
               </div>
               <div>
-                <Button type="primary" size="small">
+                {/* <Button
+                  type="primary"
+                  size="small"
+                  disabled={msgUser.trim() === ''}
+                  onClick={handleSendBot}
+                >
                   AI一键回复
-                </Button>
+                </Button> */}
               </div>
             </div>
             <div className="create-modal-chat-body">
               <TextArea
+                ref={inputBotRef}
                 className="remove-default-textarea"
-                maxLength={1000}
-                value={prompt}
-                onChange={(e) => setPrompt(e.target.value)}
+                maxLength={50000}
+                value={msgBot}
+                onChange={(e) => {
+                  setMsgBot(e.target.value);
+                }}
                 placeholder="预设 - 模拟AI回复"
-                autoSize={{ maxRows: 5 }}
+                autoSize={{ maxRows: 3 }}
+                onKeyDown={(e) => handleUserBotKeyDown(e, false)} // 监听键盘按键
               />
             </div>
           </div>

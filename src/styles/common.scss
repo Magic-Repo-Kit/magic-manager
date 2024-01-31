@@ -202,6 +202,20 @@
   }
 }
 
+// 透明-模糊背景
+.bg-filter-transparent {
+  background: transparent;
+  backface-visibility: hidden; //解决ios上内容闪动的问题
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+}
+
+// 下阴影
+.shadow-bottom {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
 // 去除a标签默认样式
 a.no-style {
   color: inherit;

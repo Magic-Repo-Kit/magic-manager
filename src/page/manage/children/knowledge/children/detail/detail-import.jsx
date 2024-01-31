@@ -70,7 +70,7 @@ function DetailImport({ toList, importWay, setImportWay }) {
           <div className="knowledge-import-link">
             <TextArea
               showCount
-              maxLength={500}
+              maxLength={50000}
               // onChange={onChange}
               placeholder="请输入连接地址，如：jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf8&，用逗号隔开，每次最多10个链接。"
               style={{

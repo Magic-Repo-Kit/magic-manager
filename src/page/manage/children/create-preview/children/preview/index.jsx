@@ -12,11 +12,11 @@ import botHead from '@/assets/images/bot-head.png';
 import { Input, Badge } from 'antd';
 const { TextArea } = Input;
 
-function Preview({ selectedModel }) {
+function Preview({ createParams, messages, setMessages }) {
   const [msgValue, setMsgValue] = useState(''); //发送消息
   const [isExtended, setIsExtended] = useState(false); // 扩展是否显示
 
-  const [messages, setMessages] = useState([]); // 聊天消息 - 全局
+  // const [messages, setMessages] = useState([]); // 聊天消息 - 全局
   const messagesRef = useRef([]); // 拿到最新的messages值
   const [sumStr, setSumStr] = useState(''); //聊天消息 - 临时存储
   const [isLoading, setIsLoading] = useState(false); // 是否等待
@@ -58,13 +58,9 @@ function Preview({ selectedModel }) {
   // 发送消息接口
   const sendMessage = async () => {
     const params = {
-      modelName: selectedModel.value,
-      temperature: '0.7',
-      isShowKnowledge: 1,
-      knowledgeId: '1746480158702338049',
+      ...createParams,
       messages: messagesRef.current,
-      prompt: '',
-      isOnline: 1,
+      isOnline: 1, //是否联网[1:关闭(默认) 2:开启]
     };
 
     // SSE 成功-回调函数
@@ -118,6 +114,7 @@ function Preview({ selectedModel }) {
   const scrollToBottom = () => {
     chatMainRef.current.scrollTop = chatMainRef.current.scrollHeight;
   };
+
   useEffect(() => {
     scrollToBottom(); //messages数组有变化就滚动
   }, [messages]);
@@ -129,7 +126,7 @@ function Preview({ selectedModel }) {
           <div className="preview-prompt-box">
             <div className="preview-model-name flx-center font-family-dingding">
               <div className="flx-center">
-                <div>当前模型：{selectedModel.label}</div>
+                <div>当前模型：{createParams.modelName}</div>
                 <i
                   className="iconfont mr-icons-air_element"
                   style={{ marginLeft: 2 }}
@@ -141,8 +138,8 @@ function Preview({ selectedModel }) {
               <div className="gradient-text-3">提示词预览</div>
             </div>
             <div className="preview-prompt-text">
-              提示词是与人工智能（AI）对话系统进行交互时提供的指导性文本，它可以帮助我们更好地与AI进行交流。通过编写清晰、明确的提示词，我们能够准确表达自己的意图和问题，从而得到系统更精确的回答。Prompt
-              的好坏直接影响到AI对话的效果和用户体验。
+              {createParams.prompt ||
+                '提示词是与人工智能（AI）对话系统进行交互时提供的指导性文本，它可以帮助我们更好地与AI进行交流。通过编写清晰、明确的提示词，我们能够准确表达自己的意图和问题，从而得到系统更精确的回答。Prompt的好坏直接影响到AI对话的效果和用户体验。'}
             </div>
           </div>
         </Badge.Ribbon>
@@ -151,7 +148,7 @@ function Preview({ selectedModel }) {
       <main ref={chatMainRef}>
         <div className="preview-chat-main">
           <div className="bot-msg" style={{ marginTop: 15 }}>
-            <img className="bot-head" src={botHead} />
+            <img className="bot-head" src={createParams.imageUrl || botHead} />
             <div className="msg-item" style={{ paddingBottom: 8 }}>
               配置完成后，试试和我聊天吧！
             </div>
@@ -166,7 +163,11 @@ function Preview({ selectedModel }) {
                 {item.type === 1 ? (
                   ''
                 ) : (
-                  <img className="bot-head" src={botHead} />
+                  // <img className="bot-head" src={botHead} />
+                  <img
+                    className="bot-head"
+                    src={createParams.imageUrl || botHead}
+                  />
                 )}
 
                 {/* 聊天内容 */}
@@ -185,7 +186,12 @@ function Preview({ selectedModel }) {
           })}
           {isLoading && (
             <div className="bot-msg">
-              <img className="bot-head" src={botHead} />
+              {/* <img className="bot-head" src={botHead} /> */}
+              <img
+                className="bot-head"
+                src={createParams.imageUrl || botHead}
+              />
+
               <div className="msg-item">
                 {sumStr ? (
                   <MarkdownRenderer markdown={sumStr} />

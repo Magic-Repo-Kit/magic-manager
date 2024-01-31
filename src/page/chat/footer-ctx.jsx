@@ -63,7 +63,7 @@ function FooterCtx() {
         ></i>
       </div>
       <TextArea
-        maxLength={500}
+        maxLength={50000}
         size="large"
         value={value}
         onChange={(e) => setValue(e.target.value)}

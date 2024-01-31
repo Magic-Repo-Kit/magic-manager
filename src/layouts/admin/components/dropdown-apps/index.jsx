@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { useNavigate } from 'react-router-dom'; //渲染子路由
+import { useNavigate } from 'react-router-dom';
 import { DarkModeContext } from '@/components/DarkModeProvider'; //夜间模式
 import './index.scss';
 

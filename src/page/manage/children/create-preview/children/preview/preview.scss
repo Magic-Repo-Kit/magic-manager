@@ -26,8 +26,10 @@
       }
 
       .preview-prompt-text {
-        margin-top: 5px;
+        margin-top: 3px;
         line-height: 20px;
+        max-height: 150px;
+        overflow: auto;
       }
     }
   }
@@ -62,7 +64,6 @@
       }
       // 用户消息
       .user-msg {
-        // text-align: right;
         justify-content: flex-end;
         > img {
           margin-left: 5px;
@@ -84,7 +85,7 @@
   footer {
     width: calc((100% - 60px) / 2);
     position: absolute;
-    bottom: 15px;
+    bottom: 20px;
 
     .preview-text-send-container {
       display: flex;

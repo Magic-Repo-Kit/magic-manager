@@ -97,7 +97,7 @@ function FooterCtx(props) {
         ></i>
       </div>
       <TextArea
-        maxLength={2000}
+        maxLength={50000}
         size="large"
         value={msg}
         onChange={(e) => {

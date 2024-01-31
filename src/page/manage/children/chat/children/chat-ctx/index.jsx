@@ -247,7 +247,7 @@ function ChatCtx() {
               className={`remove-default-textarea ${
                 darkMode ? 'custom-placeholder' : ''
               }`}
-              maxLength={5000}
+              maxLength={50000}
               placeholder="Shift + Enter换行"
               onChange={(e) => setMsgValue(e.target.value)}
               autoSize={{ maxRows: 10 }}

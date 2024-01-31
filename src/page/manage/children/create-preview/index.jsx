@@ -15,21 +15,17 @@ function CreatePreview() {
   const { darkMode } = useContext(DarkModeContext);
   const [isChange, setIsChange] = useState(false);
   const [modelList, setModelList] = useState(''); //模型名称
-  const [SelectedModel, setSelectedModel] = useState({
-    value: 'mrk-3.5-turbo',
-    label: 'mrk-3.5-turbo',
-  }); //选中的模型
+
+  const [messages, setMessages] = useState([]); // 聊天消息 - 全局
 
   const [createParams, setCreateParams] = useState({
     prompt: '', //提示词
     imageUrl: '', //头像
     name: '', //角色名称
-    temperature: 0.7, //发散能力(0~2)
+    temperature: '0.7', //发散能力(0~2)
     modelName: 'mrk-3.5-turbo', //使用模型
     isShowKnowledge: 1, //是否展现知识库[1:关闭(默认) 2:开启]
     knowledgeId: '', //知识库id
-    messages: [], //聊天记录
-    isOnline: 1, //是否联网[1:关闭(默认) 2:开启]
   });
 
   // 获取模型列表type[空:全部,1:文本,2:向量,3:图像,4:文本审核]
@@ -38,18 +34,12 @@ function CreatePreview() {
       const res = await ajax.get(`/chat/model/list?type=1`);
       if (res.code === 200) {
         if (res.data) {
-          // console.log('🚀 ~ getModelList ~ res.data:', res.data);
           setModelList(res.data);
         }
       }
     } catch (error) {
       console.log('🚀 ~ getFileList ~ error:', error || '获取模型列表失败');
     }
-  };
-
-  // Create选中的模型
-  const handleModelChoose = (model) => {
-    setSelectedModel(model);
   };
 
   useEffect(() => {
@@ -66,13 +56,19 @@ function CreatePreview() {
       >
         <div className="create-preview-item">
           <Create
+            createParams={createParams}
+            setCreateParams={setCreateParams}
             modelList={modelList}
-            getModelList={getModelList}
-            onModelChoose={handleModelChoose}
+            messages={messages}
+            setMessages={setMessages}
           />
         </div>
         <div className="preview-container-box create-preview-item">
-          <Preview modelList={modelList} selectedModel={SelectedModel} />
+          <Preview
+            createParams={createParams}
+            messages={messages}
+            setMessages={setMessages}
+          />
         </div>
       </div>
       {/* 移动端 */}
@@ -93,11 +89,21 @@ function CreatePreview() {
         {/* 创建/预览 */}
         {isChange ? (
           <div className="preview-container-box create-preview-item">
-            <Preview modelList={modelList} selectedModel={SelectedModel} />
+            <Preview
+              createParams={createParams}
+              messages={messages}
+              setMessages={setMessages}
+            />
           </div>
         ) : (
           <div className="create-preview-item">
-            <Create modelList={modelList} onModelChoose={handleModelChoose} />
+            <Create
+              createParams={createParams}
+              setCreateParams={setCreateParams}
+              modelList={modelList}
+              messages={messages}
+              setMessages={setMessages}
+            />
           </div>
         )}
 
