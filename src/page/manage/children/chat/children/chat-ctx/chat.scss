@@ -43,6 +43,7 @@
         line-height: 20px;
       }
     }
+    // 聊天页面
     .chat-chat-main {
       font-size: 14px;
       overflow-x: hidden;
@@ -99,6 +100,24 @@
         }
         &.hide {
           opacity: 0;
+        }
+      }
+    }
+    // 聊天页面 - 空
+    .chat-chat-empty {
+      height: calc(100% - 80px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .chat-empty-icon {
+        > img {
+          opacity: 0.1;
+          width: 80px;
+          filter: brightness(0);
+          @media screen and (max-width: 768px) {
+            width: 50px;
+          }
         }
       }
     }
@@ -210,6 +229,7 @@
         }
       }
     }
+    // 聊天页面
     .chat-chat-main {
       > div {
         .msg-item {
@@ -220,6 +240,14 @@
       .bot-msg {
         > div {
           background-color: $text-300;
+        }
+      }
+    }
+    // 聊天页面 - 空
+    .chat-chat-empty {
+      .chat-empty-icon {
+        > img {
+          filter: brightness(0) invert(1); //invert(1)反转
         }
       }
     }

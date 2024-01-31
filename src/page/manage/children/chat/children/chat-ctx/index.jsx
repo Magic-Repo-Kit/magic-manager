@@ -6,17 +6,30 @@ import TextLoading from '@/components/text-loading';
 import MarkdownRenderer from '@/components/MarkdownRenderer';
 import { DarkModeContext } from '@/components/DarkModeProvider'; //夜间模式
 // import { throttle } from 'lodash'; //lodash 节流函数
+import ajax from '@/request';
 
 // 图片
 import userHead from '@/assets/images/user-head.png';
 import botHead from '@/assets/images/bot-head.png';
+import mrkLogo from '@/assets/images/logo-mrk.png';
 // antd组件
 import { Input, Select } from 'antd';
+
 const { TextArea } = Input;
 
 function ChatCtx() {
   //  共享参数
   const { darkMode } = useContext(DarkModeContext);
+
+  const [roleList, setRoleList] = useState([]); // 角色列表
+  const [selectedRole, setSelectedRole] = useState([]); //选中的角色
+
+  const [roleParams, setRoleParams] = useState({
+    // 角色列表参数
+    pageNo: 1,
+    pageSize: 100,
+    keywords: '',
+  });
 
   const [msgValue, setMsgValue] = useState(''); //发送消息
   const [isExtended, setIsExtended] = useState(false); // 扩展是否显示
@@ -27,11 +40,49 @@ function ChatCtx() {
   const [isLoading, setIsLoading] = useState(false); // 是否等待
   const chatMainRef = useRef(null);
 
+  const [chatParams, setChatParams] = useState({
+    content: '你会什么？', //	对话内容
+    roleId: '1752617382628560898', //角色id
+    conversationId: 'd08b777e-f5c2-493f-82ae-060731d1ea80', // 会话id[不传开始新的会话]
+    isContext: 2, //是否开启上下文[1:关闭 2:开启]
+    contextLength: 30, //上下文长度问答对数量(只有开启上下文生效)[默认20，范围1-100]
+    isOnline: 1, //是否联网[1:关闭 2:开启]
+  });
+
   // 阻止默认的换行,(Enter-发送),(Shift + Enter - 换行)
   const handleKeyDown = (e) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
       handleRequestMessage();
+    }
+  };
+
+  // 获取角色列表
+  const getRoleList = async () => {
+    try {
+      const res = await ajax.get(`/chat/role/list-page`, roleParams);
+      if (res.code === 200) {
+        if (res.data) {
+          const tempRoleList = res.data.list
+            ? res.data.list.map((role) => ({
+                value: role.id,
+                label: role.name,
+                description: role.description,
+                imageUrl: role.imageUrl,
+              }))
+            : [];
+          setRoleList(tempRoleList);
+
+          setSelectedRole(tempRoleList[0]);
+
+          setChatParams((prevParams) => ({
+            ...prevParams,
+            roleId: tempRoleList[0],
+          }));
+        }
+      }
+    } catch (error) {
+      console.log('🚀 ~ getFileList ~ error:', error || '获取模型列表失败');
     }
   };
   // 模型选择
@@ -67,7 +118,7 @@ function ChatCtx() {
   // 发送消息接口
   const sendMessage = async () => {
     const params = {
-      modelName: 'mrk-3.5-turbo',
+      modelName: selectedRole.value,
       temperature: '0.7',
       isShowKnowledge: 1,
       knowledgeId: '1746480158702338049',
@@ -147,24 +198,16 @@ function ChatCtx() {
   };
   useEffect(() => {
     scrollToBottom(); //messages数组有变化就滚动
+    getRoleList();
   }, [messages]);
 
   return (
     <div className={`chat-container ${darkMode ? 'dark-mode' : ''}`}>
       <div className="chat-select-btn">
         <Select
-          defaultValue="GPT3.5"
-          onChange={handleChangeModal}
-          options={[
-            {
-              value: 'GPT3.5',
-              label: 'GPT3.5',
-            },
-            {
-              value: 'GPT4.0',
-              label: 'GPT4.0',
-            },
-          ]}
+          value={selectedRole}
+          onChange={(value) => setSelectedRole(value)}
+          options={roleList}
         />
       </div>
 
@@ -177,26 +220,27 @@ function ChatCtx() {
           </div>
           <div className="chat-prompt-text">MagicRepoKit闪聊开始内测啦！</div>
         </div>
-        <div className="chat-chat-main">
-          {messages.map((item, index) => {
-            return (
-              <div
-                key={index}
-                className={item.type === 1 ? 'user-msg' : 'bot-msg'}
-              >
-                {/* 头像-bot */}
-                {item.type === 1 ? (
-                  ''
-                ) : (
-                  <img className="bot-head" src={botHead} />
-                )}
+        {messages && messages.length > 0 ? (
+          <div className="chat-chat-main">
+            {messages.map((item, index) => {
+              return (
+                <div
+                  key={index}
+                  className={item.type === 1 ? 'user-msg' : 'bot-msg'}
+                >
+                  {/* 头像-bot */}
+                  {item.type === 1 ? (
+                    ''
+                  ) : (
+                    <img className="bot-head" src={botHead} />
+                  )}
 
-                {/* 聊天内容 */}
-                <div className="msg-item">
-                  <MarkdownRenderer markdown={item.message} />
-                  {/* {item.message} */}
-                  {/* 刷新请求 */}
-                  {/* {item.isError && index === messages.length - 1 ? (
+                  {/* 聊天内容 */}
+                  <div className="msg-item">
+                    <MarkdownRenderer markdown={item.message} />
+                    {/* {item.message} */}
+                    {/* 刷新请求 */}
+                    {/* {item.isError && index === messages.length - 1 ? (
                     <div
                       className="msg-refush"
                       onClick={throttle(sendMessage, 3000)}
@@ -206,33 +250,40 @@ function ChatCtx() {
                   ) : (
                     ''
                   )} */}
-                </div>
-
-                {/* 头像-user */}
-                {item.type === 1 ? (
-                  <img className="user-head" src={userHead} />
-                ) : (
-                  ''
-                )}
-              </div>
-            );
-          })}
-          {isLoading && (
-            <div className={`bot-msg ${isLoading ? '' : 'hide'}`}>
-              <img className="bot-head" src={botHead} />
-              {/* <div className="msg-item">{sumStr || <TextLoading />}</div> */}
-              <div className="msg-item">
-                {sumStr ? (
-                  <MarkdownRenderer markdown={sumStr} />
-                ) : (
-                  <div style={{ paddingBottom: 8 }}>
-                    <TextLoading />
                   </div>
-                )}
+
+                  {/* 头像-user */}
+                  {item.type === 1 ? (
+                    <img className="user-head" src={userHead} />
+                  ) : (
+                    ''
+                  )}
+                </div>
+              );
+            })}
+            {isLoading && (
+              <div className={`bot-msg ${isLoading ? '' : 'hide'}`}>
+                <img className="bot-head" src={botHead} />
+                {/* <div className="msg-item">{sumStr || <TextLoading />}</div> */}
+                <div className="msg-item">
+                  {sumStr ? (
+                    <MarkdownRenderer markdown={sumStr} />
+                  ) : (
+                    <div style={{ paddingBottom: 8 }}>
+                      <TextLoading />
+                    </div>
+                  )}
+                </div>
               </div>
+            )}
+          </div>
+        ) : (
+          <div className="chat-chat-empty">
+            <div className="chat-empty-icon flx-center user-select">
+              <img src={mrkLogo} className="mrkLogo" />
             </div>
-          )}
-        </div>
+          </div>
+        )}
       </main>
 
       <footer className="chat-container-footer">
