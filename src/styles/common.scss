@@ -232,6 +232,21 @@ a.no-style {
   background-size: 1.1rem 1.1rem;
 }
 
+// 停止 - 放大缩小
+.stop-scale {
+  display: block;
+  animation: icon-scale 0.3s infinite alternate-reverse;
+  @keyframes icon-scale {
+    0% {
+      transform: scale(1);
+    }
+
+    100% {
+      transform: scale(1.15);
+    }
+  }
+}
+
 .loading-rocks {
   display: flex;
   justify-content: center;

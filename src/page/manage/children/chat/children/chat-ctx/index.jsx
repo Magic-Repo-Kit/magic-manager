@@ -21,9 +21,6 @@ function ChatCtx() {
   //  共享参数
   const { darkMode } = useContext(DarkModeContext);
 
-  const [roleList, setRoleList] = useState([]); // 角色列表
-  const [selectedRole, setSelectedRole] = useState([]); //选中的角色
-
   const [roleParams, setRoleParams] = useState({
     // 角色列表参数
     pageNo: 1,
@@ -31,18 +28,28 @@ function ChatCtx() {
     keywords: '',
   });
 
-  const [msgValue, setMsgValue] = useState(''); //发送消息
+  const [roleList, setRoleList] = useState([]); // 角色列表
+  const [roleImg, setRoleImg] = useState(''); // 角色头像
+  const [roleName, setRoleName] = useState(''); // 角色姓名
+  const [roleDescription, setDescription] = useState(''); // 角色功能描述
+  const [roleModel, setRoleModel] = useState(''); // 角色基于模型
+  const [roleConversationStarters, setConversationStarters] = useState([
+    '帮我用Python实现一个计数器',
+    '我想写个年终报告',
+    '什么是量子力学？',
+  ]); // 试试这样问
+
+  // const [msgValue, setMsgValue] = useState(''); //发送消息
   const [isExtended, setIsExtended] = useState(false); // 扩展是否显示
 
   const [messages, setMessages] = useState([]); // 聊天消息
-  const messagesRef = useRef([]); // 拿到最新的messages值
   const [sumStr, setSumStr] = useState(''); //聊天消息 - 临时存储
   const [isLoading, setIsLoading] = useState(false); // 是否等待
   const chatMainRef = useRef(null);
 
   const [chatParams, setChatParams] = useState({
-    content: '你会什么？', //	对话内容
-    roleId: '1752617382628560898', //角色id
+    content: '', //	对话内容
+    roleId: '1', //角色id , 默认1 ，mrk-3.5
     conversationId: 'd08b777e-f5c2-493f-82ae-060731d1ea80', // 会话id[不传开始新的会话]
     isContext: 2, //是否开启上下文[1:关闭 2:开启]
     contextLength: 30, //上下文长度问答对数量(只有开启上下文生效)[默认20，范围1-100]
@@ -72,43 +79,90 @@ function ChatCtx() {
               }))
             : [];
           setRoleList(tempRoleList);
-
-          setSelectedRole(tempRoleList[0]);
-
-          setChatParams((prevParams) => ({
-            ...prevParams,
-            roleId: tempRoleList[0],
-          }));
         }
       }
     } catch (error) {
       console.log('🚀 ~ getFileList ~ error:', error || '获取模型列表失败');
     }
   };
-  // 模型选择
-  const handleChangeModal = (value) => {
-    console.log(`selected ${value}`);
+  // 获取角色详情
+  const getRoleDetail = async (roleId) => {
+    const id = roleId || chatParams.roleId;
+    try {
+      const res = await ajax.get(`/chat/role/detail/${id}`);
+      if (res.code === 200) {
+        if (res.data) {
+          console.log('🚀 ~ getRoleDetail ~ res.data:', res.data);
+          // 角色简介
+          setRoleName(res.data.name);
+          setDescription(res.data.description);
+          setRoleImg(res.data.imageUrl);
+          setRoleImg(res.data.imageUrl);
+          setRoleModel(res.data.modelName);
+          if (
+            res.data.conversationStarters &&
+            res.data.conversationStarters.length > 0
+          ) {
+            setConversationStarters(res.data.conversationStarters);
+          }
+        }
+      }
+    } catch (error) {
+      console.log('🚀 ~ getFileList ~ error:', error || '获取角色详情失败');
+    }
+  };
+
+  // 切换角色
+  const handleChangeSelect = (value) => {
+    setChatParams((prevParams) => ({
+      ...prevParams,
+      roleId: value,
+    }));
+    getRoleDetail(value);
+  };
+  // 快捷提问
+  const handleFastQuestion = async (question) => {
+    console.log('🚀 ~ handleFastQuestion ~ question:', question);
+
+    if (question.trim() !== '') {
+      // 更新消息显示数组 - user
+      setMessages((prevMessages) => [
+        ...prevMessages,
+        { message: question, type: 1 },
+      ]);
+
+      setIsLoading(true);
+
+      // 请求
+      sendMessage(question);
+    }
   };
 
   // 处理请求时的消息
   const handleRequestMessage = () => {
     // 过滤空格
-    if (msgValue.trim() === '') {
-      setMsgValue('');
+    if (chatParams.content.trim() === '') {
+      setChatParams((prevParams) => ({
+        ...prevParams,
+        content: '',
+      }));
       return;
     }
     if (isLoading) {
       return;
     }
 
-    if (msgValue.trim() !== '') {
+    if (chatParams.content.trim() !== '') {
       // 更新消息显示数组 - user
-      setMessages((prevMessages) => {
-        const newMessages = [...prevMessages, { message: msgValue, type: 1 }];
-        messagesRef.current = newMessages; //用messagesRef.current存储 - 请求用(解决useState副作用)
-        return newMessages;
-      });
-      setMsgValue('');
+      setMessages((prevMessages) => [
+        ...prevMessages,
+        { message: chatParams.content, type: 1 },
+      ]);
+      // 发送之后清掉chatParams
+      setChatParams((prevParams) => ({
+        ...prevParams,
+        content: '',
+      }));
       setIsLoading(true);
 
       // 请求
@@ -116,17 +170,7 @@ function ChatCtx() {
     }
   };
   // 发送消息接口
-  const sendMessage = async () => {
-    const params = {
-      modelName: selectedRole.value,
-      temperature: '0.7',
-      isShowKnowledge: 1,
-      knowledgeId: '1746480158702338049',
-      messages: messagesRef.current,
-      prompt: '',
-      isOnline: 1,
-    };
-
+  const sendMessage = async (question) => {
     // SSE 成功-回调函数
     const onMessage = (event) => {
       if (event.isEnd) {
@@ -137,8 +181,6 @@ function ChatCtx() {
         return;
       } else {
         if (event.message) {
-          // console.log('🚀 ~ onMessage ~ message:', event.message);
-
           // 字符串累加
           setSumStr((prevSumStr) => prevSumStr + event.message);
 
@@ -171,13 +213,24 @@ function ChatCtx() {
     };
 
     // 调用SSE函数
-    sseRequest(
-      '/chat/gpt/chat-preset',
-      params,
-      onMessage,
-      setIsLoading,
-      onMyError
-    );
+    if (question) {
+      // 快速提问
+      sseRequest(
+        '/chat/gpt/chat-role',
+        { ...chatParams, content: question },
+        onMessage,
+        setIsLoading,
+        onMyError
+      );
+    } else {
+      sseRequest(
+        '/chat/gpt/chat-role',
+        chatParams,
+        onMessage,
+        setIsLoading,
+        onMyError
+      );
+    }
   };
 
   // 处理接收到的消息
@@ -198,15 +251,18 @@ function ChatCtx() {
   };
   useEffect(() => {
     scrollToBottom(); //messages数组有变化就滚动
-    getRoleList();
   }, [messages]);
+  useEffect(() => {
+    getRoleList();
+    getRoleDetail();
+  }, []);
 
   return (
     <div className={`chat-container ${darkMode ? 'dark-mode' : ''}`}>
       <div className="chat-select-btn">
         <Select
-          value={selectedRole}
-          onChange={(value) => setSelectedRole(value)}
+          defaultValue="1"
+          onChange={handleChangeSelect}
           options={roleList}
         />
       </div>
@@ -225,7 +281,7 @@ function ChatCtx() {
                   {item.type === 1 ? (
                     ''
                   ) : (
-                    <img className="bot-head" src={botHead} />
+                    <img className="bot-head" src={roleImg || botHead} />
                   )}
 
                   {/* 聊天内容 */}
@@ -256,7 +312,7 @@ function ChatCtx() {
             })}
             {isLoading && (
               <div className={`bot-msg ${isLoading ? '' : 'hide'}`}>
-                <img className="bot-head" src={botHead} />
+                <img className="bot-head" src={roleImg || botHead} />
                 {/* <div className="msg-item">{sumStr || <TextLoading />}</div> */}
                 <div className="msg-item">
                   {sumStr ? (
@@ -271,6 +327,7 @@ function ChatCtx() {
             )}
           </div>
         ) : (
+          // 没有消息时
           <>
             {/* 人物介绍 */}
 
@@ -282,16 +339,17 @@ function ChatCtx() {
                     <div>
                       <div className="role-info-name single-omit">
                         <i className="iconfont mr-taocanbanben"></i>
-                        <span>小明同学</span>
+                        <span>{roleName}</span>
                       </div>
                       <div className="role-info-ability multiple-omit">
-                        一个功能强大的AI助手，帮你解决各种问题。多模态人工智能！
+                        {roleDescription ||
+                          '一个功能强大的AI助手，帮你解决各种问题。多模态人工智能！'}
                       </div>
                     </div>
 
                     <div className="role-info-author">
                       <div className="role-info-title single-omit">
-                        <span className="role-info-model">mrk-3.5-turbo</span>
+                        <span className="role-info-model">{roleModel}</span>
                         <span className="role-info-model">Creative</span>
                         <span className="role-info-model">创作</span>
                       </div>
@@ -304,7 +362,7 @@ function ChatCtx() {
                   </div>
                   <div className="chat-prompt-role-right font-family-dingding">
                     <div className="role-info-head">
-                      <img src={selectedRole.imageUrl} />
+                      <img src={roleImg || botHead} />
                     </div>
                     <div className="role-info-collect flx-justify-between">
                       {/* 收藏 */}
@@ -327,10 +385,18 @@ function ChatCtx() {
                 <div className="chat-prompt-title font-family-dingding">
                   试试这样问
                 </div>
-                <div className="chat-question">
-                  <span>帮我用Python实现一个计数器</span>
-                  <span>我想写个年终报告</span>
-                  <span>什么是量子力学？</span>
+                <div className="chat-question user-select">
+                  {roleConversationStarters &&
+                  roleConversationStarters.length > 0
+                    ? roleConversationStarters.map((item, index) => (
+                        <span
+                          key={index}
+                          onClick={() => handleFastQuestion(item)}
+                        >
+                          {item}
+                        </span>
+                      ))
+                    : ''}
                 </div>
               </div>
             </div>
@@ -352,18 +418,23 @@ function ChatCtx() {
               style={{
                 color: darkMode ? '#fff' : '',
               }}
-              value={msgValue}
+              value={chatParams.content}
               className={`remove-default-textarea ${
                 darkMode ? 'custom-placeholder' : ''
               }`}
               maxLength={50000}
               placeholder="Shift + Enter换行"
-              onChange={(e) => setMsgValue(e.target.value)}
+              onChange={(e) =>
+                setChatParams((prevParams) => ({
+                  ...prevParams,
+                  content: e.target.value,
+                }))
+              }
               autoSize={{ maxRows: 10 }}
               onFocus={() => setIsExtended(false)}
               onKeyDown={handleKeyDown} // 监听键盘按键
             />
-            {msgValue ? (
+            {chatParams.content ? (
               ''
             ) : (
               <div className="chat-footer-icon chat-footer-sound">
@@ -374,20 +445,28 @@ function ChatCtx() {
           {/* 添加 / 发送图标 */}
 
           <div className={`chat-footer-icon chat-footer-send click-jump `}>
-            {msgValue ? (
-              <i
-                className="iconfont mr-gongzuo-jiantoufasonganniu"
-                onClick={handleRequestMessage}
-              ></i>
+            {isLoading ? (
+              <i className="iconfont mr-stop stop-scale"></i>
             ) : (
-              <div
-                className={`${isExtended ? 'add-rotate' : 'reverse-rotate'}`}
-              >
-                <i
-                  className="iconfont mr-jia"
-                  onClick={() => setIsExtended(!isExtended)}
-                ></i>
-              </div>
+              <>
+                {chatParams.content ? (
+                  <i
+                    className="iconfont mr-gongzuo-jiantoufasonganniu"
+                    onClick={handleRequestMessage}
+                  ></i>
+                ) : (
+                  <div
+                    className={`${
+                      isExtended ? 'add-rotate' : 'reverse-rotate'
+                    }`}
+                  >
+                    <i
+                      className="iconfont mr-jia"
+                      onClick={() => setIsExtended(!isExtended)}
+                    ></i>
+                  </div>
+                )}
+              </>
             )}
           </div>
         </div>
