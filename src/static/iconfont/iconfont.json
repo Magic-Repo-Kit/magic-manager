@@ -6,6 +6,146 @@
   "description": "百宝袋",
   "glyphs": [
     {
+      "icon_id": "1435204",
+      "name": "收藏填充",
+      "font_class": "shoucangtianchong",
+      "unicode": "e64f",
+      "unicode_decimal": 58959
+    },
+    {
+      "icon_id": "1435244",
+      "name": "喜欢填充",
+      "font_class": "xihuantianchong",
+      "unicode": "e685",
+      "unicode_decimal": 59013
+    },
+    {
+      "icon_id": "1435247",
+      "name": "验证码填充",
+      "font_class": "yanzhengmatianchong",
+      "unicode": "e686",
+      "unicode_decimal": 59014
+    },
+    {
+      "icon_id": "1435248",
+      "name": "验证码",
+      "font_class": "yanzhengma",
+      "unicode": "e687",
+      "unicode_decimal": 59015
+    },
+    {
+      "icon_id": "714340",
+      "name": "套餐版本",
+      "font_class": "taocanbanben",
+      "unicode": "e6b6",
+      "unicode_decimal": 59062
+    },
+    {
+      "icon_id": "2700350",
+      "name": "超导芯片",
+      "font_class": "chaodaoxinpian",
+      "unicode": "e681",
+      "unicode_decimal": 59009
+    },
+    {
+      "icon_id": "8400544",
+      "name": "AI芯片结构",
+      "font_class": "AIxinpianjiegou",
+      "unicode": "e682",
+      "unicode_decimal": 59010
+    },
+    {
+      "icon_id": "18320823",
+      "name": "空数据",
+      "font_class": "kongshuju",
+      "unicode": "e6ad",
+      "unicode_decimal": 59053
+    },
+    {
+      "icon_id": "22773544",
+      "name": "半导体芯片",
+      "font_class": "bandaotixinpian",
+      "unicode": "e683",
+      "unicode_decimal": 59011
+    },
+    {
+      "icon_id": "27520555",
+      "name": "读取版本",
+      "font_class": "duqubanben",
+      "unicode": "e933",
+      "unicode_decimal": 59699
+    },
+    {
+      "icon_id": "18165852",
+      "name": "证件,工作证,身份,员工,人员卡,工牌",
+      "font_class": "work-permit",
+      "unicode": "e8a9",
+      "unicode_decimal": 59561
+    },
+    {
+      "icon_id": "18169741",
+      "name": "数据库,数据",
+      "font_class": "odbc",
+      "unicode": "e93a",
+      "unicode_decimal": 59706
+    },
+    {
+      "icon_id": "18169761",
+      "name": "数据库,数据",
+      "font_class": "database",
+      "unicode": "e940",
+      "unicode_decimal": 59712
+    },
+    {
+      "icon_id": "18169816",
+      "name": "nfc-full",
+      "font_class": "nfc-full",
+      "unicode": "e94b",
+      "unicode_decimal": 59723
+    },
+    {
+      "icon_id": "18171122",
+      "name": "重做,刷新",
+      "font_class": "reset",
+      "unicode": "ea11",
+      "unicode_decimal": 59921
+    },
+    {
+      "icon_id": "18171214",
+      "name": "标签,贴标",
+      "font_class": "tag-full",
+      "unicode": "ea2b",
+      "unicode_decimal": 59947
+    },
+    {
+      "icon_id": "18171226",
+      "name": "复制,重复,重叠",
+      "font_class": "copy-rect",
+      "unicode": "ea30",
+      "unicode_decimal": 59952
+    },
+    {
+      "icon_id": "18174847",
+      "name": "文件,pdf",
+      "font_class": "pdf-full",
+      "unicode": "ea44",
+      "unicode_decimal": 59972
+    },
+    {
+      "icon_id": "18174850",
+      "name": "文件,txt",
+      "font_class": "txt-full",
+      "unicode": "ea47",
+      "unicode_decimal": 59975
+    },
+    {
+      "icon_id": "18174873",
+      "name": "文件,word",
+      "font_class": "word-full",
+      "unicode": "ea50",
+      "unicode_decimal": 59984
+    },
+    {
       "icon_id": "10388773",
       "name": "拍摄",
       "font_class": "paishe",
@@ -377,13 +517,6 @@
       "unicode_decimal": 58956
     },
     {
-      "icon_id": "11232195",
-      "name": "VR",
-      "font_class": "VR3",
-      "unicode": "e7e1",
-      "unicode_decimal": 59361
-    },
-    {
       "icon_id": "15378343",
       "name": "favro",
       "font_class": "favro",
@@ -536,20 +669,6 @@
       "font_class": "ic_user1",
       "unicode": "e68d",
       "unicode_decimal": 59021
-    },
-    {
-      "icon_id": "15188656",
-      "name": "user",
-      "font_class": "user1",
-      "unicode": "e730",
-      "unicode_decimal": 59184
-    },
-    {
-      "icon_id": "35170141",
-      "name": "user用户",
-      "font_class": "useryonghu",
-      "unicode": "e858",
-      "unicode_decimal": 59480
     },
     {
       "icon_id": "1484894",
@@ -867,13 +986,6 @@
       "unicode_decimal": 58957
     },
     {
-      "icon_id": "3904594",
-      "name": "智能芯片＊",
-      "font_class": "zhinengxinpian",
-      "unicode": "e6a0",
-      "unicode_decimal": 59040
-    },
-    {
       "icon_id": "5142620",
       "name": "ai customer",
       "font_class": "aicustomer",
@@ -900,20 +1012,6 @@
       "font_class": "scazhinengduihuafenxi",
       "unicode": "e8e8",
       "unicode_decimal": 59624
-    },
-    {
-      "icon_id": "21284171",
-      "name": "ai1",
-      "font_class": "ai1",
-      "unicode": "e64f",
-      "unicode_decimal": 58959
-    },
-    {
-      "icon_id": "26537724",
-      "name": "AIyuqing",
-      "font_class": "AIyuqing",
-      "unicode": "e6f9",
-      "unicode_decimal": 59129
     },
     {
       "icon_id": "28282644",

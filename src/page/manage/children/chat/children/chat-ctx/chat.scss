@@ -17,37 +17,158 @@
       display: none;
     }
     .chat-prompt-box {
+      position: absolute;
       font-size: 14px;
       width: 100%;
-      min-height: 80px;
-      padding: 12px;
-      box-sizing: border-box;
-      border-radius: 10px;
-      background-color: $primary-1000;
-      box-shadow: $shadow-200;
-      .chat-prompt-title {
-        i,
-        > :last-child {
-          background-image: linear-gradient(#af40ff, #5b42f3 50%, #00ddeb);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
+      // 角色介绍
+      .chat-prompt-role {
+        min-height: 70px;
+        box-sizing: border-box;
+        padding: 20px;
+        border-radius: 10px;
+        background-color: $primary-1000;
+        box-shadow: $shadow-200;
+        display: flex;
+        justify-content: space-between;
+        @media screen and (max-width: 768px) {
+          padding: 15px;
+        }
+        .chat-prompt-role-left {
+          width: 65%;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          .role-info-name {
+            padding-top: 5px;
+            font-size: 25px;
+            margin-bottom: 10px;
+            > i {
+              font-size: 22px;
+              margin-right: 3px;
+            }
+          }
+          .role-info-ability {
+            margin-bottom: 10px;
+          }
+          .role-info-author {
+            margin-top: 20px;
+            img {
+              height: 20px;
+              border-radius: 50%;
+            }
+            .role-info-title {
+              margin-bottom: 10px;
+              .role-info-model {
+                margin-right: 5px;
+                display: inline-block;
+                background: linear-gradient(
+                  269deg,
+                  #a171ff -3.63%,
+                  #5d66ff 100.38%
+                );
+                padding: 2px 6px;
+                border-radius: 12px;
+                font-size: 12px;
+                color: #fff;
+              }
+            }
+          }
+        }
+        .chat-prompt-role-right {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: space-between;
+          .role-info-head {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            margin-right: 3px;
+            border: 3px solid $bg-500;
+            margin-top: 10px;
+            @media screen and (max-width: 768px) {
+              margin-top: 20px;
+            }
+            > img {
+              width: 100%;
+              height: 100%;
+              border-radius: 50%;
+            }
+          }
+          .role-info-collect {
+            .role-info-star {
+              cursor: pointer;
+              > i {
+                font-size: 16px;
+                color: $accent-1000;
+              }
+              > :last-child {
+                font-size: 16px;
+                margin-left: 3px;
+              }
+              &:first-child {
+                margin-right: 15px;
+                > i {
+                  font-size: 17px;
+                  color: $accent-500;
+                }
+              }
+            }
+          }
         }
       }
-      i {
-        font-size: 16px;
-        margin-right: 5px;
-        margin-bottom: 3px;
-      }
-      .chat-prompt-text {
-        margin-top: 5px;
-        line-height: 20px;
+      // 预设问题
+      .chat-prompt-question-box {
+        margin-top: 10px;
+        box-sizing: border-box;
+
+        .chat-prompt-title {
+          font-size: 16px;
+          margin-bottom: 5px;
+          text-align: center;
+          position: relative;
+          opacity: 0.4;
+          &::before {
+            content: '';
+            width: calc((100% - 100px) / 2);
+            height: 1px;
+            background-color: $text-200;
+            opacity: 0.2;
+            position: absolute;
+            left: 0;
+            top: calc(50% - 1px);
+          }
+          &::after {
+            content: '';
+            width: calc((100% - 100px) / 2);
+            height: 1px;
+            background-color: $text-200;
+            opacity: 0.2;
+            position: absolute;
+            right: 0;
+            top: calc(50% - 1px);
+          }
+        }
+        .chat-question {
+          position: relative;
+
+          > span {
+            cursor: pointer;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            display: inline-block;
+            padding: 8px 12px;
+            background-color: $primary-1000;
+            border-radius: 4px;
+          }
+        }
       }
     }
+
     // 聊天页面
     .chat-chat-main {
       font-size: 14px;
       overflow-x: hidden;
-
       > div {
         margin: 30px 0;
         border-radius: 10px;
@@ -60,7 +181,7 @@
         .msg-item {
           padding: 8px 12px 0 12px;
           max-width: calc(100% - 95px);
-          background-color: $primary-1100;
+          background: $primary-1100;
           border-radius: 4px;
           position: relative;
           @media screen and (max-width: 768px) {
@@ -105,7 +226,7 @@
     }
     // 聊天页面 - 空
     .chat-chat-empty {
-      height: calc(100% - 80px);
+      height: 100%;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -113,10 +234,10 @@
       .chat-empty-icon {
         > img {
           opacity: 0.1;
-          width: 80px;
+          width: 40px;
           filter: brightness(0);
           @media screen and (max-width: 768px) {
-            width: 50px;
+            width: 30px;
           }
         }
       }
@@ -221,19 +342,35 @@
 .chat-container.dark-mode {
   main {
     .chat-prompt-box {
-      background-color: $text-300;
-      .chat-prompt-title {
-        i,
-        > :last-child {
-          background-image: linear-gradient(40deg, #ff0080, #ff8c00 70%);
+      .chat-prompt-role {
+        background-color: $text-300;
+        .chat-prompt-title {
+          i,
+          > :last-child {
+            background-image: linear-gradient(40deg, #ff0080, #ff8c00 70%);
+          }
+        }
+      }
+      // 预设问题
+      .chat-prompt-question-box {
+        .chat-prompt-title::before,
+        .chat-prompt-title::after {
+          background-color: $bg-100;
+        }
+        .chat-question {
+          > span {
+            background-color: $text-300;
+          }
         }
       }
     }
+
     // 聊天页面
     .chat-chat-main {
       > div {
         .msg-item {
-          background-color: $primary-100;
+          // background: $primary-100;
+          background: linear-gradient(269deg, #5d66ff -3.63%, #a171ff 100.38%);
         }
       }
       // 机器人消息

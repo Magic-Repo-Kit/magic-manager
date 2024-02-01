@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 4291850 */
-  src: url('iconfont.woff2?t=1705998895152') format('woff2'),
-       url('iconfont.woff?t=1705998895152') format('woff'),
-       url('iconfont.ttf?t=1705998895152') format('truetype');
+  src: url('iconfont.woff2?t=1706758278013') format('woff2'),
+       url('iconfont.woff?t=1706758278013') format('woff'),
+       url('iconfont.ttf?t=1706758278013') format('truetype');
 }
 
 .iconfont {
@@ -11,6 +11,86 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.mr-shoucangtianchong:before {
+  content: "\e64f";
+}
+
+.mr-xihuantianchong:before {
+  content: "\e685";
+}
+
+.mr-yanzhengmatianchong:before {
+  content: "\e686";
+}
+
+.mr-yanzhengma:before {
+  content: "\e687";
+}
+
+.mr-taocanbanben:before {
+  content: "\e6b6";
+}
+
+.mr-chaodaoxinpian:before {
+  content: "\e681";
+}
+
+.mr-AIxinpianjiegou:before {
+  content: "\e682";
+}
+
+.mr-kongshuju:before {
+  content: "\e6ad";
+}
+
+.mr-bandaotixinpian:before {
+  content: "\e683";
+}
+
+.mr-duqubanben:before {
+  content: "\e933";
+}
+
+.mr-work-permit:before {
+  content: "\e8a9";
+}
+
+.mr-odbc:before {
+  content: "\e93a";
+}
+
+.mr-database:before {
+  content: "\e940";
+}
+
+.mr-nfc-full:before {
+  content: "\e94b";
+}
+
+.mr-reset:before {
+  content: "\ea11";
+}
+
+.mr-tag-full:before {
+  content: "\ea2b";
+}
+
+.mr-copy-rect:before {
+  content: "\ea30";
+}
+
+.mr-pdf-full:before {
+  content: "\ea44";
+}
+
+.mr-txt-full:before {
+  content: "\ea47";
+}
+
+.mr-word-full:before {
+  content: "\ea50";
 }
 
 .mr-paishe:before {
@@ -225,10 +305,6 @@
   content: "\e64c";
 }
 
-.mr-VR3:before {
-  content: "\e7e1";
-}
-
 .mr-favro:before {
   content: "\eb8d";
 }
@@ -315,14 +391,6 @@
 
 .mr-ic_user1:before {
   content: "\e68d";
-}
-
-.mr-user1:before {
-  content: "\e730";
-}
-
-.mr-useryonghu:before {
-  content: "\e858";
 }
 
 .mr-user-admin:before {
@@ -505,10 +573,6 @@
   content: "\e64d";
 }
 
-.mr-zhinengxinpian:before {
-  content: "\e6a0";
-}
-
 .mr-aicustomer:before {
   content: "\e812";
 }
@@ -523,14 +587,6 @@
 
 .mr-scazhinengduihuafenxi:before {
   content: "\e8e8";
-}
-
-.mr-ai1:before {
-  content: "\e64f";
-}
-
-.mr-AIyuqing:before {
-  content: "\e6f9";
 }
 
 .mr-zhinengkefuzhongxin:before {

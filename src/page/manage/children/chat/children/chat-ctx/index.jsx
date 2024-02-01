@@ -13,7 +13,7 @@ import userHead from '@/assets/images/user-head.png';
 import botHead from '@/assets/images/bot-head.png';
 import mrkLogo from '@/assets/images/logo-mrk.png';
 // antd组件
-import { Input, Select } from 'antd';
+import { Input, Select, Badge } from 'antd';
 
 const { TextArea } = Input;
 
@@ -213,13 +213,6 @@ function ChatCtx() {
 
       {/* 聊天 */}
       <main ref={chatMainRef}>
-        <div className="chat-prompt-box">
-          <div className="flx-align-center chat-prompt-title">
-            <i className="iconfont mr-aiqfome"></i>
-            <div className="font-family-dingding">通知</div>
-          </div>
-          <div className="chat-prompt-text">MagicRepoKit闪聊开始内测啦！</div>
-        </div>
         {messages && messages.length > 0 ? (
           <div className="chat-chat-main">
             {messages.map((item, index) => {
@@ -278,11 +271,76 @@ function ChatCtx() {
             )}
           </div>
         ) : (
-          <div className="chat-chat-empty">
-            <div className="chat-empty-icon flx-center user-select">
-              <img src={mrkLogo} className="mrkLogo" />
+          <>
+            {/* 人物介绍 */}
+
+            <div className="chat-prompt-box">
+              {/* 角色介绍 */}
+              <Badge.Ribbon text="简介" color="#4f46e5">
+                <div className="chat-prompt-role">
+                  <div className="chat-prompt-role-left font-family-dingding">
+                    <div>
+                      <div className="role-info-name single-omit">
+                        <i className="iconfont mr-taocanbanben"></i>
+                        <span>小明同学</span>
+                      </div>
+                      <div className="role-info-ability multiple-omit">
+                        一个功能强大的AI助手，帮你解决各种问题。多模态人工智能！
+                      </div>
+                    </div>
+
+                    <div className="role-info-author">
+                      <div className="role-info-title single-omit">
+                        <span className="role-info-model">mrk-3.5-turbo</span>
+                        <span className="role-info-model">Creative</span>
+                        <span className="role-info-model">创作</span>
+                      </div>
+                      <div className="flx-align-center single-omit">
+                        <span>作者：</span>
+                        <img src={userHead} />
+                        <span>无敌管理员</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="chat-prompt-role-right font-family-dingding">
+                    <div className="role-info-head">
+                      <img src={selectedRole.imageUrl} />
+                    </div>
+                    <div className="role-info-collect flx-justify-between">
+                      {/* 收藏 */}
+                      <div className="role-info-star flx-center">
+                        <i className="iconfont mr-shoucangtianchong"></i>
+                        <span>406</span>
+                      </div>
+                      {/* 点赞 */}
+                      <div className="role-info-star flx-center">
+                        <i className="iconfont mr-xihuantianchong"></i>
+                        <span>523</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </Badge.Ribbon>
+
+              {/* 预设问题 */}
+              <div className="chat-prompt-question-box">
+                <div className="chat-prompt-title font-family-dingding">
+                  试试这样问
+                </div>
+                <div className="chat-question">
+                  <span>帮我用Python实现一个计数器</span>
+                  <span>我想写个年终报告</span>
+                  <span>什么是量子力学？</span>
+                </div>
+              </div>
             </div>
-          </div>
+
+            <div className="chat-chat-empty">
+              <div className="chat-empty-icon flx-center user-select">
+                <img src={mrkLogo} className="mrkLogo" />
+              </div>
+            </div>
+          </>
         )}
       </main>
 

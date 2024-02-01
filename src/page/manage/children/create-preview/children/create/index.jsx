@@ -373,6 +373,21 @@ function Create({
               />
             </div>
           </div>
+          <div className="flx-align-center">
+            <div className="create-base-title">角色介绍：</div>
+            <div className="create-base-input">
+              <Input
+                placeholder={`描述一下角色主要功能`}
+                value={createParams.name}
+                onChange={(e) =>
+                  setCreateParams((prevParams) => ({
+                    ...prevParams,
+                    name: e.target.value,
+                  }))
+                }
+              />
+            </div>
+          </div>
         </div>
         <div className="create-base-Info create-high-config">
           <div className="flx-justify-between">
