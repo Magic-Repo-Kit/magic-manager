@@ -13,9 +13,15 @@ function CreatePreview() {
   // 共享参数
   const { darkMode } = useContext(DarkModeContext);
 
+  const [isNavHidden, setIsNavHidden] = useState(false);
   return (
     <div className={`chat-container-box ${darkMode ? 'dark-mode' : ''}`}>
       <ChatCtx />
+      {/* 侧边栏 */}
+
+      <nav className={`chat-container-nav ${isNavHidden ? 'hidden' : ''}`}>
+        <div>添加</div>
+      </nav>
     </div>
   );
 }

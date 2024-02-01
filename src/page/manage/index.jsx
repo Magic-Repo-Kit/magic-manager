@@ -39,6 +39,7 @@ function Manage() {
   return (
     <div className={`manage-container ${darkMode ? 'dark-mode' : ''}`}>
       <aside>
+        {/* 控制显示隐藏 */}
         <div
           className={`manage-display-aside ${isHidden ? '' : 'hidden'}`}
           onClick={() => setIsHidden(false)}
@@ -116,38 +117,6 @@ function Manage() {
             </div>
           </Tooltip>
 
-          {/* 权限管理 */}
-          {/* <Tooltip
-            title="权限管理"
-            arrow={false}
-            color={'rgba(25, 25, 25, 0.8)'}
-            placement="right"
-          >
-            <div
-              className={`aside-item-active ${
-                manageMenuUrl === 'roles-manage' ? 'active' : ''
-              }`}
-              onClick={() => handleAppClick('roles-manage', '权限管理')}
-            >
-              <i className="iconfont mr-fingerprint"></i>
-            </div>
-          </Tooltip> */}
-          {/* 联系我们 */}
-          {/* <Tooltip
-            title="联系我们"
-            arrow={false}
-            color={'rgba(25, 25, 25, 0.8)'}
-            placement="right"
-          >
-            <div
-              className={`aside-item-active ${
-                manageMenuUrl === 'contact-us' ? 'active' : ''
-              }`}
-              onClick={() => handleAppClick('contact-us', '联系我们')}
-            >
-              <i className="iconfont mr-lightning"></i>
-            </div>
-          </Tooltip> */}
           {/* 我 */}
           <Tooltip
             title="我"
@@ -166,22 +135,7 @@ function Manage() {
           </Tooltip>
           <div className="aside-last">
             <div className="space-line"></div>
-            {/* 工作台设置 */}
-            {/* <Tooltip
-              title="设置"
-              arrow={false}
-              color={'rgba(25, 25, 25, 0.8)'}
-              placement="right"
-            >
-              <div
-                className={`aside-item-active ${
-                  manageMenuUrl === 'setting-manage' ? 'active' : ''
-                }`}
-                onClick={() => handleAppClick('setting-manage', '设置')}
-              >
-                <i className="iconfont mr-setting-3"></i>
-              </div>
-            </Tooltip> */}
+
             {/* 权限管理 */}
             <Tooltip
               title="权限管理"
