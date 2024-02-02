@@ -1,0 +1,105 @@
+@import '@/styles/theme';
+.mr-header-container {
+  width: 100%;
+  z-index: 1;
+  position: fixed;
+  top: 0;
+  background: transparent;
+  transform: translateZ(0); //触发 GPU 硬件加速
+  -webkit-transform: translateZ(0);
+  -moz-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  -o-transform: translateZ(0);
+  backface-visibility: hidden; //解决ios上内容闪动的问题
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  .header-content {
+    padding: 0 25px;
+    padding-right: 15px;
+    height: 65px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .mrk-logo {
+      height: 24px;
+      display: flex;
+      align-items: center;
+      img {
+        height: 100%;
+      }
+      .mrkTitle {
+        margin-left: 5px;
+        height: 70%;
+      }
+    }
+    .mrk-select-app {
+      cursor: pointer;
+      border-radius: 8px;
+      font-size: 18px;
+      // background-color: $bg-200;
+      // padding: 8px 20px;
+      > i {
+        margin: 5px;
+        font-size: 12px;
+        &:first-child {
+          margin: 3px;
+          font-size: 16px;
+        }
+      }
+    }
+
+    .btn-box {
+      display: flex;
+      align-items: center;
+      height: 100%;
+      .space-line {
+        margin: 0 10px;
+        width: 1px;
+        height: 15px;
+        background-color: $border-color-100;
+      }
+      .admin-switch {
+        cursor: pointer;
+        padding: 6px;
+        // margin-right: 10px;
+        i {
+          font-size: 24px;
+        }
+      }
+      .admin-user-container {
+        // border: 2px solid $border-color-100;
+        border-radius: 50%;
+        padding: 0;
+        height: 45px;
+        width: 45px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        > img {
+          height: 80%;
+          border-radius: 50%;
+        }
+      }
+    }
+  }
+}
+
+.admin-container.dark-mode {
+  transition: color 0.5s, background-color 0.5s;
+  color: $bg-100;
+  background-color: $text-200;
+  .mr-header-container {
+    .header-content {
+      .mrk-logo {
+        .mrkLogo {
+          filter: grayscale(100%) brightness(200%); //白
+        }
+      }
+      .btn-box {
+        .space-line {
+          opacity: 0.2;
+        }
+      }
+    }
+  }
+}

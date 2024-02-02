@@ -167,14 +167,14 @@ function Manage() {
         </nav>
       </aside>
       <main className={isHidden ? 'no-padding-left' : ''}>
-        <header>
+        {/* <header>
           <div className="manage-header-item-box font-family-dingding">
             <div className="manage-header-item flx-center">
               <i className="iconfont mr-bookmark-full"></i>
               <span>{manageMenuName}</span>
             </div>
           </div>
-        </header>
+        </header> */}
         {/* 渲染子路由 */}
         <Outlet />
       </main>

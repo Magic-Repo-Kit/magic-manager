@@ -10,11 +10,16 @@ import knowledgeIcon from '@/assets/images/knowledge-icon.png';
 import { Button, Dropdown, Popconfirm } from 'antd';
 
 // item内容
-function FileItem({ file, onEdit, onMove, onDelete }) {
+function FileItem({ file, onEdit, onMove, onDelete, setParams }) {
   const [dropdownEditOpen, setDropdownEditOpen] = useState(false);
   const navigate = useNavigate();
 
   const handleClick = () => {
+    // 每次点击文件，pageNo要重新置为1
+    setParams((prev) => ({
+      ...prev,
+      pageNo: 1,
+    }));
     // type 1-文件 2-知识库
     if (file.type === 1) {
       // 在当前URL基础上添加或替换parentId参数

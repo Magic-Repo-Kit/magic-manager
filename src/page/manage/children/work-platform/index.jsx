@@ -119,7 +119,7 @@ function WorkPlatform() {
       <main>
         <section className="work-platform-main-card-header">
           {/* 访问热度 */}
-          <div className="work-platform-main-header-left">
+          {/* <div className="work-platform-main-header-left">
             <div className="work-platform-visitor-update flx-justify-between">
               <span>
                 热度
@@ -133,55 +133,10 @@ function WorkPlatform() {
             <div>
               <TinyArea {...visitorConfig} />
             </div>
-          </div>
-          {/* 快捷入口 */}
-          <div className="work-platform-main-header-right">
-            <div className="work-platform-title">
-              快捷入口
-              <i className="iconfont mr-rocket-full"></i>
-            </div>
-            <div className="work-platform-apps user-select">
-              <div className="work-platform-item">
-                <div className="flx-center click-app-box">
-                  <i className="work-platform-item-ai iconfont mr-ziyuan49"></i>
-                </div>
-                <span>一问一答</span>
-              </div>
-              <div className="work-platform-item">
-                <div className="flx-center click-app-box">
-                  {/* <i className="iconfont mr-service_ChatGPT"></i> */}
-                  <img
-                    src={PlatRobot}
-                    alt=""
-                    height={55}
-                    style={{ marginLeft: '10px' }}
-                  />
-                </div>
-                <span>AI助手</span>
-              </div>
-              <div className="work-platform-item">
-                <div className="flx-center click-app-box">
-                  <i className="iconfont mr-lightning-full gradient-text-2"></i>
-                </div>
-                <span>闪聊</span>
-              </div>
-              <div className="work-platform-item">
-                <div className="flx-center work-platform-item-painting click-app-box">
-                  <i className="iconfont mr-sheji_huatu"></i>
-                </div>
-                <span>AI绘图</span>
-              </div>
-              <div className="work-platform-item">
-                <div className="flx-center click-app-box">
-                  <i className="iconfont mr-record-sound"></i>
-                </div>
-                <span>频道</span>
-              </div>
-            </div>
-          </div>
+          </div> */}
         </section>
-        <div style={{ margin: '15px 0' }}>词云</div>
-        <section className="work-platform-main-middle">
+        {/* <div style={{ margin: '15px 0' }}>词云</div> */}
+        {/* <section className="work-platform-main-middle">
           <div className="work-platform-middle-box">
             <div>
               <WordCloud {...wordCloudConfig} />
@@ -207,9 +162,9 @@ function WorkPlatform() {
             </div>
           </div>
 
-          {/* <div></div> */}
-        </section>
-        <section className="work-platform-main-bottom">
+
+        </section> */}
+        {/* <section className="work-platform-main-bottom">
           <div></div>
           <div>
             <Sunburst {...sunDataConfig} />
@@ -227,8 +182,7 @@ function WorkPlatform() {
             </div>
             <div>您的星是对我们最大的鼓励！</div>
           </div>
-        </section>
-        <section></section>
+        </section> */}
       </main>
     </div>
   );

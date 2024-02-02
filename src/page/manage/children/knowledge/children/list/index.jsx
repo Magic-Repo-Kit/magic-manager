@@ -27,6 +27,10 @@ import {
 function List() {
   const location = useLocation();
 
+  // 从URL中获取parentId参数
+  const queryParams = new URLSearchParams(location.search);
+  const parentId = queryParams.get('parentId');
+
   const inputFolderNameRef = useRef(null); //inputRef 自动聚焦
   const [dropdownAddOpen, setDropdownAddOpen] = useState(false); //新建下拉状态
   const [isOpen, setIsOpen] = useState(false); //弹框状态 - 新增/编辑
@@ -34,7 +38,7 @@ function List() {
   const [fileList, setFileList] = useState([]); //文件列表
 
   const [total, setTotal] = useState(0); //总条数
-  const [parentId, setParentId] = useState(''); //存储地址栏，用来刷新列表
+  // const [parentId, setParentId] = useState(''); //存储地址栏，用来刷新列表
 
   const [moveTargetId, setMoveTargetId] = useState(''); //要移动的子id
   const [moveTargetParentId, setMoveTargetParentId] = useState(''); //移动到哪个父id
@@ -133,7 +137,7 @@ function List() {
             parentId,
           });
 
-          getFileList();
+          getFileList(parentId);
         }
       } catch (error) {
         message.error(error.message || '编辑失败');
@@ -164,7 +168,7 @@ function List() {
             imageUrl: '',
             parentId,
           });
-          getFileList();
+          getFileList(parentId);
         }
       } catch (error) {
         message.error(error.msg || '创建失败');
@@ -221,7 +225,7 @@ function List() {
 
         setMoveTargetId('');
         setMoveTargetParentId('');
-        getFileList();
+        getFileList(parentId);
       }
     } catch (error) {
       message.error(error.message || '移动失败');
@@ -274,7 +278,7 @@ function List() {
       }
       if (res.code === 200) {
         message.success('删除成功');
-        getFileList();
+        getFileList(parentId);
       }
     } catch (error) {
       message.error(error.msg || '删除失败');
@@ -283,30 +287,19 @@ function List() {
     }
   };
 
-  // useEffect(() => {
-  //   // getFileList();
-  // }, []); //监听params的变化，如果是[]，则只在首次执行
+  useEffect(() => {
+    getFileList(parentId);
+  }, [params]); //监听params的变化，如果是[]，则只在首次执行
 
   useEffect(() => {
-    // 从URL中获取parentId参数
-    const queryParams = new URLSearchParams(location.search);
-    const parentId = queryParams.get('parentId');
-
     getFileList(parentId);
-
-    // 修改params值，触发监听
-    // setParams((prevParams) => ({
-    //   ...prevParams,
-    //   parentId,
-    // }));
-
     // 修改folderForm值，提交对应parentId
     setFolderForm((prevForm) => ({
       ...prevForm,
       parentId,
     }));
     // 存储新的parentId
-    setParentId(parentId);
+    // setParentId(parentId);
   }, [location]);
 
   return (
@@ -360,7 +353,9 @@ function List() {
             setDropdownAddOpen(dropdownAddOpen)
           }
         >
-          <Button type="primary">新建</Button>
+          <Button type="primary" size="default">
+            新建
+          </Button>
         </Dropdown>
       </div>
       <main className="knowledge-list-content">
@@ -373,6 +368,7 @@ function List() {
               onEdit={(file) => handleModal(file)}
               onMove={handleMoveTarget}
               onDelete={handleDelete}
+              setParams={setParams} //点击文件的时候  用来重置params
             />
           ))
         ) : (

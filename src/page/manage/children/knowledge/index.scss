@@ -4,11 +4,17 @@
   padding-top: 0;
   position: relative;
   .knowledge-title-screen {
-    display: flex;
-    justify-content: space-between;
+    display: flex; /* 使用flex布局 */
     align-items: center;
-    padding: 0px 5px;
-    padding-bottom: 10px;
+    overflow-x: auto; /* 内容超出时允许横向滚动 */
+    white-space: nowrap; /* 防止内容换行 */
+    -webkit-overflow-scrolling: touch; /* 为移动设备提供流畅的滚动 */
+    max-width: calc(100% - 65px);
+    min-height: 35px;
+    padding: 0 5px;
+    box-sizing: border-box;
+    margin-top: 5px;
+    margin-bottom: 15px;
   }
 
   .knowledge-list {
@@ -16,8 +22,9 @@
       margin-bottom: 20px;
       display: flex;
       align-items: center;
+      justify-content: flex-end;
       position: absolute;
-      top: -49px;
+      top: -0px;
       right: 15px;
     }
     .knowledge-list-content {
