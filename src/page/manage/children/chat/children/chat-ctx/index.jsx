@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect, useContext } from 'react';
-import '../../index.scss';
+// import '../../index.scss';
 import './chat.scss';
 import sseRequest from '@/request/sseRequest';
 import TextLoading from '@/components/text-loading';
@@ -17,7 +17,7 @@ import { Input, Select, Badge } from 'antd';
 
 const { TextArea } = Input;
 
-function ChatCtx() {
+function ChatCtx({ messages, setMessages, conversationId }) {
   //  共享参数
   const { darkMode } = useContext(DarkModeContext);
 
@@ -42,7 +42,7 @@ function ChatCtx() {
   // const [msgValue, setMsgValue] = useState(''); //发送消息
   const [isExtended, setIsExtended] = useState(false); // 扩展是否显示
 
-  const [messages, setMessages] = useState([]); // 聊天消息
+  // const [messages, setMessages] = useState([]); // 聊天消息
   const [sumStr, setSumStr] = useState(''); //聊天消息 - 临时存储
   const [isLoading, setIsLoading] = useState(false); // 是否等待
   const chatMainRef = useRef(null);
@@ -50,7 +50,7 @@ function ChatCtx() {
   const [chatParams, setChatParams] = useState({
     content: '', //	对话内容
     roleId: '1', //角色id , 默认1 ，mrk-3.5
-    conversationId: 'd08b777e-f5c2-493f-82ae-060731d1ea80', // 会话id[不传开始新的会话]
+    conversationId, // 会话id[不传开始新的会话]
     isContext: 2, //是否开启上下文[1:关闭 2:开启]
     contextLength: 30, //上下文长度问答对数量(只有开启上下文生效)[默认20，范围1-100]
     isOnline: 1, //是否联网[1:关闭 2:开启]
@@ -92,7 +92,6 @@ function ChatCtx() {
       const res = await ajax.get(`/chat/role/detail/${id}`);
       if (res.code === 200) {
         if (res.data) {
-          console.log('🚀 ~ getRoleDetail ~ res.data:', res.data);
           // 角色简介
           setRoleName(res.data.name);
           setDescription(res.data.description);
@@ -122,8 +121,6 @@ function ChatCtx() {
   };
   // 快捷提问
   const handleFastQuestion = async (question) => {
-    console.log('🚀 ~ handleFastQuestion ~ question:', question);
-
     if (question.trim() !== '') {
       // 更新消息显示数组 - user
       setMessages((prevMessages) => [
@@ -176,8 +173,11 @@ function ChatCtx() {
       if (event.isEnd) {
         console.log('结束');
         setSumStr(''); //清空临时存储
-        let newMessage = { message: event.message, type: 2 };
+        let tempMsg =
+          event.message || '我好像不知道怎么回答了，请帮我联系下开发者。';
+        let newMessage = { message: tempMsg, type: 2 };
         handleReceiveMessage(newMessage);
+
         return;
       } else {
         if (event.message) {
@@ -257,6 +257,13 @@ function ChatCtx() {
     getRoleDetail();
   }, []);
 
+  useEffect(() => {
+    setChatParams((prevParams) => ({
+      ...prevParams,
+      conversationId: conversationId,
+    }));
+  }, [conversationId]);
+
   return (
     <div className={`chat-container ${darkMode ? 'dark-mode' : ''}`}>
       <div className="chat-select-btn">
@@ -329,8 +336,6 @@ function ChatCtx() {
         ) : (
           // 没有消息时
           <>
-            {/* 人物介绍 */}
-
             <div className="chat-prompt-box">
               {/* 角色介绍 */}
               <Badge.Ribbon text="简介" color="#4f46e5">
@@ -400,7 +405,7 @@ function ChatCtx() {
                 </div>
               </div>
             </div>
-
+            {/* 中间LOGO */}
             <div className="chat-chat-empty">
               <div className="chat-empty-icon flx-center user-select">
                 <img src={mrkLogo} className="mrkLogo" />

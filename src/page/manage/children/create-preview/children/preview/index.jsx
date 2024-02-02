@@ -69,7 +69,9 @@ function Preview({ createParams, messages, setMessages }) {
         setIsLoading(false);
         console.log('结束');
         setSumStr(''); //清空临时存储
-        let newMessage = { message: event.message, type: 2 };
+        let tempMsg =
+          event.message || '我好像不知道怎么回答了，请帮我联系下开发者。';
+        let newMessage = { message: tempMsg, type: 2 };
         handleReceiveMessage(newMessage);
         return;
       } else {

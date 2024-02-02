@@ -343,7 +343,7 @@
   main {
     .chat-prompt-box {
       .chat-prompt-role {
-        background-color: $text-300;
+        background-color: $text-700;
         .chat-prompt-title {
           i,
           > :last-child {
@@ -359,7 +359,7 @@
         }
         .chat-question {
           > span {
-            background-color: $text-300;
+            background-color: $text-700;
           }
         }
       }
@@ -375,7 +375,7 @@
       // 机器人消息
       .bot-msg {
         > div {
-          background: $text-300;
+          background: $text-700;
         }
       }
     }
@@ -402,7 +402,7 @@
     }
     .chat-text-extend-container {
       .chat-text-extend-item {
-        background-color: $text-300;
+        background-color: $text-700;
         color: $bg-100;
         border: 1px solid rgba($color: $border-color-200, $alpha: 0);
       }
