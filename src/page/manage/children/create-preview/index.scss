@@ -7,39 +7,20 @@
   position: relative;
   display: flex;
   gap: 30px;
+  -webkit-overflow-scrolling: touch; /* 为移动设备提供流畅的滚动 */
   @media screen and (max-width: 768px) {
     padding: 10px;
     padding-top: 0;
+    padding-bottom: 30px;
+    // 移动端只创建  不预览
+    .preview-container-box {
+      display: none;
+    }
   }
   .create-preview-item {
     width: 50%;
     @media screen and (max-width: 768px) {
       width: 100%;
-    }
-  }
-}
-
-// PC
-.create-preview-pc {
-  @media screen and (max-width: 768px) {
-    display: none;
-  }
-}
-// app
-.create-preview-app {
-  display: none;
-  padding-bottom: 50px;
-
-  @media screen and (max-width: 768px) {
-    display: block;
-  }
-  .create-preview-change-icon {
-    position: absolute;
-    top: -42px;
-    right: 16px;
-    display: none;
-    @media screen and (max-width: 768px) {
-      display: block;
     }
   }
 }

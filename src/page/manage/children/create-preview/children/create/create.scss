@@ -213,3 +213,35 @@
     padding: 20px 15px;
   }
 }
+
+// 夜间模式
+.create-preview-container.dark-mode {
+  .create-container {
+    header {
+      .create-prompt-box {
+        border: 2px solid $primary-200;
+
+        .create-promp-box-header {
+          position: absolute;
+          top: 10px;
+
+          i {
+            font-size: 18px;
+            margin-right: 5px;
+            margin-bottom: 3px;
+            background-image: linear-gradient(#af40ff, #5b42f3 50%, #00ddeb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+          }
+          img {
+            cursor: pointer;
+          }
+        }
+        .create-promp-box-footer {
+          position: absolute;
+          bottom: 10px;
+        }
+      }
+    }
+  }
+}

@@ -47,69 +47,24 @@ function CreatePreview() {
   }, []);
 
   return (
-    <>
-      {/* PC端 */}
-      <div
-        className={`create-preview-container create-preview-pc ${
-          darkMode ? 'dark-mode' : ''
-        }`}
-      >
-        <div className="create-preview-item">
-          <Create
-            createParams={createParams}
-            setCreateParams={setCreateParams}
-            modelList={modelList}
-            messages={messages}
-            setMessages={setMessages}
-          />
-        </div>
-        <div className="preview-container-box create-preview-item">
-          <Preview
-            createParams={createParams}
-            messages={messages}
-            setMessages={setMessages}
-          />
-        </div>
+    <div className={`create-preview-container ${darkMode ? 'dark-mode' : ''}`}>
+      <div className="create-preview-item">
+        <Create
+          createParams={createParams}
+          setCreateParams={setCreateParams}
+          modelList={modelList}
+          messages={messages}
+          setMessages={setMessages}
+        />
       </div>
-      {/* 移动端 */}
-      <div
-        className={`create-preview-container create-preview-app ${
-          darkMode ? 'dark-mode' : ''
-        }`}
-      >
-        <div className="create-preview-change-icon flx-center">
-          <Button
-            type="primary"
-            size="small"
-            onClick={() => setIsChange(!isChange)}
-          >
-            切换{isChange ? '创建' : '预览'}
-          </Button>
-        </div>
-        {/* 创建/预览 */}
-        {isChange ? (
-          <div className="preview-container-box create-preview-item">
-            <Preview
-              createParams={createParams}
-              messages={messages}
-              setMessages={setMessages}
-            />
-          </div>
-        ) : (
-          <div className="create-preview-item">
-            <Create
-              createParams={createParams}
-              setCreateParams={setCreateParams}
-              modelList={modelList}
-              messages={messages}
-              setMessages={setMessages}
-            />
-          </div>
-        )}
-
-        {/* 移动端 */}
+      <div className="preview-container-box create-preview-item">
+        <Preview
+          createParams={createParams}
+          messages={messages}
+          setMessages={setMessages}
+        />
       </div>
-    </>
+    </div>
   );
 }
 
