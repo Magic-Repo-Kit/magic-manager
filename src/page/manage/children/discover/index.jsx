@@ -11,7 +11,7 @@ import { TinyArea, WordCloud, Sunburst } from '@ant-design/plots';
 import { Timeline } from 'antd';
 import { ClockCircleOutlined } from '@ant-design/icons';
 
-function WorkPlatform() {
+function Discover() {
   // 共享参数
   const { darkMode } = useContext(DarkModeContext);
 
@@ -188,4 +188,4 @@ function WorkPlatform() {
   );
 }
 
-export default WorkPlatform;
+export default Discover;
