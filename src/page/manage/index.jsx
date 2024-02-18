@@ -32,14 +32,15 @@ function Manage() {
   };
   useEffect(() => {
     const storedManageMenuUrl = sessionStorage.getItem('manageMenuUrl');
-    setManageMenuUrl(storedManageMenuUrl || 'work-platform');
+    setManageMenuUrl(storedManageMenuUrl || 'discover');
     const storedManageMenuName = sessionStorage.getItem('manageMenuName');
     setManageMenuName(storedManageMenuName || '发现');
   }, []);
   return (
     <div className={`manage-container ${darkMode ? 'dark-mode' : ''}`}>
+      {/* PC  */}
       <aside>
-        {/* 控制显示隐藏 */}
+        {/* 控件显示隐藏 */}
         <div
           className={`manage-display-aside ${isHidden ? '' : 'hidden'}`}
           onClick={() => setIsHidden(false)}
@@ -57,9 +58,9 @@ function Manage() {
           >
             <div
               className={`aside-first ${
-                manageMenuUrl === 'work-platform' ? 'active' : ''
+                manageMenuUrl === 'discover' ? 'active' : ''
               }`}
-              onClick={() => handleAppClick('work-platform', '发现')}
+              onClick={() => handleAppClick('discover', '发现')}
             >
               <img src={mrkLogo} alt="" className="mrkLogo" />
             </div>
@@ -78,7 +79,7 @@ function Manage() {
               }`}
               onClick={() => handleAppClick('knowledge', '知识库')}
             >
-              <i className="iconfont mr-inbox"></i>
+              <i className="iconfont mr-inbox" style={{ fontSize: 22 }}></i>
             </div>
           </Tooltip>
           {/* 创建角色预览 */}
@@ -100,9 +101,9 @@ function Manage() {
               ></i>
             </div>
           </Tooltip>
-          {/* 闪聊 */}
+          {/* 消息 */}
           <Tooltip
-            title="闪聊"
+            title="消息"
             arrow={false}
             color={'rgba(25, 25, 25, 0.8)'}
             placement="right"
@@ -111,9 +112,9 @@ function Manage() {
               className={`aside-item-active ${
                 manageMenuUrl === 'chat' ? 'active' : ''
               }`}
-              onClick={() => handleAppClick('chat', '闪聊')}
+              onClick={() => handleAppClick('chat', '消息')}
             >
-              <i className="iconfont mr-ziyuan49" style={{ fontSize: 20 }}></i>
+              <i className="iconfont mr-ziyuan49" style={{ fontSize: 22 }}></i>
             </div>
           </Tooltip>
 
@@ -133,6 +134,7 @@ function Manage() {
               <i className="iconfont mr-user-admin"></i>
             </div>
           </Tooltip>
+
           <div className="aside-last">
             <div className="space-line"></div>
 
@@ -166,16 +168,67 @@ function Manage() {
           </div>
         </nav>
       </aside>
+      {/* 移动-菜单 */}
+      <div className="manage-mobile-menus">
+        {/* 知识库 */}
+        <div
+          className={`manage-mobile-menu-item ${
+            manageMenuUrl === 'knowledge' ? 'active' : ''
+          }`}
+          onClick={() => handleAppClick('knowledge', '知识库')}
+        >
+          <i className="iconfont mr-inbox" style={{ fontSize: 20 }}></i>
+          <span>知识库</span>
+        </div>
+        {/* 创建角色预览 */}
+        <div
+          className={`manage-mobile-menu-item ${
+            manageMenuUrl === 'create-preview' ? 'active' : ''
+          }`}
+          onClick={() => handleAppClick('create-preview', '创建角色')}
+        >
+          <i
+            className="iconfont mr-a-xingzhuang1858kaobei"
+            style={{ fontSize: 20 }}
+          ></i>
+          <span>创建</span>
+        </div>
+        {/* 发现 */}
+        <div
+          className={`manage-mobile-menu-item ${
+            manageMenuUrl === 'discover' ? 'active' : ''
+          }`}
+          onClick={() => handleAppClick('discover', '发现')}
+        >
+          <i className="iconfont mr-zhishixingqiu"></i>
+          <span>发现</span>
+        </div>
+
+        {/* 消息 */}
+        <div
+          className={`manage-mobile-menu-item ${
+            manageMenuUrl === 'chat' ? 'active' : ''
+          }`}
+          onClick={() => handleAppClick('chat', '消息')}
+        >
+          <i className="iconfont mr-ziyuan49"></i>
+          <span>消息</span>
+        </div>
+
+        {/* 我 */}
+
+        <div
+          className={`manage-mobile-menu-item ${
+            manageMenuUrl === 'user-center' ? 'active' : ''
+          }`}
+          onClick={() => handleAppClick('user-center', '我')}
+        >
+          <i className="iconfont mr-user-admin" style={{ fontSize: 24 }}></i>
+          <span>我</span>
+        </div>
+      </div>
+      {/* 子路由 */}
       <main className={isHidden ? 'no-padding-left' : ''}>
-        {/* <header>
-          <div className="manage-header-item-box font-family-dingding">
-            <div className="manage-header-item flx-center">
-              <i className="iconfont mr-bookmark-full"></i>
-              <span>{manageMenuName}</span>
-            </div>
-          </div>
-        </header> */}
-        {/* 渲染子路由 */}
         <Outlet />
       </main>
     </div>

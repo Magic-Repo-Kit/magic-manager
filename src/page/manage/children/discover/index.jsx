@@ -115,12 +115,12 @@ function WorkPlatform() {
   }, []);
 
   return (
-    <div className={`work-platform-container ${darkMode ? 'dark-mode' : ''}`}>
+    <div className={`discover-container ${darkMode ? 'dark-mode' : ''}`}>
       <main>
-        <section className="work-platform-main-card-header">
+        <section className="discover-main-card-header">
           {/* 访问热度 */}
-          {/* <div className="work-platform-main-header-left">
-            <div className="work-platform-visitor-update flx-justify-between">
+          {/* <div className="discover-main-header-left">
+            <div className="discover-visitor-update flx-justify-between">
               <span>
                 热度
                 <i className="iconfont mr-remen visitor-fire"></i>
@@ -136,8 +136,8 @@ function WorkPlatform() {
           </div> */}
         </section>
         {/* <div style={{ margin: '15px 0' }}>词云</div> */}
-        {/* <section className="work-platform-main-middle">
-          <div className="work-platform-middle-box">
+        {/* <section className="discover-main-middle">
+          <div className="discover-middle-box">
             <div>
               <WordCloud {...wordCloudConfig} />
             </div>
@@ -164,19 +164,19 @@ function WorkPlatform() {
 
 
         </section> */}
-        {/* <section className="work-platform-main-bottom">
+        {/* <section className="discover-main-bottom">
           <div></div>
           <div>
             <Sunburst {...sunDataConfig} />
           </div>
 
-          <div className="work-platform-bottom-github flx-center">
+          <div className="discover-bottom-github flx-center">
             <i className="icon-github iconfont mr-github"></i>
-            <div className="work-platform-bottom-title font-family-dingding">
+            <div className="discover-bottom-title font-family-dingding">
               MagicRepoKit
             </div>
             <div>愿我有所发现，有所创造。</div>
-            <div className="work-platform-bottom-btn font-family-dingding user-select">
+            <div className="discover-bottom-btn font-family-dingding user-select">
               <i className="iconfont mr-star01"></i>
               <span>Star on GitHub</span>
             </div>

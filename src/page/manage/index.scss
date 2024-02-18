@@ -3,6 +3,7 @@
   box-sizing: border-box;
   font-size: 16px;
   position: relative;
+  // PC菜单
   > aside {
     box-sizing: border-box;
     height: calc(100% - 65px);
@@ -11,11 +12,14 @@
     position: fixed;
     left: 0;
     top: 65px;
+    @media screen and (max-width: 780px) {
+      display: none;
+    }
     // 隐藏边框
     .manage-display-aside {
       position: absolute;
       left: 0;
-      bottom: 50%;
+      bottom: 39px;
       opacity: 0.3;
       transition: all 0.3s ease;
       cursor: pointer;
@@ -144,6 +148,43 @@
       }
     }
   }
+
+  // 移动端菜单
+  .manage-mobile-menus {
+    z-index: 1;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 55px;
+    box-sizing: border-box;
+    padding: 8px 0;
+    background: rgba($bg-100, 0.85);
+    -webkit-backdrop-filter: blur(100px);
+    backdrop-filter: blur(100px);
+    @media screen and (min-width: 780px) {
+      display: none;
+    }
+    .manage-mobile-menu-item {
+      height: 100%;
+      opacity: 0.4;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 10px;
+      transition: opacity 0.3s, transform 0.15s;
+      &.active {
+        opacity: 1;
+        transform: scale(1.1);
+      }
+      > i {
+        font-size: 22px;
+      }
+    }
+  }
   > main {
     max-width: 1250px;
     padding-left: 70px;
@@ -153,27 +194,8 @@
     &.no-padding-left {
       padding-left: 0;
     }
-    > header {
-      padding: 12px;
-      .manage-header-item-box {
-        width: 100%;
-        display: flex;
-        // justify-content: space-between;
-        align-items: center;
-        font-size: 18px;
-        border-bottom: 1px solid rgba($border-color-100, 0.5);
-        // padding-bottom: 10px;
-        height: 40px;
-        .manage-header-item {
-          > i {
-            font-size: 20px;
-            margin-right: 2px;
-            background-image: linear-gradient(#af40ff, #5b42f3 50%, #00ddeb);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-          }
-        }
-      }
+    @media screen and (max-width: 780px) {
+      padding-left: 0;
     }
   }
 }
@@ -200,16 +222,7 @@
       }
     }
   }
-  > main {
-    > header {
-      .manage-header-item-box {
-        border-bottom: 1px solid rgba($border-color-100, 0.2);
-        .manage-header-item {
-          > i {
-            background-image: linear-gradient(40deg, #ff0080, #ff8c00 70%);
-          }
-        }
-      }
-    }
+  .manage-mobile-menus {
+    background: rgba($text-200, 0.85);
   }
 }

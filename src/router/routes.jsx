@@ -27,9 +27,10 @@ const AdminLayout = lazy(() => import('@/layouts/admin'));
 const AuthLayout = lazy(() => import('@/layouts/auth'));
 const FailLayout = lazy(() => import('@/layouts/fail'));
 
-// 工作台
 const Manage = lazy(() => import('@/page/manage'));
-const WorkPlatform = lazy(() => import('@/page/manage/children/work-platform'));
+
+// 发现
+const Discover = lazy(() => import('@/page/manage/children/discover'));
 
 // 知识库
 const Knowledge = lazy(() => import('@/page/manage/children/knowledge'));
@@ -62,10 +63,6 @@ const SettingManage = lazy(() =>
   import('@/page/manage/children/setting-manage')
 );
 
-const ChatMenu = lazy(() => import('@/page/chat'));
-const GPT = lazy(() => import('@/page/gpt'));
-const AiHelper = lazy(() => import('@/page/ai-helper'));
-
 // 路由
 const routes = [
   // 通过权限页面
@@ -73,7 +70,7 @@ const routes = [
     path: 'admin',
     element: <AdminLayout />,
     children: [
-      // 空路径 匹配 "/admin" 重定向到 "/admin/home"
+      // 空路径 匹配 "/admin" 重定向到 "/admin/manage"
       {
         path: '',
         element: <Navigate to="manage" replace />,
@@ -83,18 +80,20 @@ const routes = [
         path: 'manage',
         element: lazyLoad(<Manage />),
         children: [
+          //默认路由
           {
             path: '',
             element: (
               <Navigate
-                to={sessionStorage.getItem('manageMenuUrl') || 'work-platform'}
+                to={sessionStorage.getItem('manageMenuUrl') || 'discover'}
                 replace
               />
-            ), //默认发现
+            ),
           },
+          // 发现
           {
-            path: 'work-platform',
-            element: lazyLoad(<WorkPlatform />),
+            path: 'discover',
+            element: lazyLoad(<Discover />),
           },
           // 知识库
           {
@@ -160,24 +159,6 @@ const routes = [
             element: lazyLoad(<SettingManage />),
           },
         ],
-      },
-      // 闪聊
-      {
-        path: 'chat',
-        element: lazyLoad(<ChatMenu />),
-        children: [],
-      },
-      // 一问一答
-      {
-        path: 'gpt',
-        element: lazyLoad(<GPT />),
-        children: [],
-      },
-      // AI助手
-      {
-        path: 'ai-helper',
-        element: lazyLoad(<AiHelper />),
-        children: [],
       },
     ],
   },

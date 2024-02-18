@@ -11,7 +11,10 @@
   overflow: hidden;
   font-family: 'Montserrat', sans-serif;
   > main {
-    padding-top: 65px;
+    padding-top: 55px;
+    @media screen and (max-width: 780px) {
+      padding-bottom: 55px;
+    }
   }
 }
 

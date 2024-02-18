@@ -20,6 +20,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    transition: height 0.3s;
+    @media screen and (max-width: 780px) {
+      height: 55px;
+    }
     .mrk-logo {
       height: 24px;
       display: flex;
