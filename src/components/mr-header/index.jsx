@@ -36,13 +36,12 @@ const MrHeader = () => {
             <i className="iconfont mr-qiehuanyuyan"></i>
           </div>
           {/* user */}
-          <div
+          {/* <div
             className="admin-switch admin-user-container"
             // onClick={() => setUserOpen(true)}
           >
-            {/* <i className="iconfont mr-user--line"></i> */}
             <img src={userHead} alt="" />
-          </div>
+          </div> */}
           <Drawer
             closeIcon={null}
             placement="right"

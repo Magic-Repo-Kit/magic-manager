@@ -7,11 +7,11 @@
     grid-gap: 20px;
     grid-template-columns: repeat(5, 1fr); // 默认显示5列
     grid-auto-flow: column;
-    @media screen and (max-width: 1800px) {
+    @media screen and (max-width: 1400px) {
       grid-gap: 15px;
       grid-template-columns: repeat(4, 1fr); // 在较小的屏幕下显示4列
     }
-    @media screen and (max-width: 1200px) {
+    @media screen and (max-width: 1000px) {
       grid-gap: 10px;
       grid-template-columns: repeat(3, 1fr); // 在更小的屏幕下显示3列
     }
@@ -55,6 +55,7 @@
           .discover-list-item-info-name {
             font-size: 14px;
             font-weight: 700;
+            max-width: 15ch; /* 最大宽度为15个字符的宽度 */
           }
           > p {
             display: -webkit-box;

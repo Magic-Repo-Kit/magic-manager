@@ -1,9 +1,104 @@
 @import '@/styles/theme';
 .user-container {
-  // padding: 12px;
+  // padding: 10px 5px;
+  > header {
+    padding: 10px 5px;
+    display: flex;
+    justify-content: center;
+    // align-items: center;
+    padding: 10px;
+    @media screen and (max-width: 780px) {
+      justify-content: flex-start;
+    }
+    .user-head {
+      margin-right: 40px;
+      @media screen and (max-width: 780px) {
+        display: none;
+      }
+      > img {
+        height: 100px;
+        border-radius: 50%;
+      }
+    }
+    .user-info {
+      font-size: 14px;
+      .user-info-mobile {
+        display: flex;
+        align-items: center;
 
-  main {
+        .user-head-mobile {
+          margin-right: 20px;
+          display: none;
+          @media screen and (max-width: 780px) {
+            display: block;
+          }
+          > img {
+            height: 65px;
+            border-radius: 50%;
+          }
+        }
+      }
+      .user-name {
+        font-size: 18px;
+        font-weight: 700;
+      }
+      .user-account {
+        margin-top: 5px;
+        opacity: 0.6;
+      }
+      .user-sign {
+        margin-top: 10px;
+        display: flex;
+        align-items: center;
+        > :last-child {
+          font-size: 18px;
+          cursor: pointer;
+        }
+      }
+      .user-medal {
+        margin-top: 10px;
+        > img {
+          height: 25px;
+          margin-right: 5px;
+        }
+      }
+      .user-follow {
+        margin-top: 5px;
+        display: flex;
+        > div {
+          margin-right: 15px;
+          > :first-child {
+            font-weight: 700;
+            margin-right: 3px;
+          }
+          > :last-child {
+            opacity: 0.7;
+          }
+        }
+      }
+    }
+  }
+
+  > main {
     .user-main-menu {
+      background: $bg-900;
+      @media screen and (min-width: 780px) {
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+      }
+      .user-main-menu-content {
+        color: #919191;
+        .ant-menu-item-selected,
+        .ant-menu-item-active {
+          color: $text-200;
+          &::after {
+            border-bottom-color: #5b42f3;
+          }
+        }
+      }
+
+      // 去除下边框
       .ant-menu-light,
       .ant-menu-light > .ant-menu {
         background: transparent;
@@ -13,95 +108,143 @@
       }
     }
     .user-main-content {
-      padding: 10px;
+      padding: 10px 5px;
       font-size: 14px;
-    }
-  }
-
-  .my-space-container {
-    header {
-      .user-info {
-        --s: 37px; /* 控制尺寸 */
-        --c: #0000, #282828 0.5deg 119.5deg, #0000 120deg;
-        --g1: conic-gradient(from 60deg at 56.25% calc(425% / 6), var(--c));
-        --g2: conic-gradient(from 180deg at 43.75% calc(425% / 6), var(--c));
-        --g3: conic-gradient(from -60deg at 50% calc(175% / 12), var(--c));
-        background: var(--g1), var(--g1) var(--s) calc(1.73 * var(--s)),
-          var(--g2), var(--g2) var(--s) calc(1.73 * var(--s)),
-          var(--g3) var(--s) 0, var(--g3) 0 calc(1.73 * var(--s)) #1e1e1e;
-        background-size: calc(2 * var(--s)) calc(3.46 * var(--s));
-        // ---- 颜色end
-        width: 100%;
-        height: 170px;
-        border-radius: 20px 20px 0 0;
-        color: $bg-100;
-        padding: 18px;
-        box-sizing: border-box;
-        display: flex;
-        justify-content: space-between;
-        .user-info-left {
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
-          > :first-child {
-            font-size: 20px;
-            margin-bottom: 5px;
-          }
-          .user-info-introduce {
-            padding-top: 5px;
-            > :first-child {
-              font-size: 25px;
-              margin-bottom: 5px;
-            }
-          }
-          .user-info-user {
-            margin-bottom: 5px;
-            font-size: 16px;
+      // 角色列表
+      .role-list-container {
+        > main {
+          width: 100%;
+          .wrapper {
             display: flex;
-            align-items: center;
-            > i {
-              font-size: 25px;
-              margin-right: 2px;
-            }
-          }
-        }
-        .user-info-right {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          .user-info-head {
-            width: 90px;
-            height: 90px;
-            border-radius: 50%;
-            margin-right: 3px;
-            border: 3px solid $bg-500;
-            > img {
-              width: 100%;
-              height: 100%;
-              border-radius: 50%;
-            }
-          }
-          .user-info-star {
-            margin-top: 15px;
-            > :last-child {
-              font-size: 15px;
-              margin-left: 4px;
+            flex-wrap: wrap;
+            transform: translateX(2.5px);
+            gap: 5px;
+            .column {
+              background-color: $bg-100;
+              width: calc((100% / 5) - 5px);
+              height: 260px;
+              border-radius: 6px;
+
+              box-sizing: border-box;
+              @media screen and (max-width: 1800px) {
+                width: calc((100% / 4) - 5px);
+              }
+              @media screen and (max-width: 1000px) {
+                width: calc((100% / 3) - 5px);
+              }
+              @media screen and (max-width: 780px) {
+                width: calc((100% / 2) - 5px);
+              }
+              .role-list-item {
+                .role-list-item-img {
+                  > img {
+                    width: 100%;
+                    max-height: 150px;
+                    object-fit: cover;
+                    border-radius: 6px;
+                  }
+                }
+                .role-list-item-info {
+                  padding: 5px;
+                  font-size: 12px;
+                  box-sizing: border-box;
+                  height: 100px;
+                  position: relative;
+                  .role-list-item-info-name {
+                    font-size: 14px;
+                    font-weight: 700;
+                    max-width: 15ch; /* 最大宽度为15个字符的宽度 */
+                  }
+                  > p {
+                    opacity: 0.8;
+                    margin: 5px 0;
+                    display: -webkit-box;
+                    -webkit-line-clamp: 2;
+                    -webkit-box-orient: vertical;
+                    overflow: hidden;
+                  }
+                  .role-list-item-info-bottom {
+                    width: calc(100% - 10px);
+                    box-sizing: border-box;
+                    padding: 0 10px;
+                    position: absolute;
+                    bottom: 5px;
+
+                    > div {
+                      cursor: pointer;
+                      text-align: center;
+                      background: #94b5ff;
+                      padding: 5px 10px;
+                      border-radius: 8px;
+                      transition: all 0.2s ease;
+                    }
+                  }
+                  // 赞过
+                  .like-list-item-info-bottom {
+                    width: calc(100% - 10px);
+                    box-sizing: border-box;
+                    padding: 0 5px;
+                    position: absolute;
+                    bottom: 5px;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    .like-list-head {
+                      height: 25px;
+                      border-radius: 50%;
+                      margin-right: 5px;
+                    }
+                    .like-list-star {
+                      color: $accent-100;
+                      font-size: 12px;
+                      margin-right: 3px;
+                    }
+                  }
+                }
+              }
             }
           }
         }
       }
-      .user-data {
-        height: 100px;
-        width: 100%;
-        background-color: $bg-100;
-        border-radius: 0 0 20px 20px;
-        display: flex;
-        > div {
-          // width: 10%;
-          padding: 20px;
-          flex-direction: column;
-          > :first-child {
-            margin-bottom: 8px;
+    }
+  }
+}
+
+// 黑暗模式
+.user-container.dark-mode {
+  > main {
+    .user-main-menu {
+      background: $text-200;
+      .user-main-menu-content {
+        color: $bg-400;
+        .ant-menu-item-selected,
+        .ant-menu-item-active {
+          color: $bg-100;
+          &::after {
+            border-bottom-color: #a3dafb;
+          }
+        }
+      }
+    }
+    .user-main-content {
+      // 角色列表
+      .role-list-container {
+        > main {
+          .wrapper {
+            .column {
+              background-color: $text-700;
+              .role-list-item {
+                .role-list-item-info-bottom {
+                  > div {
+                    background: linear-gradient(
+                      269deg,
+                      #a171ff -3.63%,
+                      #5d66ff 100.38%
+                    );
+                  }
+                }
+              }
+            }
           }
         }
       }

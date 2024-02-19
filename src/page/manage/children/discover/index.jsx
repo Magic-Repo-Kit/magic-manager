@@ -17,12 +17,12 @@ function Discover() {
       name: '万能助手4.0',
       describe: '万物皆有裂痕，那是光照进来的地方',
       img: 'https://picsum.photos/200/300',
-      author: 'abus',
+      author: '老登老登老登老登',
       authorHead: 'https://picsum.photos/200/300',
       star: '2000',
     },
     {
-      name: '超级风格画',
+      name: '超级风格画超级风格画超级风格画超级风格画超级风格画超级风格画 ',
       describe: '宁静致远，克己复礼',
       img: 'https://picsum.photos/200/400',
       author: 'John Doe',
@@ -32,7 +32,7 @@ function Discover() {
       name: '单词卡片',
       describe: '岁月静好，珍惜当下',
       img: 'https://picsum.photos/200/500',
-      author: 'Jane Smith',
+      author: 'Jane Smith Jane Smith Jane Smith',
       star: '3000',
     },
     {
@@ -179,9 +179,9 @@ function Discover() {
   useEffect(() => {
     function handleResize() {
       let newColumnCount = 5;
-      if (window.innerWidth >= 1800) {
+      if (window.innerWidth >= 1400) {
         newColumnCount = 5;
-      } else if (window.innerWidth >= 1200) {
+      } else if (window.innerWidth >= 1000) {
         newColumnCount = 4;
       } else if (window.innerWidth >= 780) {
         newColumnCount = 3;
@@ -218,12 +218,16 @@ function Discover() {
             <img src={item.img} alt={item.name} />
           </div>
           <div className="discover-list-item-info">
-            <div className="discover-list-item-info-name">{item.name}</div>
+            <div className="discover-list-item-info-name single-omit">
+              {item.name}
+            </div>
             <p>{item.describe}</p>
             <div className="discover-list-item-info-bottom">
               <div className="flx-center">
                 <img src={userHead} className="discover-list-head" />
-                <span>{item.author}</span>
+                <span className="single-omit" style={{ maxWidth: '10ch' }}>
+                  {item.author}
+                </span>
               </div>
               <div className="flx-center" style={{ alignItems: 'baseline' }}>
                 <i className="iconfont mr-xihuan discover-list-star"></i>
