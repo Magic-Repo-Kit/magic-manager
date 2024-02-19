@@ -3,187 +3,265 @@ import './index.scss';
 import { DarkModeContext } from '@/components/DarkModeProvider'; //夜间模式
 
 // 图片
-import PlatRobot from '@/assets/images/work-platform-robot.png';
-import PlatPainting from '@/assets/images/work-platform-painting.png';
-
-// antv图表
-import { TinyArea, WordCloud, Sunburst } from '@ant-design/plots';
-import { Timeline } from 'antd';
-import { ClockCircleOutlined } from '@ant-design/icons';
+import userHead from '@/assets/images/user-head.png';
 
 function Discover() {
   // 共享参数
   const { darkMode } = useContext(DarkModeContext);
 
-  // 访客数据
-  const [visitorList, setVisitorList] = useState([
-    264, 417, 438, 887, 309, 397, 550, 575, 563, 430, 525, 592, 492, 467, 513,
-    546, 983, 340, 539, 243, 226, 192,
+  const [columnCount, setColumnCount] = useState(5); //默认展示5列
+  const [columns, setColumns] = useState([]);
+
+  const [list, setList] = useState([
+    {
+      name: '万能助手4.0',
+      describe: '万物皆有裂痕，那是光照进来的地方',
+      img: 'https://picsum.photos/200/300',
+      author: 'abus',
+      authorHead: 'https://picsum.photos/200/300',
+      star: '2000',
+    },
+    {
+      name: '超级风格画',
+      describe: '宁静致远，克己复礼',
+      img: 'https://picsum.photos/200/400',
+      author: 'John Doe',
+      star: '1500',
+    },
+    {
+      name: '单词卡片',
+      describe: '岁月静好，珍惜当下',
+      img: 'https://picsum.photos/200/500',
+      author: 'Jane Smith',
+      star: '3000',
+    },
+    {
+      name: '若曦',
+      describe: '风吹麦浪，阳光洒路',
+      img: 'https://picsum.photos/200/600',
+      author: 'Alan Johnson',
+      star: '1200',
+    },
+    {
+      name: '私立高中',
+      describe: '梦想是翅膀，奋斗是力量',
+      img: 'https://picsum.photos/200/700',
+      author: 'Emily Davis',
+      star: '1800',
+    },
+    {
+      name: '霸道总裁爱上我',
+      describe:
+        '勇敢前行，未来可期勇敢前行，未来可期勇敢前行，未来可期勇敢前行，未来可期勇敢前行，未来可期',
+      img: 'https://picsum.photos/200/800',
+      author: 'John Doe',
+      star: '2500',
+    },
+    {
+      name: '物理解决',
+      describe: '一花一世界，一叶一追寻',
+      img: 'https://picsum.photos/200/900',
+      author: 'Alan Johnson',
+      star: '2200',
+    },
+    {
+      name: '程序员',
+      describe: '前方的路，还很长，但我会一步步走过去',
+      img: 'https://picsum.photos/200/1000',
+      author: 'Jane Smith',
+      star: '2800',
+    },
+    {
+      name: '数据分析师',
+      describe: '相信自己，你才能成功',
+      img: 'https://picsum.photos/200/1100',
+      author: 'Emily Davis',
+      star: '2300',
+    },
+    {
+      name: '超级机器人',
+      describe:
+        '天道酬勤，成功就在不远处天道酬勤，成功就在不远处天道酬勤，成功就在不远处天道酬勤，成功就在不远处',
+      img: 'https://picsum.photos/200/1200',
+      author: 'John Doe',
+      star: '3200',
+    },
+    {
+      name: '物理解决',
+      describe: '一花一世界，一叶一追寻',
+      img: 'https://picsum.photos/200/900',
+      author: 'Alan Johnson',
+      star: '2200',
+    },
+    {
+      name: '程序员',
+      describe: '前方的路，还很长，但我会一步步走过去',
+      img: 'https://picsum.photos/200/1000',
+      author: 'Jane Smith',
+      star: '2800',
+    },
+    {
+      name: '数据分析师',
+      describe: '相信自己，你才能成功',
+      img: 'https://picsum.photos/200/1100',
+      author: 'Emily Davis',
+      star: '2300',
+    },
+    {
+      name: '超级机器人',
+      describe:
+        '天道酬勤，成功就在不远处天道酬勤，成功就在不远处天道酬勤，成功就在不远处天道酬勤，成功就在不远处',
+      img: 'https://picsum.photos/200/1200',
+      author: 'John Doe',
+      star: '3200',
+    },
+    {
+      name: '物理解决',
+      describe: '一花一世界，一叶一追寻',
+      img: 'https://picsum.photos/200/900',
+      author: 'Alan Johnson',
+      star: '2200',
+    },
+    {
+      name: '程序员',
+      describe: '前方的路，还很长，但我会一步步走过去',
+      img: 'https://picsum.photos/200/1000',
+      author: 'Jane Smith',
+      star: '2800',
+    },
+    {
+      name: '数据分析师',
+      describe: '相信自己，你才能成功',
+      img: 'https://picsum.photos/200/1100',
+      author: 'Emily Davis',
+      star: '2300',
+    },
+    {
+      name: '超级机器人',
+      describe:
+        '天道酬勤，成功就在不远处天道酬勤，成功就在不远处天道酬勤，成功就在不远处天道酬勤，成功就在不远处',
+      img: 'https://picsum.photos/200/1200',
+      author: 'John Doe',
+      star: '3200',
+    },
+    {
+      name: '物理解决',
+      describe: '一花一世界，一叶一追寻',
+      img: 'https://picsum.photos/200/900',
+      author: 'Alan Johnson',
+      star: '2200',
+    },
+    {
+      name: '程序员',
+      describe: '前方的路，还很长，但我会一步步走过去',
+      img: 'https://picsum.photos/200/1000',
+      author: 'Jane Smith',
+      star: '2800',
+    },
+    {
+      name: '数据分析师',
+      describe: '相信自己，你才能成功',
+      img: 'https://picsum.photos/200/1100',
+      author: 'Emily Davis',
+      star: '2300',
+    },
+    {
+      name: '超级机器人',
+      describe:
+        '天道酬勤，成功就在不远处天道酬勤，成功就在不远处天道酬勤，成功就在不远处天道酬勤，成功就在不远处',
+      img: 'https://picsum.photos/200/1200',
+      author: 'John Doe',
+      star: '3200',
+    },
   ]);
-  const handleVisitorUpdate = () => {
-    // 在这里更新 visitorList 状态
-    const newList = [
-      264, 417, 438, 887, 309, 397, 550, 575, 563, 430, 525, 592, 492, 467, 513,
-      546, 983, 340, 539, 243, 226, 12,
-    ];
-    setVisitorList(newList);
-  };
-  const visitorConfig = {
-    height: 100,
-    autoFit: false,
-    data: visitorList,
-    smooth: true,
-    areaStyle: {
-      gradient: {
-        colorStops: [
-          {
-            offset: 0,
-            color: '#a0e4ff', // 0% 处的颜色
-          },
-          {
-            offset: 1,
-            color: '#fff', // 100% 处的颜色
-          },
-        ],
-        globalCoord: false, // 缺省为 false
-      },
-    },
-  };
 
-  // 词图
-  const [wordCloudData, setWordCloudData] = useState([]);
-  const getWordCloudData = () => {
-    fetch(
-      'https://gw.alipayobjects.com/os/antvdemo/assets/data/antv-keywords.json'
-    )
-      .then((response) => response.json())
-      .then((json) => setWordCloudData(json))
-      .catch((error) => {
-        console.log('fetch data failed', error);
-      });
-  };
-  const wordCloudConfig = {
-    data: wordCloudData,
-    wordField: 'name',
-    weightField: 'value',
-    colorField: 'name',
-
-    wordStyle: {
-      fontFamily: 'Verdana',
-      fontSize: [8, 32],
-      rotation: 1, //这里设置0.5比较卡顿
-    },
-    random: () => 0.5, //可以设置[0,1]区间值，让每次渲染位置相同
-  };
+  // 根据屏幕宽度来更新列数
   useEffect(() => {
-    getWordCloudData();
-  }, []);
+    function handleResize() {
+      let newColumnCount = 5;
+      if (window.innerWidth >= 1800) {
+        newColumnCount = 5;
+      } else if (window.innerWidth >= 1200) {
+        newColumnCount = 4;
+      } else if (window.innerWidth >= 780) {
+        newColumnCount = 3;
+      } else {
+        newColumnCount = 2;
+      }
+      return newColumnCount;
+    }
 
-  // 旭日图
-  const [sunData, setSunData] = useState([]);
-  const sunDataConfig = {
-    data: sunData,
-    innerRadius: 0.2,
-    radius: 1,
-    interactions: [
-      {
-        type: 'element-active',
-      },
-    ],
-    hierarchyConfig: {
-      field: 'sum',
-    },
-    label: {
-      // label layout: limit label in shape, which means the labels out of shape will be hide
-      layout: [
-        {
-          type: 'limit-in-shape',
-        },
-      ],
-    },
-  };
-  const getSunData = () => {
-    fetch('https://gw.alipayobjects.com/os/antvdemo/assets/data/sunburst.json')
-      .then((response) => response.json())
-      .then((json) => setSunData(json))
-      .catch((error) => {
-        console.log('fetch data failed', error);
-      });
-  };
+    function updateColumnCount() {
+      const newColumnCount = handleResize();
+      if (newColumnCount !== columnCount) {
+        setColumnCount(newColumnCount);
+      }
+    }
+
+    updateColumnCount();
+
+    window.addEventListener('resize', updateColumnCount);
+
+    return () => {
+      window.removeEventListener('resize', updateColumnCount);
+    };
+  }, [columnCount]);
+
   useEffect(() => {
-    getSunData();
-  }, []);
+    const masonryCols = Array.from({ length: columnCount }, () => []);
+
+    for (let i = 0; i < list.length; i++) {
+      const item = list[i];
+      const card = (
+        <div key={i} className="discover-list-item">
+          <div className="discover-list-item-img">
+            <img src={item.img} alt={item.name} />
+          </div>
+          <div className="discover-list-item-info">
+            <div className="discover-list-item-info-name">{item.name}</div>
+            <p>{item.describe}</p>
+            <div className="discover-list-item-info-bottom">
+              <div className="flx-center">
+                <img src={userHead} className="discover-list-head" />
+                <span>{item.author}</span>
+              </div>
+              <div className="flx-center" style={{ alignItems: 'baseline' }}>
+                <i className="iconfont mr-xihuan discover-list-star"></i>
+                <span>{item.star}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+
+      let shortestColumnIndex = 0;
+
+      for (let j = 0; j < masonryCols.length; j++) {
+        if (masonryCols[j].length < masonryCols[shortestColumnIndex].length) {
+          shortestColumnIndex = j;
+        }
+      }
+
+      masonryCols[shortestColumnIndex] = [
+        ...masonryCols[shortestColumnIndex],
+        card,
+      ];
+    }
+
+    setColumns(masonryCols);
+  }, [columnCount, list]);
 
   return (
     <div className={`discover-container ${darkMode ? 'dark-mode' : ''}`}>
-      <main>
-        <section className="discover-main-card-header">
-          {/* 访问热度 */}
-          {/* <div className="discover-main-header-left">
-            <div className="discover-visitor-update flx-justify-between">
-              <span>
-                热度
-                <i className="iconfont mr-remen visitor-fire"></i>
-              </span>
-              <i
-                className="iconfont mr-refresh-full"
-                onClick={handleVisitorUpdate}
-              ></i>
-            </div>
-            <div>
-              <TinyArea {...visitorConfig} />
-            </div>
-          </div> */}
-        </section>
-        {/* <div style={{ margin: '15px 0' }}>词云</div> */}
-        {/* <section className="discover-main-middle">
-          <div className="discover-middle-box">
-            <div>
-              <WordCloud {...wordCloudConfig} />
-            </div>
-
-            <div>
-              <Timeline
-                items={[
-                  {
-                    children: 'Create a services site 2015-09-01',
-                  },
-                  {
-                    children: 'Solve initial network problems 2015-09-01',
-                  },
-                  {
-                    children: 'Technical testing 2015-09-01',
-                  },
-                  {
-                    children: 'Network problems being solved 2015-09-01',
-                  },
-                ]}
-              />
-            </div>
+      {/* <div>1</div> */}
+      {/* 瀑布流 */}
+      <div className="wrapper">
+        {columns.map((col, colIndex) => (
+          <div key={colIndex} className="column">
+            {col}
           </div>
-
-
-        </section> */}
-        {/* <section className="discover-main-bottom">
-          <div></div>
-          <div>
-            <Sunburst {...sunDataConfig} />
-          </div>
-
-          <div className="discover-bottom-github flx-center">
-            <i className="icon-github iconfont mr-github"></i>
-            <div className="discover-bottom-title font-family-dingding">
-              MagicRepoKit
-            </div>
-            <div>愿我有所发现，有所创造。</div>
-            <div className="discover-bottom-btn font-family-dingding user-select">
-              <i className="iconfont mr-star01"></i>
-              <span>Star on GitHub</span>
-            </div>
-            <div>您的星是对我们最大的鼓励！</div>
-          </div>
-        </section> */}
-      </main>
+        ))}
+      </div>
     </div>
   );
 }

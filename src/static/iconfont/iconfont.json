@@ -6,25 +6,18 @@
   "description": "百宝袋",
   "glyphs": [
     {
-      "icon_id": "3336289",
-      "name": "发现",
-      "font_class": "find",
+      "icon_id": "1435205",
+      "name": "收藏",
+      "font_class": "shoucang",
+      "unicode": "e63f",
+      "unicode_decimal": 58943
+    },
+    {
+      "icon_id": "1435245",
+      "name": "喜欢",
+      "font_class": "xihuan",
       "unicode": "e66b",
       "unicode_decimal": 58987
-    },
-    {
-      "icon_id": "9057801",
-      "name": "地球",
-      "font_class": "diqiu",
-      "unicode": "e684",
-      "unicode_decimal": 59012
-    },
-    {
-      "icon_id": "9071452",
-      "name": "星球",
-      "font_class": "xingqiu",
-      "unicode": "e689",
-      "unicode_decimal": 59017
     },
     {
       "icon_id": "16742216",
@@ -32,27 +25,6 @@
       "font_class": "zhishixingqiu",
       "unicode": "e68a",
       "unicode_decimal": 59018
-    },
-    {
-      "icon_id": "16745115",
-      "name": "知识星球-选中",
-      "font_class": "zhishixingqiu-xuanzhong",
-      "unicode": "e68b",
-      "unicode_decimal": 59019
-    },
-    {
-      "icon_id": "25577414",
-      "name": "探索",
-      "font_class": "tansuo",
-      "unicode": "e690",
-      "unicode_decimal": 59024
-    },
-    {
-      "icon_id": "28790146",
-      "name": "icon-星球",
-      "font_class": "icon-xingqiu",
-      "unicode": "e6b5",
-      "unicode_decimal": 59061
     },
     {
       "icon_id": "2077551",
@@ -655,13 +627,6 @@
       "font_class": "queren",
       "unicode": "e649",
       "unicode_decimal": 58953
-    },
-    {
-      "icon_id": "2306150",
-      "name": "赞",
-      "font_class": "zan",
-      "unicode": "e63f",
-      "unicode_decimal": 58943
     },
     {
       "icon_id": "11891790",

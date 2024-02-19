@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 4291850 */
-  src: url('iconfont.woff2?t=1708238804780') format('woff2'),
-       url('iconfont.woff?t=1708238804780') format('woff'),
-       url('iconfont.ttf?t=1708238804780') format('truetype');
+  src: url('iconfont.woff2?t=1708313937597') format('woff2'),
+       url('iconfont.woff?t=1708313937597') format('woff'),
+       url('iconfont.ttf?t=1708313937597') format('truetype');
 }
 
 .iconfont {
@@ -13,32 +13,16 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.mr-find:before {
+.mr-shoucang:before {
+  content: "\e63f";
+}
+
+.mr-xihuan:before {
   content: "\e66b";
-}
-
-.mr-diqiu:before {
-  content: "\e684";
-}
-
-.mr-xingqiu:before {
-  content: "\e689";
 }
 
 .mr-zhishixingqiu:before {
   content: "\e68a";
-}
-
-.mr-zhishixingqiu-xuanzhong:before {
-  content: "\e68b";
-}
-
-.mr-tansuo:before {
-  content: "\e690";
-}
-
-.mr-icon-xingqiu:before {
-  content: "\e6b5";
 }
 
 .mr-xinzeng:before {
@@ -383,10 +367,6 @@
 
 .mr-queren:before {
   content: "\e649";
-}
-
-.mr-zan:before {
-  content: "\e63f";
 }
 
 .mr-chat:before {
