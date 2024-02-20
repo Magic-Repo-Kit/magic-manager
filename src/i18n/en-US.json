@@ -1,0 +1,17 @@
+{
+  "menu.knowledge": "Knowledge",
+  "menu.create": "Create",
+  "menu.discover": "Discover",
+  "menu.chat": "Chat",
+  "menu.me": "Me",
+  "menu.manage": "Manage",
+
+  "me.role": "role",
+  "me.my": "my",
+  "me.like": "like",
+  "me.account": "account",
+  "me.likes": "likes",
+  "me.follow": "follow",
+  "me.fans": "fans",
+  "me.introduce": "Add an introduction to let everyone know you."
+}

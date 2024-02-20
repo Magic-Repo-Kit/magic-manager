@@ -1,0 +1,17 @@
+{
+  "menu.knowledge": "知识库",
+  "menu.create": "创建",
+  "menu.discover": "发现",
+  "menu.chat": "消息",
+  "menu.me": "我",
+  "menu.manage": "权限管理",
+
+  "me.role": "角色",
+  "me.my": "我的",
+  "me.like": "赞过",
+  "me.account": "账号",
+  "me.likes": "获赞",
+  "me.follow": "关注",
+  "me.fans": "粉丝",
+  "me.introduce": "点击添加介绍，让大家认识你。"
+}

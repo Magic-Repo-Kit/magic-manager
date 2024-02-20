@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import './index.scss';
 import { DarkModeContext } from '@/components/DarkModeProvider'; //夜间模式
+import { IntlContext } from '@/components/IntlProvider'; // 国际化
 
 import RoleList from './role-list';
 import MyRole from './my-role';
@@ -15,24 +16,25 @@ import Bronze from '@/assets/images/medal-bronze.png';
 import { Menu, Affix } from 'antd';
 import { EditOutlined } from '@ant-design/icons';
 
-const items = [
-  {
-    label: '角色',
-    key: 'role-list',
-  },
-  {
-    label: '我的',
-    key: 'my-role',
-  },
-  {
-    label: '赞过',
-    key: 'like',
-  },
-];
-
 function UserCenter() {
   // 共享参数
   const { darkMode } = useContext(DarkModeContext);
+  const { currentIntl } = useContext(IntlContext);
+
+  const items = [
+    {
+      label: currentIntl.formatMessage({ id: 'me.role' }),
+      key: 'role-list',
+    },
+    {
+      label: currentIntl.formatMessage({ id: 'me.my' }),
+      key: 'my-role',
+    },
+    {
+      label: currentIntl.formatMessage({ id: 'me.like' }),
+      key: 'like',
+    },
+  ];
 
   const [current, setCurrent] = useState('role-list');
   const onClick = (e) => {
@@ -52,16 +54,17 @@ function UserCenter() {
             </div>
             <div>
               <div className="user-name">Mark</div>
-              <div className="user-account">账号：admin</div>
+              <div className="user-account">
+                {currentIntl.formatMessage({ id: 'me.account' })}：admin
+              </div>
             </div>
           </div>
 
           <div className="user-sign">
-            <span>点击添加介绍，让大家认识你。</span>
+            <span>{currentIntl.formatMessage({ id: 'me.introduce' })}</span>
+            {/* <span>愿我有所发现、有所创造。</span> */}
             <EditOutlined />
           </div>
-          {/* <div className="user-info-btn">编辑资料</div> */}
-          {/* <div className="user-sign">愿我有所发现、有所创造。</div> */}
           <div className="user-medal user-select">
             <img src={Gold} alt="金勋章" />
             <img src={Silver} alt="银勋章" />
@@ -71,15 +74,15 @@ function UserCenter() {
           <div className="user-follow user-select">
             <div>
               <span>10</span>
-              <span>获赞</span>
+              <span>{currentIntl.formatMessage({ id: 'me.likes' })}</span>
             </div>
             <div>
               <span>185</span>
-              <span>关注</span>
+              <span>{currentIntl.formatMessage({ id: 'me.follow' })}</span>
             </div>
             <div>
               <span>31</span>
-              <span>粉丝</span>
+              <span>{currentIntl.formatMessage({ id: 'me.fans' })}</span>
             </div>
           </div>
         </div>
