@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import './move-list.scss';
 import { useNavigate } from 'react-router-dom';
 import ajax from '@/request';
+import { IntlContext } from '@/components/IntlProvider'; // 国际化
 
 // import InfiniteScroll from 'react-infinite-scroll-component';
 // 图片
@@ -19,6 +20,9 @@ function MoveItem({
   setParams,
   setMoveBreadList,
 }) {
+  // 共享参数
+  const { currentIntl } = useContext(IntlContext);
+
   const [loading, setLoading] = useState(false);
 
   const [fileList, setFileList] = useState([]); //文件列表
@@ -148,7 +152,7 @@ function MoveItem({
           <div
             key={file.id}
             className={`knowledge-move-item-content flx-center ${
-              file.type === 1 ? 'cursor-point' : ''
+              file.type === 1 ? 'cursor-point' : 'no-select'
             }`}
             onClick={() => handleClick(file)}
           >
@@ -158,7 +162,11 @@ function MoveItem({
               }
               className="filter-drop-shadow"
             />
-            <div className="knowledge-move-item-name single-omit">
+            <div
+              className={`knowledge-move-item-name single-omit ${
+                file.type === 1 ? '' : 'no-select'
+              }`}
+            >
               {file.name}
             </div>
           </div>
@@ -168,7 +176,11 @@ function MoveItem({
         <div className="knowledge-move-empty">
           <Empty
             image={Empty.PRESENTED_IMAGE_SIMPLE}
-            description={<span>没有子目录了，就放这里吧！</span>}
+            description={
+              <span>
+                {currentIntl.formatMessage({ id: 'knowledge.empty_son' })}
+              </span>
+            }
           />
         </div>
       )}

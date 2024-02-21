@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect, useRef } from 'react';
 import '../../index.scss';
 import ajax from '@/request';
 import { useLocation } from 'react-router-dom';
+import { IntlContext } from '@/components/IntlProvider'; // 国际化
 
 import MrPagination from '@/components/mr-pagination';
 import MrModal from '@/components/mr-modal';
@@ -25,6 +26,9 @@ import {
 } from 'antd';
 
 function List() {
+  // 共享参数
+  const { currentIntl } = useContext(IntlContext);
+
   const location = useLocation();
 
   // 从URL中获取parentId参数
@@ -323,7 +327,7 @@ function List() {
                     handleModal({}, 1);
                   }}
                 >
-                  文件夹
+                  {currentIntl.formatMessage({ id: 'knowledge.root' })}
                 </Button>
               </div>
               {/* 新建知识库 */}
@@ -341,7 +345,7 @@ function List() {
                     handleModal({}, 2);
                   }}
                 >
-                  知识库
+                  {currentIntl.formatMessage({ id: 'knowledge.file' })}
                 </Button>
               </div>
             </div>
@@ -353,9 +357,15 @@ function List() {
             setDropdownAddOpen(dropdownAddOpen)
           }
         >
-          <Button type="primary" size="default">
-            新建
-          </Button>
+          <div>
+            <i
+              className="iconfont mr-xinzeng title-add-mobile"
+              style={{ cursor: 'pointer' }}
+            ></i>
+            <Button type="primary" size="default" className="title-add-pc">
+              {currentIntl.formatMessage({ id: 'knowledge.add' })}
+            </Button>
+          </div>
         </Dropdown>
       </div>
       <main className="knowledge-list-content">
@@ -376,7 +386,11 @@ function List() {
           <div className="knowledge-content-empty">
             <Empty
               image={Empty.PRESENTED_IMAGE_SIMPLE}
-              description={<span>还没有文件，快去创建一个吧！</span>}
+              description={
+                <span>
+                  {currentIntl.formatMessage({ id: 'knowledge.empty' })}
+                </span>
+              }
             />
           </div>
         )}
@@ -406,14 +420,22 @@ function List() {
         title={
           <div className="knowledge-list-modal-title">
             <img src={folderForm.type === 1 ? knowledgeFile : knowledgeIcon} />
-            <span>{`${folderForm.type === 1 ? '文件夹' : '知识库'}`}</span>
+            <span>{`${
+              folderForm.type === 1
+                ? currentIntl.formatMessage({ id: 'knowledge.folder' })
+                : currentIntl.formatMessage({ id: 'knowledge.file' })
+            }`}</span>
           </div>
         }
         content={
           <div style={{ margin: '20px 0 25px 0' }}>
             <Input
               ref={inputFolderNameRef}
-              placeholder={`${folderForm.type === 1 ? '文件夹' : '知识库'}名称`}
+              placeholder={`${
+                folderForm.type === 1
+                  ? currentIntl.formatMessage({ id: 'knowledge.folder' })
+                  : currentIntl.formatMessage({ id: 'knowledge.file' })
+              }${currentIntl.formatMessage({ id: 'knowledge.name' })}`}
               prefix={<span style={{ color: '#f64d28' }}>*</span>}
               suffix={<i className="iconfont mr-shuru" />}
               value={folderForm.name}
@@ -427,7 +449,9 @@ function List() {
             <div style={{ height: 15 }}></div>
             <Input
               placeholder={`这个${
-                folderForm.type === 1 ? '文件夹' : '知识库'
+                folderForm.type === 1
+                  ? currentIntl.formatMessage({ id: 'knowledge.folder' })
+                  : currentIntl.formatMessage({ id: 'knowledge.file' })
               }还没有介绍~`}
               suffix={<i className="iconfont mr-jishiben" />}
               allowClear
@@ -451,7 +475,9 @@ function List() {
         title={
           <div className="knowledge-list-modal-title">
             <img src={moveTo} />
-            <span>{`移动到此处`}</span>
+            <span>
+              {currentIntl.formatMessage({ id: 'knowledge.move_here' })}
+            </span>
           </div>
         }
         open={isMoveOpen}
@@ -464,7 +490,7 @@ function List() {
               className="knowledge-list-modal-btn"
               onClick={handleMoveConfirm}
             >
-              保存
+              {currentIntl.formatMessage({ id: 'knowledge.save' })}
             </Button>
           </div>
         }
@@ -475,7 +501,7 @@ function List() {
           <Breadcrumb
             items={[
               {
-                title: '根目录',
+                title: currentIntl.formatMessage({ id: 'knowledge.root' }),
                 href: '',
                 onClick: handleMoveHomeClick,
               },

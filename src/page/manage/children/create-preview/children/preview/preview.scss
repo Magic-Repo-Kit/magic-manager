@@ -15,11 +15,21 @@
         margin-bottom: 5px;
       }
       .preview-prompt-icon-title {
-        i {
+        > i {
           font-size: 16px;
           margin-right: 5px;
           margin-bottom: 3px;
           background-image: linear-gradient(#af40ff, #5b42f3 50%, #00ddeb);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
+        > div {
+          background-image: linear-gradient(
+            43deg,
+            #af40ff,
+            #5b42f3 50%,
+            #00ddeb
+          );
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
         }
@@ -169,6 +179,56 @@
         .preview-text-extend-item {
           width: calc((100% / 4) - 10px);
         }
+      }
+    }
+  }
+}
+// 黑暗模式
+.preview-container.dark-mode {
+  header {
+    .preview-prompt-box {
+      background-color: $text-700;
+      .preview-prompt-icon-title {
+        > i {
+          background-image: linear-gradient(40deg, #ff0080, #ff8c00 70%);
+        }
+        > div {
+          background-image: linear-gradient(40deg, #ff0080, #ff8c00 70%);
+        }
+      }
+    }
+  }
+  main {
+    .preview-chat-main {
+      > div {
+        .msg-item {
+          background: linear-gradient(269deg, #5d66ff -3.63%, #a171ff 100.38%);
+        }
+      }
+      // 机器人消息
+      .bot-msg {
+        > div {
+          background: $text-700;
+        }
+      }
+    }
+  }
+  footer {
+    .preview-text-send-container {
+      .preview-text-area-box {
+        border: 1px solid rgba($color: $border-color-200, $alpha: 0.8);
+        color: $bg-100;
+        .custom-placeholder::placeholder {
+          color: #fff;
+          opacity: 0.8;
+        }
+      }
+    }
+    .preview-text-extend-container {
+      .preview-text-extend-item {
+        background-color: $text-700;
+        color: $bg-100;
+        border: 1px solid rgba($color: $border-color-200, $alpha: 0);
       }
     }
   }

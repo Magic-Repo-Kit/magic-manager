@@ -13,6 +13,7 @@
     width: calc((100% - 30px) / 4);
     flex-direction: column;
     transition: background-color 0.1s;
+
     &:hover {
       background-color: #e5f3ff;
     }
@@ -24,6 +25,9 @@
     }
     .knowledge-move-item-name {
       max-width: 80%;
+      &.no-select {
+        opacity: 0.5;
+      }
     }
     @media screen and (max-width: 768px) {
       width: 100%;

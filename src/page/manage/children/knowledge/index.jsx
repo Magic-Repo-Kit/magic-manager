@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import './index.scss';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom'; //渲染子路由
 import { DarkModeContext } from '@/components/DarkModeProvider'; //夜间模式
+import { IntlContext } from '@/components/IntlProvider'; // 国际化
 
 import ajax from '@/request';
 
@@ -11,6 +12,8 @@ import { Breadcrumb } from 'antd';
 function Knowledge() {
   // 共享参数
   const { darkMode } = useContext(DarkModeContext);
+  const { currentIntl } = useContext(IntlContext);
+
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -132,7 +135,7 @@ function Knowledge() {
           <Breadcrumb
             items={[
               {
-                title: '根目录',
+                title: currentIntl.formatMessage({ id: 'knowledge.root' }),
                 href: '',
                 onClick: handleBreadHomeClick,
               },

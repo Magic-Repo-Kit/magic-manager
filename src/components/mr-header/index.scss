@@ -65,7 +65,32 @@
       .admin-switch {
         cursor: pointer;
         padding: 6px;
-        // margin-right: 10px;
+        // transition: transform 0.5s ease;
+        &.rotate-en {
+          animation: rotateIntlForward 0.5s forwards;
+          transform: rotate(360deg) scale(1.2);
+        }
+
+        &.rotate-zh {
+          animation: rotateIntlReverse 0.5s forwards;
+          transform: rotate(360deg) scale(1.2);
+        }
+        @keyframes rotateIntlForward {
+          0% {
+            transform: rotate(0deg) scale(1);
+          }
+          100% {
+            transform: rotate(360deg) scale(1);
+          }
+        }
+        @keyframes rotateIntlReverse {
+          0% {
+            transform: rotate(360deg) scale(1);
+          }
+          100% {
+            transform: rotate(0deg) scale(1);
+          }
+        }
         i {
           font-size: 24px;
         }

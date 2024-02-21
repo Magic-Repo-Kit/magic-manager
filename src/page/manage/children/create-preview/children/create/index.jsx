@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, useContext } from 'react';
 import '../../index.scss';
 import './create.scss';
 import ajax from '@/request';
@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 import UploadImage from '@/components/upload-image';
 import MarkdownRenderer from '@/components/MarkdownRenderer';
+import { DarkModeContext } from '@/components/DarkModeProvider'; //夜间模式
 
 // 图片
 import Tips from '@/assets/images/tips.png';
@@ -35,6 +36,9 @@ function Create({
   messages,
   setMessages,
 }) {
+  //  共享参数
+  const { darkMode } = useContext(DarkModeContext);
+
   const navigate = useNavigate(); //路由
 
   // 拿到modelList值
@@ -292,7 +296,7 @@ function Create({
     }
   }, [isPresetOpen]);
   return (
-    <div className="create-container">
+    <div className={`create-container ${darkMode ? 'dark-mode' : ''}`}>
       <header>
         <div className="create-prompt-box">
           <div className="create-promp-box-header">
@@ -309,9 +313,14 @@ function Create({
               </Tooltip>
             </div>
           </div>
-          <div>
+          <div className="create-promp-box-textarea">
             <TextArea
-              className="remove-default-textarea"
+              style={{
+                color: darkMode ? '#fff' : '',
+              }}
+              className={`remove-default-textarea ${
+                darkMode ? 'custom-placeholder' : ''
+              }`}
               maxLength={10000}
               value={createParams.prompt}
               onChange={(e) =>
@@ -328,9 +337,9 @@ function Create({
             <Button
               type="primary"
               size="small"
-              disabled={createParams.prompt.trim() === ''}
+              // disabled={createParams.prompt.trim() === ''}
             >
-              AI一键生成
+              猜你想说 . . .
             </Button>
           </div>
         </div>

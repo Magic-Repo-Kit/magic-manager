@@ -1,9 +1,10 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useContext } from 'react';
 import '../../index.scss';
 import './preview.scss';
 import sseRequest from '@/request/sseRequest';
 import TextLoading from '@/components/text-loading';
 import MarkdownRenderer from '@/components/MarkdownRenderer';
+import { DarkModeContext } from '@/components/DarkModeProvider'; //夜间模式
 
 // 图片
 import userHead from '@/assets/images/user-head.png';
@@ -13,6 +14,9 @@ import { Input, Badge } from 'antd';
 const { TextArea } = Input;
 
 function Preview({ createParams, messages, setMessages }) {
+  // 共享参数
+  const { darkMode } = useContext(DarkModeContext);
+
   const [msgValue, setMsgValue] = useState(''); //发送消息
   const [isExtended, setIsExtended] = useState(false); // 扩展是否显示
 
@@ -122,7 +126,7 @@ function Preview({ createParams, messages, setMessages }) {
   }, [messages]);
 
   return (
-    <div className="preview-container">
+    <div className={`preview-container ${darkMode ? 'dark-mode' : ''}`}>
       <header>
         <Badge.Ribbon text="预览" color="#4f46e5">
           <div className="preview-prompt-box">
@@ -137,7 +141,7 @@ function Preview({ createParams, messages, setMessages }) {
             </div>
             <div className="flx-align-center preview-prompt-icon-title">
               <i className="iconfont mr-mofabang"></i>
-              <div className="gradient-text-3">提示词预览</div>
+              <div>提示词预览</div>
             </div>
             <div className="preview-prompt-text">
               {createParams.prompt ||
@@ -213,8 +217,13 @@ function Preview({ createParams, messages, setMessages }) {
           {/* 输入 */}
           <div className="preview-text-area-box">
             <TextArea
+              style={{
+                color: darkMode ? '#fff' : '',
+              }}
               value={msgValue}
-              className="remove-default-textarea"
+              className={`remove-default-textarea ${
+                darkMode ? 'custom-placeholder' : ''
+              }`}
               maxLength={50000}
               placeholder="Shift + Enter换行"
               onChange={(e) => setMsgValue(e.target.value)}

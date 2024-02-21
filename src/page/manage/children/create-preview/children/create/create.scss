@@ -219,28 +219,23 @@
   .create-container {
     header {
       .create-prompt-box {
-        border: 2px solid $primary-200;
-
+        border: 2px solid $text-500;
         .create-promp-box-header {
-          position: absolute;
-          top: 10px;
-
           i {
-            font-size: 18px;
-            margin-right: 5px;
-            margin-bottom: 3px;
-            background-image: linear-gradient(#af40ff, #5b42f3 50%, #00ddeb);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-          }
-          img {
-            cursor: pointer;
+            background-image: linear-gradient(40deg, #ff0080, #ff8c00 70%);
           }
         }
-        .create-promp-box-footer {
-          position: absolute;
-          bottom: 10px;
+        .create-promp-box-textarea {
+          .custom-placeholder::placeholder {
+            color: #fff;
+            opacity: 0.8;
+          }
         }
+      }
+    }
+    main {
+      .create-base-Info {
+        background-color: $text-700;
       }
     }
   }

@@ -1,7 +1,9 @@
 @import '@/styles/theme';
 .discover-container {
   padding: 10px 5px;
-  // scroll-behavior: smooth; //平滑滚动
+  @media screen and (max-width: 780px) {
+    padding-top: 0px;
+  }
   .wrapper {
     display: grid;
     grid-gap: 20px;

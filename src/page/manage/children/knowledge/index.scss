@@ -1,6 +1,6 @@
 @import '@/styles/theme';
 .knowledge-container {
-  padding: 15px;
+  padding: 10px;
   padding-top: 0;
   position: relative;
   .knowledge-title-screen {
@@ -19,13 +19,26 @@
 
   .knowledge-list {
     .knowledge-list-title {
-      margin-bottom: 20px;
       display: flex;
       align-items: center;
       justify-content: flex-end;
       position: absolute;
-      top: -0px;
-      right: 15px;
+      top: 1px;
+      right: 20px;
+      @media screen and (max-width: 768px) {
+        top: 8px;
+      }
+      .title-add-pc {
+        @media screen and (max-width: 768px) {
+          display: none;
+        }
+      }
+      .title-add-mobile {
+        display: none;
+        @media screen and (max-width: 768px) {
+          display: block;
+        }
+      }
     }
     .knowledge-list-content {
       display: flex;
@@ -148,5 +161,46 @@
   > img {
     height: 26px;
     margin-right: 5px;
+  }
+}
+
+// 黑暗模式
+.knowledge-container.dark-mode {
+  .knowledge-list {
+    .knowledge-list-content {
+      .knowledge-content-item {
+        border: 1px solid transparent;
+        background-color: $text-700;
+        &:hover {
+          border-color: rgba($color: $bg-100, $alpha: 0.2);
+        }
+      }
+    }
+  }
+  .ant-breadcrumb a,
+  .ant-breadcrumb .ant-breadcrumb-separator {
+    color: rgba(250, 250, 250, 0.45);
+  }
+  .ant-breadcrumb li:last-child {
+    color: rgba(250, 250, 250, 0.88);
+  }
+  .ant-empty-normal .ant-empty-description {
+    color: rgba(250, 250, 250, 0.25);
+  }
+
+  // 目录
+  .ant-pagination {
+    color: rgba(250, 250, 250, 0.88);
+  }
+  .ant-pagination .ant-pagination-disabled .ant-pagination-item-link,
+  .ant-pagination .ant-pagination-disabled:hover .ant-pagination-item-link {
+    color: rgba(250, 250, 250, 0.25);
+  }
+  .ant-pagination .ant-pagination-prev button,
+  .ant-pagination .ant-pagination-next button {
+    color: rgba(250, 250, 250, 0.88);
+  }
+  .ant-pagination.ant-pagination-simple .ant-pagination-simple-pager input {
+    color: rgba(0, 0, 0, 0.88);
   }
 }

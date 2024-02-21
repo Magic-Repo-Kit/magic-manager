@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import '../../index.scss';
 import { useNavigate } from 'react-router-dom';
 
@@ -6,11 +6,16 @@ import { useNavigate } from 'react-router-dom';
 import knowledgeFile from '@/assets/images/file.png';
 import knowledgeIcon from '@/assets/images/knowledge-icon.png';
 
+import { IntlContext } from '@/components/IntlProvider'; // 国际化
+
 // antd组件
 import { Button, Dropdown, Popconfirm } from 'antd';
 
 // item内容
 function FileItem({ file, onEdit, onMove, onDelete, setParams }) {
+  // 共享参数
+  const { currentIntl } = useContext(IntlContext);
+
   const [dropdownEditOpen, setDropdownEditOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -65,7 +70,7 @@ function FileItem({ file, onEdit, onMove, onDelete, setParams }) {
                       onEdit(file);
                     }}
                   >
-                    编 辑
+                    {currentIntl.formatMessage({ id: 'knowledge.edit' })}
                   </Button>
                 </div>
                 <div>
@@ -82,7 +87,7 @@ function FileItem({ file, onEdit, onMove, onDelete, setParams }) {
                       onMove(file);
                     }}
                   >
-                    移 动
+                    {currentIntl.formatMessage({ id: 'knowledge.move' })}
                   </Button>
                 </div>
                 <div>
@@ -99,7 +104,7 @@ function FileItem({ file, onEdit, onMove, onDelete, setParams }) {
                       // onDelete(file);
                     }}
                   >
-                    导 出
+                    {currentIntl.formatMessage({ id: 'knowledge.export' })}
                   </Button>
                 </div>
                 <div>
@@ -136,7 +141,7 @@ function FileItem({ file, onEdit, onMove, onDelete, setParams }) {
                       type="text"
                       className="title-dropdown-btn"
                     >
-                      删 除
+                      {currentIntl.formatMessage({ id: 'knowledge.delete' })}
                     </Button>
                   </Popconfirm>
                 </div>
@@ -155,12 +160,20 @@ function FileItem({ file, onEdit, onMove, onDelete, setParams }) {
       </div>
       <div className="knowledge-item-content single-omit">
         {file.description ||
-          `这个${file.type === 1 ? '文件夹' : '知识库'}还没有介绍~`}
+          `这个${
+            file.type === 1
+              ? currentIntl.formatMessage({ id: 'knowledge.folder' })
+              : currentIntl.formatMessage({ id: 'knowledge.file' })
+          }还没有介绍~`}
       </div>
       <div className="knowledge-item-footer">
         <div></div>
         <div className="flx-center">
-          <span>{file.type === 1 ? '文件夹' : '知识库'}</span>
+          <span>
+            {file.type === 1
+              ? currentIntl.formatMessage({ id: 'knowledge.folder' })
+              : currentIntl.formatMessage({ id: 'knowledge.file' })}
+          </span>
         </div>
       </div>
     </div>
