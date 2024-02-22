@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect, useContext } from 'react';
-// import '../../index.scss';
 import './chat.scss';
+
 import sseRequest from '@/request/sseRequest';
 import TextLoading from '@/components/text-loading';
 import MarkdownRenderer from '@/components/MarkdownRenderer';
@@ -266,13 +266,13 @@ function ChatCtx({ messages, setMessages, conversationId }) {
 
   return (
     <div className={`chat-container ${darkMode ? 'dark-mode' : ''}`}>
-      <div className="chat-select-btn">
+      {/* <div className="chat-select-btn">
         <Select
           defaultValue="1"
           onChange={handleChangeSelect}
           options={roleList}
         />
-      </div>
+      </div> */}
 
       {/* 聊天 */}
       <main ref={chatMainRef}>
@@ -465,9 +465,13 @@ function ChatCtx({ messages, setMessages, conversationId }) {
                       isExtended ? 'add-rotate' : 'reverse-rotate'
                     }`}
                   >
+                    {/* 添加 */}
                     <i
                       className="iconfont mr-jia"
-                      onClick={() => setIsExtended(!isExtended)}
+                      onClick={() => {
+                        scrollToBottom();
+                        setIsExtended(!isExtended);
+                      }}
                     ></i>
                   </div>
                 )}

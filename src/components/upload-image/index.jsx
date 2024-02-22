@@ -136,7 +136,7 @@ function UploadImage({
             modalOk="确定"
           >
             <Upload
-              action="https://124.222.46.195/system/oss/upload"
+              action="https://60.204.200.62/system/oss/upload"
               headers={{
                 'User-Type': 'pc',
                 Authorization: `Bearer ${access_token}`,
@@ -166,7 +166,7 @@ function UploadImage({
           </ImgCrop>
         ) : (
           <Upload
-            action="https://124.222.46.195/system/oss/upload"
+            action="https://60.204.200.62/system/oss/upload"
             headers={{
               'User-Type': 'pc',
               Authorization: `Bearer ${access_token}`,

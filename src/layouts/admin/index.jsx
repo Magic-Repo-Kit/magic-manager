@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { Outlet, useNavigate } from 'react-router-dom'; //渲染子路由
+import { Outlet, useLocation } from 'react-router-dom'; //渲染子路由
 import './index.scss';
 import { DarkModeContext } from '@/components/DarkModeProvider'; //夜间模式
 
@@ -8,12 +8,16 @@ import MrHeader from '@/components/mr-header';
 function Admin() {
   // 共享参数
   const { darkMode } = useContext(DarkModeContext);
-  const navigate = useNavigate(); //路由
+  const location = useLocation();
+
+  const hideHeader = location.pathname === '/admin/manage/chat';
 
   return (
     <div className={`admin-container ${darkMode ? 'dark-mode' : ''}`}>
-      <MrHeader />
-      <main>
+      <div className={`mr-header-box ${hideHeader ? 'isHide' : ''}`}>
+        <MrHeader />
+      </div>
+      <main className={hideHeader ? 'isHide' : ''}>
         {/* 渲染子路由 */}
         <Outlet />
       </main>

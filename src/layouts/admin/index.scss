@@ -10,10 +10,21 @@
   // overflow: auto;
   overflow: hidden;
   font-family: 'Montserrat', sans-serif;
+  .mr-header-box {
+    &.isHide {
+      @media screen and (max-width: 768px) {
+        display: none;
+      }
+    }
+  }
   > main {
     padding-top: 65px;
-    @media screen and (max-width: 780px) {
+    @media screen and (max-width: 768px) {
+      padding-top: 55px;
       padding-bottom: 55px;
+      &.isHide {
+        padding-top: 0;
+      }
     }
   }
 }

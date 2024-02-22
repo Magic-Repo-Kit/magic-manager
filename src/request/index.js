@@ -10,7 +10,7 @@ import { message } from 'antd';
 
 // 创建 axios 实例
 const instance = axios.create({
-  baseURL: process.env.NODE_ENV === 'development' ? '/api' : 'https://124.222.46.195',
+  baseURL: process.env.NODE_ENV === 'development' ? '/api' : 'https://60.204.200.62',
   timeout: 10000,
   headers: {
     'Content-Type': 'application/json',

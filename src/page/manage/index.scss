@@ -12,7 +12,7 @@
     position: fixed;
     left: 0;
     top: 65px;
-    @media screen and (max-width: 780px) {
+    @media screen and (max-width: 768px) {
       display: none;
     }
     // 隐藏边框
@@ -164,7 +164,7 @@
     background: rgba($bg-900, 0.85);
     -webkit-backdrop-filter: blur(100px);
     backdrop-filter: blur(100px);
-    @media screen and (min-width: 780px) {
+    @media screen and (min-width: 768px) {
       display: none;
     }
     .manage-mobile-menu-item {
@@ -195,7 +195,7 @@
     &.no-padding-left {
       padding-left: 0;
     }
-    @media screen and (max-width: 780px) {
+    @media screen and (max-width: 768px) {
       padding-left: 0;
     }
   }

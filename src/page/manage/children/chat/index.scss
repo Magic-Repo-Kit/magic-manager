@@ -10,8 +10,16 @@
   @media screen and (max-width: 768px) {
     padding: 10px;
     padding-top: 0;
+    height: calc(100vh - 110px);
   }
-
+  // 头部
+  > header {
+    height: 55px;
+    padding: 0 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
   // 侧边栏
   .chat-container-nav {
     position: fixed;
@@ -106,6 +114,16 @@
       }
     }
   }
+}
+// 抽屉
+.chat-drawer-box {
+  .chat-drawer-role-list {
+    display: flex;
+  }
+}
+// 抽屉最大宽度
+.ant-drawer .ant-drawer-content-wrapper {
+  max-width: 70vw;
 }
 
 // 黑暗模式

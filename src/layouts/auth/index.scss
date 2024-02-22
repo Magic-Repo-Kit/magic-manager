@@ -244,8 +244,8 @@
           }
         }
       }
-      // 媒体查询 <780px
-      @media screen and (max-width: 780px) {
+      // 媒体查询 <768px
+      @media screen and (max-width: 768px) {
         padding: 20px 0;
         .rocket-bg {
           top: 30%;
@@ -341,7 +341,7 @@
           width: calc(100% / 2);
         }
       }
-      @media screen and (max-width: 780px) {
+      @media screen and (max-width: 768px) {
         article {
           width: 100%;
         }

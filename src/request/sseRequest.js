@@ -11,7 +11,7 @@ function sseRequest(url, params, onMessage, setIsLoading, onMyError) {
   // 开发环境
   const devUrl = `/api${url}`;
   // 生产环境
-  const prodUrl = `https://124.222.46.195${url}`;
+  const prodUrl = `https://60.204.200.62${url}`;
   const apiUrl = process.env.NODE_ENV === 'development' ? devUrl : prodUrl;
 
   const startSse = () => {
