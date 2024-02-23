@@ -7,7 +7,10 @@ import ChatCtx from './children/chat-ctx';
 import ChatList from './children/chat-list';
 import ajax from '@/request';
 
-import { Drawer } from 'antd';
+// 图片
+import botHead from '@/assets/images/bot-head.png';
+
+import { Drawer, Popover } from 'antd';
 
 function Chat() {
   // 共享参数
@@ -16,6 +19,15 @@ function Chat() {
   const [messages, setMessages] = useState([]); // 聊天消息
 
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [roleList, setRoleList] = useState([]); // 角色列表
+  const [selectRole, setSelectRole] = useState(''); //选中的角色id
+
+  const [roleParams, setRoleParams] = useState({
+    // 角色列表参数
+    pageNo: 1,
+    pageSize: 100,
+    keywords: '',
+  });
 
   // 获取对话详情
   const getChatMessages = async () => {
@@ -42,18 +54,75 @@ function Chat() {
     setDrawerOpen(false);
   };
 
+  // 获取角色列表
+  const getRoleList = async () => {
+    try {
+      const res = await ajax.get(`/chat/role/list-page`, roleParams);
+      if (res.code === 200) {
+        if (res.data) {
+          setRoleList(res.data.list || []);
+          if (res.data.list.length > 0) {
+            setSelectRole(res.data.list[0].id); // 设置选中的角色为第一个角色的id
+          }
+        }
+      }
+    } catch (error) {
+      console.log('🚀 ~ getFileList ~ error:', error || '获取模型列表失败');
+    }
+  };
+  // 选择角色
+  const handleRoleClick = (roleId) => {
+    setSelectRole(roleId);
+  };
+
   useEffect(() => {
     getChatMessages();
   }, [conversationId]);
+
+  useEffect(() => {
+    getRoleList();
+  }, []);
 
   return (
     <div className={`chat-container-box ${darkMode ? 'dark-mode' : ''}`}>
       {/* 头部 */}
       <header>
-        <div className="font-family-dingding">面试官</div>
+        <Popover
+          arrow={false}
+          placement="bottomLeft"
+          content={
+            <div
+              className="chat-role-list"
+              style={{
+                background: darkMode ? '#2f2f2f' : '',
+                color: darkMode ? '#fff' : '',
+              }}
+            >
+              {roleList &&
+                roleList.map((role) => (
+                  <div key={role.id} onClick={() => handleRoleClick(role.id)}>
+                    <img src={role.imageUrl || botHead}></img>
+                    <div className="chat-role-list-name single-omit">
+                      {role.name}
+                    </div>
+                    {/* <div className="chat-role-list-checked"></div> */}
+                    {role.id === selectRole && (
+                      <div className="chat-role-list-checked"></div>
+                    )}
+                  </div>
+                ))}
+            </div>
+          }
+        >
+          <div className="font-family-dingding chat-header-role user-select">
+            面试官
+          </div>
+        </Popover>
+
         <div onClick={onShowDrawer}>
           <i className="iconfont mr-more-2 cursor-point"></i>
         </div>
+        {/* 角色下拉 */}
       </header>
       <ChatCtx
         messages={messages}
