@@ -14,6 +14,10 @@ import mrkLogo from '@/assets/images/logo-mrk.png';
 import mrkLight from '@/assets/images/mrk-title-light.png';
 import mrkDark from '@/assets/images/mrk-title-dark.png';
 
+import { ExclamationCircleFilled } from '@ant-design/icons';
+import { Modal } from 'antd';
+const { confirm } = Modal;
+
 const MrHeader = () => {
   // 共享参数
   const { darkMode } = useContext(DarkModeContext);
@@ -21,7 +25,6 @@ const MrHeader = () => {
   const { currentIntl, setCurrentIntl } = useContext(IntlContext);
 
   const handleSwitchLocale = throttle(() => {
-    console.log(11);
     setCurrentIntl(createIntlObject(currentIntl.locale === 'en' ? 'zh' : 'en'));
   }, 1000); // 设置节流时间间隔为1000ms
 
@@ -43,6 +46,28 @@ const MrHeader = () => {
             onClick={handleSwitchLocale}
           >
             <i className="iconfont mr-qiehuanyuyan"></i>
+          </div>
+          <div
+            className={`admin-switch flx-center`}
+            onClick={() => {
+              confirm({
+                title: '提示',
+                icon: <ExclamationCircleFilled />,
+                content: '确认是否退出登录?',
+                okText: '确定',
+                okType: 'danger',
+                cancelText: '取消',
+                onOk() {
+                  window.location.replace('/auth');
+                  sessionStorage.clear();
+                },
+                onCancel() {
+                  console.log('取消');
+                },
+              });
+            }}
+          >
+            <i className="iconfont mr-exit-full"></i>
           </div>
         </div>
       </div>
