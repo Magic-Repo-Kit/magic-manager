@@ -88,6 +88,7 @@ function Chat() {
       {/* 头部 */}
       <header>
         <Popover
+          trigger="click"
           arrow={false}
           placement="bottomLeft"
           content={
@@ -131,20 +132,16 @@ function Chat() {
       />
       {/* 抽屉 */}
       <Drawer
-        title="选择"
+        title="聊天记录"
         onClose={onCloseDrawer}
         open={drawerOpen}
         placement="right"
       >
         <div className="chat-drawer-box">
-          <div className="chat-drawer-role-list">
-            <div>角色</div>
-            <div>角色</div>
-            <div>角色</div>
-          </div>
-          <div>
-            <div>聊天纪录</div>
-          </div>
+          <ChatList
+            conversationId={conversationId}
+            setConversationId={setConversationId}
+          />
         </div>
       </Drawer>
       {/* 侧边栏 */}

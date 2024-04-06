@@ -22,7 +22,7 @@ function ChatList({ conversationId, setConversationId }) {
       const res = await ajax.get(`/chat/gpt/page-conversation`, listParams);
       if (res.code === 200) {
         if (res.data) {
-          setTitleList(res.data.list);
+          setTitleList(res.data.list.slice(0, 15)); // 只显示前15条
           setTitleTotal(res.data.total);
           // 默认设置第一个会话为激活状态
           if (!conversationId) {
