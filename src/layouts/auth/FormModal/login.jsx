@@ -121,12 +121,12 @@ function Login() {
         {/* 账号 */}
         <div className="input-title">
           账号：
-          {username.length < 12 ? (
+          {username.length < 25 ? (
             showUsernameTips && (
               <span className="title-tips">请输入数字、字母或 _ - . @</span>
             )
           ) : (
-            <span className="title-tips">最大长度不能超过12</span>
+            <span className="title-tips">最大长度不能超过25</span>
           )}
         </div>
         <div className="input-content">
@@ -143,12 +143,12 @@ function Login() {
         {/* 密码 */}
         <div className="input-title">
           密码：
-          {password.length < 12 ? (
+          {password.length < 25 ? (
             showPasswordTips && (
               <span className="title-tips">请输入数字、字母或 _ - . @</span>
             )
           ) : (
-            <span className="title-tips">最大长度不能超过12</span>
+            <span className="title-tips">最大长度不能超过25</span>
           )}
         </div>
         <div className="input-content">

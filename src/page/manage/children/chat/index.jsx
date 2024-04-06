@@ -28,6 +28,10 @@ function Chat() {
     pageSize: 100,
     keywords: '',
   });
+  const [listParams, setListParams] = useState({
+    pageNo: 1,
+    pageSize: 100,
+  });
 
   // 获取对话详情
   const getChatMessages = async () => {
@@ -74,13 +78,29 @@ function Chat() {
   const handleRoleClick = (roleId) => {
     setSelectRole(roleId);
   };
-
+  // 获取会话列表list
+  const getTitleList = async () => {
+    try {
+      const res = await ajax.get(`/chat/gpt/page-conversation`, listParams);
+      if (res.code === 200) {
+        if (res.data) {
+          // 默认设置第一个会话为激活状态
+          if (!conversationId) {
+            setConversationId(res.data.list[0]?.conversationId);
+          }
+        }
+      }
+    } catch (error) {
+      console.log('🚀 ~ getFileList ~ error:', error || '获取会话列表失败');
+    }
+  };
   useEffect(() => {
     getChatMessages();
   }, [conversationId]);
 
   useEffect(() => {
     getRoleList();
+    getTitleList();
   }, []);
 
   return (

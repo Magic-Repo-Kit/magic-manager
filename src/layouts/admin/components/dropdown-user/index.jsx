@@ -199,12 +199,12 @@ function DropdownUser({ setUserOpen }) {
             </div>
             {/* 
             <span className="tips">
-              {password.length < 12 ? (
+              {password.length < 25 ? (
                 showPasswordTips && (
                   <span className="title-tips">请输入数字、字母或 _ - . @</span>
                 )
               ) : (
-                <span className="title-tips">最大长度不能超过12</span>
+                <span className="title-tips">最大长度不能超过25</span>
               )}
             </span> */}
           </div>
