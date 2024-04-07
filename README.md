@@ -31,6 +31,10 @@ react-syntax-highlighter -代码高亮
 
 ```
 
-#
+# 本地构建
+
+HashRouter
+npm i @vitejs/plugin-legacy -D
+npm install terser --save-dev
 
 路由懒加载
