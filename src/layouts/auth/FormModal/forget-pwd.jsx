@@ -1,27 +1,29 @@
 import React, { useState, useContext, useEffect } from 'react';
 import './index.scss';
 import { throttle } from 'lodash'; //lodash 节流函数
-import { registerAPI, sendCodeAPI, checkEmailAPI } from '@/request/auth';
-import { setAccessToken, setRefreshToken } from '@/utils/tools';
+import {
+  registerAPI,
+  sendCodeAPI,
+  forgetPwdAPI,
+  checkEmailAPI,
+  checkAccountAPI,
+} from '@/request/auth';
+
 import { useNavigate } from 'react-router-dom';
 import { WholeLoadingContext } from '@/components/whole-loading-provider'; //全局Loading控制
-
-// 静态组件
-import google from '@/assets/images/google.png';
-import github from '@/assets/images/github.png';
-import gitee from '@/assets/images/gitee.png';
 
 // antd组件
 import { message, Button } from 'antd';
 
 // 上下文
 import { IsRegisterContext } from '../index';
+import { IsForgetPwdContext } from '../index';
 
-function Register() {
+function ForgetPwd() {
   // 上下文
   const { isRegister, setIsRegister } = useContext(IsRegisterContext);
-  // 路由
-  const navigate = useNavigate();
+  const { isForgetPwd, setIsForgetPwd } = useContext(IsForgetPwdContext);
+
   // 共享参数
   const { setIsLoading } = useContext(WholeLoadingContext);
   // 参数
@@ -29,7 +31,7 @@ function Register() {
   const [vCodeLoading, setVCodeLoading] = useState(false); //验证码加载状态
   const [countdown, setCountdown] = useState(0);
 
-  const [account, setAccount] = useState(''); // 账号
+  // 账号信息
   const [email, setEmail] = useState(''); //邮箱
   const [verificationCode, setVerificationCode] = useState(''); //验证码
   const [password, setPassword] = useState('');
@@ -72,12 +74,12 @@ function Register() {
       return;
     }
 
-    // 如果邮箱已存在
+    // 如果邮箱没有注册
     try {
       const res = await checkEmailAPI({ email });
       if (res.code === 200) {
-        if (res.data) {
-          message.warning('该邮箱已存在，请直接登录');
+        if (!res.data) {
+          message.warning('该邮箱未注册，请先注册');
           setVCodeLoading(false);
           return;
         }
@@ -89,9 +91,9 @@ function Register() {
     }
 
     setVCodeLoading(true);
-    // 发送验证码
+    // 发送验证码 - 忘记密码
     try {
-      const res = await sendCodeAPI(email, 1);
+      const res = await sendCodeAPI(email, 2);
       if (res.code === 200) {
         if (res.data) {
           message.success('验证码已发送，请注意查收');
@@ -107,8 +109,8 @@ function Register() {
     }
   };
 
-  // 注册账号
-  const handleRegister = throttle(async (e) => {
+  // 重置密码
+  const handleReset = throttle(async (e) => {
     e.preventDefault();
     // 校验
     if (!email) {
@@ -136,11 +138,12 @@ function Register() {
       return;
     }
 
+    // 如果邮箱没有注册
     try {
       const res = await checkEmailAPI({ email });
       if (res.code === 200) {
-        if (res.data) {
-          message.warning('该邮箱已存在，请直接登录');
+        if (!res.data) {
+          message.warning('该邮箱未注册，请先注册');
           return;
         }
       } else {
@@ -151,8 +154,8 @@ function Register() {
     }
 
     setIsLoading(true);
+
     const parmas = JSON.stringify({
-      account: email,
       email,
       password,
       confirmPassword,
@@ -160,19 +163,15 @@ function Register() {
     });
     // 添加注册处理函数
     try {
-      const res = await registerAPI(parmas);
+      const res = await forgetPwdAPI(parmas);
       if (res.code === 200) {
         if (res.data) {
-          message.success('注册成功，去登录试试');
-          setIsRegister(!isRegister);
+          message.success('密码重置成功，去登录试试');
+          setIsForgetPwd(false);
         }
       } else {
         if (res.msg === 'CAPTCHA_ERROR') {
           message.warning('验证码错误');
-          return;
-        }
-        if (res.msg === 'EMAIL_ERROR') {
-          message.warning('该邮箱已存在，请直接登录');
           return;
         }
         message.error(res.msg);
@@ -323,16 +322,20 @@ function Register() {
           </div>
         </div>
 
-        <button className="button-submit" onClick={handleRegister}>
-          注 册
+        <button className="button-submit forget-pwd-btn" onClick={handleReset}>
+          重置密码
         </button>
 
         {/* 第三方平台登录 */}
         <div className="form-login-or font-family-dingding">OR</div>
         <p className="register">
-          已有账户?{' '}
-          <span className="link" onClick={() => setIsRegister(!isRegister)}>
-            去登录
+          <span
+            className="link"
+            onClick={() => {
+              setIsForgetPwd(false);
+            }}
+          >
+            返回登录
           </span>
         </p>
       </div>
@@ -340,4 +343,4 @@ function Register() {
   );
 }
 
-export default Register;
+export default ForgetPwd;

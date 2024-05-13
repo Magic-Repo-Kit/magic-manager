@@ -29,8 +29,8 @@ import loginMain from '@/assets/images/login-main.png';
 // antd组件
 import { Modal, message } from 'antd';
 
-// 创建登录/注册上下文
-export const IsRegisterContext = createContext();
+export const IsRegisterContext = createContext(); // 创建登录/注册上下文
+export const IsForgetPwdContext = createContext(); // 创建忘记密码上下文
 
 function Auth() {
   // 共享参数
@@ -38,6 +38,7 @@ function Auth() {
   const { isLoading, setIsLoading } = useContext(WholeLoadingContext);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isRegister, setIsRegister] = useState(false);
+  const [isForgetPwd, setIsForgetPwd] = useState(false); // 忘记密码
 
   const navigate = useNavigate();
   const locationObj = useLocation();
@@ -103,7 +104,13 @@ function Auth() {
           <div className="btn-box">
             <DarkModeToggle size="20px" />
             <div className="space-line"></div>
-            <div onClick={() => setIsModalVisible(true)}>
+            <div
+              onClick={() => {
+                setIsRegister(false);
+                setIsForgetPwd(false);
+                setIsModalVisible(true);
+              }}
+            >
               {/* <BtnLogin iconName="mr-login-full" content="Login" /> */}
               <BtnLogin iconName="mr-login-full" content="登录" />
             </div>
@@ -207,21 +214,27 @@ function Auth() {
       {/* 弹框 */}
       <Modal
         title={
-          <div className="form-switch">
-            <SwitchBtn
-              isRegister={isRegister}
-              handRegisterChange={() => setIsRegister(!isRegister)}
-            />
-          </div>
+          isForgetPwd ? (
+            '重置密码'
+          ) : (
+            <div className="form-switch">
+              <SwitchBtn
+                isRegister={isRegister}
+                handRegisterChange={() => setIsRegister(!isRegister)}
+              />
+            </div>
+          )
         }
         centered
         open={isModalVisible}
         onCancel={() => setIsModalVisible(false)}
         footer=""
       >
-        <IsRegisterContext.Provider value={{ isRegister, setIsRegister }}>
-          <FormModal />
-        </IsRegisterContext.Provider>
+        <IsForgetPwdContext.Provider value={{ isForgetPwd, setIsForgetPwd }}>
+          <IsRegisterContext.Provider value={{ isRegister, setIsRegister }}>
+            <FormModal />
+          </IsRegisterContext.Provider>
+        </IsForgetPwdContext.Provider>
       </Modal>
       {/* loading */}
       <WholeLoading isLoading={isLoading} />

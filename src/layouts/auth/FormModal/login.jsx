@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import './index.scss';
 import { throttle } from 'lodash'; //lodash 节流函数
-import { loginAPI, getPlatformAuth } from '@/request/auth';
+import { loginAPI, getPlatformAuth, checkEmailAPI } from '@/request/auth';
 import { setAccessToken, setRefreshToken } from '@/utils/tools';
 import { useNavigate } from 'react-router-dom';
 import { WholeLoadingContext } from '@/components/whole-loading-provider'; //全局Loading控制
@@ -16,10 +16,12 @@ import { message } from 'antd';
 
 // 上下文
 import { IsRegisterContext } from '../index';
+import { IsForgetPwdContext } from '../index';
 
 function Login() {
   // 上下文
   const { isRegister, setIsRegister } = useContext(IsRegisterContext);
+  const { isForgetPwd, setIsForgetPwd } = useContext(IsForgetPwdContext);
 
   // 共享参数
   const { setIsLoading } = useContext(WholeLoadingContext);
@@ -36,7 +38,7 @@ function Login() {
   const filterInput = (e, setValue, setShowTips) => {
     const inputValue = e.target.value;
     const filteredValue = inputValue.replace(/[^a-zA-Z0-9_\-.@]/g, '');
-    const maxLengthValue = filteredValue.match(/^.{0,12}/)[0]; // 最多匹配前12个字符
+    const maxLengthValue = filteredValue.match(/^.{0,25}/)[0]; // 最多匹配前12个字符
     setValue(maxLengthValue);
     if (filteredValue !== inputValue) {
       setShowTips(true); // 显示提示信息
@@ -44,7 +46,12 @@ function Login() {
       setShowTips(false); // 隐藏提示信息
     }
   };
-
+  // 按下enter键 登录
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      handleLogin(e);
+    }
+  };
   // 账号登录
   const handleLogin = throttle(async (e) => {
     e.preventDefault();
@@ -65,6 +72,20 @@ function Login() {
       message.warning('请输入正确格式密码');
       return;
     }
+    // 如果邮箱不存在，则提示用户注册
+    try {
+      const res = await checkEmailAPI({ email: username });
+      if (res.code === 200) {
+        if (!res.data) {
+          message.warning('该账号未注册，请先注册');
+          return;
+        }
+      } else {
+        message.error(res.msg);
+      }
+    } catch (error) {
+      message.error(error.msg);
+    }
 
     setIsLoading(true);
     // 添加登录处理函数
@@ -76,6 +97,7 @@ function Login() {
         setRefreshToken(refresh_token);
         navigate('/admin');
       } else {
+        setIsLoading(false);
         message.error(res.msg || '登录失败');
       }
     } catch (error) {
@@ -162,6 +184,7 @@ function Login() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             onBlur={(e) => filterInput(e, setPassword, setShowPasswordTips)}
+            onKeyDown={handleKeyDown}
           />
           <div
             className="icon-eyes-box"
@@ -175,13 +198,16 @@ function Login() {
 
         <div className="form-other">
           <div>
-            <input type="checkbox" />
-            <label>记住密码</label>
+            {/* 此功能不安全 */}
+            {/* <input type="checkbox" />
+            <label>记住密码</label> */}
           </div>
-          <span className="link">忘记密码?</span>
+          <span className="link" onClick={() => setIsForgetPwd(true)}>
+            忘记密码？
+          </span>
         </div>
 
-        <button className="button-submit" onClick={handleLogin}>
+        <button className="button-submit login" onClick={handleLogin}>
           登 录
         </button>
 

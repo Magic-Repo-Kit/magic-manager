@@ -118,6 +118,9 @@
         width: 100%;
         cursor: pointer;
         transition: all 0.5s ease;
+        &.login {
+          margin-top: 10px;
+        }
         &:hover {
           letter-spacing: 3px;
           background-color: $text-600;
@@ -126,6 +129,9 @@
           letter-spacing: 3px;
           transform: translateY(5px);
           transition: 100ms;
+        }
+        &.forget-pwd-btn {
+          background-color: #c71d23;
         }
       }
       .form-login-or {
