@@ -2,5 +2,6 @@
   font-family: '钉钉进步体 Regular';
   font-weight: 400;
   src: url('./DingTalk-JinBuTi.ttf');
-  font-display: swap;
+  /* font-display: swap; */
+  font-display: fallback;
 }

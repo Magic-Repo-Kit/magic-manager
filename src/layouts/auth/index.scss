@@ -74,13 +74,16 @@
         animation: move 50s linear infinite;
         @keyframes move {
           0% {
-            transform: translate(-100%, -50%);
+            opacity: 1;
+            transform: translate(-100%, -50%) scale(1);
           }
           50% {
-            transform: translate(100%, -50%);
+            opacity: 0.8;
+            transform: translate(100%, -50%) scale(0.9);
           }
           100% {
-            transform: translate(-100%, -50%);
+            opacity: 1;
+            transform: translate(-100%, -50%) scale(1);
           }
         }
       }
@@ -158,7 +161,7 @@
               }
             }
             .explain-btn {
-              font-weight: 600;
+              // font-weight: 600;
               letter-spacing: 1.8px;
               margin-top: 40px;
               display: flex;
@@ -235,6 +238,19 @@
             position: relative;
             min-width: 300px;
             box-sizing: border-box;
+            opacity: 0;
+            animation: springFadeAnimation-left 1s
+              cubic-bezier(0.455, 0.03, 0.515, 0.955) 0.1s forwards;
+            @keyframes springFadeAnimation-left {
+              from {
+                opacity: 0;
+                transform: translateX(-50px);
+              }
+              to {
+                opacity: 1;
+                transform: translateX(0);
+              }
+            }
             > img {
               // height: 500px;
               -webkit-touch-callout: none; /* 禁止长按弹出默认菜单 */
@@ -258,6 +274,19 @@
             .login-main {
               height: 400px;
               // padding-left: 10px;
+              opacity: 0;
+              animation: springFadeAnimation-left 1s
+                cubic-bezier(0.455, 0.03, 0.515, 0.955) 0.1s forwards;
+              @keyframes springFadeAnimation-left {
+                from {
+                  opacity: 0;
+                  transform: translateY(-50px);
+                }
+                to {
+                  opacity: 1;
+                  transform: translateY(0);
+                }
+              }
             }
             .login-main-explain {
               padding: 20px;

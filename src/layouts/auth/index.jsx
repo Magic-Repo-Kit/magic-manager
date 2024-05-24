@@ -119,28 +119,33 @@ function Auth() {
       </header>
       <main>
         <div className="rocket-box">
-          <div className="rocket-bg">
-            <CubeBg />
+          <div className="fade-in-animation">
+            <div className="rocket-bg">
+              <CubeBg />
+            </div>
           </div>
+
           <div className="rocket-container">
             <section>
               <div className="login-main-explain">
-                <div className="ai-title font-family-dingding">
-                  <span>百宝袋</span>
-                  <i className="iconfont mr-icon_AI ai-icon"></i>
-                </div>
-                <div className="ai-subtitle font-family-dingding">
-                  MagicRepokit
-                </div>
-                <div className="ai-point font-family-dingding">
-                  自由
-                  <div className="space-line"></div>
-                  简单
-                  <div className="space-line"></div>
-                  高效
+                <div className="fade-slide-in-animation">
+                  <div className="ai-title font-family-dingding">
+                    <span>百宝袋</span>
+                    <i className="iconfont mr-icon_AI ai-icon"></i>
+                  </div>
+                  <div className="ai-subtitle font-family-dingding">
+                    MagicRepokit
+                  </div>
+                  <div className="ai-point font-family-dingding">
+                    自由
+                    <div className="space-line"></div>
+                    简单
+                    <div className="space-line"></div>
+                    高效
+                  </div>
                 </div>
 
-                <div className="ai-explain">
+                <div className="ai-explain font-family-dingding fade-slide-in-animation">
                   <TypedText
                     texts={[
                       'MRK',
@@ -154,7 +159,7 @@ function Auth() {
                   />
                 </div>
 
-                <div className="explain-btn user-select">
+                <div className="explain-btn user-select font-family-dingding fade-slide-in-animation-bottom">
                   <div onClick={() => setIsModalVisible(true)}>快速体验</div>
                   <div
                     onClick={() => {
@@ -170,7 +175,7 @@ function Auth() {
                     <div className="explain-text">查看文档</div>
                   </div>
                 </div>
-                <div>
+                <div className="fade-slide-in-animation-bottom">
                   <IconList />
                 </div>
               </div>

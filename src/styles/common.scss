@@ -512,3 +512,66 @@ a.no-style {
   user-select: none;
   filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.1));
 }
+
+// 渐入
+.fade-in-animation {
+  opacity: 0;
+  animation: fadeInAnimation 3s ease-out 0.2s forwards;
+  @keyframes fadeInAnimation {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+}
+
+// 右边渐入
+.fade-slide-in-animation {
+  opacity: 0;
+  animation: springFadeAnimation 1s cubic-bezier(0.455, 0.03, 0.515, 0.955)
+    forwards;
+  @keyframes springFadeAnimation {
+    from {
+      opacity: 0;
+      transform: translateX(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+}
+// 下面划入
+.fade-slide-in-animation-bottom {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.6s ease-out 0.2s forwards;
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+// 左边渐入
+.fade-slide-in-animation-left {
+  opacity: 0;
+  animation: springFadeAnimation-left 1s cubic-bezier(0.455, 0.03, 0.515, 0.955)
+    0.1s forwards;
+  @keyframes springFadeAnimation-left {
+    from {
+      opacity: 0;
+      transform: translateX(-50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+}
