@@ -28,6 +28,7 @@ import loginMain from '@/assets/images/login-main.png';
 
 // antd组件
 import { Modal, message } from 'antd';
+import MagicRepoKit from './magic-repo-kit/index';
 
 export const IsRegisterContext = createContext(); // 创建登录/注册上下文
 export const IsForgetPwdContext = createContext(); // 创建忘记密码上下文
@@ -117,12 +118,12 @@ function Auth() {
           </div>
         </div>
       </header>
+      {/* 背景 */}
+      <div className="bg-box"></div>
       <main>
         <div className="rocket-box">
           <div className="fade-in-animation">
-            <div className="rocket-bg">
-              <CubeBg />
-            </div>
+            <div className="rocket-bg">{/* <CubeBg /> */}</div>
           </div>
 
           <div className="rocket-container">
@@ -145,16 +146,21 @@ function Auth() {
                   </div>
                 </div>
 
-                <div className="ai-explain font-family-dingding fade-slide-in-animation">
-                  <TypedText
-                    texts={[
-                      'MRK',
+                {/*   'MRK',
                       'MagicRepokit 是一个面向 AI 的多功能工具箱。',
                       '引入了多样化的功能，拓宽了语言模型的应用场景。',
                       '提供了智能模型交互，实现了数据源与模型的有效融合。',
                       '人工智能和自然语言处理领域的创新方向，',
                       '作为一个开源项目，鼓励社区参与和共同发展。',
-                      '下一个 AI 工具百宝袋。MRK🚀',
+                      '下一个 AI 工具百宝袋。MRK🚀', */}
+                <div className="ai-explain font-family-dingding fade-slide-in-animation">
+                  <TypedText
+                    texts={[
+                      '工欲善其事，必先利其器！',
+                      '使用 MagicRepokit 告别重复劳动，提升效率！',
+                      'Just like Magic，像变魔术一样。',
+                      '融合各大模型强力驱动，让我成为您的智能助手。',
+                      '鼓励社区共同参与，Bringing the world closer together.',
                     ]}
                   />
                 </div>
@@ -188,9 +194,13 @@ function Auth() {
           </div>
         </div>
         {/* 功能介绍 */}
+        <div className="rocket-introduce-title font-family-dingding">
+          Why MagicRepoKit?
+        </div>
         <div className="rocket-introduce user-select">
           <Introduce />
         </div>
+
         {/* <div className="login-magicrepokit">
           <img style={{ width: '100%' }} src={headerJS} />
         </div> */}
