@@ -7,7 +7,7 @@ import WholeLoading from '@/components/whole-loading';
 import { WholeLoadingContext } from '@/components/whole-loading-provider'; //全局Loading控制
 import SwitchBtn from '@/components/switch-btn';
 import BtnLogin from '@/components/BtnLogin';
-import CubeBg from '@/components/cube-bg';
+// import CubeBg from '@/components/cube-bg';
 import TypedText from '@/components/TypedText';
 import FormModal from './FormModal';
 import IconList from './IconList';
@@ -23,8 +23,8 @@ import mrkLogo from '@/assets/images/logo-mrk.png';
 import mrkLight from '@/assets/images/mrk-title-light.png';
 import mrkDark from '@/assets/images/mrk-title-dark.png';
 import loginMain from '@/assets/images/login-main.png';
-import joinUsBlack from '@/assets/images/join-us-black.png';
-import joinUsWhite from '@/assets/images/join-us-white.png';
+// import joinUsBlack from '@/assets/images/join-us-black.png';
+// import joinUsWhite from '@/assets/images/join-us-white.png';
 import githubBlack from '@/assets/images/github.png';
 import githubWhite from '@/assets/images/github-white.png';
 import wechat from '@/assets/images/wechat.png';
@@ -44,7 +44,7 @@ import userHeadC from '@/assets/images/bot-head.png';
 
 // antd组件
 import { Modal, message, Avatar, Tooltip } from 'antd';
-import MagicRepoKit from './magic-repo-kit/index';
+// import MagicRepoKit from './magic-repo-kit/index';
 
 export const IsRegisterContext = createContext(); // 创建登录/注册上下文
 export const IsForgetPwdContext = createContext(); // 创建忘记密码上下文
