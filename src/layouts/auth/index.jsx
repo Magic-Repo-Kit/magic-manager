@@ -12,6 +12,7 @@ import TypedText from '@/components/TypedText';
 import FormModal from './FormModal';
 import IconList from './IconList';
 import Introduce from './introduce'; //功能介绍
+import Questions from './questions'; //常见问题
 // import MagicRepoKit from './magic-repo-kit';
 // import Rocket from '@/components/Rocket';
 // 方法
@@ -22,12 +23,27 @@ import mrkLogo from '@/assets/images/logo-mrk.png';
 import mrkLight from '@/assets/images/mrk-title-light.png';
 import mrkDark from '@/assets/images/mrk-title-dark.png';
 import loginMain from '@/assets/images/login-main.png';
+import joinUsBlack from '@/assets/images/join-us-black.png';
+import joinUsWhite from '@/assets/images/join-us-white.png';
+import githubBlack from '@/assets/images/github.png';
+import githubWhite from '@/assets/images/github-white.png';
+import wechat from '@/assets/images/wechat.png';
+import fastStart from '@/assets/images/fast-start.png';
+import joinUs from '@/assets/images/join-us.png';
+import thanksWhite from '@/assets/images/thanks-white.png';
+import thanksBlack from '@/assets/images/thanks-black.png';
+import teamLogo from '@/assets/images/team-logo.png';
+import medalGold from '@/assets/images/medal-gold.png';
+import userHead from '@/assets/images/user-head.png';
+import userHeadB from '@/assets/images/user-head-2.png';
+import userHeadC from '@/assets/images/bot-head.png';
+
 // import headerJS from '@/assets/images/header-js.png';
 // import loginComputer from '@/assets/images/login-computer.png';
 // import loginHeadset from '@/assets/images/login-headset.png';
 
 // antd组件
-import { Modal, message } from 'antd';
+import { Modal, message, Avatar, Tooltip } from 'antd';
 import MagicRepoKit from './magic-repo-kit/index';
 
 export const IsRegisterContext = createContext(); // 创建登录/注册上下文
@@ -166,7 +182,7 @@ function Auth() {
                 </div>
 
                 <div className="explain-btn user-select font-family-dingding fade-slide-in-animation-bottom">
-                  <div onClick={() => setIsModalVisible(true)}>快速体验</div>
+                  <div onClick={() => setIsModalVisible(true)}>开始使用</div>
                   <div
                     onClick={() => {
                       window.location.assign(
@@ -194,12 +210,80 @@ function Auth() {
           </div>
         </div>
         {/* 功能介绍 */}
-        <div className="rocket-introduce-title font-family-dingding">
-          Why MagicRepoKit?
-        </div>
-        <div className="rocket-introduce user-select">
-          <Introduce />
-        </div>
+        <section className="rocket-introduce-section">
+          <div className="rocket-introduce-title font-family-dingding">
+            Why MagicRepoKit?
+          </div>
+          <div className="rocket-introduce user-select">
+            <Introduce />
+          </div>
+        </section>
+        {/* 常见问题 */}
+        <section>
+          <div className="rocket-introduce-title font-family-dingding">
+            你想了解的
+          </div>
+          <div className="rocket-questions user-select">
+            <Questions />
+          </div>
+        </section>
+        {/* team团队 */}
+        <section className="rocket-team-section">
+          <div className="team-logo-box">
+            <img src={teamLogo} />
+          </div>
+          <div className="rocket-introduce-title rocket-team-title font-family-dingding">
+            感谢有你们
+          </div>
+          <div className="rocket-team-explain">
+            Magic-Repo-Kit
+            贡献者们的智慧和力量，正在让MagicRepoKit变得越来越完美
+          </div>
+          <div
+            className="rocket-team user-select"
+            onClick={() => {
+              window.open(
+                'https://github.com/Magic-Repo-Kit/magic-manager/graphs/contributors',
+                '_blank'
+              );
+            }}
+          >
+            <img src={medalGold} className="rocket-team-medal" />
+            {/* <Avatar.Group> */}
+            <Tooltip title="ShuLan" placement="top">
+              <Avatar
+                src={userHead}
+                style={{
+                  width: '50px',
+                  height: '50px',
+                  margin: '0 5px',
+                }}
+              />
+            </Tooltip>
+            <Tooltip title="Andrew Wang" placement="top">
+              <Avatar
+                src={userHeadB}
+                style={{
+                  width: '50px',
+                  height: '50px',
+                  margin: '0 5px',
+                }}
+              />
+            </Tooltip>
+            <Tooltip title="Mrk Bot" placement="top">
+              <Avatar
+                src={userHeadC}
+                style={{
+                  width: '50px',
+                  height: '50px',
+                  margin: '0 5px',
+                }}
+              />
+            </Tooltip>
+
+            {/* </Avatar.Group> */}
+          </div>
+        </section>
 
         {/* <div className="login-magicrepokit">
           <img style={{ width: '100%' }} src={headerJS} />
@@ -225,6 +309,54 @@ function Auth() {
           <MagicRepoKit />
         </div> */}
       </main>
+      {/* 底部 */}
+      <footer>
+        <div className="footer-title font-family-dingding">
+          <img src={darkMode ? mrkDark : mrkLight} className="mrkTitle" />
+          <div>如果你也喜欢它</div>
+        </div>
+        <div className="footer-content font-family-dingding">
+          <div onClick={() => setIsModalVisible(true)}>
+            <img src={fastStart} className="mrkTitle" />
+            <div>从这里开始</div>
+          </div>
+          <div
+            onClick={() => {
+              window.open(
+                'https://github.com/Magic-Repo-Kit/magic-manager',
+                '_blank'
+              );
+            }}
+          >
+            <img
+              src={darkMode ? githubWhite : githubBlack}
+              className="mrkTitle"
+            />
+            <div>在Github点星</div>
+          </div>
+          <div>
+            <img src={joinUs} className="mrkTitle" />
+            <div>加入我们</div>
+          </div>
+          <div>
+            <img src={wechat} className="mrkTitle" />
+            <div>加入微信群</div>
+          </div>
+          <div>
+            <img
+              src={darkMode ? thanksWhite : thanksBlack}
+              className="mrkTitle"
+            />
+            <div>赞助商</div>
+          </div>
+        </div>
+        <div className="footer-explain">
+          <img src={mrkLogo} alt="" className="mrkLogo" />
+          <div className="font-family-dingding">
+            Copyright © 2024 MagicRepoKit Team
+          </div>
+        </div>
+      </footer>
 
       {/* 弹框 */}
       <Modal

@@ -106,6 +106,16 @@
     padding: 65px 0 30px 0;
     margin: 0 auto;
     position: relative;
+    > section {
+      padding: 30px 0;
+      @media screen and (max-width: 768px) {
+        padding: 10px 0;
+      }
+    }
+    .rocket-introduce-section {
+      padding: 0;
+      padding-bottom: 30px;
+    }
     .rocket-box {
       position: relative;
       padding: 100px 0 100px 0;
@@ -172,6 +182,7 @@
               );
               -webkit-background-clip: text;
               -webkit-text-fill-color: transparent;
+
               .ai-icon {
                 font-size: 35px;
                 margin-left: 10px;
@@ -433,6 +444,141 @@
         }
       }
     }
+    .rocket-questions {
+      .questions-content {
+        padding-left: 24px;
+        > p {
+          margin: 10px 0;
+        }
+        > ul > li {
+          line-height: 35px;
+        }
+      }
+      .ant-collapse-borderless {
+        background-color: transparent;
+      }
+      .ant-collapse > .ant-collapse-item > .ant-collapse-header {
+        font-size: 18px;
+      }
+      .ant-collapse .ant-collapse-content {
+        font-size: 16px;
+      }
+      .ant-collapse-borderless > .ant-collapse-item {
+        border-bottom: 1px solid $bg-200;
+      }
+    }
+    .rocket-team-section {
+      .team-logo-box {
+        text-align: center;
+        > img {
+          height: 35px;
+          // transform: translateY(20px);
+        }
+      }
+      .rocket-team-explain {
+        padding: 20px;
+        opacity: 0.6;
+        font-size: 14px;
+        text-align: center;
+        // transform: translateY(-10px);
+      }
+      .rocket-team-title {
+        padding: 10px;
+      }
+      .rocket-team {
+        width: calc(100% - 40px);
+        max-width: 650px;
+        height: 235px;
+        margin: 50px auto;
+        border-radius: 20px;
+        box-shadow: 2px 24px 70px $bg-600;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        .rocket-team-medal {
+          height: 100px;
+          position: absolute;
+          top: 0;
+          left: 50%;
+          transform: translate(-50%, -50%);
+        }
+      }
+    }
+  }
+  footer {
+    box-sizing: border-box;
+    border-top: 1px solid $bg-200;
+    width: 100%;
+    padding: 20px;
+    .footer-title {
+      padding: 10px;
+      font-size: 20px;
+      flex-direction: column;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      > img {
+        height: 18px;
+        margin-bottom: 15px;
+      }
+    }
+    .footer-content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      box-sizing: border-box;
+      max-width: 1250px;
+      padding: 20px 0 80px 0;
+      margin: 0 auto;
+      > div {
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-sizing: border-box;
+        // width: 180px;
+        width: calc((100% - 100px) / 5);
+        height: 40px;
+        border: 1px solid $bg-800;
+        // margin: 25px;
+        border-radius: 4px;
+        transition: all 0.3s ease;
+        > img {
+          height: 25px;
+          margin-right: 10px;
+        }
+        &:hover {
+          border-color: transparent;
+          box-shadow: 1px 1px 18px $bg-200;
+          transform: scale(1.1);
+        }
+        @media screen and (max-width: 1000px) {
+          width: calc((100% - 100px) / 3);
+        }
+        @media screen and (max-width: 768px) {
+          width: 100%;
+        }
+      }
+    }
+
+    .footer-explain {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-size: 14px;
+      img {
+        height: 32px;
+        margin: 15px 0;
+        opacity: 0.6;
+        &:hover {
+          opacity: 1;
+        }
+      }
+    }
   }
 }
 
@@ -448,9 +594,9 @@
           filter: none;
         }
       }
-      .mrkLogo {
-        filter: grayscale(100%) brightness(200%); //白
-      }
+      // .mrkLogo {
+      //   filter: grayscale(100%) brightness(200%); //白
+      // }
       .btn-box {
         .space-line {
           opacity: 0.2;
@@ -506,6 +652,34 @@
               transparent 1px
             );
           }
+        }
+      }
+    }
+
+    .rocket-questions {
+      .ant-collapse > .ant-collapse-item > .ant-collapse-header {
+        color: rgba($bg-100, 1);
+      }
+      .ant-collapse .ant-collapse-content {
+        color: rgba($bg-100, 0.8);
+      }
+      .ant-collapse-borderless > .ant-collapse-item {
+        border-bottom: 1px solid $text-300;
+      }
+    }
+    .rocket-team {
+      box-shadow: 2px 24px 70px $text-300;
+    }
+  }
+  footer {
+    border-color: $text-300;
+    .footer-content {
+      > div {
+        border: 1px solid $text-500;
+        &:hover {
+          opacity: 1;
+          box-shadow: 1px 1px 18px $text-300;
+          transform: scale(1.1);
         }
       }
     }
