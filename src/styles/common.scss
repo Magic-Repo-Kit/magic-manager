@@ -575,3 +575,12 @@ a.no-style {
     }
   }
 }
+
+// 鼠标移上跳动放大/缩小
+.cursor-scale {
+  transition: transform 0.2s;
+  transition-timing-function: cubic-bezier(0.45, -0.85, 0.55, -0.45);
+  &:hover {
+    transform: scale(1.2);
+  }
+}

@@ -141,6 +141,7 @@ function Auth() {
           <div className="fade-in-animation">
             <div className="rocket-bg">{/* <CubeBg /> */}</div>
           </div>
+          <div className="blur-box"></div>
 
           <div className="rocket-container">
             <section>
@@ -249,9 +250,11 @@ function Auth() {
             }}
           >
             <img src={medalGold} className="rocket-team-medal" />
+
             {/* <Avatar.Group> */}
             <Tooltip title="ShuLan" placement="top">
               <Avatar
+                className="cursor-scale"
                 src={userHead}
                 style={{
                   width: '50px',
@@ -263,6 +266,7 @@ function Auth() {
             <Tooltip title="Andrew Wang" placement="top">
               <Avatar
                 src={userHeadB}
+                className="cursor-scale"
                 style={{
                   width: '50px',
                   height: '50px',
@@ -273,6 +277,7 @@ function Auth() {
             <Tooltip title="Mrk Bot" placement="top">
               <Avatar
                 src={userHeadC}
+                className="cursor-scale"
                 style={{
                   width: '50px',
                   height: '50px',
@@ -317,7 +322,7 @@ function Auth() {
         </div>
         <div className="footer-content font-family-dingding">
           <div onClick={() => setIsModalVisible(true)}>
-            <img src={fastStart} className="mrkTitle" />
+            <img src={fastStart} className="mrkTitle " />
             <div>从这里开始</div>
           </div>
           <div
@@ -351,7 +356,7 @@ function Auth() {
           </div>
         </div>
         <div className="footer-explain">
-          <img src={mrkLogo} alt="" className="mrkLogo" />
+          <img src={mrkLogo} alt="" className="mrkLogo cursor-scale" />
           <div className="font-family-dingding">
             Copyright © 2024 MagicRepoKit Team
           </div>
